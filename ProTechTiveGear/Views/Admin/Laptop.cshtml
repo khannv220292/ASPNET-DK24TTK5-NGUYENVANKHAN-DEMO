@@ -1,0 +1,33 @@
+@model IEnumerable<ProTechTiveGear.Models.Item>
+@{
+	ViewBag.Title = "CRUD Laptop";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h4>Quản lý laptop</h4>
+		@Html.ActionLink("Thêm mới", "CreateLaptop", "Admin", null, new { @class = "btn btn-success btn-sm" })
+	</div>
+	<div class="card-body">
+		<table class="table table-bordered">
+			<thead>
+				<tr><th>Ảnh</th><th>Tên</th><th>Giá</th><th>Loại</th><th></th></tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td><img width="70" src="~/img/Item/@item.Picture" /></td>
+						<td>@item.Name</td>
+						<td>@item.SellPrice</td>
+						<td>@(item.ItemType != null ? item.ItemType.TypeName : "")</td>
+						<td>
+							@Html.ActionLink("Sửa", "EditLaptop", new { id = item.ID }) |
+							@Html.ActionLink("Xóa", "DeleteLaptop", new { id = item.ID })
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

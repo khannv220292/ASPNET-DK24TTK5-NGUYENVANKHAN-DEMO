@@ -1,0 +1,13 @@
+﻿@model LaptopStore.Models.StoreOrder
+@{
+	ViewBag.Title = "Đặt hàng thành công";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="alert alert-success">
+	<h3>Đặt hàng thành công</h3>
+	<p>Mã đơn: @Model.ID</p>
+	<p>Ngày: @Model.Orderdate</p>
+	<p>Trạng thái: @(Model.Deliverystatus == true ? "Đã giao" : "Chờ xử lý")</p>
+	<p>Tổng tiền: @string.Format("{0:N0} đ", Model.Totalprice)</p>
+</div>
+<p>@Html.ActionLink("Về cửa hàng", "Index", "Store")</p>

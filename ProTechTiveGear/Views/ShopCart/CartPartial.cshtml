@@ -1,0 +1,11 @@
+@using System.Linq
+@using ProTechTiveGear.Models
+@{
+    var cart = Session["ShopCart"] as List<CartEntity>;
+    int count = ViewBag.TotalQuantity != null ? (int)ViewBag.TotalQuantity : (cart != null ? cart.Sum(c => c.Quantity) : 0);
+}
+<li class="shop_cart">
+    <a href="@Url.Action("Cart", "ShopCart")">
+        <i class="lnr lnr-cart">(@count)</i>
+    </a>
+</li>

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>@ViewBag.Title - KHANNVSHOP</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand font-weight-bold" href="@Url.Action("Index", "Store")">KHANNVSHOP</a>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">@Html.ActionLink("Cửa hàng", "Index", "Store", null, new { @class = "nav-link" })</li>
+				<li class="nav-item">@Html.ActionLink("Trang chủ cũ", "Index", "AuraStore", null, new { @class = "nav-link" })</li>
+				<li class="nav-item">@Html.ActionLink("Giỏ hàng", "Index", "Cart", null, new { @class = "nav-link" })</li>
+			</ul>
+			<a class="btn btn-outline-light btn-sm" href="@Url.Action("Index", "Admin")">Quản trị</a>
+		</div>
+	</nav>
+	<div class="container py-4">
+		@RenderBody()
+	</div>
+	<footer class="text-center text-muted py-3 border-top">KHANNVSHOP — Website bán laptop</footer>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	@RenderSection("scripts", required: false)
+</body>
+</html>
