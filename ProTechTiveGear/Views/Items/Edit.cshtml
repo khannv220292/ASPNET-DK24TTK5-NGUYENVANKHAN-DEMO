@@ -93,7 +93,7 @@
 				<input type="button" id="btnUpload" value="..." class="btn btn-success" />
 				<input type="file" id="fileUpload" accept="image/*" name="fileUpload" style="display:none" ; />
 				@Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
-				<img id="pictureUpload" width="100" src="" />
+				<img id="pictureUpload" width="100" src="@Url.Content("~/img/Item/" + (Model.Picture ?? ""))" alt="" />
 			</div>
 		</div>
 

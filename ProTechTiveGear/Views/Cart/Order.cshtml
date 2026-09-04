@@ -9,9 +9,8 @@
 	Customer cus = (Customer)Session["usr"];
 }
 <table align="center">
-	@using (Html.BeginForm("Order", "ShopCart", FormMethod.Post))
+	@using (Html.BeginForm())
 	{
-		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true)
 		<tr style="height:40px">
 			<td> Tên: </td>
@@ -44,8 +43,8 @@
 			<td><input type="Submit" class="pest_btn" value="Xác nhận đặt hàng" /></td>
             <td>
                 
-                <a class="pest_btn" href="@Url.Action("PaymentMoMo","ShopCart")">Thanh toán qua MOMO</a>
-                <a class="pest_btn" href="@Url.Action("Newinformation","ShopCart")">Chỉnh sửa địa chỉ</a>
+                <a class="pest_btn" href="@Url.Action("PaymentMoMo","Cart")">Thanh toán qua MOMO</a>
+                <a class="pest_btn" href="@Url.Action("Newinformation","Cart")">Chỉnh sửa địa chỉ</a>
             </td>
 
 		</tr>
@@ -74,7 +73,7 @@
 								<img class="resize-image-cart" src="~/img/Item/@item.Picture" alt="">
 
 							</td>
-							@using (Html.BeginForm("EditCart", "ShopCart", new { @id = item.IdItem }))
+							@using (Html.BeginForm("EditCart", "Cart", new { @id = item.IdItem }))
 							{
 								<td>@item.Name</td>
 								<td>@String.Format("{0:0,0}", item.Prices)</td>

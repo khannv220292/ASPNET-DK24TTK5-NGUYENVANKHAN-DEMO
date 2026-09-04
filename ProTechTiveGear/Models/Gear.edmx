@@ -103,16 +103,16 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="PurcharsePrice" Type="decimal" Precision="18" Scale="0" />
           <Property Name="SellPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DateImport" Type="datetime" />
           <Property Name="Quantity" Type="int" />
           <Property Name="TypeID" Type="bigint" />
           <Property Name="BrandID" Type="bigint" />
-          <Property Name="Picture" Type="nvarchar" MaxLength="400" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="200" />
           <Property Name="Active" Type="bit" />
-          <Property Name="ShortTitle" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ShortTitle" Type="nvarchar" MaxLength="200" />
           <Property Name="Describe" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ItemType">
@@ -492,19 +492,19 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PurcharsePrice" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="SellPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DateImport" Type="DateTime" Precision="3" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="TypeID" Type="Int64" />
           <Property Name="BrandID" Type="Int64" />
-          <Property Name="Picture" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Brand" Relationship="Self.FK__Item__BrandID__1FCDBCEB" FromRole="Item" ToRole="Brand" />
           <NavigationProperty Name="ItemType" Relationship="Self.FK__Item__TypeID__1ED998B2" FromRole="Item" ToRole="ItemType" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__ItemI__267ABA7A" FromRole="Item" ToRole="OrderDetail" />
-          <Property Name="ShortTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ShortTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="ItemType">

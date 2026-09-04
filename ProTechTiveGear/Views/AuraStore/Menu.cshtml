@@ -19,7 +19,7 @@
             <a class="dropdown-toggle" href="@Url.Action("Index","AuraStore")" role="button" aria-haspopup="true" aria-expanded="false">Trang chủ</a>
 
         </li>
-        @foreach (var item in Model.Where(m => m.Name != "Phụ kiện"))
+        @foreach (var item in Model)
         {
             long listId = item.ID == 1 ? 1 : (item.ID == 2 ? 3 : (item.ID == 3 ? 5 : 7));
             <li class="dropdown submenu">
@@ -46,7 +46,7 @@
 
         </li>
         <li class="search_icon"><a class="popup-with-zoom-anim" href="#test-search"><i class="icon icon-Search"></i></a></li>
-        @Html.Action("CartPartial", "ShopCart")
+        @Html.Action("CartPartial", "Cart")
         @*@if (Session["usr"] == null)
         {
             <li><a href="@Url.Action("Login","Login")">Login/</a></li>

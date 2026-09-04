@@ -66,11 +66,8 @@
                 <div id="da" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="@Url.Action("Index","Admin")">CRUD laptop (đồ án)</a>
-                        <a class="collapse-item" href="@Url.Action("Create", "Admin")">Thêm laptop</a>
-                        <a class="collapse-item" href="@Url.Action("Productnotsold", "Admin")">Thống kê chưa bán</a>
-                        <a class="collapse-item" href="@Url.Action("Index","Items")">Danh sách (shop cũ)</a>
-                        <a class="collapse-item" href="@Url.Action("Create", "Items")">Thêm sản phẩm (shop cũ)</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Items")">Danh sách </a>
+                        <a class="collapse-item" href="@Url.Action("Create", "Items")">Thêm sản phẩm</a>
 
                         <!----------------new Product---------------------------------------------------------------------------------------------------------------------------------------------->
                     </div>
@@ -102,8 +99,8 @@
                 <div id="rr2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="@Url.Action("AllListOrder","ShopAdmin")">Danh sách</a>
-                        <a class="collapse-item" href="@Url.Action("ListOrder","ShopAdmin")">Đơn hàng chưa xử lý</a>
+                        <a class="collapse-item" href="@Url.Action("AllListOrder","Admin")">Danh sách</a>
+                        <a class="collapse-item" href="@Url.Action("ListOrder","Admin")">Đơn hàng chưa xử lý</a>
 
                     </div>
                 </div>
@@ -114,6 +111,12 @@
             <!-- Divider -->
             <!-- Heading -->
             <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Banners")">
+                    <i class="fas fa-fw fa-image"></i>
+                    <span>Banner trang chủ</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-user"></i>
@@ -172,7 +175,7 @@
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 								
-								<a class="dropdown-item" href="@Url.Action("SignOut", "ShopAdmin")">
+								<a class="dropdown-item" href="~/Admin/SignOut">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Đăng xuất
 								</a>

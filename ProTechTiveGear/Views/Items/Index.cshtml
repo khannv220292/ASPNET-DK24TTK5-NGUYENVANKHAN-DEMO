@@ -57,7 +57,7 @@
 					{
 					<tr>
 						<td>
-							<img width="100" height="100" src="~/img/Item/@Html.DisplayFor(modelItem => item.Picture)" />
+							<img width="100" height="100" src="@Url.Content("~/img/Item/" + item.Picture)" alt="" style="object-fit:contain" />
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.Name)

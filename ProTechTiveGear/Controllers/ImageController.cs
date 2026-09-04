@@ -1,68 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace ProTechTiveGear.Controllers
 {
-    public class ImageController : Controller
-    {
-		// GET: Image
+	public class ImageController : Controller
+	{
 		public ActionResult UploadImage()
 		{
 			return View();
 		}
+
+		[HttpPost]
 		public string ProcessUpload(HttpPostedFileBase file)
 		{
-
 			try
 			{
-				//validate (tự validate)
-				// xử lí upload
-				//var fileName = Path.GetFileName(file.FileName);
-				//var path = Path.Combine(Server.MapPath("~/img/Item"), fileName);
-				//if(file==null){
-				//	ViewBag.Filenull = "Chose image please";
+				if (file == null || file.ContentLength <= 0)
+					return "";
 
-				//}
-				//else
-				//{
-				//	if(ModelState.IsValid){
-				//if (ModelState.IsValid)
-				//{
-				//	//file.SaveAs(Server.MapPath("~/img/Item/" + file.FileName));
-				//	var fileName = Path.GetFileName(file.FileName);
-				//	var path = Path.Combine(Server.MapPath("~/img/Item"),fileName);
-
-				//	if (System.IO.File.Exists(file.FileName))
-
-				//		ViewBag.ImageExist = "Inmage Exit";
-				//	else
-				//	{
-				//		file.SaveAs(path);
-				//	}
-
-				//}
-				//	}
-				//}
+				var folder = Server.MapPath("~/img/Item");
+				if (!Directory.Exists(folder))
+					Directory.CreateDirectory(folder);
 
 				var fileName = Path.GetFileName(file.FileName);
-				file.SaveAs(Server.MapPath("~/img/Item/" + fileName));
+				if (string.IsNullOrEmpty(fileName))
+					return "";
+
+				var path = Path.Combine(folder, fileName);
+				file.SaveAs(path);
 				return fileName;
-					
 			}
 			catch (Exception ex)
 			{
-
 				Debug.WriteLine(ex.Message);
+				return "";
 			}
-			
-			return null;
-
-
 		}
 	}
 }

@@ -4,8 +4,7 @@
 	Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<div class="wrap-login100">
-@using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { @class = "login100-form validate-form" }))
+@using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { @class = "login100-form validate-form wrap-login100" }))
 {
 	@Html.AntiForgeryToken()
 	<span class="login100-form-logo">
@@ -15,7 +14,7 @@
 		Đăng nhập Admin
 	</span>
 	<div class="wrap-input100 validate-input" data-validate="Enter username">
-		<input class="input100" type="text" name="userName" id="userName" placeholder="Tài khoản" />
+		<input class="input100" type="text" name="userName" id="userName" placeholder="Tài khoản" value="Admin" />
 		<span class="focus-input100" data-placeholder="&#xf207;"></span>
 	</div>
 	<div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -26,8 +25,4 @@
 	<div class="container-login100-form-btn">
 		<button type="submit" class="login100-form-btn">Đăng Nhập</button>
 	</div>
-	<p style="color:#fff;text-align:center;margin-top:18px;font-size:13px">
-		Admin / admin
-	</p>
 }
-</div>

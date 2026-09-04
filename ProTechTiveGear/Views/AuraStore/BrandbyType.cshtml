@@ -40,7 +40,7 @@
                         <div class="cake_text" style="background-color:aquamarine">
                             <h4>@item.SellPrice</h4>
                             <h3>@item.Name</h3>
-                            <a class="pest_btn" href="@Url.Action("AddtoCart","ShopCart",new {@id=item.ID,@strURL=Request.Url.ToString() })" style="background-color:brown">Thêm vào giỏ</a>
+                            <a class="pest_btn" href="@Url.Action("AddtoCart","Cart",new {@id=item.ID,@strURL=Request.Url.ToString() })" style="background-color:brown">Thêm vào giỏ</a>
                         </div>
 					</div>
 

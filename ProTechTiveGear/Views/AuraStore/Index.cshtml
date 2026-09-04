@@ -13,16 +13,9 @@
 <section class="welcome_bakery_area cake_feature_main p_100">
 	<div class="container">
 		<div class="main_title">
-			@if (!string.IsNullOrEmpty((string)ViewBag.CurrentSearch))
-			{
-				<h2>Kết quả tìm kiếm cho từ khóa: "@ViewBag.CurrentSearch"</h2>
-				<p>Tìm thấy @ViewBag.SearchCount sản phẩm (LINQ Contains / SQL LIKE N'%...%')</p>
-			}
-			else
-			{
-				<h2>Laptop nổi bật</h2>
-				<p>Laptop xách tay Lenovo, Dell, HP – giá tốt, chính hãng VAT đầy đủ</p>
-			}
+			<h2>Laptop nổi bật</h2>
+			<p>Laptop xách tay Lenovo, Dell, HP – giá tốt như laptopusa.com.vn</p>
+
 		</div>
 		@*@using (Html.BeginForm("Index", "AuraStore", FormMethod.Get))
 		{
@@ -55,7 +48,7 @@
 								<p style="color:red">Out of Stock</p>
 							}
 							@if (item.Quantity == 0) {<a class="pest_btn disabled" >Thêm vào giỏ</a> }
-							else { <a class="pest_btn" href="@Url.Action("AddtoCart","ShopCart",new {@id=item.ID,@strURL=Request.Url.ToString() })" style="background-color:brown">Thêm vào giỏ</a>}
+							else { <a class="pest_btn" href="@Url.Action("AddtoCart","Cart",new {@id=item.ID,@strURL=Request.Url.ToString() })" style="background-color:brown">Thêm vào giỏ</a>}
 
 
 							

@@ -157,16 +157,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\ShopAdminController.cs" />
     <Compile Include="Controllers\BannersController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\ShopCartController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuraStoreController.cs" />
-    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ItemTypesController.cs" />
@@ -230,23 +227,6 @@
     <Compile Include="Models\Item.cs">
       <DependentUpon>Gear.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Item.Metadata.cs" />
-    <Compile Include="Models\Customer.Metadata.cs" />
-    <Compile Include="Models\Admin.Metadata.cs" />
-    <Compile Include="Models\Brand.Metadata.cs" />
-    <Compile Include="Models\ItemType.Metadata.cs" />
-    <Compile Include="Models\Order.Metadata.cs" />
-    <Compile Include="Models\OrderDetail.Metadata.cs" />
-    <Compile Include="Models\LapStoreDbContext.cs" />
-    <Compile Include="Models\LaptopStore\Item.cs" />
-    <Compile Include="Models\LaptopStore\CartItem.cs" />
-    <Compile Include="Models\LaptopStore\LapStoreDbContext.cs" />
-    <Compile Include="Models\LaptopStore\Admin.cs" />
-    <Compile Include="Models\LaptopStore\Customer.cs" />
-    <Compile Include="Models\LaptopStore\Order.cs" />
-    <Compile Include="Models\LaptopStore\OrderDetail.cs" />
-    <Compile Include="Models\LaptopStore\Brand.cs" />
-    <Compile Include="Models\LaptopStore\ItemType.cs" />
     <Compile Include="Models\ItemEntity.cs" />
     <Compile Include="Models\ItemType.cs">
       <DependentUpon>Gear.tt</DependentUpon>
@@ -2362,12 +2342,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\AuraStore\Relatedproducts.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
-    <Content Include="Views\Cart\Index.cshtml" />
-    <Content Include="Views\Cart\OrderSuccess.cshtml" />
-    <Content Include="Views\Store\Index.cshtml" />
-    <Content Include="Views\Store\Details.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
-    <Content Include="Views\ShopCart\CartPartial.cshtml" />
     <Content Include="Views\AuraStore\Newdproducts.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Cart\OrderConfirmation.cshtml" />
@@ -2390,11 +2365,6 @@
     <Content Include="Scripts\tinymce\js\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Laptop.cshtml" />
-    <Content Include="Views\Admin\CreateLaptop.cshtml" />
-    <Content Include="Views\Admin\EditLaptop.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
-    <Content Include="Views\Admin\DeleteLaptop.cshtml" />
     <Content Include="Views\Banners\Create.cshtml" />
     <Content Include="Views\Banners\Delete.cshtml" />
     <Content Include="Views\Banners\Details.cshtml" />

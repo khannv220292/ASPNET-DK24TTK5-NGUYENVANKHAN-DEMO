@@ -66,7 +66,7 @@
 							<img class="resize-image-cart" src="~/img/Item/@item.Picture" alt="">
 
 						</td>
-						@using (Html.BeginForm("EditCart", "ShopCart", new { @id = item.IdItem }))
+						@using (Html.BeginForm("EditCart", "Cart", new { @id = item.IdItem }))
 						{
 							<td>@item.Name</td>
 							<td>@String.Format("{0:0,0}", item.Prices)</td>
@@ -118,7 +118,7 @@
 						<td>
 							<form class="form-inline">
 							
-								<a class="pest_btn" href="@Url.Action("DeleteAll","ShopCart")"><span style="color:red">Xóa tất cả</span></a>
+								<a class="pest_btn" href="@Url.Action("DeleteAll","Cart")"><span style="color:red">Xóa tất cả</span></a>
 							</form>
 						</td>
 							
@@ -143,7 +143,7 @@
 					<div class="cart_footer">
 						@*<a class="pest_btn">@Html.ActionLink("Order", "Order", "Cart")</a>*@
 						<div class="cart_footer">
-							<a class="pest_btn" href="@Url.Action("Order","ShopCart")">Xác nhận</a>
+							<a class="pest_btn" href="@Url.Action("Order","Cart")">Xác nhận</a>
 						</div>
 					</div>
 				</div>

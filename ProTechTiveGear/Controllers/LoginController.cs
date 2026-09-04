@@ -24,25 +24,25 @@ namespace ProTechTiveGear.Controllers
 			var userName = (collection["userName"] ?? "").Trim();
 			var passWord = (collection["passWord"] ?? "").Trim();
 
-			Admin ad = db.Admins.ToList().FirstOrDefault(n =>
-				string.Equals((n.Username ?? "").Trim(), userName, StringComparison.OrdinalIgnoreCase)
-				&& n.Passwords == passWord);
+			Admin ad = db.Admins.FirstOrDefault(n => n.Username == userName && n.Passwords == passWord);
 			if (ad != null)
 			{
 				Session["Account"] = ad;
-				return RedirectToAction("AllListOrder", "ShopAdmin");
+				Response.Cookies["usr"].Value = ad.Username;
+				Response.Cookies["Name"].Value = ad.Name;
+				return RedirectToAction("AllListOrder", "Admin");
 			}
 
-			Customer cs = db.Customers.ToList().FirstOrDefault(n =>
-				string.Equals((n.Username ?? "").Trim(), userName, StringComparison.OrdinalIgnoreCase)
-				&& n.Passwords == passWord);
-			if (cs != null)
-			{
-				Session["usr"] = cs;
-				return RedirectToAction("Index", "AuraStore");
-			}
-
-			ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng. Admin: Admin / admin. Khách: quanghuy / 123456");
+			Customer cs = db.Customers.SingleOrDefault(n => n.Username == userName && n.Passwords == passWord);
+				if (cs != null)
+				{
+					
+					Session["usr"] = cs;
+					return RedirectToAction("Index", "AuraStore");
+				}
+				else
+					ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng");
+			//}
 			return View();
 			
 		}

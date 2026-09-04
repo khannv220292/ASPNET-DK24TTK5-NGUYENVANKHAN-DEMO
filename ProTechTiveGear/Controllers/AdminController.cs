@@ -1,121 +1,240 @@
 ﻿using System;
-using System.Data.Entity;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LaptopStore.Models;
-
-namespace LaptopStore.Controllers
+using ProTechTiveGear.Models;
+namespace ProTechTiveGear.Controllers
 {
+	
     public class AdminController : Controller
     {
-        private LapStoreDbContext db = new LapStoreDbContext();
+		// GET: Admin
+		ProTechTiveGearEntities db = new ProTechTiveGearEntities();
+		public ActionResult SignOut()
+		{
+			//FormsAuthentication.SignOut();
+			Response.Cookies.Clear();
+			return RedirectToAction("Login", "Admin");
 
-        // 1. READ: Danh sách Laptop
-        public ActionResult Index()
+		}
+		public ActionResult Index()
         {
-            var items = db.Items.Include(i => i.Brand).Include(i => i.ItemType);
-            return View(items.ToList());
+			DateTime dateTimeNow = DateTime.Now.Date;
+			dateTimeNow = dateTimeNow.AddYears(-1);
+
+			string[] dateX = new string[12];
+			string[] data = new string[12];
+			for (int i = 0; i < 12; i++)
+			{
+
+				dateX[i] = (dateTimeNow.Month.ToString() + "/" + dateTimeNow.Year.ToString()).ToString();
+				var temp = db.Orders.Where(a => a.Orderdate.Value.Month == dateTimeNow.Month).Sum(s => s.Totalprice);
+				if (temp == null)
+				{
+					temp = 0;
+				}
+				data[i] = temp.ToString();
+				dateTimeNow = dateTimeNow.AddMonths(1);
+			}
+			ViewBag.dateX = dateX;
+			ViewBag.data = data;
+
+			// DatachartLine();
+			var ac = (Admin)Session["Account"];
+			if (ac == null)
+			{
+				return RedirectToAction("Login", "Admin");
+			}
+			else { return View(); }
+			
         }
+		public ActionResult Login()
+		{
+			return View();
 
-        // 2. CREATE: Thêm mới
-        public ActionResult Create()
-        {
-            ViewBag.BrandID = new SelectList(db.Brands, "ID", "Name");
-            ViewBag.TypeID = new SelectList(db.ItemTypes, "ID", "TypeName");
-            return View();
-        }
+		}
+		[HttpPost]
+		public ActionResult Login(FormCollection collection)
+		{
+			var userName = (collection["userName"] ?? "").Trim();
+			var passWord = (collection["passWord"] ?? "").Trim();
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(StoreItem item, HttpPostedFileBase photo)
-        {
-            item.Picture = SavePicture(photo, item.Picture);
-            if (ModelState.IsValid)
+			Admin ad = db.Admins.SingleOrDefault(n => n.Username == userName && n.Passwords == passWord);
+			if (ad == null)
+			{
+				ad = db.Admins.ToList().FirstOrDefault(n =>
+					string.Equals(n.Username, userName, StringComparison.OrdinalIgnoreCase)
+					&& n.Passwords == passWord);
+			}
+			if (ad != null)
+			{
+				Session["Account"] = ad;
+				Response.Cookies["usr"].Value = ad.Username;
+
+				var name = db.Admins.SingleOrDefault(a => a.Username == ad.Username).Name;
+				Response.Cookies["Name"].Value = name;
+
+				var atar = db.Admins.SingleOrDefault(a => a.Username == ad.Username).Picture;
+				if (atar == null || atar == "")
+				{
+					atar = "~/img/Item/avatar-default-icon.png";
+				}
+
+				Response.Cookies["avatar"].Value = atar;
+
+				return RedirectToAction("AllListOrder", "Admin");
+			}
+			else
+			
+				ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng");
+			
+			return View();
+
+
+		
+	}
+
+		public ActionResult Create()
+		{
+			return View();
+		}
+
+		// POST: Admins/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Create([Bind(Include = "Username,Passwords,Name,Picture")] Admin admin)
+		{
+			if (ModelState.IsValid)
+			{
+				db.Admins.Add(admin);
+				db.SaveChanges();
+				return RedirectToAction("Index");
+			}
+
+			return View(admin);
+		}
+
+
+
+		///  
+		/// </summary>
+		/// <returns></returns>
+		/// 
+
+
+		//order
+		public ActionResult ListOrder()
+		{
+			var temp = db.Orders.Where(o => o.Status == false).ToList();
+			List<OrderEntity> lisorder = new List<OrderEntity>();
+			foreach (var item in temp)
+			{
+				OrderEntity or = new OrderEntity();
+				or.TypeOf_OrderEntity(item);
+				lisorder.Add(or);
+
+
+			}
+
+
+			return View(lisorder);
+		}
+
+		// xacs nhan
+
+		public ActionResult Comfirm(long ? id)
+		{
+			var temp = db.OrderDetails.Where(d => d.OrderID == id);
+			List<OrderDetailEntity> listdetail = new List<OrderDetailEntity>();
+			foreach (var item in temp)
+			{
+				OrderDetailEntity or = new OrderDetailEntity();
+				or.TypeOf_OrderEntity(item);
+				listdetail.Add(or);
+			}
+			ViewBag.Date = db.Orders.SingleOrDefault(a => a.ID == id).Deliverydate;
+			ViewBag.id = id;
+			return View(listdetail);
+
+		}
+
+		[HttpPost]
+
+		public ActionResult Comfirm(FormCollection fc)
+		{
+			var date = DateTime.Now;
+			long id = Convert.ToInt64(fc["id"]);
+			var tem = db.Orders.SingleOrDefault(d => d.ID ==id);
+
+			tem.Status = true;
+			tem.Deliverydate = date;
+			db.SaveChanges();
+
+            if (!tem.Payments.Any())
             {
-                if (string.IsNullOrWhiteSpace(item.Picture))
-                    item.Picture = "laptop-hp-01.jpg";
-                db.Items.Add(item);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.BrandID = new SelectList(db.Brands, "ID", "Name", item.BrandID);
-            ViewBag.TypeID = new SelectList(db.ItemTypes, "ID", "TypeName", item.TypeID);
-            return View(item);
-        }
+				Payment pm = new Payment();
+				pm.Payprices = tem.Totalprice;
+				pm.OrderID = tem.ID;
+				db.Payments.Add(pm);
+				db.SaveChanges();
+			}
+		
+			return RedirectToAction("ListOrder");
 
-        // 3. UPDATE: Sửa
-        public ActionResult Edit(long id)
-        {
-            var item = db.Items.Find(id);
-            if (item == null) return HttpNotFound();
-            ViewBag.BrandID = new SelectList(db.Brands, "ID", "Name", item.BrandID);
-            ViewBag.TypeID = new SelectList(db.ItemTypes, "ID", "TypeName", item.TypeID);
-            return View(item);
-        }
+		}
+		//-------------------------------------------
+		public ActionResult AllListOrder()
+		{
+			var temp = db.Orders.ToList();
+			List<OrderEntity> lisorder = new List<OrderEntity>();
+			foreach (var item in temp)
+			{
+				OrderEntity or = new OrderEntity();
+				or.TypeOf_OrderEntity(item);
+				lisorder.Add(or);
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(StoreItem item, HttpPostedFileBase photo)
-        {
-            item.Picture = SavePicture(photo, item.Picture);
-            if (ModelState.IsValid)
-            {
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.BrandID = new SelectList(db.Brands, "ID", "Name", item.BrandID);
-            ViewBag.TypeID = new SelectList(db.ItemTypes, "ID", "TypeName", item.TypeID);
-            return View(item);
-        }
 
-        string SavePicture(HttpPostedFileBase photo, string currentName)
-        {
-            if (photo == null || photo.ContentLength <= 0)
-                return currentName;
-            var ext = Path.GetExtension(photo.FileName);
-            if (string.IsNullOrEmpty(ext))
-                ext = ".jpg";
-            var fileName = Guid.NewGuid().ToString("N") + ext.ToLowerInvariant();
-            var folderItem = Server.MapPath("~/img/Item");
-            var folderRoot = Server.MapPath("~/img");
-            if (!Directory.Exists(folderItem))
-                Directory.CreateDirectory(folderItem);
-            if (!Directory.Exists(folderRoot))
-                Directory.CreateDirectory(folderRoot);
-            var pathItem = Path.Combine(folderItem, fileName);
-            photo.SaveAs(pathItem);
-            try { System.IO.File.Copy(pathItem, Path.Combine(folderRoot, fileName), true); } catch { }
-            return fileName;
-        }
+			}
 
-        // 4. DELETE: Xóa an toàn
-        public ActionResult Delete(long id)
-        {
-            var item = db.Items.Find(id);
-            if (item == null) return HttpNotFound();
-            return View(item);
-        }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            var item = db.Items.Find(id);
-            db.Items.Remove(item);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+			return View(lisorder);
+		}
 
-        // 5. THỐNG KÊ (Tiêu chí 8): Sản phẩm tồn kho chưa từng bán
-        public ActionResult Productnotsold()
-        {
-            var soldItemIds = db.OrderDetails.Where(od => od.ItemId != null).Select(od => od.ItemId).Distinct();
-            var unsoldItems = db.Items.Include(i => i.Brand).Include(i => i.ItemType)
-                .Where(i => !soldItemIds.Contains(i.ID)).ToList();
-            return View(unsoldItems);
-        }
-    }
+		// xacs nhan
+
+		public ActionResult OrderDetail(long? id)
+		{
+			var temp = db.OrderDetails.Where(d => d.OrderID == id);
+			List<OrderDetailEntity> listdetail = new List<OrderDetailEntity>();
+			foreach (var item in temp)
+			{
+				OrderDetailEntity or = new OrderDetailEntity();
+				or.TypeOf_OrderEntity(item);
+				listdetail.Add(or);
+			}
+			
+			return View(listdetail);
+
+		}
+		
+		public ActionResult Productnotsold()
+		{
+
+			//var results = from t1 in db.Items
+			//			  where !(from t2 in db.Orders where t2.Orderdate == DateTime.Now
+			//					  select t2.ID).Contains(t1.ID)
+			//			  select t1;
+			var results = from t1 in db.Items
+						  where !(from t2 in db.Orders
+								  join a in db.OrderDetails on t2.ID equals a.OrderID
+								  where t2.Orderdate == DateTime.Now
+								  select t2.ID).Contains(t1.ID)
+						  select t1;
+			return View(results.ToList());
+		}
+	}
 }

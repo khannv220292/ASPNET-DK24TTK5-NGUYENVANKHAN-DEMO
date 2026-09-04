@@ -57,10 +57,7 @@ namespace ProTechTiveGear.Controllers
 			{
 				q = q.Where(nv => nv.Name.Contains(search));
 			}
-			var list = q.OrderByDescending(c => c.DateImport).ToList();
-			ViewBag.CurrentSearch = search;
-			ViewBag.SearchCount = list.Count;
-			var model = string.IsNullOrEmpty(search) ? list.Take(16).ToList() : list;
+			var model = q.OrderByDescending(c => c.DateImport).Take(16).ToList();
 			return View(model);
 
 		
