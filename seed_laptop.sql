@@ -1,4 +1,4 @@
-USE webgaming;
+﻿USE webgaming;
 GO
 UPDATE Menu SET Name = N'Lenovo' WHERE ID = 1;
 UPDATE Menu SET Name = N'Dell' WHERE ID = 2;
@@ -24,7 +24,7 @@ UPDATE Item SET
   TypeID = 1, BrandID = 1,
   SellPrice = 12990000, PurcharsePrice = 10500000, Quantity = 12, Active = 1,
   ShortTitle = N'i5-1145G7 / 16GB / 512GB / 14" FHD',
-  Describe = N'<p><b>Laptop Lenovo ThinkPad T14 Gen 2</b> (nhập khẩu, phong cách laptopusa.com.vn).</p><p>CPU Intel Core i5-1145G7, RAM 16GB, SSD 512GB, màn 14 inch FHD, Windows 11.</p><p>Phù hợp văn phòng, doanh nhân. Bảo hành 3-6 tháng tại KHANNVSHOP.</p>'
+  Describe = N'<p><b>Laptop Lenovo ThinkPad T14 Gen 2</b> (nhập khẩu, phong cách laptopusa.com.vn).</p><p>CPU Intel Core i5-1145G7, RAM 16GB, SSD 512GB, màn 14 inch FHD, Windows 11.</p><p>Phù hợp văn phòng, doanh nhân. Bảo hành 3-6 tháng tại laptop.khannv.vn.</p>'
 WHERE ID = 1;
 UPDATE Item SET
   Name = N'ThinkPad X1 Carbon 9',

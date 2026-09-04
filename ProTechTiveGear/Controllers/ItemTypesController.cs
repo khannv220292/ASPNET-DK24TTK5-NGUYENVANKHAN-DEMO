@@ -39,7 +39,7 @@ namespace ProTechTiveGear.Controllers
         // GET: ItemTypes/Create
         public ActionResult Create()
         {
-            ViewBag.MenuID = new SelectList(db.Menus.Where(x => x.ID != 1), "ID", "Name");
+            ViewBag.MenuID = new SelectList(db.Menus.OrderBy(x => x.ID), "ID", "Name");
             return View();
         }
 
@@ -48,16 +48,34 @@ namespace ProTechTiveGear.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TypeName,MenuID")] ItemType itemType)
+        public ActionResult Create([Bind(Include = "TypeName,MenuID")] ItemType itemType)
         {
+            if (string.IsNullOrWhiteSpace(itemType.TypeName))
+            {
+                ModelState.AddModelError("TypeName", "Nhập tên loại sản phẩm");
+            }
+            if (itemType.MenuID == null)
+            {
+                ModelState.AddModelError("MenuID", "Chọn loại (Lenovo, Dell, HP, Phụ kiện...)");
+            }
             if (ModelState.IsValid)
             {
-                db.ItemTypes.Add(itemType);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.ItemTypes.Add(itemType);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.InnerException != null && ex.InnerException.InnerException != null
+                        ? ex.InnerException.InnerException.Message
+                        : (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    ModelState.AddModelError("", "Không lưu được: " + msg);
+                }
             }
 
-            ViewBag.MenuID = new SelectList(db.Menus, "ID", "Name", itemType.MenuID);
+            ViewBag.MenuID = new SelectList(db.Menus.OrderBy(x => x.ID), "ID", "Name", itemType.MenuID);
             return View(itemType);
         }
 
@@ -73,7 +91,7 @@ namespace ProTechTiveGear.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MenuID = new SelectList(db.Menus.Where(x => x.ID != 1), "ID", "Name", itemType.MenuID);
+            ViewBag.MenuID = new SelectList(db.Menus.OrderBy(x => x.ID), "ID", "Name", itemType.MenuID);
             return View(itemType);
         }
 
@@ -86,11 +104,21 @@ namespace ProTechTiveGear.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(itemType).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(itemType).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.InnerException != null && ex.InnerException.InnerException != null
+                        ? ex.InnerException.InnerException.Message
+                        : (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    ModelState.AddModelError("", "Không lưu được: " + msg);
+                }
             }
-            ViewBag.MenuID = new SelectList(db.Menus, "ID", "Name", itemType.MenuID);
+            ViewBag.MenuID = new SelectList(db.Menus.OrderBy(x => x.ID), "ID", "Name", itemType.MenuID);
             return View(itemType);
         }
 
@@ -115,8 +143,27 @@ namespace ProTechTiveGear.Controllers
         public ActionResult DeleteConfirmed(long id)
         {
             ItemType itemType = db.ItemTypes.Find(id);
-            db.ItemTypes.Remove(itemType);
-            db.SaveChanges();
+            if (itemType == null)
+            {
+                return HttpNotFound();
+            }
+            try
+            {
+                var items = db.Items.Where(x => x.TypeID == id).ToList();
+                foreach (var it in items)
+                {
+                    it.TypeID = null;
+                }
+                db.ItemTypes.Remove(itemType);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.InnerException != null && ex.InnerException.InnerException != null
+                    ? ex.InnerException.InnerException.Message
+                    : (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                TempData["Error"] = "Không xóa được: " + msg;
+            }
             return RedirectToAction("Index");
         }
 

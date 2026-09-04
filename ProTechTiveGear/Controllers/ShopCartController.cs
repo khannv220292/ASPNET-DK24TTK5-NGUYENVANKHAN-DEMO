@@ -28,20 +28,21 @@ namespace ProTechTiveGear.Controllers
         public ActionResult AddtoCart(long id, string strURL)
         {
             List<CartEntity> lstcart = GetCart();
-            //Kiem tra sách này tồn tại trong Session["Giohang"] chưa?
-
             CartEntity Product = lstcart.Find(n => n.IdItem == id);
             if (Product == null)
             {
                 Product = new CartEntity(id);
                 lstcart.Add(Product);
-                return Redirect(strURL);
             }
             else
             {
                 Product.Quantity++;
+            }
+            if (!string.IsNullOrWhiteSpace(strURL) && Uri.IsWellFormedUriString(strURL, UriKind.Absolute))
+            {
                 return Redirect(strURL);
             }
+            return RedirectToAction("Cart");
         }
         /// <summary>Giỏ hàng shop cũ.</summary>
         public ActionResult Index()
@@ -58,7 +59,8 @@ namespace ProTechTiveGear.Controllers
             }
             ViewBag.TotalQuantity = TotalQuantity();
             ViewBag.ToTalPrice = ToTalPrice();
-            return View(lstCart);
+            // Dùng chung view với Cart (folder Views/ShopCart thiếu Cart.cshtml)
+            return View("~/Views/Cart/Cart.cshtml", lstCart);
         }
 
         private int TotalQuantity()

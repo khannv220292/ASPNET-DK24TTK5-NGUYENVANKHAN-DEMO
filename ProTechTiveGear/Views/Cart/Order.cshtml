@@ -1,151 +1,349 @@
 ﻿@using ProTechTiveGear.Models
 @model List<CartEntity>
 @{
-	ViewBag.Title = "Order";
+	ViewBag.Title = "Thanh toán";
 	Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+	ViewBag.HideBanner = true;
+	Customer cus = Session["usr"] as Customer;
+	string fullName = cus != null ? (cus.Name ?? "") : "";
+	string phone = cus != null ? (cus.Phone ?? "") : "";
+	string address = cus != null ? (cus.Address ?? "") : "";
+	double total = ViewBag.ToTalPrice != null ? Convert.ToDouble(ViewBag.ToTalPrice) : (ViewBag.TotalPrice != null ? Convert.ToDouble(ViewBag.TotalPrice) : 0);
+	int qty = ViewBag.TotalQuantity != null ? Convert.ToInt32(ViewBag.TotalQuantity) : (ViewBag.ToTalQuanttity != null ? Convert.ToInt32(ViewBag.ToTalQuanttity) : 0);
 }
-<h2 style="text-align:center;color:#49e4fa">Thông tin đơn hàng</h2>
-@{
-	Customer cus = (Customer)Session["usr"];
-}
-<table align="center">
-	@using (Html.BeginForm())
-	{
-		@Html.ValidationSummary(true)
-		<tr style="height:40px">
-			<td> Tên: </td>
-			<td style="font-weight:bold">  @cus.Name </td>
-		</tr>
-		<tr style="height:40px">
-			<td> Địa chỉ: </td>
-			<td style="font-weight:bold">  @cus.Address </td>
-		</tr>
-		<tr style="height:40px">
-			<td> Số điện thoại: </td>
-			<td style="font-weight:bold">  @cus.Phone </td>
-		</tr>
-		<tr style="height:40px">
-			<td> Email : </td>
-			<td style="font-weight:bold"> @cus.EmailAddress  </td>
-		</tr>
-		<tr style="height:40px">
-			<td> Ngày đặt hàng: </td>
-			<td style="font-weight:bold"> @DateTime.Now.ToShortDateString() </td>
-		</tr>
-
-		@*<tr style="height:40px">
-				<td> Delivery:</td>
-				<td style="font-weight:bold">
-					<input type="date" name="DeliveryDate" />
-				</td>
-			</tr>*@
-		<tr style="height:40px">
-			<td><input type="Submit" class="pest_btn" value="Xác nhận đặt hàng" /></td>
-            <td>
-                
-                <a class="pest_btn" href="@Url.Action("PaymentMoMo","Cart")">Thanh toán qua MOMO</a>
-                <a class="pest_btn" href="@Url.Action("Newinformation","Cart")">Chỉnh sửa địa chỉ</a>
-            </td>
-
-		</tr>
+<style>
+	.ck-page { background: #f4f5f7; padding: 24px 0 48px; min-height: 60vh; }
+	.ck-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+	.ck-left { flex: 1 1 420px; background: #fff; border-radius: 8px; padding: 22px 24px 28px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+	.ck-right { flex: 1 1 340px; max-width: 440px; }
+	.ck-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+	.ck-head h3 { margin: 0; font-size: 20px; font-weight: 800; color: #222; }
+	.ck-login { color: #e53935; font-weight: 700; font-size: 13px; text-decoration: none; }
+	.ck-login:hover { text-decoration: underline; }
+	.ck-login i { margin-right: 4px; }
+	.ck-field { margin-bottom: 14px; }
+	.ck-field label { display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 6px; }
+	.ck-field input[type=text],
+	.ck-field input[type=tel],
+	.ck-field select,
+	.ck-field textarea {
+		width: 100%;
+		height: 42px;
+		border: 1px solid #d0d5dd;
+		border-radius: 6px;
+		padding: 8px 12px;
+		font-size: 14px;
+		background: #fff;
+		color: #222;
 	}
-</table>
+	.ck-field textarea { height: 88px; resize: vertical; }
+	.ck-field select:disabled { background: #f0f0f0; color: #999; }
+	.ck-row2 { display: flex; gap: 12px; }
+	.ck-row2 .ck-field { flex: 1; }
+	.ck-phone-wrap { display: flex; gap: 8px; }
+	.ck-phone-wrap .ck-flag {
+		flex: 0 0 72px;
+		height: 42px;
+		border: 1px solid #d0d5dd;
+		border-radius: 6px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #fff;
+		font-size: 13px;
+		font-weight: 700;
+		color: #333;
+	}
+	.ck-phone-wrap input { flex: 1; }
+	.ck-box { background: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+	.ck-box h4 { margin: 0 0 12px; font-size: 16px; font-weight: 800; color: #222; }
+	.ck-ship-hint {
+		background: #e8f4ff;
+		color: #1565c0;
+		border-radius: 6px;
+		padding: 12px 14px;
+		font-size: 13px;
+	}
+	.ck-pay-list { list-style: none; margin: 0; padding: 0; }
+	.ck-pay-list li { border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+	.ck-pay-list label {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 14px;
+		margin: 0;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: 600;
+		color: #222;
+	}
+	.ck-pay-list input { margin: 0; }
+	.ck-pay-ico {
+		width: 36px;
+		height: 28px;
+		border-radius: 4px;
+		background: #ffebee;
+		color: #c62828;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 14px;
+		flex-shrink: 0;
+	}
+	.ck-pay-badge {
+		margin-left: auto;
+		background: #ff6d00;
+		color: #fff;
+		font-size: 11px;
+		font-weight: 800;
+		padding: 3px 8px;
+		border-radius: 4px;
+		white-space: nowrap;
+	}
+	.ck-pay-logo {
+		margin-left: auto;
+		font-size: 11px;
+		font-weight: 800;
+		color: #1565c0;
+		letter-spacing: .02em;
+	}
+	.ck-order-mini { font-size: 13px; color: #555; }
+	.ck-order-mini .line { display: flex; justify-content: space-between; margin-bottom: 8px; }
+	.ck-order-mini .sum { font-size: 18px; font-weight: 800; color: #e53935; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+	.ck-submit {
+		width: 100%;
+		margin-top: 14px;
+		height: 48px;
+		border: none;
+		border-radius: 8px;
+		background: #e53935;
+		color: #fff;
+		font-size: 16px;
+		font-weight: 800;
+		cursor: pointer;
+	}
+	.ck-submit:hover { background: #c62828; }
+	.ck-back { display: inline-block; margin-bottom: 12px; color: #0077dd; font-weight: 600; text-decoration: none; }
+	.ck-back:hover { text-decoration: underline; }
+	@@media (max-width: 900px) {
+		.ck-right { max-width: none; }
+	}
+</style>
 
-<section class="cart_table_area p_100">
+<section class="ck-page">
 	<div class="container">
-		<div class="table-responsive">
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col" style="background-color:#49e4fa;color:white">Ảnh</th>
-						<th scope="col" style="background-color:#49e4fa;color:white">Sản phẩm</th>
-						<th scope="col" style="background-color:#49e4fa;color:white">Giá</th>
-						<th scope="col" style="background-color:#49e4fa;color:white">Số lượng</th>
-						<th scope="col" style="background-color:#49e4fa;color:white">Tổng tiền</th>
+		<a class="ck-back" href="@Url.Action("Cart", "Cart")"><i class="fa fa-arrow-left"></i> Quay lại giỏ hàng</a>
 
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model)
-					{
-						<tr>
-							<td>
-								<img class="resize-image-cart" src="~/img/Item/@item.Picture" alt="">
+		@if (TempData["CheckoutError"] != null)
+		{
+			<div style="background:#ffebee;color:#c62828;padding:12px 16px;border-radius:8px;margin-bottom:14px;font-weight:600">@TempData["CheckoutError"]</div>
+		}
 
-							</td>
-							@using (Html.BeginForm("EditCart", "Cart", new { @id = item.IdItem }))
+		@using (Html.BeginForm("Order", "Cart", FormMethod.Post, new { id = "checkoutForm" }))
+		{
+			<div class="ck-grid">
+				<div class="ck-left">
+					<div class="ck-head">
+						<h3>Thông tin nhận hàng</h3>
+						@if (cus == null)
+						{
+							<a class="ck-login" href="@Url.Action("Login", "Login", new { returnUrl = Url.Action("Order", "Cart") })"><i class="fa fa-user"></i> Đăng nhập</a>
+						}
+						else
+						{
+							<span style="font-size:13px;color:#2e7d32;font-weight:700"><i class="fa fa-check-circle"></i> @(cus.Name)</span>
+						}
+					</div>
+
+					<div class="ck-field">
+						<label>Họ và tên</label>
+						<input type="text" name="fullName" value="@fullName" placeholder="Họ và tên" required maxlength="80" />
+					</div>
+					<div class="ck-field">
+						<label>Số điện thoại</label>
+						<div class="ck-phone-wrap">
+							<div class="ck-flag">🇻🇳 +84</div>
+							<input type="tel" name="phone" value="@phone" placeholder="Số điện thoại" required maxlength="15" />
+						</div>
+					</div>
+					<div class="ck-field">
+						<label>Địa chỉ</label>
+						<input type="text" name="address" id="ckAddress" value="@address" placeholder="Số nhà, tên đường..." required maxlength="200" />
+					</div>
+					<div class="ck-field">
+						<label>Tỉnh thành</label>
+						<select name="province" id="ckProvince" required>
+							<option value="">---</option>
+							<option value="Hồ Chí Minh">Hồ Chí Minh</option>
+							<option value="Hà Nội">Hà Nội</option>
+							<option value="Đà Nẵng">Đà Nẵng</option>
+							<option value="Hải Phòng">Hải Phòng</option>
+							<option value="Cần Thơ">Cần Thơ</option>
+							<option value="An Giang">An Giang</option>
+							<option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+							<option value="Bắc Giang">Bắc Giang</option>
+							<option value="Bắc Ninh">Bắc Ninh</option>
+							<option value="Bình Dương">Bình Dương</option>
+							<option value="Bình Định">Bình Định</option>
+							<option value="Đồng Nai">Đồng Nai</option>
+							<option value="Khánh Hòa">Khánh Hòa</option>
+							<option value="Lâm Đồng">Lâm Đồng</option>
+							<option value="Nghệ An">Nghệ An</option>
+							<option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+							<option value="Trà Vinh">Trà Vinh</option>
+							<option value="Vĩnh Long">Vĩnh Long</option>
+						</select>
+					</div>
+					<div class="ck-row2">
+						<div class="ck-field">
+							<label>Quận huyện</label>
+							<select name="district" id="ckDistrict" disabled required>
+								<option value="">---</option>
+							</select>
+						</div>
+						<div class="ck-field">
+							<label>Phường xã</label>
+							<select name="ward" id="ckWard" disabled required>
+								<option value="">---</option>
+							</select>
+						</div>
+					</div>
+					<div class="ck-field">
+						<label>Ghi chú (tùy chọn)</label>
+						<textarea name="note" placeholder="Ghi chú thêm cho đơn hàng..." maxlength="300"></textarea>
+					</div>
+				</div>
+
+				<div class="ck-right">
+					<div class="ck-box">
+						<h4>Vận chuyển</h4>
+						<div class="ck-ship-hint" id="ckShipHint">Vui lòng nhập thông tin giao hàng</div>
+						<div id="ckShipFee" style="display:none;font-size:14px;font-weight:700;color:#2e7d32">
+							Giao hàng tiêu chuẩn — <span style="color:#e53935">Miễn phí</span>
+						</div>
+					</div>
+
+					<div class="ck-box">
+						<h4>Thanh toán</h4>
+						<ul class="ck-pay-list">
+							<li>
+								<label>
+									<input type="radio" name="paymentMethod" value="COD" checked />
+									<span class="ck-pay-ico"><i class="fa fa-money"></i></span>
+									<span>Thanh toán khi giao hàng (COD)</span>
+								</label>
+							</li>
+						</ul>
+					</div>
+
+					<div class="ck-box">
+						<h4>Đơn hàng (@qty sản phẩm)</h4>
+						<div class="ck-order-mini">
+							@foreach (var item in Model)
 							{
-								<td>@item.Name</td>
-								<td>@String.Format("{0:0,0}", item.Prices)</td>
-
-
-								<td class="cart_quantity">
-									<div class="cart_quantity_button">
-										<input class="cart_quantity_input" type="number" name="txtSoluong" min="1" max="10" value="@item.Quantity">
-									</div>
-								</td>
-								@*<td>
-										<div class="form-group--number">
-											<input type="submit" onclick="tru()" class="minus"><span>-</span>
-											<button type="button" onclick="tru()" class="minus"><span>-</span></button>
-											<input id="quantity" min="1" max="100" class="form-control" type="text" name="txtSoLuong" value="@item.Quantity">
-											<button type="button" onclick="cong()" class="plus"><span>+</span></button>
-											<input type="submit" onclick="cong()" class="plus"><span>-</span>
-										</div>
-									</td>*@
-
-
-								<td>@String.Format("{0:0,0}", item.TotalPrices)</td>
-
+								<div class="line">
+									<span>@item.Name × @item.Quantity</span>
+									<span>@string.Format("{0:#,##0}đ", item.TotalPrices)</span>
+								</div>
 							}
-						</tr>
-
-					}
-					@*<tr>
-						<td></td>
-
-						<td></td>
-						<td></td>
-						<td><span>@String.Format("{0:0,0}", ViewBag.ToTalPrice)</span></td>
-
-						<td>
-							@ViewBag.TotalQuantity
-						</td>
-
-
-					</tr>*@
-
-				</tbody>
-			</table>
-		</div>
-
-
-	<div class="row cart_total_inner">
-		<div class="col-lg-7"></div>
-		<div class="col-lg-5">
-			<div class="cart_total_text">
-				<div class="cart_head" style="background-color:#49e4fa;color:white">
-					Tổng đơn hàng
-				</div>
-				<div class="sub_total">
-					<h5>Số lượng <span>@ViewBag.TotalQuantity</span></h5>
-				</div>
-				<div class="total">
-					<h4>Tiền <span>@String.Format("{0:0,0}", ViewBag.ToTalPrice)</span></h4>
-				</div>
-				<div class="cart_footer">
-					@*<a class="pest_btn">@Html.ActionLink("Order", "Order", "Cart")</a>*@
-					<div class="cart_footer">
-						
+							<div class="line sum">
+								<span>Tổng cộng</span>
+								<span>@string.Format("{0:#,##0}đ", total)</span>
+							</div>
+						</div>
+						<button type="submit" class="ck-submit" id="ckSubmit">Đặt hàng</button>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
-
+		}
 	</div>
 </section>
 
+<script>
+(function () {
+	var districts = {
+		"Hồ Chí Minh": ["Quận 1", "Quận 3", "Quận 5", "Quận 7", "Quận 10", "Bình Thạnh", "Tân Bình", "Gò Vấp", "Thủ Đức", "Bình Tân"],
+		"Hà Nội": ["Ba Đình", "Hoàn Kiếm", "Hai Bà Trưng", "Đống Đa", "Cầu Giấy", "Thanh Xuân", "Long Biên", "Nam Từ Liêm", "Bắc Từ Liêm", "Hà Đông"],
+		"Đà Nẵng": ["Hải Châu", "Thanh Khê", "Sơn Trà", "Ngũ Hành Sơn", "Liên Chiểu", "Cẩm Lệ"],
+		"Hải Phòng": ["Hồng Bàng", "Ngô Quyền", "Lê Chân", "Hải An", "Kiến An", "Đồ Sơn"],
+		"Cần Thơ": ["Ninh Kiều", "Bình Thủy", "Cái Răng", "Ô Môn", "Thốt Nốt"],
+		"Trà Vinh": ["TP. Trà Vinh", "Càng Long", "Cầu Kè", "Tiểu Cần", "Châu Thành", "Trà Cú", "Cầu Ngang", "Duyên Hải"],
+		"default": ["Trung tâm", "Phường 1", "Phường 2", "Phường 3"]
+	};
 
+	// Phường/xã theo quận-huyện (danh sách thực tế rút gọn phục vụ checkout)
+	var wardsByDistrict = {
+		"Bình Tân": ["An Lạc", "An Lạc A", "Bình Hưng Hòa", "Bình Hưng Hòa A", "Bình Hưng Hòa B", "Bình Trị Đông", "Bình Trị Đông A", "Bình Trị Đông B", "Tân Tạo", "Tân Tạo A"],
+		"Quận 1": ["Bến Nghé", "Bến Thành", "Cầu Kho", "Cầu Ông Lãnh", "Cô Giang", "Đa Kao", "Nguyễn Cư Trinh", "Nguyễn Thái Bình", "Phạm Ngũ Lão", "Tân Định"],
+		"Quận 3": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5", "Phường 9", "Phường 10", "Phường 11", "Phường 12", "Phường 13", "Phường 14"],
+		"Quận 5": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5", "Phường 6", "Phường 7", "Phường 8", "Phường 9", "Phường 10", "Phường 11", "Phường 12", "Phường 13", "Phường 14", "Phường 15"],
+		"Quận 7": ["Tân Thuận Đông", "Tân Thuận Tây", "Tân Kiểng", "Tân Hưng", "Bình Thuận", "Tân Quy", "Phú Thuận", "Tân Phú", "Tân Phong", "Phú Mỹ"],
+		"Quận 10": ["Phường 1", "Phường 2", "Phường 4", "Phường 5", "Phường 6", "Phường 7", "Phường 8", "Phường 9", "Phường 10", "Phường 11", "Phường 12", "Phường 13", "Phường 14", "Phường 15"],
+		"Bình Thạnh": ["Phường 1", "Phường 2", "Phường 3", "Phường 5", "Phường 6", "Phường 7", "Phường 11", "Phường 12", "Phường 13", "Phường 14", "Phường 15", "Phường 17", "Phường 19", "Phường 21", "Phường 22", "Phường 24", "Phường 25", "Phường 26", "Phường 27", "Phường 28"],
+		"Tân Bình": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5", "Phường 6", "Phường 7", "Phường 8", "Phường 9", "Phường 10", "Phường 11", "Phường 12", "Phường 13", "Phường 14", "Phường 15"],
+		"Gò Vấp": ["Phường 1", "Phường 3", "Phường 4", "Phường 5", "Phường 6", "Phường 7", "Phường 8", "Phường 9", "Phường 10", "Phường 11", "Phường 12", "Phường 13", "Phường 14", "Phường 15", "Phường 16", "Phường 17"],
+		"Thủ Đức": ["Hiệp Bình Chánh", "Hiệp Bình Phước", "Linh Chiểu", "Linh Đông", "Linh Tây", "Linh Trung", "Linh Xuân", "Bình Chiểu", "Bình Thọ", "Tam Bình", "Tam Phú", "Trường Thọ"],
+		"Ba Đình": ["Cống Vị", "Điện Biên", "Đội Cấn", "Giảng Võ", "Kim Mã", "Liễu Giai", "Ngọc Hà", "Ngọc Khánh", "Nguyễn Trung Trực", "Phúc Xá", "Quán Thánh", "Thành Công", "Trúc Bạch", "Vĩnh Phúc"],
+		"Hoàn Kiếm": ["Chương Dương", "Cửa Đông", "Cửa Nam", "Đồng Xuân", "Hàng Bạc", "Hàng Bài", "Hàng Bồ", "Hàng Bông", "Hàng Buồm", "Hàng Đào", "Hàng Gai", "Hàng Mã", "Hàng Trống", "Lý Thái Tổ", "Phan Chu Trinh", "Phúc Tân", "Tràng Tiền", "Trần Hưng Đạo"],
+		"Cầu Giấy": ["Dịch Vọng", "Dịch Vọng Hậu", "Mai Dịch", "Nghĩa Đô", "Nghĩa Tân", "Quan Hoa", "Trung Hòa", "Yên Hòa"],
+		"Hải Châu": ["Bình Hiên", "Bình Thuận", "Hải Châu I", "Hải Châu II", "Hòa Cường Bắc", "Hòa Cường Nam", "Hòa Thuận Đông", "Hòa Thuận Tây", "Nam Dương", "Phước Ninh", "Thạch Thang", "Thanh Bình", "Thuận Phước"],
+		"Ninh Kiều": ["An Bình", "An Cư", "An Hòa", "An Hội", "An Lạc", "An Nghiệp", "An Phú", "Cái Khế", "Hưng Lợi", "Tân An", "Thới Bình", "Xuân Khánh"],
+		"TP. Trà Vinh": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5", "Phường 6", "Phường 7", "Phường 8", "Phường 9"]
+	};
 
+	function wardsOf(districtName) {
+		if (wardsByDistrict[districtName]) return wardsByDistrict[districtName];
+		return ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5", "Phường 6", "Phường 7", "Phường 8"];
+	}
+
+	var prov = document.getElementById("ckProvince");
+	var dist = document.getElementById("ckDistrict");
+	var ward = document.getElementById("ckWard");
+	var hint = document.getElementById("ckShipHint");
+	var fee = document.getElementById("ckShipFee");
+	var addr = document.getElementById("ckAddress");
+
+	function fillSelect(sel, items, placeholder) {
+		sel.innerHTML = "";
+		var o0 = document.createElement("option");
+		o0.value = "";
+		o0.textContent = placeholder || "---";
+		sel.appendChild(o0);
+		(items || []).forEach(function (t) {
+			var o = document.createElement("option");
+			o.value = t;
+			o.textContent = t;
+			sel.appendChild(o);
+		});
+	}
+
+	function refreshShip() {
+		var ok = prov.value && dist.value && ward.value && addr.value.trim().length > 3;
+		if (ok) {
+			hint.style.display = "none";
+			fee.style.display = "block";
+		} else {
+			hint.style.display = "block";
+			fee.style.display = "none";
+		}
+	}
+
+	prov.addEventListener("change", function () {
+		var list = districts[prov.value] || districts["default"];
+		fillSelect(dist, list, "---");
+		dist.disabled = !prov.value;
+		fillSelect(ward, [], "---");
+		ward.disabled = true;
+		refreshShip();
+	});
+
+	dist.addEventListener("change", function () {
+		fillSelect(ward, dist.value ? wardsOf(dist.value) : [], "---");
+		ward.disabled = !dist.value;
+		refreshShip();
+	});
+
+	ward.addEventListener("change", refreshShip);
+	addr.addEventListener("input", refreshShip);
+})();
+</script>

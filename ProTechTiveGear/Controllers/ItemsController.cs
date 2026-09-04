@@ -70,6 +70,7 @@ namespace ProTechTiveGear.Controllers
             {
 				item.DateImport = DateTime.Now;
 				item.Active = true;
+				db.Configuration.ValidateOnSaveEnabled = false;
                 db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");

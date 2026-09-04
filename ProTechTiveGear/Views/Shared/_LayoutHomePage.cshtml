@@ -1,14 +1,14 @@
 ﻿@using ProTechTiveGear.Models;
+@using System.Linq
 @{
-
 	Customer acc = (Customer)Session["usr"];
 	string username = "";
 	if (Request.Cookies["usr"] != null)
 	{
 		username = Request.Cookies["usr"].Value;
-
 	}
-
+	var headerCart = Session["Cart"] as List<CartEntity>;
+	int headerCartCount = headerCart != null ? headerCart.Sum(x => x.Quantity) : 0;
 }
 @*@{
 
@@ -72,6 +72,15 @@
 		.search-btn { position: absolute; right: 4px; top: 3px; width: 32px; height: 32px; border-radius: 50%; border: none; background: transparent; color: #0077dd; cursor: pointer; }
 		.header-action-item { display: inline-flex; align-items: center; gap: 8px; color: #fff !important; text-decoration: none !important; font-size: 13px; white-space: nowrap; }
 		.header-action-text b { display: block; font-size: 14px; color: #fff; }
+		.header-account { display: inline-flex; align-items: center; gap: 8px; color: #fff; }
+		.header-account-icon { width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); display: inline-flex; align-items: center; justify-content: center; font-size: 16px; }
+		.header-account-links { display: flex; flex-direction: column; line-height: 1.25; }
+		.header-account-links a { color: #fff !important; text-decoration: none !important; font-size: 13px; font-weight: 500; }
+		.header-account-links a:hover { text-decoration: underline !important; }
+		.header-cart-wrap { position: relative; }
+		.header-cart-badge { position: absolute; top: -6px; right: -8px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 50%; background: #e53935; color: #fff; font-size: 10px; line-height: 16px; text-align: center; font-weight: 700; }
+		.header-contact-link:hover, .header-search-icon:hover { opacity: .9; }
+		.header-search-icon { padding: 0 4px; }
 		.main_header_three { position: relative !important; top: auto !important; background: #0077dd; z-index: 40; }
 		.main_header_three + section, .main_header_three + div { margin-top: 0 !important; }
 		.main_header_three.navbar_fixed .middle_menu_three {
@@ -83,6 +92,102 @@
 		.middle_menu_three { background: #fff; position: relative; z-index: 1; }
 		.middle_menu_three .navbar { padding-left: 0; padding-right: 0; }
 		.middle_menu_three .navbar-brand { display: none; }
+		.main_slider_area {
+			position: relative;
+			height: auto;
+			max-height: none;
+			overflow: visible;
+			background: transparent;
+			padding: 12px 0 0;
+		}
+		.main_slider_area .container {
+			position: relative;
+		}
+		.main_slider_area #homeBannerOwl {
+			overflow: hidden;
+			border-radius: 10px;
+			background: #0f172a;
+			position: relative;
+		}
+		.main_slider_area #homeBannerOwl .owl-stage-outer {
+			overflow: hidden;
+		}
+		.main_slider_area #homeBannerOwl .owl-item,
+		.main_slider_area #homeBannerOwl .item,
+		.main_slider_area #homeBannerOwl .hb-slide {
+			line-height: 0;
+			margin: 0;
+			padding: 0;
+			height: auto !important;
+		}
+		.main_slider_area .hb-slide img {
+			width: 100%;
+			height: auto !important;
+			max-height: none;
+			object-fit: contain;
+			object-position: top center;
+			display: block;
+			margin: 0 !important;
+			vertical-align: top;
+		}
+		/* Owl dùng <div class="owl-prev/next"> — đặt absolute theo #homeBannerOwl */
+		.main_slider_area #homeBannerOwl .owl-nav {
+			position: static !important;
+			margin: 0 !important;
+			height: 0 !important;
+			line-height: 0;
+			pointer-events: none;
+		}
+		.main_slider_area #homeBannerOwl .owl-nav .owl-prev,
+		.main_slider_area #homeBannerOwl .owl-nav .owl-next {
+			position: absolute !important;
+			top: 50% !important;
+			transform: translateY(-50%);
+			width: 42px !important;
+			height: 42px !important;
+			line-height: 42px !important;
+			border-radius: 50% !important;
+			background: rgba(0,0,0,.45) !important;
+			color: #fff !important;
+			font-size: 22px;
+			text-align: center;
+			margin: 0 !important;
+			padding: 0 !important;
+			display: block !important;
+			pointer-events: auto;
+			z-index: 6;
+		}
+		.main_slider_area #homeBannerOwl .owl-nav .owl-prev { left: 12px !important; right: auto !important; }
+		.main_slider_area #homeBannerOwl .owl-nav .owl-next { right: 12px !important; left: auto !important; }
+		.main_slider_area #homeBannerOwl .owl-dots {
+			position: absolute !important;
+			left: 0;
+			right: 0;
+			bottom: 12px !important;
+			top: auto !important;
+			height: auto !important;
+			text-align: center;
+			z-index: 6;
+			margin: 0 !important;
+			padding: 0 !important;
+			width: 100%;
+			pointer-events: none;
+		}
+		.main_slider_area #homeBannerOwl .owl-dot {
+			display: inline-block !important;
+			vertical-align: middle;
+			pointer-events: auto;
+		}
+		.main_slider_area #homeBannerOwl .owl-dot span {
+			width: 10px;
+			height: 10px;
+			margin: 0 4px;
+			background: #fff;
+			opacity: .45;
+			border-radius: 50%;
+			display: block;
+		}
+		.main_slider_area #homeBannerOwl .owl-dot.active span { opacity: 1; background: #e67e22; }
 		.pv-wrap { padding-top: 32px !important; }
 		.pv-head { background: #fff; border-radius: 8px; padding: 16px 20px; margin: 0 0 22px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
 		.pv-img { overflow: hidden; }
@@ -130,28 +235,39 @@
 							<b>0978.111.017</b>
 						</div>
 					</div>
-					<a href="@Url.Action("Cart", "ShopCart")" class="header-action-item">
-						<i class="fa fa-shopping-cart"></i>
-						<span>Giỏ hàng</span>
-					</a>
-					<a href="@Url.Action("Login", "Admin")" class="header-action-item">
-						<i class="fa fa-cog"></i>
-						<span>Admin</span>
-					</a>
 					@if (Session["usr"] == null)
 					{
-						<a href="@Url.Action("Login", "Login")" class="header-action-item">
-							<i class="fa fa-user"></i>
-							<span>Đăng nhập</span>
-						</a>
+						<div class="header-account">
+							<span class="header-account-icon"><i class="fa fa-user"></i></span>
+							<div class="header-account-links">
+								<a href="@Url.Action("Register", "Login")">Đăng ký</a>
+								<a href="@Url.Action("Login", "Login")">Đăng nhập</a>
+							</div>
+						</div>
 					}
 					else
 					{
-						<a href="@Url.Action("Profile", "AuraStore")" class="header-action-item">
-							<i class="fa fa-user"></i>
-							<span>@(acc != null ? acc.Name : "Tài khoản")</span>
+						<a href="@Url.Action("Profile", "AuraStore")" class="header-account">
+							<span class="header-account-icon"><i class="fa fa-user"></i></span>
+							<div class="header-account-links">
+								<span>@(acc != null ? acc.Name : "Tài khoản")</span>
+							</div>
 						</a>
 					}
+					<a href="@Url.Action("Contact", "AuraStore")" class="header-action-item header-contact-link" title="Liên hệ">
+						<i class="fa fa-envelope" style="font-size:18px"></i>
+						<div class="header-action-text">
+							<span style="font-size:11px;opacity:.9">Hỗ trợ</span>
+							<b>Liên hệ</b>
+						</div>
+					</a>
+					<a href="#test-search" class="header-action-item popup-with-zoom-anim header-search-icon" title="Tìm kiếm">
+						<i class="fa fa-search" style="font-size:20px"></i>
+					</a>
+					<a href="@Url.Action("Cart", "Cart")" class="header-action-item header-cart-wrap">
+						<i class="fa fa-shopping-cart" style="font-size:22px"></i>
+						<span class="header-cart-badge">@headerCartCount</span>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -182,10 +298,10 @@
 	@if (ViewBag.HideBanner != true)
 	{
 	<section class="main_slider_area">
-		<div id="main_slider" class="rev_slider" data-version="5.3.1.6">
-			<ul>
+		<div class="container">
+			<div id="homeBannerOwl" class="owl-carousel owl-theme">
 				@Html.Action("Banner", "AuraStore")
-			</ul>
+			</div>
 		</div>
 	</section>
 	}
@@ -282,7 +398,51 @@
 	<script src="~/vendors/jquery-ui/jquery-ui.min.js"></script>
 	<script src="~/vendors/lightbox/simpleLightbox.min.js"></script>
 
-	<script src="~/Scripts/theme.js"></script>
+	<script src="~/Scripts/theme.js?v=banner7"></script>
+	<script>
+		(function ($) {
+			var $b = $('#homeBannerOwl');
+			if (!$b.length) return;
+
+			function fitBannerHeight() {
+				var $img = $b.find('.owl-item.active img').first();
+				if (!$img.length) $img = $b.find('.owl-item img').first();
+				if (!$img.length || !$img[0].naturalWidth) return;
+				// Chiều cao theo tỷ lệ ảnh thật (tránh bị clip / khung trống)
+				var w = $b.width() || $img.width();
+				var h = Math.round(w * ($img[0].naturalHeight / $img[0].naturalWidth));
+				if (!h) return;
+				$b.find('.owl-stage-outer, .owl-stage, .owl-item.active').css({ height: h + 'px' });
+				$b.find('.owl-stage-outer').css('overflow', 'hidden');
+				$b.css({ height: h + 'px', overflow: 'hidden' });
+			}
+
+			if (!$b.hasClass('owl-loaded') && $.fn.owlCarousel) {
+				$b.owlCarousel({
+					items: 1,
+					loop: true,
+					autoplay: true,
+					autoplayTimeout: 4000,
+					autoplayHoverPause: true,
+					nav: true,
+					dots: true,
+					autoHeight: false,
+					smartSpeed: 700,
+					navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+				});
+			}
+
+			$b.on('initialized.owl.carousel resized.owl.carousel changed.owl.carousel translated.owl.carousel', function () {
+				fitBannerHeight();
+				setTimeout(fitBannerHeight, 50);
+			});
+			$b.find('img').on('load', fitBannerHeight);
+			setTimeout(fitBannerHeight, 50);
+			setTimeout(fitBannerHeight, 300);
+			setTimeout(fitBannerHeight, 800);
+			$(window).on('resize', fitBannerHeight);
+		})(jQuery);
+	</script>
 </body>
 
 </html>

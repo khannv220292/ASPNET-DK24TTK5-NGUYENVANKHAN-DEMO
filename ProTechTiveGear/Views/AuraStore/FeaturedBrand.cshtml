@@ -1,0 +1,143 @@
+@model IEnumerable<ProTechTiveGear.Models.Item>
+@using System.Linq
+@using System.Collections.Generic
+@using ProTechTiveGear.Models
+@{
+	string brand = (ViewBag.BrandName as string) ?? "Laptop";
+	string theme = (ViewBag.Theme as string) ?? "#0b5cab";
+	string hero = (ViewBag.Hero as string) ?? "";
+	long brandId = ViewBag.BrandId != null ? Convert.ToInt64(ViewBag.BrandId) : 0;
+	string noiBat = "N\u1ed4I B\u1eacT";
+	string titlePre = "S\u1ea3n ph\u1ea9m laptop ";
+	string titlePost = " n\u1ed5i b\u1eadt";
+	string sub = "Hi\u1ec7u n\u0103ng v\u01b0\u1ee3t tr\u1ed9i \u2013 Thi\u1ebft k\u1ebf hi\u1ec7n \u0111\u1ea1i \u2013 \u0110\u1ed9 b\u1ec1n chu\u1ea9n ";
+	string xemAll = "Xem t\u1ea5t c\u1ea3 laptop ";
+	string themGio = "Th\u00eam v\u00e0o gi\u1ecf";
+	string xemCt = "Xem chi ti\u1ebft";
+	string conHang = "C\u00f2n h\u00e0ng";
+	string hetHang = "H\u1ebft h\u00e0ng";
+}
+<style>
+	.feat-wrap { background: #fff; padding: 28px 0 40px; }
+	.feat-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }
+	.feat-badge { display: inline-flex; align-items: center; gap: 6px; background: #eaf3ff; color: @theme; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 16px; }
+	.feat-title { font-size: 28px; font-weight: 800; color: #1a1a1a; margin: 10px 0 6px; }
+	.feat-title b { color: @theme; font-size: 34px; }
+	.feat-sub { color: #5b6b7a; margin: 0; }
+	.feat-logo { font-size: 42px; font-weight: 900; color: @theme; letter-spacing: 1px; line-height: 1; }
+	.feat-hero { max-height: 110px; max-width: 220px; object-fit: contain; }
+	.feat-trust { background: #eef6ff; border-radius: 12px; padding: 14px 10px; display: flex; flex-wrap: wrap; margin-bottom: 22px; }
+	.feat-trust-item { flex: 1 1 200px; display: flex; align-items: center; gap: 10px; padding: 8px 12px; }
+	.feat-ico { width: 38px; height: 38px; border-radius: 50%; background: @theme; color: #fff; display: flex; align-items: center; justify-content: center; }
+	.feat-trust b { display: block; font-size: 13px; color: #1a1a1a; }
+	.feat-trust span { font-size: 12px; color: #667; }
+	.feat-card { background: #fff; border: 1px solid #e6eef7; border-radius: 12px; padding: 12px; height: 100%; box-shadow: 0 2px 10px rgba(11,92,171,.06); display: flex; flex-direction: column; }
+	.feat-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+	.feat-series { font-size: 11px; font-weight: 700; color: @theme; border: 1px solid @theme; padding: 2px 8px; border-radius: 4px; }
+	.feat-off { background: @theme; color: #fff; font-size: 12px; font-weight: 700; padding: 3px 7px; border-radius: 4px; }
+	.feat-img { height: 150px; display: flex; align-items: center; justify-content: center; margin: 6px 0 10px; }
+	.feat-img img { max-height: 145px; max-width: 100%; object-fit: contain; }
+	.feat-name { font-size: 14px; font-weight: 800; color: #111; min-height: 40px; margin: 0 0 4px; }
+	.feat-name a { color: #111; }
+	.feat-tag { font-size: 12px; color: #6a7; min-height: 18px; margin-bottom: 8px; }
+	.feat-specs { display: flex; justify-content: space-between; background: #f4f8fd; border-radius: 8px; padding: 8px 6px; margin-bottom: 10px; text-align: center; }
+	.feat-specs div { flex: 1; font-size: 11px; color: #445; }
+	.feat-specs b { display: block; font-size: 11px; color: #123; }
+	.feat-price { color: #e53935; font-size: 20px; font-weight: 800; }
+	.feat-old { color: #9aa; font-size: 12px; text-decoration: line-through; margin-left: 6px; }
+	.feat-stock { color: #2e7d32; font-size: 13px; font-weight: 600; margin: 8px 0; }
+	.feat-btns { display: flex; gap: 8px; margin-top: auto; }
+	.feat-btns a { flex: 1; text-align: center; padding: 8px 6px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+	.feat-cart { border: 1px solid @theme; color: @theme; }
+	.feat-cart:hover { background: @theme; color: #fff; text-decoration: none; }
+	.feat-more { background: @theme; color: #fff !important; }
+	.feat-more:hover { opacity: .92; text-decoration: none; color: #fff; }
+	.feat-all { display: block; margin: 22px auto 0; max-width: 420px; text-align: center; padding: 10px; border: 1px solid @theme; color: @theme; border-radius: 10px; font-weight: 700; background: #eef6ff; }
+	.feat-all:hover { background: @theme; color: #fff; text-decoration: none; }
+</style>
+@Html.Partial("~/Views/Shared/_LaptopCardCss.cshtml")
+<section class="feat-wrap">
+	<div class="container">
+		<div class="feat-head">
+			<div>
+				<div class="feat-badge">@noiBat</div>
+				<h2 class="feat-title">@titlePre<b>@brand</b>@titlePost</h2>
+				<p class="feat-sub">@sub@brand</p>
+			</div>
+			<div style="text-align:right">
+				<div class="feat-logo">@brand</div>
+				@if (!string.IsNullOrEmpty(hero))
+				{
+					<img class="feat-hero" src="~/img/Item/@hero" alt="@brand" />
+				}
+			</div>
+		</div>
+		<div class="feat-trust">
+			<div class="feat-trust-item"><div class="feat-ico"><i class="fa fa-shield"></i></div><div><b>@("Ch\u00ednh h\u00e3ng 100%")</b><span>@("B\u1ea3o h\u00e0nh to\u00e0n qu\u1ed1c")</span></div></div>
+			<div class="feat-trust-item"><div class="feat-ico"><i class="fa fa-percent"></i></div><div><b>@("Gi\u00e1 t\u1ed1t m\u1ed7i ng\u00e0y")</b><span>@("C\u1eadp nh\u1eadt \u01b0u \u0111\u00e3i")</span></div></div>
+			<div class="feat-trust-item"><div class="feat-ico"><i class="fa fa-truck"></i></div><div><b>@("Giao h\u00e0ng to\u00e0n qu\u1ed1c")</b><span>@("Nhanh ch\u00f3ng - An to\u00e0n")</span></div></div>
+			<div class="feat-trust-item"><div class="feat-ico"><i class="fa fa-credit-card"></i></div><div><b>@("Tr\u1ea3 g\u00f3p 0%")</b><span>@("Th\u1ee7 t\u1ee5c \u0111\u01a1n gi\u1ea3n")</span></div></div>
+		</div>
+		@{
+			var ds = new List<Item>();
+			foreach (var x in Model)
+			{
+				string blob = ((x.Name ?? "") + " " + (x.ShortTitle ?? "")).ToUpperInvariant();
+				string b = brand.ToUpperInvariant();
+				bool keep = false;
+				if (b.IndexOf("LENOVO", StringComparison.Ordinal) >= 0)
+				{
+					keep = (blob.IndexOf("LENOVO", StringComparison.Ordinal) >= 0
+						|| blob.IndexOf("THINKPAD", StringComparison.Ordinal) >= 0
+						|| blob.IndexOf("IDEAPAD", StringComparison.Ordinal) >= 0
+						|| blob.IndexOf("LEGION", StringComparison.Ordinal) >= 0
+						|| blob.IndexOf("YOGA", StringComparison.Ordinal) >= 0)
+						&& blob.IndexOf("ASUS", StringComparison.Ordinal) < 0
+						&& blob.IndexOf("TUF GAMING", StringComparison.Ordinal) < 0
+						&& blob.IndexOf("DELL", StringComparison.Ordinal) < 0
+						&& blob.IndexOf("MACBOOK", StringComparison.Ordinal) < 0;
+				}
+				else if (b.IndexOf("ASUS", StringComparison.Ordinal) >= 0)
+				{
+					keep = blob.IndexOf("ASUS", StringComparison.Ordinal) >= 0 || blob.IndexOf("TUF GAMING", StringComparison.Ordinal) >= 0 || blob.IndexOf(" ROG", StringComparison.Ordinal) >= 0;
+				}
+				else if (b.IndexOf("DELL", StringComparison.Ordinal) >= 0)
+				{
+					keep = blob.IndexOf("DELL", StringComparison.Ordinal) >= 0;
+				}
+				else if (b.IndexOf("APPLE", StringComparison.Ordinal) >= 0 || b.IndexOf("MAC", StringComparison.Ordinal) >= 0)
+				{
+					keep = blob.IndexOf("APPLE", StringComparison.Ordinal) >= 0 || blob.IndexOf("MACBOOK", StringComparison.Ordinal) >= 0;
+				}
+				else if (b == "HP" || b.StartsWith("HP ") || b.IndexOf("LAPTOP HP", StringComparison.Ordinal) >= 0)
+				{
+					keep = blob.IndexOf("HP", StringComparison.Ordinal) >= 0 || blob.IndexOf("OMNIBOOK", StringComparison.Ordinal) >= 0 || blob.IndexOf("PROBOOK", StringComparison.Ordinal) >= 0 || blob.IndexOf("ELITEBOOK", StringComparison.Ordinal) >= 0 || blob.IndexOf("VICTUS", StringComparison.Ordinal) >= 0;
+				}
+				else
+				{
+					keep = blob.IndexOf(b, StringComparison.Ordinal) >= 0;
+				}
+				if (keep)
+				{
+					ds.Add(x);
+				}
+			}
+		}
+		<div class="row">
+			@foreach (var item in ds)
+			{
+				<div class="col-lg-3 col-md-6" style="margin-bottom:16px">
+					@Html.Partial("~/Views/Shared/_LaptopCard.cshtml", item)
+				</div>
+			}
+		</div>
+		@if (!ds.Any())
+		{
+			<p style="text-align:center;color:#666;margin:24px 0">Chua co san pham @brand. Hay them laptop @brand va gan dung hang trong admin.</p>
+		}
+		@if (brandId > 0)
+		{
+			<a class="feat-all" href="@Url.Action("ProductbyMenu","AuraStore", new { id = brandId })">@xemAll @brand &rarr;</a>
+		}
+	</div>
+</section>

@@ -1,119 +1,89 @@
 ﻿@model IEnumerable<ProTechTiveGear.Models.OrderDetailEntity>
 
 @{
-	ViewBag.Title = "Comfirm";
+	ViewBag.Title = "Xử lý đơn hàng";
 	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+	var order = ViewBag.Order as ProTechTiveGear.Models.Order;
 }
 
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
 		<h2 class="text-center">Xử Lý</h2>
-
+		@if (order != null)
+		{
+			<div class="text-center" style="color:#555;font-size:14px;margin-top:6px">
+				Mã đơn <strong>#@order.ID</strong>
+				&nbsp;·&nbsp; Ngày @(order.Orderdate.HasValue ? order.Orderdate.Value.ToString("dd/MM/yyyy HH:mm") : "—")
+				&nbsp;·&nbsp; Khách <strong>@(order.Customer != null ? order.Customer.Name : "—")</strong>
+				&nbsp;·&nbsp; Tổng <strong>@string.Format("{0:#,##0} đ", order.Totalprice)</strong>
+			</div>
+		}
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
 			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
-						<th>
-							Số Lượng
-						</th>
-						@*<th>
-								@Html.DisplayNameFor(model => model.ItemId)
-							</th>*@
-						<th>
-							Mã Đơn
-						</th>
-						<th>
-							Tổng Giá
-						</th>
-						<th>
-							Sản Phẩm
-						</th>
-						<th>
-							Ảnh
-						</th>
-
+						<th>Số Lượng</th>
+						<th>Mã Đơn</th>
+						<th>Tổng Giá</th>
+						<th>Sản Phẩm</th>
+						<th>Ảnh</th>
 					</tr>
-					</thead>
+				</thead>
 				<tbody>
-
-					@foreach (var item in Model)
+					@if (Model == null || !Model.Any())
 					{
 						<tr>
-							<td>
-								@Html.DisplayFor(modelItem => item.Quantity)
-							</td>
-							@*<td>
-									@Html.DisplayFor(modelItem => item.ItemId)
-								</td>*@
-							<td>
-								@Html.DisplayFor(modelItem => item.OrderID)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Totalprice)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Item.Name)
-							</td>
-							<td>
-								<img width="100" height="100" src=" ~/img/Item/@Html.DisplayFor(modelItem => item.Item.Picture)" />
+							<td colspan="5" class="text-center text-muted" style="padding:24px">
+								Đơn hàng chưa có chi tiết sản phẩm.
 							</td>
 						</tr>
 					}
-
-					</tbody>
+					else
+					{
+						foreach (var item in Model)
+						{
+							string pic = "";
+							if (item.Item != null && !string.IsNullOrWhiteSpace(item.Item.Picture))
+							{
+								pic = item.Item.Picture.Split('|')[0].Trim();
+							}
+							<tr>
+								<td>@item.Quantity</td>
+								<td>@item.OrderID</td>
+								<td>@string.Format("{0:#,##0}", item.Totalprice)</td>
+								<td>@(item.Item != null ? item.Item.Name : "")</td>
+								<td>
+									@if (!string.IsNullOrEmpty(pic))
+									{
+										<img width="100" height="100" style="object-fit:contain;background:#fafafa;border:1px solid #eee;border-radius:6px;padding:4px"
+											 src="@Url.Content("~/img/Item/" + pic)" alt="@(item.Item != null ? item.Item.Name : "")" />
+									}
+									else
+									{
+										<span style="color:#999">Không có ảnh</span>
+									}
+								</td>
+							</tr>
+						}
+					}
+				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
 
 <div class="col-md-12">
-
-	@using (Html.BeginForm("Comfirm", "Admin", FormMethod.Post, new
-	{
-		enctype = "multipart/form-data"
-	}))
+	@using (Html.BeginForm("Comfirm", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 	{
 		@Html.AntiForgeryToken()
-    <div class="container" align="center">
-
-        <div class="col-md-5">
-            <input type="hidden"
-                   id="id"
-                   name="id"
-                   value="@ViewBag.id"
-                   class="form-control" readonly />
-        </div>
-
-
-        <br />
-        Xác nhận đã xử lý và giao hàng
-
-        @*@{ var today = String.Format("{0:yyyy-MM-dd}", DateTime.Now);}
-
-        <div class="col-md-5">
-            <input type="date"
-                   id="date"
-                   name="date"
-                   min="@today"
-                   value="@today"
-                   class="form-control" />
-        </div>
-
-        <br />*@
-        <br />
-
-        <input type="submit" value=" Xác nhận " title="Save" class="btn btn-primary" />
-
-
-
-    </div>
-
+		<div class="container" align="center">
+			<input type="hidden" id="id" name="id" value="@ViewBag.id" />
+			<br />
+			Xác nhận đã xử lý và giao hàng
+			<br /><br />
+			<input type="submit" value=" Xác nhận " title="Save" class="btn btn-primary" />
+		</div>
 	}
-
-
-
-
-</div>
 </div>

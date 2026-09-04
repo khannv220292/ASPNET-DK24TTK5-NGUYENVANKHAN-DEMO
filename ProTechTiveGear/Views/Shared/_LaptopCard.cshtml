@@ -1,83 +1,92 @@
 @model ProTechTiveGear.Models.Item
+@using System.Text.RegularExpressions
 @{
-	var info = ProTechTiveGear.Models.LaptopCardInfo.From(Model);
-	var pic = string.IsNullOrWhiteSpace(Model.Picture) ? "" : System.IO.Path.GetFileName(Model.Picture.Replace("\\", "/"));
-	var imgSrc = "https://placehold.co/320x200?text=" + Uri.EscapeDataString(info.Brand);
-	var imgFallback = imgSrc;
-	if (!string.IsNullOrEmpty(pic))
+	var item = Model;
+	string hang = (item.ItemType != null && item.ItemType.Menu != null) ? item.ItemType.Menu.Name : "";
+	string dong = item.ItemType != null ? (item.ItemType.TypeName ?? "") : "";
+	string badge = (hang + " " + dong).Trim();
+	if (badge.Length == 0) { badge = "Laptop"; }
+	string pic = (item.Picture ?? "").Split('|')[0];
+	decimal oldPrice = item.PurcharsePrice.HasValue && item.PurcharsePrice.Value > item.SellPrice
+		? item.PurcharsePrice.Value
+		: Math.Round(item.SellPrice * 1.18m / 1000m) * 1000m;
+	int off = oldPrice > item.SellPrice ? (int)Math.Round((double)((oldPrice - item.SellPrice) / oldPrice * 100m)) : 0;
+	string blob = ((item.Name ?? "") + " " + (item.ShortTitle ?? "") + " " + (item.Describe ?? "")).Replace('\n', ' ');
+	string[] slash = (item.ShortTitle ?? "").Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+	string spec1 = !string.IsNullOrWhiteSpace(dong) ? dong : hang;
+	if (spec1.Length == 0) { spec1 = "Laptop"; }
+	string ram = "8GB";
+	string ssd = "256GB";
+	string scr = "15.6\"";
+	if (slash.Length >= 4)
 	{
-		var pItem = Server.MapPath("~/img/Item/" + pic);
-		var pRoot = Server.MapPath("~/img/" + pic);
-		if (System.IO.File.Exists(pItem))
-		{
-			imgSrc = Url.Content("~/img/Item/" + pic);
-			imgFallback = Url.Content("~/img/" + pic);
-		}
-		else if (System.IO.File.Exists(pRoot))
-		{
-			imgSrc = Url.Content("~/img/" + pic);
-			imgFallback = Url.Content("~/img/Item/" + pic);
-		}
-		else
-		{
-			imgSrc = Url.Content("~/img/Item/" + pic);
-			imgFallback = "https://placehold.co/320x200?text=" + Uri.EscapeDataString(info.Brand);
-		}
+		spec1 = slash[0].Trim();
+		ram = slash[1].Trim();
+		ssd = slash[2].Trim();
+		scr = slash[3].Trim();
 	}
-}
-<article class="lp-card">
-	<div class="lp-media">
-		@if (info.DiscountPercent > 0)
-		{
-			<span class="lp-sale">Giảm @info.DiscountPercent%</span>
-		}
-		<span class="lp-mark">@info.Brand</span>
-		<a href="@Url.Action("Detail", "AuraStore", new { id = Model.ID })">
-			<img src="@imgSrc" alt=""
-				 onerror="this.onerror=null;this.src='@imgFallback';" />
-		</a>
-	</div>
-	@if (info.IsHot)
+	else if (slash.Length == 3)
 	{
-		<span class="lp-hot">Bán chạy nhất</span>
-	}
-	<a class="lp-name" href="@Url.Action("Detail", "AuraStore", new { id = Model.ID })" title="@Model.Name">@Model.Name</a>
-	<div class="lp-prices">
-		<span class="lp-now">@string.Format("{0:#,##0}₫", Model.SellPrice)</span>
-		@if (info.OldPrice > Model.SellPrice)
-		{
-			<span class="lp-old">@string.Format("{0:#,##0}₫", info.OldPrice)</span>
-		}
-	</div>
-	<a class="lp-compare" href="@Url.Action("Detail", "AuraStore", new { id = Model.ID })"><i></i> So sánh</a>
-	<div class="lp-specs">
-		<div class="lp-spec" title="@info.Cpu">
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/></svg>
-			<span>@info.Cpu</span>
-		</div>
-		<div class="lp-spec" title="@info.Ram">
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M7 8V6M11 8V6M15 8V6M7 16v2M11 16v2M15 16v2"/></svg>
-			<span>@info.Ram</span>
-		</div>
-		<div class="lp-spec" title="@info.Storage">
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M8 18v2M16 18v2M8 6V4M16 6V4"/></svg>
-			<span>@info.Storage</span>
-		</div>
-		<div class="lp-spec" title="@info.Gpu">
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 17v2M17 17v2"/></svg>
-			<span>@info.Gpu</span>
-		</div>
-		<div class="lp-spec wide" title="@info.Display">
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg>
-			<span>@info.Display</span>
-		</div>
-	</div>
-	@if (Model.Quantity == 0)
-	{
-		<span class="lp-cart disabled">Hết hàng</span>
+		ram = slash[1].Trim();
+		ssd = slash[2].Trim();
 	}
 	else
 	{
-		<a class="lp-cart" href="@Url.Action("AddtoCart", "ShopCart", new { id = Model.ID, strURL = Request.Url.ToString() })">Thêm vào giỏ</a>
+		var mRam = Regex.Match(blob, @"(\d{1,2})\s*GB", RegexOptions.IgnoreCase);
+		if (mRam.Success) { ram = mRam.Groups[1].Value + "GB"; }
+		var mSsd = Regex.Match(blob, @"(\d{3,4})\s*GB", RegexOptions.IgnoreCase);
+		if (mSsd.Success) { ssd = mSsd.Groups[1].Value + "GB"; }
+		var mTb = Regex.Match(blob, @"(\d)\s*TB", RegexOptions.IgnoreCase);
+		if (mTb.Success) { ssd = mTb.Groups[1].Value + "TB"; }
+		var mScr = Regex.Match(blob, @"(\d{2}(?:\.\d)?)\s*(?:""|inch|in\b)", RegexOptions.IgnoreCase);
+		if (mScr.Success) { scr = mScr.Groups[1].Value + "\""; }
 	}
-</article>
+		if (!scr.ToUpperInvariant().Contains("FHD") && !scr.ToUpperInvariant().Contains("HD"))
+		{
+			scr = scr.Trim() + " FHD";
+		}
+	string sub = !string.IsNullOrWhiteSpace(item.ShortTitle) ? item.ShortTitle : badge;
+	string themGio = "Th\u00eam v\u00e0o gi\u1ecf";
+	string xemCt = "Xem chi ti\u1ebft";
+	string conHang = "C\u00f2n h\u00e0ng";
+	string hetHang = "H\u1ebft h\u00e0ng";
+}
+<div class="lp-card">
+	<div class="lp-top">
+		<span class="lp-badge" title="@badge">@badge</span>
+		@if (off > 0)
+		{
+			<span class="lp-off">-@off%</span>
+		}
+	</div>
+	<a href="@Url.Action("Detail", "AuraStore", new { id = item.ID })">
+		<div class="lp-img"><img src="~/img/Item/@pic" alt="@item.Name" /></div>
+	</a>
+	<p class="lp-name"><a href="@Url.Action("Detail", "AuraStore", new { id = item.ID })">@item.Name</a></p>
+	<div class="lp-sub" title="@sub">@sub</div>
+	<div class="lp-specs">
+		<div><i class="fa fa-laptop"></i><b title="@spec1">@spec1</b></div>
+		<div><i class="fa fa-memory"></i><b>@ram</b></div>
+		<div><i class="fa fa-hdd-o"></i><b>@ssd</b></div>
+		<div><i class="fa fa-desktop"></i><b>@scr</b></div>
+	</div>
+	<div>
+		<span class="lp-price">@string.Format("{0:#,##0}\u0111", item.SellPrice)</span>
+		@if (oldPrice > item.SellPrice)
+		{
+			<span class="lp-old">@string.Format("{0:#,##0}\u0111", oldPrice)</span>
+		}
+	</div>
+	<div class="lp-stock @(item.Quantity == 0 ? "out" : "")"><span class="lp-dot"></span>@(item.Quantity == 0 ? hetHang : conHang)</div>
+	<div class="lp-btns">
+		@if (item.Quantity != 0)
+		{
+			<a class="lp-cart" href="@Url.Action("AddtoCart", "Cart", new { id = item.ID, strURL = Request.Url.ToString() })"><i class="fa fa-shopping-cart"></i> @themGio</a>
+		}
+		else
+		{
+			<span class="lp-cart" style="opacity:.45"><i class="fa fa-shopping-cart"></i> @themGio</span>
+		}
+		<a class="lp-more" href="@Url.Action("Detail", "AuraStore", new { id = item.ID })">@xemCt</a>
+	</div>
+</div>

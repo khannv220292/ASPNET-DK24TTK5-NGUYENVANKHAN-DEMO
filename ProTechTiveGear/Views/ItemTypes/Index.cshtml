@@ -7,17 +7,18 @@
 
 <h2>Loại Sản Phẩm</h2>
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
 <p>
-    @Html.ActionLink("Thêm mới", "Create")
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-success btn-sm" })
 </p>
 <table class="table">
     <tr>
-        <th>
-            Tên
-        </th>
-        <th>
-            Loại
-        </th>
+        <th>Dòng sản phẩm</th>
+        <th>Hãng</th>
         <th></th>
     </tr>
 
@@ -27,11 +28,11 @@
             @Html.DisplayFor(modelItem => item.TypeName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Menu.Name)
+            @(item.Menu != null ? item.Menu.Name : "")
         </td>
         <td>
-            @Html.ActionLink("Cập Nhập", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Chi Tiết", "Details", new { id=item.ID })
+            @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
         </td>
     </tr>
 }

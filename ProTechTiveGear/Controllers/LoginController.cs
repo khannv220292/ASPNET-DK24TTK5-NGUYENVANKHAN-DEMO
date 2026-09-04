@@ -12,10 +12,10 @@ namespace ProTechTiveGear.Controllers
 		// GET: Login
 		ProTechTiveGearEntities db = new ProTechTiveGearEntities();
 		
-		public ActionResult Login()
+		public ActionResult Login(string returnUrl)
 		{
+			ViewBag.ReturnUrl = returnUrl;
 			return View();
-
 		}
 		[HttpPost]
 		public ActionResult Login(FormCollection collection)
@@ -23,6 +23,7 @@ namespace ProTechTiveGear.Controllers
 			
 			var userName = (collection["userName"] ?? "").Trim();
 			var passWord = (collection["passWord"] ?? "").Trim();
+			var returnUrl = (collection["returnUrl"] ?? "").Trim();
 
 			Admin ad = db.Admins.FirstOrDefault(n => n.Username == userName && n.Passwords == passWord);
 			if (ad != null)
@@ -38,11 +39,16 @@ namespace ProTechTiveGear.Controllers
 				{
 					
 					Session["usr"] = cs;
+					if (!string.IsNullOrEmpty(returnUrl) && returnUrl.StartsWith("/"))
+					{
+						return Redirect(returnUrl);
+					}
 					return RedirectToAction("Index", "AuraStore");
 				}
 				else
 					ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng");
 			//}
+			ViewBag.ReturnUrl = returnUrl;
 			return View();
 			
 		}

@@ -1,102 +1,183 @@
 ﻿@model IEnumerable<ProTechTiveGear.Models.OrderEntity>
-
 @{
-	ViewBag.Title = "ListOrder";
+	ViewBag.Title = "Danh sách đơn hàng";
 	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+	string tab = (ViewBag.Tab as string) ?? "all";
+	string q = (ViewBag.Query as string) ?? "";
+	var list = Model ?? Enumerable.Empty<ProTechTiveGear.Models.OrderEntity>();
 }
+<style>
+	.od-wrap { background: #f4f6f8; margin: -1.5rem; padding: 24px; min-height: calc(100vh - 80px); }
+	.od-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+	.od-top h1 { margin: 0; font-size: 22px; font-weight: 800; color: #1f2937; }
+	.od-actions { display: flex; gap: 10px; }
+	.od-btn {
+		display: inline-flex; align-items: center; gap: 6px;
+		height: 38px; padding: 0 14px; border-radius: 8px;
+		font-size: 13px; font-weight: 700; text-decoration: none !important; border: 1px solid #d0d5dd; background: #fff; color: #344054;
+	}
+	.od-btn:hover { background: #f9fafb; color: #111; }
+	.od-btn-primary { background: #2563eb; border-color: #2563eb; color: #fff !important; }
+	.od-btn-primary:hover { background: #1d4ed8; color: #fff !important; }
+	.od-card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(16,24,40,.06); overflow: hidden; }
+	.od-tabs { display: flex; gap: 22px; padding: 0 18px; border-bottom: 1px solid #eaecf0; }
+	.od-tab {
+		position: relative; padding: 14px 2px; font-size: 14px; font-weight: 700;
+		color: #667085; text-decoration: none !important; border: 0; background: none;
+	}
+	.od-tab:hover { color: #344054; }
+	.od-tab.active { color: #101828; }
+	.od-tab.active:after {
+		content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: #101828; border-radius: 2px;
+	}
+	.od-toolbar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid #eaecf0; flex-wrap: wrap; }
+	.od-filter-btn {
+		display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px;
+		border: 1px solid #d0d5dd; border-radius: 8px; background: #fff; color: #344054; font-size: 13px; font-weight: 600;
+	}
+	.od-search { position: relative; flex: 1; min-width: 200px; max-width: 360px; }
+	.od-search i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #98a2b3; }
+	.od-search input {
+		width: 100%; height: 36px; border: 1px solid #d0d5dd; border-radius: 8px;
+		padding: 0 12px 0 36px; font-size: 13px; color: #101828;
+	}
+	.od-view { margin-left: auto; display: flex; gap: 4px; }
+	.od-view span {
+		width: 34px; height: 34px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;
+		color: #98a2b3; border: 1px solid transparent;
+	}
+	.od-view span.on { color: #2563eb; background: #eff4ff; border-color: #bfdbfe; }
+	.od-table { width: 100%; border-collapse: collapse; }
+	.od-table th {
+		text-align: left; font-size: 12px; font-weight: 700; color: #667085; text-transform: uppercase;
+		letter-spacing: .03em; padding: 12px 14px; border-bottom: 1px solid #eaecf0; background: #fcfcfd; white-space: nowrap;
+	}
+	.od-table td {
+		padding: 14px; border-bottom: 1px solid #f2f4f7; vertical-align: middle; font-size: 13px; color: #344054;
+	}
+	.od-table tr:hover td { background: #f9fafb; }
+	.od-table tr.cancelled td { color: #f97066; text-decoration: line-through; }
+	.od-code { color: #2563eb; font-weight: 800; text-decoration: none; }
+	.od-code:hover { text-decoration: underline; }
+	.od-check { margin-right: 8px; }
+	.od-badge {
+		display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px;
+		font-size: 12px; font-weight: 700; border: 1px solid; white-space: nowrap;
+	}
+	.od-b-blue { background: #eff8ff; color: #175cd3; border-color: #b2ddff; }
+	.od-b-green { background: #ecfdf3; color: #027a48; border-color: #abefc6; }
+	.od-b-orange { background: #fffaeb; color: #b54708; border-color: #fedf89; }
+	.od-b-red { background: #fef3f2; color: #b42318; border-color: #fecdca; }
+	.od-b-sky { background: #f0f9ff; color: #026aa2; border-color: #b9e6fe; }
+	.od-money { font-weight: 700; white-space: nowrap; }
+	.od-empty { text-align: center; padding: 48px 16px; color: #667085; }
+	@@media (max-width: 992px) {
+		.od-wrap { margin: 0; padding: 12px; }
+		.od-table { min-width: 980px; }
+	}
+</style>
 
-<div class="card shadow mb-4">
-	<div class="card-header py-3">
-		<h2 class="text-center">Đơn Hàng</h2>
-
+<div class="od-wrap">
+	<div class="od-top">
+		<h1>Danh sách đơn hàng</h1>
+		<div class="od-actions">
+			<a class="od-btn" href="javascript:window.print()"><i class="fa fa-download"></i> Xuất dữ liệu</a>
+			<a class="od-btn od-btn-primary" href="@Url.Action("Index", "AuraStore")" target="_blank"><i class="fa fa-plus"></i> Tạo đơn hàng</a>
+		</div>
 	</div>
-	<div class="card-body">
+
+	<div class="od-card">
+		<div class="od-tabs">
+			<a class="od-tab @(tab == "all" ? "active" : "")" href="@Url.Action("AllListOrder", "Admin", new { tab = "all", q = q })">Tất cả đơn hàng</a>
+			<a class="od-tab @(tab == "unpaid" ? "active" : "")" href="@Url.Action("AllListOrder", "Admin", new { tab = "unpaid", q = q })">Chưa thanh toán</a>
+			<a class="od-tab @(tab == "pending" ? "active" : "")" href="@Url.Action("AllListOrder", "Admin", new { tab = "pending", q = q })">Chưa xử lý</a>
+		</div>
+
+		<form class="od-toolbar" method="get" action="@Url.Action("AllListOrder", "Admin")">
+			<input type="hidden" name="tab" value="@tab" />
+			<button type="button" class="od-filter-btn"><i class="fa fa-filter"></i> Thêm điều kiện lọc</button>
+			<div class="od-search">
+				<i class="fa fa-search"></i>
+				<input type="text" name="q" id="odSearch" value="@q" placeholder="Tìm kiếm mã, khách hàng, SĐT..." />
+			</div>
+			<button type="submit" class="od-btn" style="height:36px">Tìm</button>
+			<div class="od-view">
+				<span class="on" title="Danh sách"><i class="fa fa-list"></i></span>
+				<span title="Lưới"><i class="fa fa-th-large"></i></span>
+			</div>
+		</form>
+
 		<div class="table-responsive">
-			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+			<table class="od-table" id="odTable">
 				<thead>
-                    <tr>
-                        <th>
-                            Ngày Đặt Hàng
-                        </th>
-                        <th>
-                            Ngày Giao Hàng
-                        </th>
-                        <th>
-                            Tổng Giá
-                        </th>
-                        <th>
-                            Trạng Thái
-                        </th>
-                        <th>
-                            Thanh toán
-                        </th>
-                        <th>
-                            Khách Hàng
-                        </th>
-                        <th>
-                            Địa Chỉ
-                        </th>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Số Điện Thoại
-                        </th>
-                        <th></th>
-                    </tr>
+					<tr>
+						<th style="width:42px"></th>
+						<th>Mã</th>
+						<th>Ngày tạo</th>
+						<th>Khách hàng</th>
+						<th>Thanh toán</th>
+						<th>Giao hàng</th>
+						<th>COD</th>
+						<th>SL sản phẩm</th>
+						<th>Tổng tiền</th>
+						<th>Kênh</th>
+						<th></th>
+					</tr>
 				</thead>
 				<tbody>
-					@foreach (var item in Model)
+					@if (!list.Any())
 					{
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Orderdate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Deliverydate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Totalprice)
-                        </td>
+						<tr><td colspan="11" class="od-empty">Chưa có đơn hàng nào.</td></tr>
+					}
+					else
+					{
+						foreach (var item in list)
+						{
+							bool paid = item.Payments != null && item.Payments.Any();
+							bool processed = item.Status == true;
+							bool delivered = item.Deliverystatus == true || (processed && item.Deliverydate != null);
+							bool cancelled = false; // không có cờ hủy trong DB
+							int qty = item.OrderDetails != null ? item.OrderDetails.Sum(d => d.Quantity) : 0;
+							string code = "G" + item.ID.ToString("D6");
+							string customer = item.Customer != null ? (item.Customer.Name ?? "—") : "—";
+							string phone = item.Customer != null ? (item.Customer.Phone ?? "") : "";
+							string searchBlob = (code + " " + customer + " " + phone).ToLowerInvariant();
 
-                        <td>
-                            @if (item.Status == true)
-                            {
-                                <p>Đã xử lý</p>
-                            }
-                            else
-                            {
-                                <p>Chưa xử lý</p>
-                            }
-                        </td>
-                        <td>
-                            @if (item.Payments.Any())
-                            {
-                                <p>Đã thanh toán</p>
-                            }
-                            else
-                            {
-                                <p>Chưa thanh toán</p>
-                            }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Customer.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Customer.Address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Customer.EmailAddress)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Customer.Phone)
-                        </td>
-                        <td>
+							string payLabel = paid ? "Đã thanh toán" : "Chờ xử lý";
+							string payClass = paid ? "od-b-green" : "od-b-blue";
 
-                            @Html.ActionLink("Chi tiết", "OrderDetail", new { id = item.ID })
+							string shipLabel = delivered ? "Đã giao" : (processed ? "Đang giao hàng" : "Chưa giao hàng");
+							string shipClass = delivered ? "od-b-green" : (processed ? "od-b-sky" : "od-b-orange");
 
-                        </td>
-                    </tr>
+							string codLabel = paid ? "Đã thanh toán" : "Chưa nhận";
+							string codClass = paid ? "od-b-green" : "od-b-orange";
+
+							<tr class="@(cancelled ? "cancelled" : "")" data-search="@searchBlob">
+								<td><input class="od-check" type="checkbox" /></td>
+								<td>
+									<a class="od-code" href="@Url.Action("OrderDetail", "Admin", new { id = item.ID })">@code</a>
+									@if (paid) { <i class="fa fa-check-circle" style="color:#12b76a;margin-left:4px"></i> }
+								</td>
+								<td>@(item.Orderdate.HasValue ? item.Orderdate.Value.ToString("dd/MM/yyyy hh:mm tt") : "—")</td>
+								<td>@customer</td>
+								<td><span class="od-badge @payClass">@payLabel</span></td>
+								<td><span class="od-badge @shipClass">@shipLabel</span></td>
+								<td><span class="od-badge @codClass">@codLabel</span></td>
+								<td>@qty</td>
+								<td class="od-money">@string.Format("{0:#,##0} ₫", item.Totalprice ?? 0)</td>
+								<td>Web</td>
+								<td>
+									@if (!processed)
+									{
+										<a class="od-btn" style="height:32px;padding:0 10px" href="@Url.Action("Comfirm", "Admin", new { id = item.ID })">Xử lý</a>
+									}
+									else
+									{
+										<a class="od-btn" style="height:32px;padding:0 10px" href="@Url.Action("OrderDetail", "Admin", new { id = item.ID })">Chi tiết</a>
+									}
+								</td>
+							</tr>
+						}
 					}
 				</tbody>
 			</table>
@@ -104,3 +185,17 @@
 	</div>
 </div>
 
+<script>
+	(function () {
+		var input = document.getElementById("odSearch");
+		if (!input) return;
+		input.addEventListener("keyup", function () {
+			var q = (input.value || "").toLowerCase().trim();
+			var rows = document.querySelectorAll("#odTable tbody tr[data-search]");
+			for (var i = 0; i < rows.length; i++) {
+				var hay = rows[i].getAttribute("data-search") || "";
+				rows[i].style.display = (!q || hay.indexOf(q) >= 0) ? "" : "none";
+			}
+		});
+	})();
+</script>

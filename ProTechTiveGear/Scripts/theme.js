@@ -30,7 +30,7 @@
             $("#main_slider").revolution({
                 sliderType:"standard",
                 sliderLayout:"auto",
-                delay:4000000,
+                delay:4500,
                 disableProgressBar:"on",
                 navigation: {
                     onHoverStop: 'off',
@@ -62,7 +62,7 @@
                 },
                 responsiveLevels:[4096,1199,992,767,480],
                 gridwidth:[1170,970,750,700,400],
-                gridheight:[625,625,550,550,500],
+                gridheight:[320,300,270,240,200],
                 lazyType:"smart",
                 fallbacks: {
                     simplifyAll:"off",
@@ -73,6 +73,26 @@
         }
     }
     main_slider();
+
+    // Banner homepage: init in _LayoutHomePage (autoHeight + fit height)
+    // Skip here to avoid double-init / wrong stage height.
+
+    function sizeHomeBannerToImage() {
+        if ($('#homeBannerOwl').length) return;
+        var $area = $('.main_slider_area');
+        if (!$area.length) return;
+        var h = 320;
+        if ($(window).width() < 480) h = 200;
+        else if ($(window).width() < 768) h = 240;
+        else if ($(window).width() < 992) h = 270;
+        $area.add($area.find('.rev_slider, .rev_slider_wrapper, .forcefullwidth_wrapper_tp_banner, .tp-simpleresponsive, ul, li, .slotholder'))
+            .css({ height: h + 'px', maxHeight: h + 'px' });
+    }
+    $('#main_slider').on('revolution.slide.onloaded revolution.slide.onchange', sizeHomeBannerToImage);
+    $(window).on('resize', sizeHomeBannerToImage);
+    setTimeout(sizeHomeBannerToImage, 200);
+    setTimeout(sizeHomeBannerToImage, 800);
+
     /*----------------------------------------------------*/
     /*  Main Slider js
     /*----------------------------------------------------*/
@@ -81,7 +101,7 @@
             $("#main_slider3").revolution({
                 sliderType:"standard",
                 sliderLayout:"auto",
-                delay:4000000,
+                delay:4500,
                 disableProgressBar:"on",
                 navigation: {
                     onHoverStop: 'off',
@@ -132,7 +152,7 @@
             $("#main_slider4").revolution({
                 sliderType:"standard",
                 sliderLayout:"auto",
-                delay:4000000,
+                delay:4500,
                 disableProgressBar:"on",
                 navigation: {
                     onHoverStop: 'off',
@@ -183,7 +203,7 @@
             $("#main_slider5").revolution({
                 sliderType:"standard",
                 sliderLayout:"auto",
-                delay:4000000,
+                delay:4500,
                 disableProgressBar:"on",
                 navigation: {
                     onHoverStop: 'off',

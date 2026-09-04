@@ -1,0 +1,70 @@
+﻿@model ProTechTiveGear.Models.ItemType
+@using ProTechTiveGear.Models
+@using System.Linq
+@using System.Collections.Generic
+@{
+    var gdb = new ProTechTiveGearEntities();
+    string phuKien = "Ph\u1ee5 ki\u1ec7n";
+    string chonHang = "-- Ch\u1ecdn h\u00e3ng --";
+    string lblDong = "D\u00f2ng s\u1ea3n ph\u1ea9m";
+    string lblHang = "H\u00e3ng";
+    var laptopBrands = new[] { "ASUS", "Acer", "Apple", "Dell", "Gigabyte", "HP", "Lenovo", "LG", "MSI" };
+
+    foreach (var n in laptopBrands)
+    {
+        if (!gdb.Menus.Any(m => m.Name == n))
+        {
+            gdb.Menus.Add(new Menu { Name = n });
+        }
+    }
+    if (!gdb.Menus.Any(m => m.Name == phuKien))
+    {
+        gdb.Menus.Add(new Menu { Name = phuKien });
+    }
+    gdb.SaveChanges();
+
+    var keepAcc = gdb.Menus.First(x => x.Name == phuKien);
+    foreach (var bad in gdb.Menus.ToList())
+    {
+        if (bad.ID == keepAcc.ID) { continue; }
+        bool isLaptop = laptopBrands.Contains(bad.Name);
+        bool looksLikePhuKien = bad.Name != null && bad.Name.StartsWith("Ph") && bad.Name != "HP";
+        if (isLaptop) { continue; }
+        if (!looksLikePhuKien) { continue; }
+        foreach (var t in gdb.ItemTypes.Where(t => t.MenuID == bad.ID).ToList()) { t.MenuID = keepAcc.ID; }
+        foreach (var b in gdb.Brands.Where(t => t.MenuID == bad.ID).ToList()) { b.MenuID = keepAcc.ID; }
+        gdb.Menus.Remove(bad);
+    }
+    gdb.SaveChanges();
+
+    long? selectedId = Model != null ? Model.MenuID : null;
+    var items = new List<SelectListItem>();
+    items.Add(new SelectListItem { Text = chonHang, Value = "", Selected = selectedId == null });
+    foreach (var n in laptopBrands)
+    {
+        var m = gdb.Menus.First(x => x.Name == n);
+        var label = n == "Apple" ? "Laptop Apple (MacBook)" : ("Laptop " + n);
+        items.Add(new SelectListItem { Text = label, Value = m.ID.ToString(), Selected = selectedId == m.ID });
+    }
+    items.Add(new SelectListItem { Text = phuKien, Value = keepAcc.ID.ToString(), Selected = selectedId == keepAcc.ID });
+}
+
+<div class="alert alert-info" style="max-width:720px">
+    <b>Hang</b> = thuong hieu laptop. <b>Dong san pham</b> = ROG, TUF, Zenbook, ThinkPad...
+</div>
+
+<div class="form-group">
+    <h5 class="control-label col-md-2">@lblDong</h5>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.TypeName, new { htmlAttributes = new { @class = "form-control", placeholder = "VD: ROG, TUF, Zenbook..." } })
+        @Html.ValidationMessageFor(model => model.TypeName, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <h5 class="control-label col-md-2">@lblHang</h5>
+    <div class="col-md-10">
+        @Html.DropDownList("MenuID", items, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MenuID, "", new { @class = "text-danger" })
+    </div>
+</div>

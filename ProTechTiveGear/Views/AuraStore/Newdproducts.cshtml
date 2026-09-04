@@ -1,35 +1,189 @@
-﻿
-@model IEnumerable<ProTechTiveGear.Models.Item>
-
-
-
-				<div class="col-lg-6">
-					<div class="arivals_slider owl-carousel">
-
-						@foreach (var item in Model)
-						{
-							<div class="item">
-								<div class="cake_feature_item">
-									<a href="@Url.Action("Detail","AuraStore",new { id=item.ID})">
-										<div class="cake_img">
-											<img class="resize-Productnew" src="~/img/Item/@item.Picture" alt="">
-										</div>
-										</a>
-										<div class="cake_text" style="background-color:aquamarine">
-											<h4>@item.SellPrice </h4>
-											<h3>@item.Name</h3>
-											<a class="pest_btn" href="@Url.Action("AddtoCart","Cart",new {@id=item.ID,@strURL=Request.Url.ToString() })" style="background-color:brown">Thêm vào giỏ</a>
-										</div>
+﻿@model IEnumerable<ProTechTiveGear.Models.Item>
+@using System.Linq
+@using System.Collections.Generic
+@using System.Text.RegularExpressions
+@using ProTechTiveGear.Models
+@{
+	List<Item> list = new List<Item>();
+	try
+	{
+		list = new ProTechTiveGearEntities().Items.Where(d => d.Active == true).OrderByDescending(a => a.DateImport).Take(10).ToList();
+	}
+	catch
+	{
+	}
+	if (list.Count == 0 && Model != null)
+	{
+		list = Model.ToList();
+	}
+	int n = list.Count;
+	int slideCount = n == 0 ? 0 : Math.Min(3, n);
+	string spMoi = "S\u1ea2N PH\u1ea8M M\u1edaI";
+	string tieuDe = "Laptop m\u1edbi v\u1ec1";
+	string moTa = "Laptop m\u1edbi nh\u1eadp, c\u1ea5u h\u00ecnh \u0111a d\u1ea1ng, gi\u00e1 t\u1ed1t, b\u1ea3o h\u00e0nh r\u00f5 r\u00e0ng.";
+	string xemAll = "Xem t\u1ea5t c\u1ea3";
+	string xemCt = "Xem chi ti\u1ebft";
+	string themGio = "Th\u00eam v\u00e0o gi\u1ecf";
+	string moi = "M\u1edaI";
+}
+<style>
+	.na-wrap { background:#f4f6f8; padding:36px 0 48px; }
+	.na-kicker { color:#c0392b; font-size:12px; font-weight:800; letter-spacing:.08em; margin-bottom:6px; }
+	.na-title { font-size:32px; font-weight:800; color:#1a2744; margin:0 0 10px; }
+	.na-desc { color:#667; max-width:360px; font-size:14px; }
+	.na-trust { display:flex; flex-wrap:wrap; gap:14px; margin-top:18px; font-size:12px; color:#445; }
+	.na-trust i { color:#c0392b; margin-right:6px; }
+	.na-hero { background:#fff; border-radius:16px; padding:22px; margin-bottom:22px; box-shadow:0 2px 12px rgba(0,0,0,.04); min-height:280px; }
+	.na-feat-name { font-size:26px; font-weight:800; color:#8b2e1f; margin:0 0 8px; }
+	.na-specpill { display:inline-block; background:#f3e6d8; color:#5a3; color:#5a4030; padding:6px 12px; border-radius:20px; font-size:13px; font-weight:700; margin-bottom:12px; }
+	.na-price { color:#c0392b; font-size:26px; font-weight:800; }
+	.na-old { color:#99a; text-decoration:line-through; font-size:13px; display:block; margin-bottom:12px; }
+	.na-cta { display:inline-block; background:#8b2e1f; color:#fff !important; padding:8px 16px; border-radius:8px; font-weight:700; font-size:13px; }
+	.na-cta:hover { color:#fff; text-decoration:none; opacity:.92; }
+	.na-feat-img { text-align:center; }
+	.na-feat-img img { max-height:220px; max-width:100%; object-fit:contain; }
+	.na-headrow { display:flex; justify-content:space-between; align-items:center; margin:8px 0 14px; }
+	.na-headrow h3 { margin:0; font-size:18px; font-weight:800; }
+	.na-headrow a { color:#c0392b; font-weight:700; font-size:13px; }
+	.na-card { background:#fff; border-radius:12px; padding:12px; height:100%; display:flex; flex-direction:column; box-shadow:0 2px 8px rgba(0,0,0,.05); position:relative; }
+	.na-new { position:absolute; top:10px; left:10px; background:#2e7d32; color:#fff; font-size:11px; font-weight:800; padding:2px 8px; border-radius:10px; }
+	.na-card img { height:120px; object-fit:contain; width:100%; margin:18px 0 8px; }
+	.na-card b { font-size:13px; min-height:36px; display:block; }
+	.na-card .p { color:#c0392b; font-weight:800; font-size:16px; }
+	.na-card .o { color:#99a; text-decoration:line-through; font-size:12px; }
+	.na-usp { background:#c8f5e8; border-radius:8px; padding:8px; font-size:11px; margin:8px 0; color:#245; }
+	.na-add { display:block; text-align:center; background:#8b2e1f; color:#fff !important; padding:8px; border-radius:8px; font-size:12px; font-weight:700; margin-top:auto; }
+	.na-add:hover { color:#fff; text-decoration:none; }
+	.na-dots { text-align:center; margin-top:16px; }
+	.na-dots span { display:inline-block; width:10px; height:10px; border-radius:50%; background:#f3b6c0; margin:0 4px; cursor:pointer; }
+	.na-dots span.on { background:#555; }
+	.na-slide { display:none; }
+	.na-slide.on { display:block; }
+</style>
+<section class="na-wrap">
+	<div class="container">
+		@if (n == 0)
+		{
+			<p>Chua co laptop moi.</p>
+		}
+		else
+		{
+			for (int s = 0; s < slideCount; s++)
+			{
+				var hero = list[s];
+				var cards = new List<Item>();
+				int k = 0;
+				while (cards.Count < 4 && k < n)
+				{
+					var it = list[(s + 1 + k) % n];
+					if (it.ID != hero.ID)
+					{
+						cards.Add(it);
+					}
+					k++;
+				}
+				string hpic = (hero.Picture ?? "").Split('|')[0];
+				string spec = hero.ShortTitle;
+				if (string.IsNullOrWhiteSpace(spec))
+				{
+					spec = "i5 / 8GB / 256GB";
+				}
+				decimal hold = hero.PurcharsePrice.HasValue && hero.PurcharsePrice.Value > hero.SellPrice
+					? hero.PurcharsePrice.Value
+					: Math.Round(hero.SellPrice * 1.18m / 1000m) * 1000m;
+				var slideOn = s == 0 ? "on" : "";
+				<div class="na-slide @slideOn" data-na="@s">
+					<div class="na-hero">
+						<div class="row align-items-center">
+							<div class="col-md-5">
+								<div class="na-kicker"><i class="fa fa-star"></i> @spMoi</div>
+								<h2 class="na-title">@tieuDe</h2>
+								<p class="na-desc">@moTa</p>
+								<div class="na-trust">
+									<span><i class="fa fa-check-circle"></i>@("H\u00e0ng ch\u00ednh h\u00e3ng")</span>
+									<span><i class="fa fa-shield"></i>@("B\u1ea3o h\u00e0nh uy t\u00edn")</span>
+									<span><i class="fa fa-truck"></i>@("Giao h\u00e0ng nhanh")</span>
 								</div>
 							</div>
-
+							<div class="col-md-3">
+								<div class="na-feat-name">@hero.Name</div>
+								<div class="na-specpill">@spec</div>
+								<div class="na-price">@string.Format("{0:#,##0}\u0111", hero.SellPrice)</div>
+								<div class="na-old">@string.Format("{0:#,##0}\u0111", hold)</div>
+								<a class="na-cta" href="@Url.Action("Detail", "AuraStore", new { id = hero.ID })">@xemCt &rarr;</a>
+							</div>
+							<div class="col-md-4 na-feat-img">
+								<a href="@Url.Action("Detail", "AuraStore", new { id = hero.ID })">
+									<img src="~/img/Item/@hpic" alt="@hero.Name" />
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="na-headrow">
+						<h3><i class="fa fa-fire" style="color:#e67e22"></i> @("S\u1ea3n ph\u1ea9m m\u1edbi nh\u1ea5t")</h3>
+						<a href="@Url.Action("Index", "AuraStore")">@xemAll &rarr;</a>
+					</div>
+					<div class="row">
+						@foreach (var c in cards)
+						{
+							string cpic = (c.Picture ?? "").Split('|')[0];
+							decimal cold = c.PurcharsePrice.HasValue && c.PurcharsePrice.Value > c.SellPrice
+								? c.PurcharsePrice.Value
+								: Math.Round(c.SellPrice * 1.18m / 1000m) * 1000m;
+							<div class="col-lg-3 col-md-6" style="margin-bottom:12px">
+								<div class="na-card">
+									<span class="na-new">@moi</span>
+									<a href="@Url.Action("Detail", "AuraStore", new { id = c.ID })">
+										<img src="~/img/Item/@cpic" alt="@c.Name" />
+									</a>
+									<b>@c.Name</b>
+									<div class="p">@string.Format("{0:#,##0}\u0111", c.SellPrice)</div>
+									<div class="o">@string.Format("{0:#,##0}\u0111", cold)</div>
+									<div class="na-usp"><i class="fa fa-bolt"></i> @("H\u00e0ng m\u1edbi v\u1ec1") &nbsp; <i class="fa fa-battery-full"></i> @("B\u1ea3o h\u00e0nh")</div>
+									@if (c.Quantity == 0)
+									{
+										<span class="na-add" style="opacity:.45">@themGio</span>
+									}
+									else
+									{
+										<a class="na-add" href="@Url.Action("AddtoCart", "Cart", new { id = c.ID, strURL = Request.Url.ToString() })"><i class="fa fa-shopping-cart"></i> @themGio</a>
+									}
+								</div>
+							</div>
 						}
-
 					</div>
 				</div>
-			
-
-
-
-
-
+			}
+			<div class="na-dots" id="naDots">
+				@for (int d = 0; d < slideCount; d++)
+				{
+					var naOn = d == 0 ? "on" : "";
+					<span class="@naOn" data-na="@d"></span>
+				}
+			</div>
+		}
+	</div>
+</section>
+<script>
+	(function () {
+		var slides = document.querySelectorAll('.na-slide');
+		var dots = document.querySelectorAll('#naDots span');
+		if (!slides.length) return;
+		var i = 0;
+		function go(n) {
+			i = n;
+			for (var x = 0; x < slides.length; x++) {
+				if (x === i) { slides[x].classList.add('on'); } else { slides[x].classList.remove('on'); }
+				if (dots[x]) {
+					if (x === i) { dots[x].classList.add('on'); } else { dots[x].classList.remove('on'); }
+				}
+			}
+		}
+		for (var d = 0; d < dots.length; d++) {
+			(function (idx) {
+				dots[idx].onclick = function () { go(idx); };
+			})(d);
+		}
+		setInterval(function () { go((i + 1) % slides.length); }, 10000);
+	})();
+</script>

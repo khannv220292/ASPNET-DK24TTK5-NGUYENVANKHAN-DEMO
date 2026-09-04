@@ -1,51 +1,222 @@
-﻿
+﻿@model ProTechTiveGear.Models.Item
+@using System.Linq
+@using System.Text.RegularExpressions
+@using System.Collections.Generic
+@using System.Data.Entity
+@using ProTechTiveGear.Models
 @{
-	ViewBag.Title = "Detail";
+	ViewBag.Title = Model != null ? Model.Name : "Chi tiet";
 	Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+	var item = Model;
+	var pics = (item.Picture ?? "").Split(new[] { '|', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+	var mainPic = pics.Length > 0 ? pics[0].Trim() : "";
+	string descText = Regex.Replace(item.Describe ?? "", "<[^>]+>", " ");
+	string blob = ((item.Name ?? "") + " " + (item.ShortTitle ?? "") + " " + descText).Replace('\n', ' ');
+	string cpu = "Intel Core";
+	var mCpu = Regex.Match(blob, @"(Intel\s+Core\s+i[3579][^\s,/]*|i[3579]-\d+\w*|Ryzen\s+\d+[^\s,]*)", RegexOptions.IgnoreCase);
+	if (mCpu.Success)
+	{
+		cpu = mCpu.Value;
+	}
+	string ram = "8GB";
+	var mRam = Regex.Match(blob, @"(\d{1,2}\s*GB(?:\s*DDR\d)?)", RegexOptions.IgnoreCase);
+	if (mRam.Success)
+	{
+		ram = mRam.Groups[1].Value.Trim();
+	}
+	string disk = "256GB SSD";
+	var mSsd = Regex.Match(blob, @"(\d{3,4}\s*GB|\d\s*TB)\s*(SSD)?", RegexOptions.IgnoreCase);
+	if (mSsd.Success)
+	{
+		disk = mSsd.Value.Trim();
+	}
+	string vga = "Intel UHD Graphics";
+	var mVga = Regex.Match(blob, @"(RTX\s*\d+\w*|GTX\s*\d+\w*|Intel\s+UHD[^\s,]*|Iris\s+Xe|Radeon[^\s,]*)", RegexOptions.IgnoreCase);
+	if (mVga.Success)
+	{
+		vga = mVga.Value;
+	}
+	string scr = "15.6 inch FHD";
+	var mScr = Regex.Match(blob, @"(\d{2}(?:\.\d)?)\s*(?:inch|""|in\b)", RegexOptions.IgnoreCase);
+	if (mScr.Success)
+	{
+		scr = mScr.Groups[1].Value + " inch FHD";
+	}
+	string os = "Windows 11";
+	decimal oldPrice = item.PurcharsePrice.HasValue && item.PurcharsePrice.Value > item.SellPrice
+		? item.PurcharsePrice.Value
+		: Math.Round(item.SellPrice * 1.14m / 1000m) * 1000m;
+	int off = oldPrice > item.SellPrice ? (int)Math.Round((double)((oldPrice - item.SellPrice) / oldPrice * 100m)) : 0;
+	var similar = new List<Item>();
+	try
+	{
+		var db = new ProTechTiveGearEntities();
+		var all = db.Items.Include("ItemType.Menu").Where(t => t.Active == true && t.ID != item.ID).ToList();
+		if (item.TypeID != null)
+		{
+			similar = all.Where(x => x.TypeID == item.TypeID).OrderByDescending(x => x.DateImport).Take(6).ToList();
+		}
+		if (similar.Count < 3)
+		{
+			Menu menu = item.ItemType != null ? item.ItemType.Menu : null;
+			if (menu == null && item.TypeID != null)
+			{
+				var tp = db.ItemTypes.Include("Menu").FirstOrDefault(x => x.ID == item.TypeID);
+				if (tp != null)
+				{
+					menu = tp.Menu;
+				}
+			}
+			string hang = menu != null ? (menu.Name ?? "") : "";
+			var extra = all.Where(x =>
+				(menu != null && x.ItemType != null && x.ItemType.MenuID == menu.ID) ||
+				(hang.Length > 1 && x.Name != null && x.Name.IndexOf(hang, StringComparison.OrdinalIgnoreCase) >= 0)
+			).ToList();
+			foreach (var x in extra)
+			{
+				if (similar.Count >= 6)
+				{
+					break;
+				}
+				if (!similar.Any(s => s.ID == x.ID))
+				{
+					similar.Add(x);
+				}
+			}
+		}
+		if (similar.Count == 0)
+		{
+			similar = all.OrderByDescending(x => x.DateImport).Take(6).ToList();
+		}
+	}
+	catch
+	{
+	}
+	var side = new List<Item>();
+	side.Add(item);
+	foreach (var s in similar)
+	{
+		if (side.Count >= 6)
+		{
+			break;
+		}
+		side.Add(s);
+	}
+	string maSp = "tn" + item.ID;
+	string kmTitle = "KHUY\u1ebeN M\u00c3I";
+	string luaChon = "L\u1ef1a ch\u1ecdn kh\u00e1c";
+	string vat = "bao g\u1ed3m VAT";
+	string themGio = "Th\u00eam v\u00e0o gi\u1ecf";
 }
-
-
-
-<section class="product_details_area p_100">
+<style>
+	.pd-page { padding: 24px 0 48px; background:#fff; }
+	.pd-gallery { background:#fafafa; border:1px solid #eee; border-radius:8px; padding:16px; text-align:center; }
+	.pd-gallery img.main { max-width:100%; max-height:380px; object-fit:contain; }
+	.pd-thumbs { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; justify-content:center; }
+	.pd-thumbs img { width:68px; height:68px; object-fit:contain; border:1px solid #ddd; background:#fff; cursor:pointer; }
+	.pd-stars { color:#f5a623; margin-bottom:6px; }
+	.pd-sku { color:#666; font-size:13px; margin-bottom:12px; }
+	.pd-spec { list-style:none; padding:0; margin:0 0 16px; }
+	.pd-spec li { padding:6px 0; border-bottom:1px dashed #eee; font-size:14px; }
+	.pd-spec b { display:inline-block; min-width:88px; color:#333; }
+	.pd-price { color:#e53935; font-size:28px; font-weight:800; margin:8px 0 4px; }
+	.pd-vat { font-size:13px; font-weight:600; }
+	.pd-old { color:#888; text-decoration:line-through; margin-right:8px; }
+	.pd-off { color:#e53935; font-weight:700; }
+	.pd-km { border:1px solid #c8e6c9; border-radius:8px; overflow:hidden; margin:16px 0; }
+	.pd-km h5 { background:#1b7a4e; color:#fff; margin:0; padding:8px 12px; font-size:14px; }
+	.pd-km ul { margin:0; padding:10px 16px 10px 28px; }
+	.pd-km li { font-size:13px; margin:4px 0; }
+	.pd-km em { color:#e53935; font-style:normal; font-weight:700; }
+	.pd-buy { display:inline-block; background:#e67e22; color:#fff !important; padding:10px 22px; border-radius:8px; font-weight:700; }
+	.pd-buy:hover { opacity:.92; text-decoration:none; color:#fff; }
+	.pd-side { border:1px solid #e0e0e0; border-radius:8px; padding:12px; }
+	.pd-side h3 { color:#1b7a4e; font-size:18px; font-weight:800; margin:0 0 12px; }
+	.pd-alt { display:flex; gap:10px; padding:8px; border:1px solid #eee; border-radius:8px; margin-bottom:8px; text-decoration:none; color:#222; }
+	.pd-alt:hover { text-decoration:none; color:#111; background:#fafafa; }
+	.pd-alt.on { border-color:#e53935; }
+	.pd-alt img { width:64px; height:52px; object-fit:contain; flex-shrink:0; }
+	.pd-alt b { display:block; font-size:12px; line-height:1.3; max-height:32px; overflow:hidden; }
+	.pd-alt span { color:#e53935; font-weight:800; font-size:13px; }
+</style>
+<section class="pd-page">
 	<div class="container">
-		<div class="row product_d_price">
-			<div class="col-lg-6">
-			
-					<img class="resize-image-detail" src="~/img/Item/@Model.Picture" alt="">
-			
-
-			</div>
-			<div class="col-lg-6">
-				<div class="product_details_text">
-					<h4>@Model.Name</h4>
-					<p>@Model.ShortTitle</p>
-					<h5>Giá :<span> @String.Format("{0:0,0}", Model.SellPrice) VND</span></h5>
-					<div class="quantity_box">
-						<label for="quantity">Số lượng :</label>
-						<input type="number" min="1" max="10" value="1" id="quantity">
+		<div class="row">
+			<div class="col-lg-4 col-md-5">
+				<div class="pd-gallery">
+					<img id="mainProductPic" class="main" src="~/img/Item/@mainPic" alt="@item.Name" />
+					<div class="pd-thumbs">
+						@foreach (var p in pics)
+						{
+							<img src="~/img/Item/@p.Trim()" alt="" onclick="document.getElementById('mainProductPic').src=this.src" />
+						}
 					</div>
-					@if (Model.Quantity == 0) {<a class="pink_more disabled">Add to Cart</a> }
-					else {<a class="pink_more" href="@Url.Action("AddtoCart","Cart",new {@id=@Model.ID,@strURL=Request.Url.ToString() })" style="background-color:brown">Thêm vào giỏ</a> }
-					
+				</div>
+			</div>
+			<div class="col-lg-5 col-md-7">
+				<h3 style="font-size:22px;font-weight:800;margin-bottom:8px">@item.Name</h3>
+				<div class="pd-stars">
+					<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
+				</div>
+				<div class="pd-sku">@("M\u00e3 S\u1ea3n ph\u1ea9m"): @maSp</div>
+				<ul class="pd-spec">
+					<li><b>OS:</b> @os</li>
+					<li><b>CPU:</b> @cpu</li>
+					<li><b>RAM:</b> @ram</li>
+					<li><b>@("\u1ed4 c\u1ee9ng"):</b> @disk</li>
+					<li><b>VGA:</b> @vga</li>
+					<li><b>@("M\u00e0n h\u00ecnh"):</b> @scr</li>
+				</ul>
+				<div class="pd-price">@string.Format("{0:#,##0}\u0111", item.SellPrice) <span class="pd-vat">(@vat)</span></div>
+				@if (off > 0)
+				{
+					<div><span class="pd-old">@string.Format("{0:#,##0}\u0111", oldPrice)</span><span class="pd-off">-@off%</span></div>
+				}
+				<div class="pd-km">
+					<h5><i class="fa fa-gift"></i> @kmTitle</h5>
+					<ul>
+						<li>@("T\u1eb7ng") <em>@("Chu\u1ed9t kh\u00f4ng d\u00e2y")</em></li>
+						<li>@("T\u1eb7ng") <em>@("T\u00fai x\u00e1ch laptop")</em></li>
+						<li>@("T\u1eb7ng") <em>@("L\u00f3t chu\u1ed9t + d\u00e1n m\u00e0n h\u00ecnh")</em></li>
+					</ul>
+				</div>
+				@if (item.Quantity == 0)
+				{
+					<span class="pd-buy" style="opacity:.45">@themGio</span>
+				}
+				else
+				{
+					<a class="pd-buy" href="@Url.Action("AddtoCart", "Cart", new { id = item.ID, strURL = Request.Url.ToString() })">@themGio</a>
+				}
+			</div>
+			<div class="col-lg-3">
+				<div class="pd-side">
+					<h3>@luaChon</h3>
+					@foreach (var alt in side)
+					{
+						var ap = (alt.Picture ?? "").Split('|')[0];
+						<a class="pd-alt @(alt.ID == item.ID ? "on" : "")" href="@Url.Action("Detail", "AuraStore", new { id = alt.ID })">
+							<img src="~/img/Item/@ap" alt="" />
+							<div>
+								<b>@alt.Name</b>
+								<span>@string.Format("{0:#,##0}\u0111", alt.SellPrice)</span>
+							</div>
+						</a>
+					}
 				</div>
 			</div>
 		</div>
-		<div class="product_tab_area">
+		<div class="product_tab_area" style="margin-top:28px">
 			<nav>
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
-					<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Mô tả</a>
-					
+					<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">@("M\u00f4 t\u1ea3")</a>
 				</div>
 			</nav>
 			<div class="tab-content" id="nav-tabContent">
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-					<p>@Html.Raw(@Model.Describe)</p> 
-					
+					<p>@Html.Raw(item.Describe)</p>
 				</div>
-				
 			</div>
 		</div>
 	</div>
 </section>
-
-@Html.Action("Relatedproducts", "AuraStore", new { id = @Model.BrandID})

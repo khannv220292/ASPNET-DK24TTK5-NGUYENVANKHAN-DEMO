@@ -1,68 +1,94 @@
 ﻿@model IEnumerable<ProTechTiveGear.Models.OrderDetailEntity>
 
 @{
-	ViewBag.Title = "Comfirm";
+	ViewBag.Title = "Chi tiết đơn hàng";
 	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+	var order = ViewBag.Order as ProTechTiveGear.Models.Order;
+	bool paid = ViewBag.Paid == true;
+	long orderId = ViewBag.id != null ? (long)ViewBag.id : 0;
 }
 
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
 		<h2 class="text-center">Chi Tiết Đơn Hàng</h2>
-
+		@if (order != null)
+		{
+			<div class="text-center" style="color:#555;font-size:14px;margin-top:6px">
+				Mã đơn <strong>#@order.ID</strong>
+				&nbsp;·&nbsp; Khách <strong>@(order.Customer != null ? order.Customer.Name : "—")</strong>
+				&nbsp;·&nbsp; Tổng <strong>@string.Format("{0:#,##0} đ", order.Totalprice)</strong>
+				&nbsp;·&nbsp; COD:
+				@if (paid)
+				{
+					<span class="badge badge-success" style="font-size:13px;padding:5px 10px">Đã thanh toán</span>
+				}
+				else
+				{
+					<span class="badge badge-warning" style="font-size:13px;padding:5px 10px;color:#7a2e0e">Chưa nhận</span>
+				}
+			</div>
+		}
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
 			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
-						<th>
-							Số lượng
-						</th>
-						@*<th>
-								@Html.DisplayNameFor(model => model.ItemId)
-							</th>*@
-						<th>
-							Mã Đơn
-						</th>
-						<th>
-							Tổng Giá
-						</th>
-						<th>
-							Sản Phẩm
-						</th>
-						<th>
-							Ảnh
-						</th>
-
+						<th>Số lượng</th>
+						<th>Mã Đơn</th>
+						<th>Tổng Giá</th>
+						<th>Sản Phẩm</th>
+						<th>Ảnh</th>
 					</tr>
 				</thead>
 				<tbody>
-
 					@foreach (var item in Model)
 					{
+						string pic = "";
+						if (item.Item != null && !string.IsNullOrWhiteSpace(item.Item.Picture))
+						{
+							pic = item.Item.Picture.Split('|')[0].Trim();
+						}
 						<tr>
+							<td>@item.Quantity</td>
+							<td>@item.OrderID</td>
+							<td>@string.Format("{0:#,##0}", item.Totalprice)</td>
+							<td>@(item.Item != null ? item.Item.Name : "")</td>
 							<td>
-								@Html.DisplayFor(modelItem => item.Quantity)
-							</td>
-
-							<td>
-								@Html.DisplayFor(modelItem => item.OrderID)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Totalprice)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Item.Name)
-							</td>
-							<td>
-								<img width="100" height="100" src="~/img/Item/@Html.DisplayFor(modelItem => item.Item.Picture)" />
+								@if (!string.IsNullOrEmpty(pic))
+								{
+									<img width="100" height="100" style="object-fit:contain;background:#fafafa;border:1px solid #eee;border-radius:6px;padding:4px"
+										 src="@Url.Content("~/img/Item/" + pic)" alt="@(item.Item != null ? item.Item.Name : "")" />
+								}
+								else
+								{
+									<span style="color:#999">Không có ảnh</span>
+								}
 							</td>
 						</tr>
 					}
-
 				</tbody>
 			</table>
 		</div>
+
+		<div class="text-center" style="margin-top:28px;padding-top:8px">
+			<a href="@Url.Action("AllListOrder", "Admin")" class="btn btn-secondary" style="min-width:120px;margin:0 6px">Quay lại</a>
+			@if (!paid && orderId > 0)
+			{
+				using (Html.BeginForm("ConfirmPayment", "Admin", FormMethod.Post, new { style = "display:inline-block;margin:0 6px" }))
+				{
+					@Html.AntiForgeryToken()
+					<input type="hidden" name="id" value="@orderId" />
+					<button type="submit" class="btn btn-success" style="min-width:140px;font-weight:600"
+							onclick="return confirm('Xác nhận đã thanh toán COD cho đơn #@orderId?');">
+						Xác nhận TT
+					</button>
+				}
+			}
+			else if (paid)
+			{
+				<span class="btn btn-outline-success disabled" style="min-width:140px;cursor:default;margin:0 6px">Đã thanh toán</span>
+			}
+		</div>
 	</div>
 </div>
-

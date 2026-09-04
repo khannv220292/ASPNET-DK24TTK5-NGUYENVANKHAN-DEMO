@@ -28,31 +28,27 @@ namespace ProTechTiveGear.Controllers
         public ActionResult AddtoCart(long id, string strURL)
         {
             List<CartEntity> lstcart = GetCart();
-            //Kiem tra sách này tồn tại trong Session["Giohang"] chưa?
-
             CartEntity Product = lstcart.Find(n => n.IdItem == id);
             if (Product == null)
             {
                 Product = new CartEntity(id);
                 lstcart.Add(Product);
-                return Redirect(strURL);
             }
             else
             {
                 Product.Quantity++;
-                return Redirect(strURL);
             }
+            // Sau khi thêm → mở trang giỏ để thấy kết quả rõ ràng
+            return RedirectToAction("Cart");
         }
         public ActionResult Cart()
         {
             List<CartEntity> lstCart = GetCart();
-            if (lstCart.Count == 0)
-            {
-                return RedirectToAction("Index", "AuraStore");
-            }
             ViewBag.TotalQuantity = TotalQuantity();
             ViewBag.ToTalPrice = ToTalPrice();
-            return View(lstCart);
+            ViewBag.HideBanner = true;
+            // Giỏ trống vẫn hiển thị trang giỏ (không đá về Index)
+            return View(lstCart ?? new List<CartEntity>());
         }
 
         private int TotalQuantity()
@@ -129,52 +125,160 @@ namespace ProTechTiveGear.Controllers
         [HttpGet]
         public ActionResult Order()
         {
-            if (Session["usr"] == null || Session["usr"].ToString() == "")
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            if (Session["Cart"] == null)
-            {
-                return RedirectToAction("Index", "AuraStore");
-            }
+            // Không bắt buộc đăng nhập — form thanh toán hiển thị như mẫu (có link Đăng nhập)
             List<CartEntity> listcart = GetCart();
-            ViewBag.ToTalQuanttity = TotalQuantity();
-            ViewBag.TotalPrice = ToTalPrice();
-
+            if (listcart == null || listcart.Count == 0)
+            {
+                return RedirectToAction("Cart");
+            }
+            ViewBag.TotalQuantity = TotalQuantity();
+            ViewBag.ToTalPrice = ToTalPrice();
+            ViewBag.HideBanner = true;
             return View(listcart);
         }
+
+        [HttpPost]
         public ActionResult Order(FormCollection collection)
         {
-            Order or = new Order();
-            Customer cus = (Customer)Session["usr"];
-
             List<CartEntity> crt = GetCart();
-            or.CustomerID = cus.ID;
-            or.Orderdate = DateTime.Now;
-            //var DeliveryDate = string.Format("{0:MM/dd/yyyy}", collection["Deliverydate"]);
-            or.Status = false;
-            or.Totalprice = (decimal)ToTalPrice();
-            db.Orders.Add(or);
-            db.SaveChanges();
-            foreach (var item in crt)
+            if (crt == null || crt.Count == 0)
             {
-                OrderDetail ordt = new OrderDetail();
-                ordt.OrderID = or.ID;
-                ordt.ItemId = item.IdItem;
-                ordt.Quantity = item.Quantity;
-                ordt.Totalprice = (decimal)item.Prices;
-                db.OrderDetails.Add(ordt);
-
-
-                var it = db.Items.Find(item.IdItem);
-                it.Quantity = (it.Quantity) - item.Quantity;
-                db.SaveChanges();
+                return RedirectToAction("Cart");
             }
-            db.SaveChanges();
+
+            string fullName = (collection["fullName"] ?? "").Trim();
+            string phone = (collection["phone"] ?? "").Trim();
+            string address = (collection["address"] ?? "").Trim();
+            string province = (collection["province"] ?? "").Trim();
+            string district = (collection["district"] ?? "").Trim();
+            string ward = (collection["ward"] ?? "").Trim();
+            string note = (collection["note"] ?? "").Trim();
+            string paymentMethod = (collection["paymentMethod"] ?? "COD").Trim();
+
+            if (string.IsNullOrEmpty(fullName) || string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(address))
+            {
+                TempData["CheckoutError"] = "Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ.";
+                return RedirectToAction("Order");
+            }
+
+            string fullAddress = address;
+            if (!string.IsNullOrEmpty(ward)) fullAddress += ", " + ward;
+            if (!string.IsNullOrEmpty(district)) fullAddress += ", " + district;
+            if (!string.IsNullOrEmpty(province)) fullAddress += ", " + province;
+            if (!string.IsNullOrEmpty(note)) fullAddress += " | Ghi chú: " + note;
+            // Customer.Address trong DB chỉ tối đa 100 ký tự
+            if (fullAddress.Length > 100) fullAddress = fullAddress.Substring(0, 100);
+
+            Customer cus = Session["usr"] as Customer;
+            if (cus != null)
+            {
+                var dbCus = db.Customers.Find(cus.ID);
+                if (dbCus != null)
+                {
+                    dbCus.Name = fullName.Length > 45 ? fullName.Substring(0, 45) : fullName;
+                    dbCus.Phone = phone.Length > 15 ? phone.Substring(0, 15) : phone;
+                    dbCus.Address = fullAddress;
+                    SafeSaveChanges(db);
+                    Session["usr"] = dbCus;
+                    cus = dbCus;
+                }
+            }
+            else
+            {
+                // Khách vãng lai: tìm theo SĐT hoặc tạo tài khoản tạm
+                cus = db.Customers.FirstOrDefault(x => x.Phone == phone);
+                if (cus == null)
+                {
+                    string guestUser = "guest_" + phone;
+                    cus = db.Customers.FirstOrDefault(x => x.Username == guestUser);
+                }
+                if (cus == null)
+                {
+                    cus = new Customer
+                    {
+                        Username = "guest_" + phone,
+                        Passwords = Guid.NewGuid().ToString("N").Substring(0, 8),
+                        Name = fullName.Length > 45 ? fullName.Substring(0, 45) : fullName,
+                        Phone = phone.Length > 15 ? phone.Substring(0, 15) : phone,
+                        Address = fullAddress,
+                        EmailAddress = (phone + "@guest.local")
+                    };
+                    db.Customers.Add(cus);
+                    SafeSaveChanges(db);
+                }
+                else
+                {
+                    cus.Name = fullName.Length > 45 ? fullName.Substring(0, 45) : fullName;
+                    cus.Phone = phone.Length > 15 ? phone.Substring(0, 15) : phone;
+                    cus.Address = fullAddress;
+                    SafeSaveChanges(db);
+                }
+            }
+
+            if (string.Equals(paymentMethod, "MoMo", StringComparison.OrdinalIgnoreCase))
+            {
+                Session["usr"] = cus; // MoMo cần Session customer
+                return RedirectToAction("PaymentMoMo");
+            }
+
+            // Lưu Order + OrderDetail trong 1 transaction — tránh đơn “trống” khi bước sau lỗi
+            using (var tx = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Order or = new Order();
+                    or.CustomerID = cus.ID;
+                    or.Orderdate = DateTime.Now;
+                    or.Status = false;
+                    or.Deliverystatus = false;
+                    or.Totalprice = (decimal)ToTalPrice();
+                    db.Orders.Add(or);
+                    SafeSaveChanges(db);
+
+                    foreach (var item in crt)
+                    {
+                        OrderDetail ordt = new OrderDetail();
+                        ordt.OrderID = or.ID;
+                        ordt.ItemId = item.IdItem;
+                        ordt.Quantity = item.Quantity;
+                        ordt.Totalprice = (decimal)(item.Prices * item.Quantity);
+                        db.OrderDetails.Add(ordt);
+
+                        // Trừ kho bằng SQL — tránh EF validate lại tên SP dài > 30 ký tự
+                        db.Database.ExecuteSqlCommand(
+                            "UPDATE [Item] SET Quantity = CASE WHEN ISNULL(Quantity,0) >= {0} THEN Quantity - {0} ELSE 0 END WHERE ID = {1}",
+                            item.Quantity, item.IdItem);
+                    }
+                    SafeSaveChanges(db);
+                    tx.Commit();
+                }
+                catch
+                {
+                    tx.Rollback();
+                    TempData["CheckoutError"] = "Không lưu được đơn hàng. Vui lòng thử lại.";
+                    return RedirectToAction("Order");
+                }
+            }
             Session["Cart"] = null;
+            TempData["PaymentMethod"] = paymentMethod;
 
             return RedirectToAction("OrderConfirmation", "Cart");
+        }
 
+        /// <summary>SaveChanges kèm thông báo lỗi validation rõ ràng.</summary>
+        private static void SafeSaveChanges(ProTechTiveGearEntities context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var msgs = ex.EntityValidationErrors
+                    .SelectMany(e => e.ValidationErrors)
+                    .Select(e => e.PropertyName + ": " + e.ErrorMessage);
+                throw new Exception("Lỗi lưu dữ liệu: " + string.Join("; ", msgs), ex);
+            }
         }
 
 
@@ -182,33 +286,49 @@ namespace ProTechTiveGear.Controllers
 
         public ActionResult PaymentMoMo()
         {
-            //Lấy đơn hàng
-            Order or = new Order();
             Customer cus = (Customer)Session["usr"];
-
             List<CartEntity> crt = GetCart();
-            or.CustomerID = cus.ID;
-            or.Orderdate = DateTime.Now;
-            //var DeliveryDate = string.Format("{0:MM/dd/yyyy}", collection["Deliverydate"]);
-            or.Status = false;
-            or.Totalprice = (decimal)ToTalPrice();
-            db.Orders.Add(or);
-            db.SaveChanges();
-            foreach (var item in crt)
+            if (cus == null || crt == null || crt.Count == 0)
             {
-                OrderDetail ordt = new OrderDetail();
-                ordt.OrderID = or.ID;
-                ordt.ItemId = item.IdItem;
-                ordt.Quantity = item.Quantity;
-                ordt.Totalprice = (decimal)item.Prices;
-                db.OrderDetails.Add(ordt);
-
-
-                var it = db.Items.Find(item.IdItem);
-                it.Quantity = (it.Quantity) - item.Quantity;
-                db.SaveChanges();
+                return RedirectToAction("Order");
             }
-            db.SaveChanges();
+
+            Order or;
+            using (var tx = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    or = new Order();
+                    or.CustomerID = cus.ID;
+                    or.Orderdate = DateTime.Now;
+                    or.Status = false;
+                    or.Deliverystatus = false;
+                    or.Totalprice = (decimal)ToTalPrice();
+                    db.Orders.Add(or);
+                    SafeSaveChanges(db);
+                    foreach (var item in crt)
+                    {
+                        OrderDetail ordt = new OrderDetail();
+                        ordt.OrderID = or.ID;
+                        ordt.ItemId = item.IdItem;
+                        ordt.Quantity = item.Quantity;
+                        ordt.Totalprice = (decimal)(item.Prices * item.Quantity);
+                        db.OrderDetails.Add(ordt);
+
+                        db.Database.ExecuteSqlCommand(
+                            "UPDATE [Item] SET Quantity = CASE WHEN ISNULL(Quantity,0) >= {0} THEN Quantity - {0} ELSE 0 END WHERE ID = {1}",
+                            item.Quantity, item.IdItem);
+                    }
+                    SafeSaveChanges(db);
+                    tx.Commit();
+                }
+                catch
+                {
+                    tx.Rollback();
+                    TempData["CheckoutError"] = "Không lưu được đơn hàng. Vui lòng thử lại.";
+                    return RedirectToAction("Order");
+                }
+            }
             Session["Cart"] = null;
             //
             var obj = or;

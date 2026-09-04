@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<LaptopStore.Models.StoreItem>
 @{
-    ViewBag.Title = "Cửa hàng Laptop KHANNVSHOP";
+    ViewBag.Title = "Cửa hàng laptop.khannv.vn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -58,7 +58,7 @@
                             </p>
                             <div class="mt-auto">
                                 <a href="@Url.Action("Details", "Store", new { id = item.ID })" class="btn btn-info btn-sm">Chi tiết</a>
-                                <a href="@Url.Action("AddToCart", "Cart", new { id = item.ID })" class="btn btn-success btn-sm">Thêm giỏ hàng</a>
+                                <a href="@Url.Action("AddtoCart", "Cart", new { id = item.ID, strURL = Request.Url.ToString() })" class="btn btn-success btn-sm">Thêm giỏ hàng</a>
                             </div>
                         </div>
                     </div>

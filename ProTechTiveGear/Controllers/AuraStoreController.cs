@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -33,41 +34,64 @@ namespace ProTechTiveGear.Controllers
 		{
 			return data.Items.Where(d=>d.Active==true).OrderByDescending(a => a.DateImport).Take(count).ToList();
 		}
-		public ActionResult Index(/*FormCollection fc*/string search)
+		public ActionResult Index(string search, string hang, string sapxep)
         {
-			//var item = NewItem(8);
-			//if (!String.IsNullOrEmpty(search)){
-			//	item = item.Where(s => s.Name.Contains(search)).ToList();
-			//}
-			//return View(item);
-			//-----------------------------------------------
-			//string name = fc["txtname"];
-			//if (!String.IsNullOrEmpty(name))
-			//{
-			//	var item = from t in data.Items select t;
-
-			//	item = item.Where(s => s.Name.Contains(name));
-			//	return View(item);
-			//}
-			//return View(NewItem(8));
-			//var model = NewItem(8).Where(nv => nv.Name.Contains(search) || search == null).ToList();
-			
-			var q = data.Items.Where(x => x.Active == true);
+			if (string.IsNullOrEmpty(sapxep)) sapxep = "gia-asc";
+			var q = data.Items.Include("ItemType.Menu").Include("OrderDetails").Where(x => x.Active == true);
 			if (!string.IsNullOrEmpty(search))
 			{
 				q = q.Where(nv => nv.Name.Contains(search));
 			}
-			var model = q.OrderByDescending(c => c.DateImport).Take(16).ToList();
+			if (!string.IsNullOrEmpty(hang))
+			{
+				q = q.Where(x =>
+					(x.ItemType != null && x.ItemType.Menu != null && x.ItemType.Menu.Name == hang) ||
+					(x.Name != null && x.Name.Contains(hang)));
+			}
+			var list = q.ToList();
+			if (sapxep == "gia-desc")
+			{
+				list = list.OrderByDescending(c => c.SellPrice).ToList();
+			}
+			else if (sapxep == "moi")
+			{
+				list = list.OrderByDescending(c => c.DateImport).ToList();
+			}
+			else if (sapxep == "km")
+			{
+				list = list.OrderByDescending(c =>
+				{
+					decimal sell = c.SellPrice;
+					decimal oldP = (c.PurcharsePrice.HasValue && c.PurcharsePrice.Value > sell) ? c.PurcharsePrice.Value : Math.Round(sell * 1.18m / 1000m) * 1000m;
+					return oldP > sell ? (oldP - sell) / oldP : 0m;
+				}).ToList();
+			}
+			else if (sapxep == "ban-chay")
+			{
+				list = list.OrderByDescending(c => c.OrderDetails != null ? c.OrderDetails.Sum(o => o.Quantity) : 0).ToList();
+			}
+			else if (sapxep == "ten")
+			{
+				list = list.OrderBy(c => c.Name).ToList();
+			}
+			else
+			{
+				list = list.OrderBy(c => c.SellPrice).ToList();
+			}
+			var model = list.Take(16).ToList();
+			ViewBag.Hang = hang;
+			ViewBag.SapXep = sapxep;
+			ViewBag.HangList = data.Menus.ToList()
+				.Where(m => m.Name != null && !(m.Name.StartsWith("Ph") && m.Name != "HP"))
+				.OrderBy(m => m.Name)
+				.Select(m => m.Name)
+				.ToList();
 			return View(model);
-
-		
 		}
 		public ActionResult Detail(int id)
 		{
-			var gear = from t in data.Items
-					   where t.ID == id
-					   select t;
-			return View(gear.Single());
+			var gear = data.Items.Include("ItemType.Menu").FirstOrDefault(t => t.ID == id);
+			return View(gear);
 		}
 		public ActionResult Menu()
 		{
@@ -95,12 +119,12 @@ namespace ProTechTiveGear.Controllers
 			var typeName = data.ItemTypes.Where(t => t.ID == id).Select(t => t.TypeName).FirstOrDefault();
 			ViewBag.TitleList = typeName ?? "Laptop HP";
 			ViewBag.HideBanner = true;
-			var pr = data.Items.Where(d => d.TypeID == id && d.Active == true).OrderBy(d => d.SellPrice).ToList();
+			var pr = data.Items.Include("ItemType.Menu").Where(d => d.TypeID == id && d.Active == true).OrderBy(d => d.SellPrice).ToList();
 			return View(pr);
 		}
 		public ActionResult ProductbyMenu(long id)
 		{
-			var pr = data.Items.Where(d => d.Active == true && d.ItemType.MenuID == id).OrderByDescending(d => d.DateImport).ToList();
+			var pr = data.Items.Include("ItemType.Menu").Where(d => d.Active == true && d.ItemType.MenuID == id).OrderByDescending(d => d.DateImport).ToList();
 			ViewBag.TitleList = data.Menus.Where(m => m.ID == id).Select(m => m.Name).FirstOrDefault() ?? "Laptop";
 			return View("ProductbyType", pr);
 		}
@@ -138,8 +162,21 @@ namespace ProTechTiveGear.Controllers
 		}
 		public ActionResult Relatedproducts(long id)
 		{
-			var i = (from t in data.Items where t.BrandID == id && t.Active==true select t).Take(5).ToList();
-
+			var cur = data.Items.Include("ItemType.Menu").FirstOrDefault(t => t.ID == id);
+			var all = data.Items.Include("ItemType.Menu").Where(t => t.Active == true && t.ID != id).ToList();
+			List<Item> i;
+			if (cur != null && cur.ItemType != null && cur.ItemType.Menu != null)
+			{
+				i = all.Where(x => FeaturedSetting.IsOfBrand(x, cur.ItemType.Menu)).Take(8).ToList();
+			}
+			else if (cur != null && cur.TypeID != null)
+			{
+				i = all.Where(x => x.TypeID == cur.TypeID).Take(8).ToList();
+			}
+			else
+			{
+				i = all.Take(8).ToList();
+			}
 			return PartialView(i);
 		}
 		public ActionResult Newdproducts()
@@ -377,6 +414,186 @@ namespace ProTechTiveGear.Controllers
 			return View(t.ToList());
 
 
+		}
+
+		public ActionResult FeaturedBrand()
+		{
+			var menu = FeaturedSetting.Resolve(data, Server);
+			if (menu == null)
+			{
+				ViewBag.BrandName = "Laptop";
+				ViewBag.BrandId = 0;
+				ViewBag.Theme = "#0b5cab";
+				ViewBag.Hero = "";
+				return PartialView(new List<Item>());
+			}
+			var brand = menu.Name ?? "";
+			var items = data.Items.Include("ItemType.Menu").Include("Brand")
+				.Where(x => x.Active == true)
+				.ToList()
+				.Where(x => FeaturedSetting.IsOfBrand(x, menu))
+				.OrderByDescending(x => x.DateImport)
+				.Take(4)
+				.ToList();
+			ViewBag.BrandName = menu.Name;
+			ViewBag.BrandId = menu.ID;
+			ViewBag.Theme = FeaturedSetting.ColorOf(menu.Name);
+			ViewBag.Hero = items.Count > 0 ? (items[0].Picture ?? "").Split('|')[0] : "";
+			return PartialView(items);
+		}
+	}
+
+	public static class FeaturedSetting
+	{
+		public static string FilePath(HttpServerUtilityBase server)
+		{
+			var dir = server.MapPath("~/App_Data");
+			if (!System.IO.Directory.Exists(dir))
+				System.IO.Directory.CreateDirectory(dir);
+			return System.IO.Path.Combine(dir, "featured.txt");
+		}
+
+		public static void Save(HttpServerUtilityBase server, bool auto, long? menuId)
+		{
+			var line = auto ? "AUTO" : ("ID:" + (menuId ?? 0));
+			System.IO.File.WriteAllText(FilePath(server), line);
+		}
+
+		public static bool IsAuto(HttpServerUtilityBase server)
+		{
+			var p = FilePath(server);
+			if (!System.IO.File.Exists(p)) return true;
+			var t = System.IO.File.ReadAllText(p).Trim();
+			return string.IsNullOrEmpty(t) || t.StartsWith("AUTO", StringComparison.OrdinalIgnoreCase);
+		}
+
+		public static long? SavedId(HttpServerUtilityBase server)
+		{
+			var p = FilePath(server);
+			if (!System.IO.File.Exists(p)) return null;
+			var t = System.IO.File.ReadAllText(p).Trim();
+			if (t.StartsWith("ID:", StringComparison.OrdinalIgnoreCase))
+			{
+				long id;
+				if (long.TryParse(t.Substring(3), out id)) return id;
+			}
+			return null;
+		}
+
+		public static Menu Resolve(ProTechTiveGearEntities db, HttpServerUtilityBase server)
+		{
+			var menus = db.Menus.ToList()
+				.Where(m => m.Name != null && !(m.Name.StartsWith("Ph") && m.Name != "HP"))
+				.OrderBy(m => m.Name)
+				.ToList();
+			if (menus.Count == 0) return db.Menus.FirstOrDefault();
+			if (!IsAuto(server))
+			{
+				var id = SavedId(server);
+				var pick = menus.FirstOrDefault(x => x.ID == id);
+				if (pick != null) return pick;
+			}
+			var items = db.Items.Include("ItemType").Include("Brand").Where(x => x.Active == true).ToList();
+			var withProducts = menus.Where(m => items.Any(i => IsOfBrand(i, m))).ToList();
+			if (withProducts.Count == 0) return menus[DateTime.Now.DayOfYear % menus.Count];
+			return withProducts[DateTime.Now.DayOfYear % withProducts.Count];
+		}
+
+		public static bool IsOfBrand(Item x, Menu menu)
+		{
+			if (x == null || menu == null || string.IsNullOrEmpty(menu.Name)) return false;
+			string want = DetectBrand(menu.Name);
+			string blob = (x.Name ?? "") + " " + (x.ShortTitle ?? "");
+			if (x.ItemType != null) blob += " " + (x.ItemType.TypeName ?? "");
+			string fromText = DetectBrand(blob);
+			if (fromText != null)
+			{
+				return want != null && fromText == want;
+			}
+			if (x.Brand != null && !string.IsNullOrEmpty(x.Brand.Name))
+			{
+				string fromBrand = DetectBrand(x.Brand.Name);
+				if (fromBrand != null) return want != null && fromBrand == want;
+			}
+			if (x.ItemType != null && x.ItemType.Menu != null && !string.IsNullOrEmpty(x.ItemType.Menu.Name))
+			{
+				string fromMenu = DetectBrand(x.ItemType.Menu.Name);
+				if (fromMenu != null) return want != null && fromMenu == want;
+			}
+			return want != null && x.ItemType != null && x.ItemType.MenuID == menu.ID;
+		}
+
+		static string DetectBrand(string text)
+		{
+			if (string.IsNullOrEmpty(text)) return null;
+			string u = text.ToUpperInvariant();
+			if (HasToken(u, "LENOVO") || HasToken(u, "THINKPAD") || HasToken(u, "IDEAPAD") || HasToken(u, "LEGION") || HasToken(u, "YOGA"))
+			{
+				return "LENOVO";
+			}
+			if (HasToken(u, "ASUS") || HasToken(u, "ROG") || u.IndexOf("TUF GAMING", StringComparison.Ordinal) >= 0 || HasToken(u, "VIVOBOOK") || HasToken(u, "ZENBOOK"))
+			{
+				return "ASUS";
+			}
+			if (HasToken(u, "DELL") || HasToken(u, "LATITUDE") || HasToken(u, "INSPIRON") || HasToken(u, "XPS") || HasToken(u, "VOSTRO") || HasToken(u, "ALIENWARE"))
+			{
+				return "DELL";
+			}
+			if (HasToken(u, "APPLE") || HasToken(u, "MACBOOK") || u.IndexOf("MAC BOOK", StringComparison.Ordinal) >= 0)
+			{
+				return "APPLE";
+			}
+			if (HasToken(u, "ACER") || HasToken(u, "PREDATOR") || HasToken(u, "SWIFT") || HasToken(u, "ASPIRE"))
+			{
+				return "ACER";
+			}
+			if (HasToken(u, "MSI"))
+			{
+				return "MSI";
+			}
+			if (HasToken(u, "GIGABYTE") || HasToken(u, "AORUS"))
+			{
+				return "GIGABYTE";
+			}
+			if (HasToken(u, "LG") || HasToken(u, "GRAM"))
+			{
+				return "LG";
+			}
+			if (HasToken(u, "HP") || HasToken(u, "OMNIBOOK") || HasToken(u, "PROBOOK") || HasToken(u, "ELITEBOOK") || HasToken(u, "VICTUS") || HasToken(u, "PAVILION") || HasToken(u, "ENVY"))
+			{
+				return "HP";
+			}
+			return null;
+		}
+
+		static bool HasToken(string hay, string token)
+		{
+			int i = hay.IndexOf(token, StringComparison.Ordinal);
+			while (i >= 0)
+			{
+				bool leftOk = i == 0 || !char.IsLetterOrDigit(hay[i - 1]);
+				int end = i + token.Length;
+				bool rightOk = end >= hay.Length || !char.IsLetterOrDigit(hay[end]);
+				if (leftOk && rightOk) return true;
+				i = hay.IndexOf(token, i + 1, StringComparison.Ordinal);
+			}
+			return false;
+		}
+
+		public static string ColorOf(string name)
+		{
+			if (string.IsNullOrEmpty(name)) return "#0b5cab";
+			var n = name.ToUpperInvariant();
+			if (n.Contains("ASUS")) return "#0b5cab";
+			if (n.Contains("DELL")) return "#0076ce";
+			if (n.Contains("LENOVO")) return "#e2231a";
+			if (n.Contains("HP")) return "#0096d6";
+			if (n.Contains("ACER")) return "#83b81a";
+			if (n.Contains("MSI")) return "#d32f2f";
+			if (n.Contains("APPLE") || n.Contains("MAC")) return "#555555";
+			if (n.Contains("LG")) return "#a50034";
+			if (n.Contains("GIGABYTE")) return "#ee6b00";
+			return "#0b5cab";
 		}
 	}
 }

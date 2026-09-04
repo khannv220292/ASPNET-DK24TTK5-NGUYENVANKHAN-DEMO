@@ -1,83 +1,28 @@
-﻿@{
-	ViewBag.Title = ViewBag.TitleList ?? "Laptop HP";
+﻿@using System.Linq
+@{
+	ViewBag.Title = ViewBag.TitleList ?? "Laptop";
 	ViewBag.HideBanner = true;
 	Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
 }
 @model IEnumerable<ProTechTiveGear.Models.Item>
-<style>
-	.pv-wrap { background: #f5f6f8; padding: 36px 0 48px; min-height: 70vh; }
-	.pv-head { background: #fff; border-radius: 8px; padding: 18px 22px; margin-bottom: 24px; }
-	.pv-title { font-size: 22px; font-weight: 700; margin: 0 0 6px; color: #1a1a1a; }
-	.pv-sub { color: #666; margin-bottom: 0; }
-	.pv-row { display: flex; flex-wrap: wrap; margin-left: -10px; margin-right: -10px; }
-	.pv-row > [class*="col-"] { padding-left: 10px; padding-right: 10px; margin-bottom: 22px; }
-	.pv-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 8px; padding: 12px 12px 16px; height: 100%; margin-bottom: 0; }
-	.pv-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
-	.pv-img { height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; overflow: hidden; position: relative; z-index: 1; }
-	.pv-img img { max-height: 170px; max-width: 100%; object-fit: contain; display: block; }
-	.pv-brand { color: #0b74e5; font-size: 13px; font-weight: 700; margin: 0; }
-	.pv-name { font-size: 14px; font-weight: 600; color: #222; min-height: 42px; margin: 4px 0 8px; line-height: 1.35; }
-	.pv-name a { color: #222; }
-	.pv-price { color: #0b74e5; font-size: 20px; font-weight: 800; margin: 0; }
-	.pv-old { color: #999; text-decoration: line-through; font-size: 13px; margin-left: 6px; }
-	.pv-save { display: inline-block; background: #fff0f0; color: #e53935; font-size: 12px; padding: 2px 8px; border-radius: 4px; margin: 6px 0; }
-	.pv-spec { background: #f4f5f7; border-radius: 6px; padding: 8px 10px; font-size: 12px; color: #444; margin: 8px 0 12px; min-height: 88px; }
-	.pv-spec div { margin: 2px 0; }
-	.pv-btn { display: block; text-align: center; border: 1px solid #0b74e5; color: #0b74e5; border-radius: 6px; padding: 8px; font-weight: 600; }
-	.pv-btn:hover { background: #0b74e5; color: #fff; text-decoration: none; }
-</style>
-<section class="pv-wrap">
+@Html.Partial("~/Views/Shared/_LaptopCardCss.cshtml")
+<section class="feat-wrap" style="background:#f5f6f8;padding:36px 0 48px;min-height:70vh">
 	<div class="container">
-		<div class="pv-head">
-			<h2 class="pv-title">@(ViewBag.TitleList ?? "Laptop HP")</h2>
-			<p class="pv-sub">Laptop HP chính hãng — tham khảo phongvu.vn/c/laptop-hp</p>
+		<div style="background:#fff;border-radius:8px;padding:18px 22px;margin-bottom:24px">
+			<h2 style="font-size:22px;font-weight:700;margin:0 0 6px">@(ViewBag.TitleList ?? "Laptop")</h2>
+			<p style="color:#666;margin:0">Laptop chinh hang VAT day du</p>
 		</div>
-		<div class="row pv-row">
+		<div class="row">
 			@foreach (var item in Model)
 			{
-				var oldPrice = item.SellPrice + 2000000;
-				var save = oldPrice - item.SellPrice;
-				var specs = (item.ShortTitle ?? "").Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="pv-card">
-						<a href="@Url.Action("Detail","AuraStore", new { id = item.ID })">
-							<div class="pv-img">
-								<img src="~/img/Item/@item.Picture" alt="@item.Name" />
-							</div>
-						</a>
-						<p class="pv-brand">HP</p>
-						<p class="pv-name">
-							<a href="@Url.Action("Detail","AuraStore", new { id = item.ID })">@item.Name</a>
-						</p>
-						@if (save > 0)
-						{
-							<span class="pv-save">TIẾT KIỆM @string.Format("{0:N0}", save) đ</span>
-						}
-						<p>
-							<span class="pv-price">@string.Format("{0:N0}", item.SellPrice) ₫</span>
-							<span class="pv-old">@string.Format("{0:N0}", oldPrice) ₫</span>
-						</p>
-						<div class="pv-spec">
-							@if (specs.Length > 0)
-							{
-								foreach (var s in specs.Take(6))
-								{
-									<div>• @s.Trim()</div>
-								}
-							}
-							else
-							{
-								<div>RAM / SSD / màn hình — xem chi tiết</div>
-							}
-						</div>
-						<a class="pv-btn" href="@Url.Action("AddtoCart","Cart", new { id = item.ID, strURL = Request.Url.ToString() })">Thêm vào giỏ</a>
-					</div>
+				<div class="col-lg-3 col-md-4 col-sm-6" style="margin-bottom:16px">
+					@Html.Partial("~/Views/Shared/_LaptopCard.cshtml", item)
 				</div>
 			}
 		</div>
 		@if (!Model.Any())
 		{
-			<p>Chưa có sản phẩm trong nhóm này.</p>
+			<p>Chua co san pham trong nhom nay.</p>
 		}
 	</div>
 </section>

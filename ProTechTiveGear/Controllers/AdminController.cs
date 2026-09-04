@@ -129,26 +129,20 @@ namespace ProTechTiveGear.Controllers
 		//order
 		public ActionResult ListOrder()
 		{
-			var temp = db.Orders.Where(o => o.Status == false).ToList();
-			List<OrderEntity> lisorder = new List<OrderEntity>();
-			foreach (var item in temp)
-			{
-				OrderEntity or = new OrderEntity();
-				or.TypeOf_OrderEntity(item);
-				lisorder.Add(or);
-
-
-			}
-
-
-			return View(lisorder);
+			return RedirectToAction("AllListOrder", new { tab = "pending" });
 		}
 
 		// xacs nhan
 
 		public ActionResult Comfirm(long ? id)
 		{
-			var temp = db.OrderDetails.Where(d => d.OrderID == id);
+			var order = db.Orders.Include("Customer").SingleOrDefault(a => a.ID == id);
+			if (order == null)
+			{
+				return HttpNotFound();
+			}
+
+			var temp = db.OrderDetails.Include("Item").Where(d => d.OrderID == id).ToList();
 			List<OrderDetailEntity> listdetail = new List<OrderDetailEntity>();
 			foreach (var item in temp)
 			{
@@ -156,8 +150,9 @@ namespace ProTechTiveGear.Controllers
 				or.TypeOf_OrderEntity(item);
 				listdetail.Add(or);
 			}
-			ViewBag.Date = db.Orders.SingleOrDefault(a => a.ID == id).Deliverydate;
+			ViewBag.Date = order.Deliverydate;
 			ViewBag.id = id;
+			ViewBag.Order = order;
 			return View(listdetail);
 
 		}
@@ -172,6 +167,7 @@ namespace ProTechTiveGear.Controllers
 
 			tem.Status = true;
 			tem.Deliverydate = date;
+			tem.Deliverystatus = true;
 			db.SaveChanges();
 
             if (!tem.Payments.Any())
@@ -183,24 +179,51 @@ namespace ProTechTiveGear.Controllers
 				db.SaveChanges();
 			}
 		
-			return RedirectToAction("ListOrder");
+			return RedirectToAction("AllListOrder");
 
 		}
 		//-------------------------------------------
-		public ActionResult AllListOrder()
+		public ActionResult AllListOrder(string tab = "all", string q = null)
 		{
-			var temp = db.Orders.ToList();
+			var temp = db.Orders
+				.Include("Customer")
+				.Include("OrderDetails")
+				.Include("Payments")
+				.OrderByDescending(o => o.Orderdate)
+				.ToList();
+
+			if (string.Equals(tab, "unpaid", StringComparison.OrdinalIgnoreCase))
+			{
+				temp = temp.Where(o => o.Payments == null || !o.Payments.Any()).ToList();
+			}
+			else if (string.Equals(tab, "pending", StringComparison.OrdinalIgnoreCase))
+			{
+				temp = temp.Where(o => o.Status != true).ToList();
+			}
+
+			if (!string.IsNullOrWhiteSpace(q))
+			{
+				string key = q.Trim().ToLowerInvariant();
+				temp = temp.Where(o =>
+					("g" + o.ID).Contains(key)
+					|| (o.Customer != null && (
+						(o.Customer.Name ?? "").ToLowerInvariant().Contains(key)
+						|| (o.Customer.Phone ?? "").ToLowerInvariant().Contains(key)
+						|| (o.Customer.EmailAddress ?? "").ToLowerInvariant().Contains(key)
+					))
+				).ToList();
+			}
+
 			List<OrderEntity> lisorder = new List<OrderEntity>();
 			foreach (var item in temp)
 			{
 				OrderEntity or = new OrderEntity();
 				or.TypeOf_OrderEntity(item);
 				lisorder.Add(or);
-
-
 			}
 
-
+			ViewBag.Tab = tab ?? "all";
+			ViewBag.Query = q ?? "";
 			return View(lisorder);
 		}
 
@@ -208,7 +231,13 @@ namespace ProTechTiveGear.Controllers
 
 		public ActionResult OrderDetail(long? id)
 		{
-			var temp = db.OrderDetails.Where(d => d.OrderID == id);
+			var order = db.Orders.Include("Customer").Include("Payments").SingleOrDefault(a => a.ID == id);
+			if (order == null)
+			{
+				return HttpNotFound();
+			}
+
+			var temp = db.OrderDetails.Include("Item").Where(d => d.OrderID == id).ToList();
 			List<OrderDetailEntity> listdetail = new List<OrderDetailEntity>();
 			foreach (var item in temp)
 			{
@@ -216,9 +245,36 @@ namespace ProTechTiveGear.Controllers
 				or.TypeOf_OrderEntity(item);
 				listdetail.Add(or);
 			}
-			
+
+			ViewBag.id = id;
+			ViewBag.Order = order;
+			ViewBag.Paid = order.Payments != null && order.Payments.Any();
 			return View(listdetail);
 
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult ConfirmPayment(long id)
+		{
+			var order = db.Orders.Include("Payments").SingleOrDefault(d => d.ID == id);
+			if (order == null)
+			{
+				return HttpNotFound();
+			}
+
+			if (order.Payments == null || !order.Payments.Any())
+			{
+				db.Payments.Add(new Payment
+				{
+					OrderID = order.ID,
+					Payprices = order.Totalprice
+				});
+				db.SaveChanges();
+			}
+
+			TempData["Ok"] = "Đã xác nhận thanh toán (COD = Đã thanh toán).";
+			return RedirectToAction("AllListOrder");
 		}
 		
 		public ActionResult Productnotsold()
@@ -235,6 +291,25 @@ namespace ProTechTiveGear.Controllers
 								  select t2.ID).Contains(t1.ID)
 						  select t1;
 			return View(results.ToList());
+		}
+
+		public ActionResult FeaturedBrand()
+		{
+			ViewBag.Auto = FeaturedSetting.IsAuto(Server);
+			ViewBag.MenuId = FeaturedSetting.SavedId(Server);
+			ViewBag.Menus = new SelectList(
+				db.Menus.ToList().Where(m => m.Name != null && !(m.Name.StartsWith("Ph") && m.Name != "HP")).OrderBy(m => m.Name),
+				"ID", "Name", ViewBag.MenuId);
+			return View();
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult FeaturedBrand(string mode, long? menuId)
+		{
+			FeaturedSetting.Save(Server, mode == "auto", menuId);
+			TempData["Ok"] = "Da luu hang noi bat.";
+			return RedirectToAction("FeaturedBrand");
 		}
 	}
 }

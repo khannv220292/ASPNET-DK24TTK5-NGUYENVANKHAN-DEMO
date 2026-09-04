@@ -25,10 +25,9 @@ namespace ProTechTiveGear.Controllers
 				if (!Directory.Exists(folder))
 					Directory.CreateDirectory(folder);
 
-				var fileName = Path.GetFileName(file.FileName);
-				if (string.IsNullOrEmpty(fileName))
-					return "";
-
+				var ext = Path.GetExtension(file.FileName);
+				if (string.IsNullOrEmpty(ext)) ext = ".jpg";
+				var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_" + Guid.NewGuid().ToString("N").Substring(0, 6) + ext;
 				var path = Path.Combine(folder, fileName);
 				file.SaveAs(path);
 				return fileName;

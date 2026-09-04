@@ -1,4 +1,7 @@
 ﻿
+@using System.Linq
+@using System.Web
+@using ProTechTiveGear.Models
 @{
 	ViewBag.Title = "Index";
 	Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
@@ -6,135 +9,69 @@
 
 @model IEnumerable<ProTechTiveGear.Models.Item>
 
+<style>
+	.sp-grid { display: flex; flex-wrap: wrap; margin: 0 -10px; }
+	.sp-grid > [class*="col-"] { padding: 0 10px; margin-bottom: 22px; display: flex; }
+	.sp-card {
+		background: #fff; border: 1px solid #eee; border-radius: 10px;
+		box-shadow: 0 2px 10px rgba(0,0,0,.06); padding: 12px 14px 14px;
+		width: 100%; display: flex; flex-direction: column; text-align: left;
+	}
+	.sp-img { position: relative; height: 170px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; overflow: hidden; background: #fafafa; border-radius: 8px; }
+	.sp-img img { max-height: 160px; max-width: 100%; object-fit: contain; }
+	.sp-off { position: absolute; top: 8px; right: 8px; width: 42px; height: 42px; border-radius: 50%; background: #e31c23; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+	.sp-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 6px; }
+	.sp-stars { color: #d0d0d0; letter-spacing: 1px; }
+	.sp-sku { color: #c0392b; font-weight: 600; }
+	.sp-name { font-size: 14px; font-weight: 700; color: #222; line-height: 1.35; height: 38px; overflow: hidden; margin: 0 0 10px; text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+	.sp-name:hover { color: #c0392b; text-decoration: none; }
+	.sp-now { color: #e31c23; font-size: 20px; font-weight: 800; line-height: 1.2; margin: 0; }
+	.sp-was { color: #9aa0a6; font-size: 13px; text-decoration: line-through; margin: 4px 0 12px; display: block; }
+	.sp-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; }
+	.sp-stock { color: #1aaa55; font-size: 13px; font-weight: 600; }
+	.sp-stock.out { color: #c0392b; }
+	.sp-bag { width: 36px; height: 36px; border-radius: 50%; background: #f0f0f0; display: inline-flex; align-items: center; justify-content: center; color: #333; text-decoration: none; }
+	.sp-bag:hover { background: #e31c23; color: #fff; text-decoration: none; }
+</style>
+@Html.Partial("~/Views/Shared/_LaptopCardCss.cshtml")
 
-
-
-
+<section class="welcome_bakery_area cake_feature_main" style="padding-top:0">
+	@Html.Action("FeaturedBrand", "AuraStore")
+</section>
 <section class="welcome_bakery_area cake_feature_main p_100">
 	<div class="container">
-		<div class="main_title">
-			<h2>Laptop nổi bật</h2>
-			<p>Laptop xách tay Lenovo, Dell, HP – giá tốt như laptopusa.com.vn</p>
-
+		@{
+			string hangSel = Request["hang"] ?? (ViewBag.Hang as string) ?? "";
+			string sxSel = Request["sapxep"] ?? (ViewBag.SapXep as string) ?? "gia-asc";
+			string sapXepTheo = "S\u1eafp x\u1ebfp theo";
+			string extra = "";
+			if (!string.IsNullOrEmpty(Request.QueryString["search"]))
+			{
+				extra += "&search=" + HttpUtility.UrlEncode(Request.QueryString["search"]);
+			}
+			if (!string.IsNullOrEmpty(hangSel))
+			{
+				extra += "&hang=" + HttpUtility.UrlEncode(hangSel);
+			}
+			string idx = Url.Action("Index", "AuraStore");
+			string hash = "#danh-sach";
+		}
+		<div class="sort-bar" id="danh-sach">
+			<span class="lbl">@sapXepTheo</span>
+			<a class="sort-btn @(sxSel == "km" ? "on" : "")" href="@(idx + "?sapxep=km" + extra + hash)">@("Khuy\u1ebfn m\u00e3i t\u1ed1t nh\u1ea5t")</a>
+			<a class="sort-btn @(sxSel == "gia-asc" || string.IsNullOrEmpty(sxSel) ? "on" : "")" href="@(idx + "?sapxep=gia-asc" + extra + hash)"><i class="fa fa-line-chart"></i> @("Gi\u00e1 t\u0103ng d\u1ea7n")</a>
+			<a class="sort-btn @(sxSel == "gia-desc" ? "on" : "")" href="@(idx + "?sapxep=gia-desc" + extra + hash)"><i class="fa fa-area-chart"></i> @("Gi\u00e1 gi\u1ea3m d\u1ea7n")</a>
+			<a class="sort-btn @(sxSel == "moi" ? "on" : "")" href="@(idx + "?sapxep=moi" + extra + hash)">@("S\u1ea3n ph\u1ea9m m\u1edbi nh\u1ea5t") <span class="sort-new">NEW</span></a>
+			<a class="sort-btn @(sxSel == "ban-chay" ? "on" : "")" href="@(idx + "?sapxep=ban-chay" + extra + hash)"><i class="fa fa-fire sort-hot"></i> @("S\u1ea3n ph\u1ea9m b\u00e1n ch\u1ea1y nh\u1ea5t")</a>
 		</div>
-		@*@using (Html.BeginForm("Index", "AuraStore", FormMethod.Get))
-		{
-
-			<b>
-				@Html.TextBox("search")
-				<input type="submit" value="Search" />
-			</b>
-		}*@
-	
-		<div class="cake_feature_row row">
+		<div class="row">
 			@foreach (var item in Model)
 			{
-			
-				<div class="col-lg-3 col-md-4 col-6">
-
-					<div class="cake_feature_item">
-						<a href="@Url.Action("Detail","AuraStore",new { id=item.ID})">
-							<div class="cake_img">
-
-								<img class="resize-image" src="~/img/Item/@item.Picture" alt="@item.Name">
-
-							</div>
-						</a>
-						<div class="cake_text" style="background-color: aquamarine">
-							<h4>@item.SellPrice</h4>
-							<h3>@item.Name</h3>
-							@if (item.Quantity == 0)
-							{
-								<p style="color:red">Out of Stock</p>
-							}
-							@if (item.Quantity == 0) {<a class="pest_btn disabled" >Thêm vào giỏ</a> }
-							else { <a class="pest_btn" href="@Url.Action("AddtoCart","Cart",new {@id=item.ID,@strURL=Request.Url.ToString() })" style="background-color:brown">Thêm vào giỏ</a>}
-
-
-							
-						</div>
-					</div>
-
+				<div class="col-lg-3 col-md-4 col-6" style="margin-bottom:16px">
+					@Html.Partial("~/Views/Shared/_LaptopCard.cshtml", item)
 				</div>
-
 			}
-
-		</div>
-
-	</div>
-</section>
-<section class="new_arivals_area p_100" style="background-color:#f6f6f6">
-	<div class="container">
-		<div class="single_pest_title">
-			<h2>Laptop mới về</h2>
-		</div>
-
-		
-		<div class="row arivals_inner">
-			<div class="col-lg-6 col-sm-7">
-				<div class="arivals_chocolate">
-					<div class="arivals_pic">
-						<img class="img-fluid resize-new" src="~/img/Item/resizer.png" alt="Laptop ThinkPad">
-						<div class="price_text">
-							<h5>12.990.000</h5>
-						</div>
-					</div>
-				
-					<div class="arivals_text">
-                        <h4>ThinkPad T14 <span></span>Gen 2</h4>
-                        <a href="@Url.Action("Index","AuraStore")">i5 / 16GB / 512GB</a>
-					</div>
-				</div>
-			</div>
-			@Html.Action("Newdproducts", "AuraStore")
 		</div>
 	</div>
 </section>
-
-<!--================End New Arivals Area =================-->
-<!--================Latest News Area =================-->
-@*<section class="latest_news_area gray_bg p_100">
-	<div class="container">
-		<div class="main_title">
-			<h2>Latest Blog</h2>
-			<h5>an turn into your instructor your helper, your </h5>
-		</div>
-		<div class="row latest_news_inner">
-			<div class="col-lg-4 col-md-6">
-				<div class="l_news_image">
-					<div class="l_news_img">
-						<img class="img-fluid resize-imageblog" src="img/BannerImage/Suilt.jpg" alt="">
-					</div>
-					<div class="l_news_hover">
-						<a href="#"><h5>Oct 15, 2016</h5></a>
-						<a href="#"><h4>Nanotechnology immersion along the information</h4></a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-				<div class="l_news_item">
-					<div class="l_news_img">
-						<img class="img-fluid resize-imageblogdetail" src="img/BannerImage/Suilt.jpg" alt="">
-					</div>
-					<div class="l_news_text">
-						<a href="#"><h5>Oct 15, 2016</h5></a>
-						<a href="#"><h4>Nanotechnology immersion along the information</h4></a>
-						<p>Lorem ipsum dolor sit amet, cons ectetur elit. Vestibulum nec odios Suspe ndisse cursus mal suada faci lisis. Lorem ipsum dolor sit ametion ....</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-				<div class="l_news_item">
-					<div class="l_news_img">
-						<img class="img-fluid" src="img/blog/latest-news/l-news-3.jpg" alt="">
-					</div>
-					<div class="l_news_text">
-						<a href="#"><h5>Oct 15, 2016</h5></a>
-						<a href="#"><h4>Nanotechnology immersion along the information</h4></a>
-						<p>Lorem ipsum dolor sit amet, cons ectetur elit. Vestibulum nec odios Suspe ndisse cursus mal suada faci lisis. Lorem ipsum dolor sit ametion ....</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>*@
+@Html.Action("Newdproducts", "AuraStore")

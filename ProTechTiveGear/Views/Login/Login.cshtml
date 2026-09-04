@@ -37,14 +37,12 @@
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 						<span style="color:red">@Html.ValidationSummary(true)</span>
 					</div>
+					<input type="hidden" name="returnUrl" value="@(ViewBag.ReturnUrl as string)" />
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Đăng Nhập
 						</button>
 					</div>
-					<p style="text-align:center;margin-top:18px">
-						<a href="@Url.Action("Login","Admin")" style="color:#fff;text-decoration:underline">Đăng nhập Admin</a>
-					</p>
 				</form>
 			</div>
 
