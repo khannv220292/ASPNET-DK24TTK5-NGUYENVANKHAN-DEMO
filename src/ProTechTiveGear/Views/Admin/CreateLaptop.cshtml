@@ -1,0 +1,21 @@
+@model ProTechTiveGear.Models.Item
+@{
+	ViewBag.Title = "Thêm laptop";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h3>Thêm laptop</h3>
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="form-group">@Html.Label("Tên") @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })</div>
+	<div class="form-group">@Html.Label("Giá mua") @Html.EditorFor(m => m.PurcharsePrice, new { htmlAttributes = new { @class = "form-control" } })</div>
+	<div class="form-group">@Html.Label("Giá bán") @Html.EditorFor(m => m.SellPrice, new { htmlAttributes = new { @class = "form-control" } })</div>
+	<div class="form-group">@Html.Label("Số lượng") @Html.EditorFor(m => m.Quantity, new { htmlAttributes = new { @class = "form-control" } })</div>
+	<div class="form-group">@Html.Label("Loại") @Html.DropDownList("TypeID", null, new { @class = "form-control" })</div>
+	<div class="form-group">@Html.Label("Tình trạng") @Html.DropDownList("BrandID", null, new { @class = "form-control" })</div>
+	<div class="form-group">@Html.Label("Ảnh") @Html.EditorFor(m => m.Picture, new { htmlAttributes = new { @class = "form-control" } })</div>
+	<div class="form-group">@Html.Label("Mô tả") @Html.EditorFor(m => m.ShortTitle, new { htmlAttributes = new { @class = "form-control" } })</div>
+	<button type="submit" class="btn btn-success">Lưu</button>
+	@Html.ActionLink("Quay lại", "Laptop")
+}

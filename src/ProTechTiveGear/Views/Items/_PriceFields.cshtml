@@ -1,0 +1,39 @@
+@model ProTechTiveGear.Models.Item
+@{
+	var buy = Model != null && Model.PurcharsePrice.HasValue ? Model.PurcharsePrice.Value : 0m;
+	var sell = Model != null ? Model.SellPrice : 0m;
+	Func<decimal, string> FormatVnd = n =>
+	{
+		if (n <= 0) return "";
+		return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#,##0}", n).Replace(",", ".") + "đ";
+	};
+}
+<div class="form-group">
+	<h5 class="control-label col-md-2">Giá mua</h5>
+	<div class="col-md-10">
+		<input type="text" id="PurcharsePriceDisplay" class="form-control money-vnd" inputmode="numeric" autocomplete="off"
+			   placeholder="15.000.000đ" value="@FormatVnd(buy)" />
+		<input type="hidden" name="PurcharsePrice" id="PurcharsePrice" value="@(buy > 0 ? ((long)Math.Round(buy)).ToString(System.Globalization.CultureInfo.InvariantCulture) : "")" />
+		@Html.ValidationMessageFor(m => m.PurcharsePrice, "", new { @class = "text-danger" })
+		<small class="text-muted">Giá gốc / niêm yết trước giảm (vd: 15.000.000đ). Phải lớn hơn giá bán.</small>
+	</div>
+</div>
+
+<div class="form-group">
+	<h5 class="control-label col-md-2">Giá bán</h5>
+	<div class="col-md-10">
+		<input type="text" id="SellPriceDisplay" class="form-control money-vnd" inputmode="numeric" autocomplete="off"
+			   placeholder="13.000.000đ" value="@FormatVnd(sell)" />
+		<input type="hidden" name="SellPrice" id="SellPrice" value="@(sell > 0 ? ((long)Math.Round(sell)).ToString(System.Globalization.CultureInfo.InvariantCulture) : "")" />
+		@Html.ValidationMessageFor(m => m.SellPrice, "", new { @class = "text-danger" })
+	</div>
+</div>
+
+<div class="form-group">
+	<h5 class="control-label col-md-2">% giảm</h5>
+	<div class="col-md-10">
+		<input type="text" id="DiscountPercent" class="form-control" readonly="readonly"
+			   style="max-width:200px;font-weight:700;color:#e65100;background:#fff8e1" />
+		<small class="text-muted">Tự tính: (Giá mua − Giá bán) / Giá mua × 100</small>
+	</div>
+</div>

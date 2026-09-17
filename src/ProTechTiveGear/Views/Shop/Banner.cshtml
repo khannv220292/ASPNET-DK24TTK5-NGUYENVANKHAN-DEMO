@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ProTechTiveGear.Models.Banner>
+@using System.Collections.Generic
+@using System.IO
+@{
+	var slides = new List<string>();
+	var folder = Server.MapPath("~/img/Item");
+	var fallbacks = new[] { "shopping.webp", "Latitude 7420.jpg", "Victus 15 RTX4050.jpg", "XPS 15 7590.jpg" };
+
+	if (Model != null)
+	{
+		foreach (var item in Model)
+		{
+			var name = Pic.MainName(item.Picture);
+			if (string.IsNullOrEmpty(name)) { continue; }
+			var path = Path.Combine(folder, name);
+			if (File.Exists(path) && !slides.Contains(name))
+			{
+				slides.Add(name);
+			}
+		}
+	}
+
+	if (slides.Count == 0)
+	{
+		foreach (var f in fallbacks)
+		{
+			if (File.Exists(Path.Combine(folder, f)))
+			{
+				slides.Add(f);
+			}
+		}
+	}
+
+	// Owl loop cần ≥ 2 slide; tránh nhân đôi ảnh thời trang/sai
+	if (slides.Count == 1)
+	{
+		foreach (var f in fallbacks)
+		{
+			if (!slides.Contains(f) && File.Exists(Path.Combine(folder, f)))
+			{
+				slides.Add(f);
+				break;
+			}
+		}
+	}
+}
+@for (var i = 0; i < slides.Count; i++)
+{
+	<div class="item hb-slide">
+		<img src="@Url.Content("~/img/Item/" + slides[i])" alt="Banner @(i + 1)" loading="eager" />
+	</div>
+}

@@ -1,0 +1,270 @@
+--- PAGE 1 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+1Làm vệc với ADO và các 
+đối tượng
+Bộ môn Công nghệ thông tin
+Khoa Kỹ thuật và Công nghệ
+Trường Đại học Trà Vinh
+
+--- PAGE 2 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+2Nội dung
+Hiểu về CSDL
+Cấu hình CSDL
+Data Provider Model
+Truy xuật CSDL trực tiếp
+Tạo kết nối (Connection)
+Sử dụng Command 
+Tham số (parameter) của Command
+Sử dụng DataAdapter
+Sử dụng DataSet
+
+--- PAGE 3 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+3Hiểu về CSDL
+Hầu như tất cả các ứng dụng web đều phải có một 
+CSDL để lưu trữ thông tin.
+Ví dụ:
+Web thương mại điện tử ( Amazon), sử dụng CSDL để lưu 
+các thông tin về sản phẩm, đơn đặt hàng …
+Máy tìm kiếm (Google) dùng CSDL để lưu trữ các chỉ số 
+đương dẫn web, links, hay từ khóa.
+Kiến thức (microsoft support) lưu trữ lượng lớn thông tin, 
+kiến thức nguồn
+Web đa phương tiện ( nhacso.net) để lưu trữ các bài nhạc, 
+album..
+
+--- PAGE 4 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+4Data Provider Model
+Được chia ra làm 2 nhóm chính: 
+Nhóm 1: dùng như nơi chứa và quản lý dữ liệu, DataSet, 
+DataTable, DataRow, và DataRelation
+Nhóm 2: là những lớp tương tác, đóng vai trò như cầu nối, 
+Connection, Command, DataReader.
+Các lớp hỗ trợ làm việc với Data
+System.Data.SqlClient : chứa các lớp dùng để kết nối với 
+SQL Server và thực thi các lệnh (sqlConnection hay 
+SqlCommand)
+System.Data.SqlTypes : chứa cấu trúc kiểu của SQL Server
+System.Data : Chứa các lớp cơ bản với chức năng chính là 
+ADO.NET. Chúng bao gồm DataSet và DataRelation, cho ta 
+thực thi DL quan hệ cấu trúc.
+
+--- PAGE 5 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+5Làm việc với dữ liệ u
+Đọc dữ liệ u từ database lên một DataSet
+1.Khai báo kết nối (Connection)
+2.Khai báo câu truy vấn
+3.Khai báo SqlDataAdapter từ câu truy vấn và kế t 
+nối
+4.Khai báo DataSet
+5.Đỗ dữ liệ u từ SqlDataAdapter vào DataSet
+
+--- PAGE 6 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+6Truy xuất DL trực tiếp
+Các bước cập nhật (update), hay thêm DL 
+(Insert)
+1.Khai báo kết nối (Connection)
+2.Khai báo câu truy vấn
+3.Khai báo lệnh (command ) với câu truy vấn vừa 
+khai báo.
+4.Khai báo tham số trong lệnh.
+5.Truyề n trị cho tham số
+6.Mở kế t nối
+7.Thực thi lệnh.
+8.Đóng kết nối
+
+--- PAGE 7 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+7Khai báo kết nối (Connection)
+Thuộc tính và các phương thức:
+ConnectionString: chỉ Data Source cần kết nối
+Open(): thiết lập kết nối đến Data Source
+Close(): ngắt kết nối
+Ví dụ:
+Kết nối dữ liệ u nằm trong máy chủ localhost với dữ 
+liệu tên là QuanLyThanhVien
+SqlConnection ketnoi=new SqlConnection ();
+ketnoi.ConnectionString= “ Data Source =localhost;Initial             
+Catalog=QuanLyThanhVien; Integrated Security=True ”;
+ketnoi.Open();
+//thực hiện công việc
+ketnoi.Close();
+
+--- PAGE 8 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+8Khai báo kết nối (Connection)
+Chuỗi kết nối có thể đượ c lưu trữ trên file WebConfig như sau:
+<configuration >
+<connectionStrings >
+<addname ="strQLThanhVien " connectionString ="Data 
+Source= localhost ;Initial Catalog= QuanLyThanhVien; 
+Integrated Security=SSPI />
+</connectionStrings >
+</configuration >
+Sử dụng:
+Khai báo không gian tên: using System.Web.Configuration
+string connectionstring= WebConfigurationManager. 
+ConnectionStrings[ “strQLThanhVien ”].ConnectionString;
+
+--- PAGE 9 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+9Sử dụng Command
+Nhiệm vụ của đối tượng Command:
+Giúp thực thi câu truy vấn
+Trả kết quả về cho DataReader hay DataSet
+Thuộc tính và phương thức Command:
+Connection: kết nối dùng để thực hiện câu lệnh
+CommandText: câu lệnh cần thực hiện trên Data Source
+CommandType: loại câu lệnh trong CommandText (Text, 
+StoredProc, …)
+ExecuteScalar(): thực hiện câu lệnh trong CommandText, kết 
+quả trả về giá trị đơn.
+ExecuteNonQuery(): thực hiện câu lệnh trong CommandText, 
+không có kết quả trả về.
+ExecuteReader(): thực hiện câu lệnh trong CommandText kết 
+quả trả về là một DataReader.
+
+--- PAGE 10 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+10Sử dụng Command
+Khai báo lệnh không có tham số:
+SqlConnection myConnection= new SqlConnection ();
+myConnection.ConnectionString= “ Data Source =localhost;Initial 
+Catalog=QuanLyThanhVien; Integrated Security=SSPI ”;
+SqlCommand cmd= new SqlCommand ();
+cmd.Connection=myConnection;
+cmd.CommandText= “Select * From tbl_CaSi ”;
+cmd.CommandType=CommandType.Text;
+myConnection.Open();
+cmd.ExecuteNonQuery();
+myConnection.Close();
+Hay ta có thể khai báo tóm tắt câu lệnh lại như sau:
+SqlCommand cmd= new SqlCommand (“Select * From tbl_CaSi ”, 
+myConnection);
+
+--- PAGE 11 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+11Tham số (Parameter) của Command
+Mục đích sử dụng tham số:
+Một vài giá trị của câu lệnh chỉ được biết khi thực 
+hiện câu lệnh
+Cần thực hiện câu lệnh nhiều lần với các giá trị 
+khác nhau
+Cách sử dụng:
+Thêm tham số: ? Hoặc @[tên tham số]
+Tạo các parameter tương ứng cho command
+Gán giá trị cho parameter khi dùng command 
+thực hiện câu lệnh
+
+--- PAGE 12 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+12Tham số (Parameter) của Command
+Ví dụ câu truy vấn có tham số
+
+--- PAGE 13 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+13Tham số (Parameter) của Command
+Sử dụ ng câu lệnh với tham số:
+Khai báo tham số
+Gán trị cho tham số
+Ví dụ :
+Khai báo tham số @ten trong câu truy vấn trên
+Cmd.Parameters.Add( “@ten ”, SqlDBType.Nvarchar);
+Cmd.Parameters.[ “@ten ”].Value=txtTen.Text;
+
+--- PAGE 14 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+14Sử dụng DataAdapter
+Thuộc tính và phương thức
+Fill(Dataset): dùng lệnh SelectCommand để lấy DL từ 
+Data Source đưa vào DataSet
+Update(DataSet): Dùng để cập nhật DL trong DataSet 
+vào DataSource, bằng cách sử dụng các lệnh 
+InsertCommand, UpdateCommand và DeleteCommand
+
+
+--- PAGE 15 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+15Sử dụng DataAdapter
+Lấy dữ liệ u đưa vào DataSet với câu truy vấn không tham số:
+String sql=“Select * from tblCasi ”;
+SqlConnection myConnection= new SqlConnection();
+myConnection.ConnectionString= “ Data Source 
+=localhost;Initial Catalog=QuanLyThanhVien; Integrated 
+Security=true ”;
+SqlDataAdapter da = new SqlDataAdapter ( sql, myConnection);
+DataSet ds= new DataSet ();
+da.Fill(ds);
+//làm việc với dataSet ds ( thêm, xóa, sửa)
+
+--- PAGE 16 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+16DataSet
+Là CSDL được lưu trữ trong bộ nhớ chính
+Cơ chế không kết nối
+
+
+--- PAGE 17 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+17DataSet
+Trong Dataset chứa nhiều table gọi là DataTable
+DataTable thể hiện một bảng trong CSDL
+TableName: tên bảng.
+Columns: danh sách các cột (DataColumn)
+Rows: danh sách các mẫu tin (DataRow)
+PrimaryKey: danh sách các cột làm khóa chính 
+(DataColumn)
+NewRow(): tạo một mẫu tin mới
+DataColumn: thể hiện cột trong bảng
+ColumnName: tên cột
+DataType: kiểu DL cột
+DataRow: thể hiện một mẫu tin trong bảng
+RowState: trang thái của mẫu tin (Added, Modified, Deleted, 
+Unchanged, Detach)
+Toán tử [i]: truy xuất đến cột thứ i của mẫu tin
+Delete(): đánh dấu xóa mẫu tin
+
+--- PAGE 18 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+18DataSet
+Các bước để lấy dữ liệ u từ database đưa vào 
+Dataset với câu truy vấn có tham số
+1.Khai báo kết nối
+2.Khai báo câu truy vấn 
+3.Khai báo lệnh
+4.Khai báo tham số của câu lệnh
+5.Truyề n trị cho tham số
+6.Khai báo DataAdapter từ câu lệnh
+7.Khai báo DataSet
+8.Đổ dữ liệ u từ DataAdapter vào DataSet
+
+--- PAGE 19 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+19DataSet
+Lấy dữ liệ u đưa vào DataSet với câu truy vấn có tham số
+String sql=“Select * from tblCasi where macs=@macs ”;
+SqlConnection cnn= new SqlConnection ();
+cnn.ConnectionString= “ Data Source =localhost; Initial 
+Catalog=QuanLyThanhVien; Integrated Security=true ”;
+//khai báo lệnh
+SqlCommand cmd=  new  SqlCommand(sql,cnn)
+//khai báo tham số và gá n trị
+cmd.Parameters.Add( “@macs ”, SqlDBType.Int);
+cmd.Parameters[ “@macs ”].Value= txtmacs.Text;
+//Khai báo dataAdapter từ câu lệnh có tham số
+SqlDataAdapter da = new SqlDataAdapter ( cmd);
+DataSet ds= new DataSet ();
+da.Fill(ds);
+
+--- PAGE 20 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+20Bài tập
+Cập nhật chức năng đăng nhập 
+Cập nhật chức năng tìm kiếm với database
+Viết trang đăng ký thà nh viên cho phép lưu 
+thông tin vào database
+Viết thêm chức năng chỉnh sửa dữ liệ u

@@ -1,0 +1,54 @@
+==== 220064_Bai1_v1.0.txt len=2139 ====
+  ASP.NET : 3
+==== 220064_Bai2_v1.0.txt len=8563 ====
+  EX: Bài tập Xây dựng ứng dụng kiểm tra đăng nhập. Xây dựng ứng dụng tìm số nguyên lớn nhất trong mảng.
+==== 220064_Bai3_P1_v1.0.txt len=13299 ====
+  ASP.NET : 18
+  Web Form : 2
+  Validation : 8
+  RequiredField : 1
+  EX: Bài tập Xây dựng trang web đăng ký thành viên đơn giản của gmail. Xây dựng trang bình chọn một số danh lam thắng cảnh. Xây dựng đánh giá nộ i dung của website.
+==== 220064_Bai4_v1.0.txt len=8792 ====
+  ASP.NET : 2
+  Session : 27
+  Cookie : 65
+==== 220064_Bai5_P1_v1.0.txt len=8492 ====
+  ADO.NET : 1
+  SqlConnection : 9
+  DataSet : 26
+  DataAdapter : 12
+==== 220064_Bai5_P2_v1.0.txt len=5381 ====
+  SqlConnection : 4
+  DataSet : 6
+  DataAdapter : 5
+  GridView : 13
+  DataList : 19
+==== 220064_TaiLieuHocTap.txt len=104329 ====
+  ASP.NET : 139
+  Web Form : 13
+  ADO.NET : 9
+  DataSet : 5
+  DataAdapter : 1
+  GridView : 3
+  Session : 11
+  Cookie : 6
+  ViewState : 2
+  Validation : 27
+  RequiredField : 3
+  Master Page : 3
+==== TaiLieu_more.txt len=130403 ====
+  ASP.NET : 104
+  MVC : 1
+  Web Form : 6
+  ADO.NET : 25
+  SqlConnection : 13
+  DataSet : 27
+  DataAdapter : 15
+  GridView : 5
+  DataList : 6
+  Session : 31
+  Cookie : 38
+  ViewState : 9
+  Validation : 8
+  RequiredField : 5
+  Master Page : 14

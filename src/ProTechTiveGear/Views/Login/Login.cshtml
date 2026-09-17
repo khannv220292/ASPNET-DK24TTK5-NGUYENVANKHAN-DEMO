@@ -1,0 +1,43 @@
+﻿@{
+	ViewBag.Title = "Đăng nhập";
+	Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+	var loginMsg = TempData["LoginMessage"] as string;
+}
+
+<div class="wrap-login100">
+	<form action="@Url.Action("Login", "Login")" method="post" class="login100-form validate-form">
+		@Html.AntiForgeryToken()
+
+		<span class="login100-form-logo">
+			<i class="zmdi zmdi-landscape"></i>
+		</span>
+
+		<span class="login100-form-title p-b-34 p-t-27">Đăng Nhập</span>
+
+		@if (!string.IsNullOrEmpty(loginMsg))
+		{
+			<p style="color:#8f8;text-align:center;margin-bottom:12px">@loginMsg</p>
+		}
+
+		<div class="wrap-input100 validate-input" data-validate="Enter username">
+			<input class="input100" type="text" name="userName" id="userName" placeholder="Tài khoản" required autocomplete="username" />
+			<span class="focus-input100" data-placeholder="&#xf207;"></span>
+		</div>
+
+		<div class="wrap-input100 validate-input" data-validate="Enter password">
+			<input class="input100" type="password" name="passWord" id="passWord" placeholder="Mật khẩu" required autocomplete="current-password" />
+			<span class="focus-input100" data-placeholder="&#xf191;"></span>
+			<span style="color:#f66;display:block;text-align:center;margin-top:8px">@Html.ValidationSummary(true)</span>
+		</div>
+
+		<input type="hidden" name="returnUrl" value="@(ViewBag.ReturnUrl as string)" />
+
+		<div class="container-login100-form-btn">
+			<button type="submit" class="login100-form-btn">Đăng Nhập</button>
+		</div>
+
+		<div class="text-center p-t-20">
+			<a href="@Url.Action("Register", "Login")" style="color:#fff">Chưa có tài khoản? Đăng ký</a>
+		</div>
+	</form>
+</div>

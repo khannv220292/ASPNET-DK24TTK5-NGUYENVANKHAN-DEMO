@@ -1,0 +1,243 @@
+﻿@using ProTechTiveGear.Models
+@{
+	ViewBag.Title = "Báo cáo doanh thu";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+	DateTime fromD = DateTime.Now.Date.AddMonths(-11);
+	fromD = new DateTime(fromD.Year, fromD.Month, 1);
+	DateTime toD = DateTime.Now.Date;
+	DateTime tmp;
+	if (DateTime.TryParse(Request["from"], out tmp))
+	{
+		fromD = tmp.Date;
+	}
+	if (DateTime.TryParse(Request["to"], out tmp))
+	{
+		toD = tmp.Date;
+	}
+	if (toD < fromD)
+	{
+		toD = fromD;
+	}
+	DateTime toEnd = toD.AddDays(1);
+
+	var db = new ProTechTiveGearEntities();
+	var allOrders = db.Orders.Include("Customer").Include("Payments").Include("OrderDetails.Item").ToList();
+	var orders = new List<Order>();
+	foreach (var o in allOrders)
+	{
+		if (o.Orderdate != null && o.Orderdate >= fromD && o.Orderdate < toEnd)
+		{
+			orders.Add(o);
+		}
+	}
+
+	decimal doanhThu = 0;
+	decimal chuaThu = 0;
+	int soDon = orders.Count;
+	int soPaid = 0;
+	int slBan = 0;
+	foreach (var o in orders)
+	{
+		decimal tien = 0;
+		if (o.Totalprice != null)
+		{
+			tien = o.Totalprice.Value;
+		}
+		bool paid = false;
+		if (o.Payments != null && o.Payments.Count > 0)
+		{
+			paid = true;
+		}
+		if (paid)
+		{
+			decimal p = 0;
+			foreach (var x in o.Payments)
+			{
+				if (x.Payprices != null)
+				{
+					p = p + x.Payprices.Value;
+				}
+			}
+			if (p > 0)
+			{
+				doanhThu = doanhThu + p;
+			}
+			else
+			{
+				doanhThu = doanhThu + tien;
+			}
+			soPaid = soPaid + 1;
+		}
+		else
+		{
+			chuaThu = chuaThu + tien;
+		}
+		if (o.OrderDetails != null)
+		{
+			foreach (var d in o.OrderDetails)
+			{
+				slBan = slBan + d.Quantity;
+			}
+		}
+	}
+
+	var pName = new List<string>();
+	var pQty = new List<int>();
+	var pAmt = new List<decimal>();
+	foreach (var o in orders)
+	{
+		bool paid = false;
+		if (o.Payments != null && o.Payments.Count > 0)
+		{
+			paid = true;
+		}
+		if (paid && o.OrderDetails != null)
+		{
+			foreach (var d in o.OrderDetails)
+			{
+				string name = "SP#" + d.ItemId;
+				if (d.Item != null && !string.IsNullOrEmpty(d.Item.Name))
+				{
+					name = d.Item.Name;
+				}
+				decimal amt = 0;
+				if (d.Totalprice != null)
+				{
+					amt = d.Totalprice.Value;
+				}
+				int found = -1;
+				for (int i = 0; i < pName.Count; i++)
+				{
+					if (pName[i] == name)
+					{
+						found = i;
+					}
+				}
+				if (found >= 0)
+				{
+					pQty[found] = pQty[found] + d.Quantity;
+					pAmt[found] = pAmt[found] + amt;
+				}
+				else
+				{
+					pName.Add(name);
+					pQty.Add(d.Quantity);
+					pAmt.Add(amt);
+				}
+			}
+		}
+	}
+}
+<style>
+	.od-wrap { background: #f4f6f8; margin: -1.5rem; padding: 24px; min-height: calc(100vh - 80px); }
+	.od-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+	.od-top h1 { margin: 0; font-size: 22px; font-weight: 800; color: #1f2937; }
+	.od-btn {
+		display: inline-flex; align-items: center; gap: 6px;
+		height: 38px; padding: 0 14px; border-radius: 8px; cursor: pointer;
+		font-size: 13px; font-weight: 700; text-decoration: none !important; border: 1px solid #d0d5dd; background: #fff; color: #344054;
+	}
+	.kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+	.kpi-card { background: #fff; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(16,24,40,.06); }
+	.kpi-card .l { font-size: 12px; font-weight: 700; color: #667085; text-transform: uppercase; }
+	.kpi-card .v { font-size: 22px; font-weight: 800; color: #101828; margin-top: 6px; }
+	.od-card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(16,24,40,.06); padding: 16px 18px; margin-bottom: 16px; }
+	.od-table { width: 100%; border-collapse: collapse; }
+	.od-table th { text-align: left; font-size: 12px; font-weight: 700; color: #667085; padding: 10px 12px; border-bottom: 1px solid #eaecf0; }
+	.od-table td { padding: 12px; border-bottom: 1px solid #f2f4f7; font-size: 13px; }
+	.od-filter { display: flex; gap: 10px; flex-wrap: wrap; align-items: end; }
+	.od-filter label { display: block; font-size: 12px; font-weight: 700; color: #667085; margin-bottom: 4px; }
+	.od-filter input { height: 36px; border: 1px solid #d0d5dd; border-radius: 8px; padding: 0 10px; }
+	@@media (max-width: 992px) { .kpi { grid-template-columns: 1fr 1fr; } }
+</style>
+
+<div class="od-wrap">
+	<div class="od-top">
+		<h1>Báo cáo doanh thu</h1>
+		<div style="display:flex;gap:10px">
+			<a class="od-btn" href="@Url.Action("AllListOrder","Admin")">Danh sách đơn</a>
+			<a class="od-btn" href="javascript:void(0)" id="btnExpRev">Xuất Excel</a>
+		</div>
+	</div>
+
+	<div class="od-card">
+		<form class="od-filter" method="get" action="@Url.Action("Index","Admin")">
+			<div>
+				<label>Từ ngày</label>
+				<input type="date" name="from" value="@fromD.ToString("yyyy-MM-dd")" />
+			</div>
+			<div>
+				<label>Đến ngày</label>
+				<input type="date" name="to" value="@toD.ToString("yyyy-MM-dd")" />
+			</div>
+			<button type="submit" class="od-btn" style="background:#2563eb;border-color:#2563eb;color:#fff">Lọc</button>
+		</form>
+	</div>
+
+	<div class="kpi">
+		<div class="kpi-card">
+			<div class="l">Doanh thu đã thu</div>
+			<div class="v" style="color:#027a48">@string.Format("{0:#,##0} ₫", doanhThu)</div>
+		</div>
+		<div class="kpi-card">
+			<div class="l">Chưa thanh toán</div>
+			<div class="v" style="color:#b54708">@string.Format("{0:#,##0} ₫", chuaThu)</div>
+		</div>
+		<div class="kpi-card">
+			<div class="l">Đơn hàng (đã TT / tổng)</div>
+			<div class="v">@soPaid / @soDon</div>
+		</div>
+		<div class="kpi-card">
+			<div class="l">Sản phẩm đã bán</div>
+			<div class="v">@slBan</div>
+		</div>
+	</div>
+
+	<div class="od-card">
+		<h3 style="margin:0 0 12px;font-size:16px;font-weight:800">Doanh thu theo sản phẩm</h3>
+		<table class="od-table" id="revTable">
+			<thead>
+				<tr>
+					<th>Sản phẩm</th>
+					<th>Số lượng</th>
+					<th>Doanh thu</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if (pName.Count == 0)
+				{
+					<tr><td colspan="3" style="text-align:center;color:#667085;padding:28px">Chưa có đơn đã thanh toán trong khoảng ngày này.</td></tr>
+				}
+				@for (int pi = 0; pi < pName.Count; pi++)
+				{
+					<tr>
+						<td>@pName[pi]</td>
+						<td>@pQty[pi]</td>
+						<td>@string.Format("{0:#,##0} ₫", pAmt[pi])</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script>
+	(function () {
+		var btn = document.getElementById("btnExpRev");
+		if (btn) {
+			btn.onclick = function () {
+				var table = document.getElementById("revTable");
+				var html = "<html><head><meta charset='UTF-8'></head><body>";
+				html += "<h3>Bao cao doanh thu</h3>" + table.outerHTML + "</body></html>";
+				var blob = new Blob(["\uFEFF" + html], { type: "application/vnd.ms-excel" });
+				var a = document.createElement("a");
+				a.href = URL.createObjectURL(blob);
+				a.download = "BaoCaoDoanhThu.xls";
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+			};
+		}
+	})();
+</script>

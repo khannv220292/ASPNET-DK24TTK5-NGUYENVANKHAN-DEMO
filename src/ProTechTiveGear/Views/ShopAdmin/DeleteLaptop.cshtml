@@ -1,0 +1,13 @@
+@model ProTechTiveGear.Models.Item
+@{
+	ViewBag.Title = "Xóa laptop";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h3>Ẩn laptop (xóa mềm)</h3>
+<p>@Model.Name</p>
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	<button type="submit" class="btn btn-danger">Xác nhận</button>
+	@Html.ActionLink("Hủy", "Laptop")
+}

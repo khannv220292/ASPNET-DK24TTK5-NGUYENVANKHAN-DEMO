@@ -1,0 +1,135 @@
+@using ProTechTiveGear.Models
+@model List<CartEntity>
+@{
+	ViewBag.Title = "Giỏ hàng";
+	Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+	ViewBag.HideBanner = true;
+	var list = Model ?? new List<CartEntity>();
+	int qty = ViewBag.TotalQuantity != null ? Convert.ToInt32(ViewBag.TotalQuantity) : list.Sum(x => x.Quantity);
+	double total = ViewBag.ToTalPrice != null ? Convert.ToDouble(ViewBag.ToTalPrice) : list.Sum(x => x.TotalPrices);
+}
+<style>
+	.ck-cart { padding: 28px 0 48px; background: #f5f6f8; min-height: 50vh; }
+	.ck-cart h2 { font-size: 22px; font-weight: 800; margin: 0 0 18px; color: #222; }
+	.ck-table { width: 100%; background: #fff; border-collapse: collapse; border: 1px solid #ddd; }
+	.ck-table thead th {
+		background: #0b5cab; color: #fff; font-weight: 700; padding: 12px 10px;
+		text-align: left; border: 1px solid #094a8a; white-space: nowrap;
+	}
+	.ck-table tbody td {
+		padding: 12px 10px; border: 1px solid #ddd; vertical-align: middle; background: #fff; color: #222;
+	}
+	.ck-table img { max-height: 72px; max-width: 100px; object-fit: contain; display: block; }
+	.ck-qty {
+		width: 72px; height: 34px; border: 1px solid #ccc; border-radius: 4px;
+		padding: 4px 8px; text-align: center;
+	}
+	.ck-link { color: #1976d2; font-weight: 600; text-decoration: none; }
+	.ck-link:hover { text-decoration: underline; color: #0d47a1; }
+	.ck-btn {
+		display: inline-block; border-radius: 6px; padding: 8px 14px; font-size: 13px;
+		font-weight: 700; cursor: pointer; text-decoration: none !important; border: none; line-height: 1.2;
+	}
+	.ck-btn-update { background: #ff9800; color: #fff !important; }
+	.ck-btn-update:hover { background: #f57c00; color: #fff !important; }
+	.ck-btn-clear { background: #eee; color: #444 !important; margin-top: 14px; float: right; }
+	.ck-btn-clear:hover { background: #ddd; color: #222 !important; }
+	.ck-summary {
+		clear: both; margin-top: 28px; background: #fff; border: 1px solid #e0e0e0;
+		border-radius: 8px; overflow: hidden; max-width: 420px; margin-left: auto;
+	}
+	.ck-summary-head { background: #0b5cab; color: #fff; padding: 12px 16px; font-weight: 800; }
+	.ck-summary-body { padding: 14px 16px; }
+	.ck-summary-body p { display: flex; justify-content: space-between; margin: 0 0 10px; font-size: 15px; }
+	.ck-summary-body .total { font-size: 18px; font-weight: 800; color: #e53935; margin-bottom: 16px; }
+	.ck-btn-checkout {
+		display: block; text-align: center; background: #e53935; color: #fff !important;
+		padding: 14px; border-radius: 6px; font-weight: 800; text-decoration: none !important; font-size: 16px;
+	}
+	.ck-btn-checkout:hover { background: #c62828; color: #fff !important; }
+	.ck-empty {
+		text-align: center; padding: 56px 20px; background: #fff; border-radius: 10px;
+		box-shadow: 0 2px 10px rgba(0,0,0,.05);
+	}
+	.ck-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+</style>
+
+<section class="ck-cart">
+	<div class="container">
+		<h2><i class="fa fa-shopping-cart"></i> Giỏ hàng</h2>
+
+		@if (list.Count == 0)
+		{
+			<div class="ck-empty">
+				<i class="fa fa-shopping-cart" style="font-size:48px;color:#bbb"></i>
+				<h3 style="margin:16px 0 8px">Giỏ hàng trống</h3>
+				<p style="color:#666;margin-bottom:20px">Bạn chưa thêm laptop nào. Hãy chọn sản phẩm rồi bấm &quot;Thêm vào giỏ&quot;.</p>
+				<a class="ck-btn-checkout" href="@Url.Action("Index", "Shop")" style="display:inline-block;padding:10px 22px">Tiếp tục mua sắm</a>
+			</div>
+		}
+		else
+		{
+			<div class="table-responsive">
+				<table class="ck-table">
+					<thead>
+						<tr>
+							<th>Ảnh</th>
+							<th>Sản phẩm</th>
+							<th>Giá</th>
+							<th>Số lượng</th>
+							<th>Tổng tiền</th>
+							<th>Thao tác</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in list)
+						{
+							string pic = "";
+							if (!string.IsNullOrWhiteSpace(item.Picture))
+							{
+								pic = item.Picture.Split('|')[0].Trim();
+							}
+							<tr>
+								<td>
+									@if (!string.IsNullOrEmpty(pic))
+									{
+										<img src="~/img/Item/@pic" alt="@item.Name" />
+									}
+								</td>
+								<td>@item.Name</td>
+								<td>@string.Format("{0:#,##0}đ", item.Prices)</td>
+								<td>
+									@using (Html.BeginForm("EditCart", "Cart", new { id = item.IdItem }, FormMethod.Post, new { style = "display:flex;gap:6px;align-items:center;margin:0" }))
+									{
+										<input class="ck-qty" type="number" name="txtSoluong" min="1" max="99" value="@item.Quantity" />
+										<button type="submit" class="ck-btn ck-btn-update">Cập nhật</button>
+									}
+								</td>
+								<td>@string.Format("{0:#,##0}đ", item.TotalPrices)</td>
+								<td>
+									<div class="ck-actions">
+										<a class="ck-link" href="@Url.Action("Detail", "Shop", new { id = item.IdItem })">Chi tiết</a>
+										<a class="ck-link" href="@Url.Action("DeleteCart", "Cart", new { id = item.IdItem })" onclick="return confirm('Xóa sản phẩm này khỏi giỏ?');">Xóa</a>
+									</div>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			<a class="ck-btn ck-btn-clear" href="@Url.Action("DeleteAll", "Cart")" onclick="return confirm('Xóa toàn bộ giỏ hàng?');">Xóa tất cả</a>
+
+			<div class="ck-summary">
+				<div class="ck-summary-head">Thông tin đơn hàng</div>
+				<div class="ck-summary-body">
+					<p><span>Số lượng</span><b>@qty</b></p>
+					<p class="total"><span>Tổng tiền</span><span>@string.Format("{0:#,##0}đ", total)</span></p>
+					<a class="ck-btn-checkout" href="@Url.Action("Order", "Cart")">
+						<i class="fa fa-credit-card"></i> Đặt hàng / Thanh toán
+					</a>
+				</div>
+			</div>
+		}
+	</div>
+</section>

@@ -1,0 +1,521 @@
+@using ProTechTiveGear.Models;
+@using System.Linq
+@{
+	Customer acc = (Customer)Session["usr"];
+	string username = "";
+	if (Request.Cookies["usr"] != null)
+	{
+		username = Request.Cookies["usr"].Value;
+	}
+	// Badge trang chu = so don hang chua xu ly (giong Admin)
+	int headerCartCount = 0;
+	try
+	{
+		using (var dbHome = new ProTechTiveGearEntities())
+		{
+			headerCartCount = dbHome.Orders.Count(o => o.Status != true);
+		}
+	}
+	catch { }
+}
+@*@{
+
+		string username = "";
+		//string Sigout = "";
+
+		if (Session["usr"] != null)
+		{
+			username = Session["usr"].ToString();
+			//Sigout = Session["SignOut"].ToString();
+		}
+
+	}*@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" href="img/fav-icon.png" type="image/x-icon" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>laptop.khannv.vn</title>
+
+	<!-- Icon css link -->
+	<link href="~/Content/font-awesome.min.css" rel="stylesheet">
+	<link href="~/vendors/linearicons/style.css" rel="stylesheet">
+	<link href="~/vendors/flat-icon/flaticon.css" rel="stylesheet">
+	<link href="~/vendors/stroke-icon/style.css" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Rev slider css -->
+	<link href="~/vendors/revolution/css/settings.css" rel="stylesheet">
+	<link href="~/vendors/revolution/css/layers.css" rel="stylesheet">
+	<link href="~/vendors/revolution/css/navigation.css" rel="stylesheet">
+	<link href="~/vendors/animate-css/animate.css" rel="stylesheet">
+
+
+	<!-- Extra plugin css -->
+	<link href="~/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+	<link href="~/vendors/magnifc-popup/magnific-popup.css" rel="stylesheet">
+	<link href="~/vendors/nice-select/css/nice-select.css" rel="stylesheet">
+	<link href="~/vendors/magnifc-popup/magnific-popup.css" rel="stylesheet">
+
+	<link href="~/Content/style.css" rel="stylesheet" />
+	<link href="~/Content/responsive.css" rel="stylesheet">
+	<style>
+		.top-strip { background-color: #0b69b7; color: #e6f3ff; font-size: 12px; padding: 5px 0; }
+		.top-strip span { margin: 0 10px; }
+		.header-custom { background-color: #0077dd; padding: 12px 0; color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+		.header-container { display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+		.brand-logo { font-size: 22px; font-weight: 800; color: #fff !important; text-decoration: none !important; white-space: nowrap; }
+		.brand-logo span { color: #ffe600; }
+		.btn-category { background-color: rgba(255,255,255,.2); color: #fff !important; border-radius: 20px; padding: 8px 16px; font-size: 13px; font-weight: 600; text-decoration: none !important; white-space: nowrap; }
+		.btn-category:hover { background-color: rgba(255,255,255,.3); color: #fff !important; }
+		.search-wrapper { flex-grow: 1; max-width: 420px; position: relative; min-width: 200px; }
+		.search-input { width: 100%; height: 38px; border-radius: 20px; border: none; padding: 0 45px 0 16px; font-size: 13px; color: #333; }
+		.search-btn { position: absolute; right: 4px; top: 3px; width: 32px; height: 32px; border-radius: 50%; border: none; background: transparent; color: #0077dd; cursor: pointer; }
+		.header-action-item { display: inline-flex; align-items: center; gap: 8px; color: #fff !important; text-decoration: none !important; font-size: 13px; white-space: nowrap; }
+		.header-action-text b { display: block; font-size: 14px; color: #fff; }
+		.header-account { display: inline-flex; align-items: center; gap: 8px; color: #fff; }
+		.header-account-icon { width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); display: inline-flex; align-items: center; justify-content: center; font-size: 16px; }
+		.header-account-links { display: flex; flex-direction: column; line-height: 1.25; }
+		.header-account-links a { color: #fff !important; text-decoration: none !important; font-size: 13px; font-weight: 500; }
+		.header-account-links a:hover { text-decoration: underline !important; }
+		.header-cart-wrap { position: relative; }
+		.header-cart-badge { position: absolute; top: -6px; right: -8px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 50%; background: #e53935; color: #fff; font-size: 10px; line-height: 16px; text-align: center; font-weight: 700; }
+		.header-contact-link:hover, .header-search-icon:hover { opacity: .9; }
+		.header-search-icon { padding: 0 4px; }
+		.main_header_three {
+			position: sticky !important;
+			top: 0 !important;
+			left: 0;
+			right: 0;
+			width: 100%;
+			background: #0077dd;
+			z-index: 1050;
+			box-shadow: 0 2px 10px rgba(0,0,0,.12);
+		}
+		.main_header_three + section, .main_header_three + div { margin-top: 0 !important; }
+		.main_header_three.navbar_fixed .middle_menu_three {
+			position: relative !important;
+			top: auto !important;
+			transform: none !important;
+			width: auto !important;
+			box-shadow: none;
+		}
+		.middle_menu_three { background: #fff; position: relative; z-index: 1; }
+		.middle_menu_three .navbar { padding-left: 0; padding-right: 0; }
+		.middle_menu_three .navbar-brand { display: none; }
+		.main_slider_area {
+			position: relative;
+			height: auto;
+			max-height: none;
+			overflow: visible;
+			background: transparent;
+			padding: 12px 0 0;
+		}
+		.main_slider_area .container {
+			position: relative;
+		}
+		.main_slider_area #homeBannerOwl {
+			overflow: hidden;
+			border-radius: 10px;
+			background: #0f172a;
+			position: relative;
+		}
+		.main_slider_area #homeBannerOwl .owl-stage-outer {
+			overflow: hidden;
+		}
+		.main_slider_area #homeBannerOwl .owl-item,
+		.main_slider_area #homeBannerOwl .item,
+		.main_slider_area #homeBannerOwl .hb-slide {
+			line-height: 0;
+			margin: 0;
+			padding: 0;
+			height: auto !important;
+		}
+		.main_slider_area .hb-slide img {
+			width: 100%;
+			height: auto !important;
+			max-height: none;
+			object-fit: contain;
+			object-position: top center;
+			display: block;
+			margin: 0 !important;
+			vertical-align: top;
+		}
+		/* Owl dùng <div class="owl-prev/next"> — đặt absolute theo #homeBannerOwl */
+		.main_slider_area #homeBannerOwl .owl-nav {
+			position: static !important;
+			margin: 0 !important;
+			height: 0 !important;
+			line-height: 0;
+			pointer-events: none;
+		}
+		.main_slider_area #homeBannerOwl .owl-nav .owl-prev,
+		.main_slider_area #homeBannerOwl .owl-nav .owl-next {
+			position: absolute !important;
+			top: 50% !important;
+			transform: translateY(-50%);
+			width: 42px !important;
+			height: 42px !important;
+			line-height: 42px !important;
+			border-radius: 50% !important;
+			background: rgba(0,0,0,.45) !important;
+			color: #fff !important;
+			font-size: 22px;
+			text-align: center;
+			margin: 0 !important;
+			padding: 0 !important;
+			display: block !important;
+			pointer-events: auto;
+			z-index: 6;
+		}
+		.main_slider_area #homeBannerOwl .owl-nav .owl-prev { left: 12px !important; right: auto !important; }
+		.main_slider_area #homeBannerOwl .owl-nav .owl-next { right: 12px !important; left: auto !important; }
+		.main_slider_area #homeBannerOwl .owl-dots {
+			position: absolute !important;
+			left: 0;
+			right: 0;
+			bottom: 12px !important;
+			top: auto !important;
+			height: auto !important;
+			text-align: center;
+			z-index: 6;
+			margin: 0 !important;
+			padding: 0 !important;
+			width: 100%;
+			pointer-events: none;
+		}
+		.main_slider_area #homeBannerOwl .owl-dot {
+			display: inline-block !important;
+			vertical-align: middle;
+			pointer-events: auto;
+		}
+		.main_slider_area #homeBannerOwl .owl-dot span {
+			width: 10px;
+			height: 10px;
+			margin: 0 4px;
+			background: #fff;
+			opacity: .45;
+			border-radius: 50%;
+			display: block;
+		}
+		.main_slider_area #homeBannerOwl .owl-dot.active span { opacity: 1; background: #e67e22; }
+		.pv-wrap { padding-top: 32px !important; }
+		.pv-head { background: #fff; border-radius: 8px; padding: 16px 20px; margin: 0 0 22px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+		.pv-img { overflow: hidden; }
+		.cake_feature_main .main_title, .new_arivals_area .single_pest_title { text-align: left; }
+	</style>
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<script>$.removeCookie('the_cookie', { path: '/' });</script>
+</head>
+<body>
+
+	<!--================Main Header Area =================-->
+	<header class="main_header_three">
+		<div class="top-strip">
+			<div class="container text-center">
+				<span>Giá rẻ dẫn đầu - Bảo hành siêu lâu</span>
+				<span>&bull;</span>
+				<span>Thu cũ giá tốt - Lên đời tiết kiệm</span>
+				<span>&bull;</span>
+				<span>Sản phẩm Chính hãng - VAT đầy đủ</span>
+			</div>
+		</div>
+		<div class="header-custom">
+			<div class="container">
+				<div class="header-container">
+					<a href="@Url.Action("Index", "Shop")" class="brand-logo">laptop.<span>khannv</span>.vn</a>
+					<a href="@Url.Action("Index", "Shop")" class="btn-category"><i class="fa fa-th-list"></i> Danh mục</a>
+					<div class="search-wrapper">
+						@using (Html.BeginForm("Index", "Shop", FormMethod.Get, new { id = "headerSearchForm" }))
+						{
+							<input type="text" name="search" id="headerSearchInput" class="search-input" placeholder="Nhập tên laptop cần tìm..." value="@(Request["search"] ?? "")" autocomplete="off" />
+							<button type="submit" class="search-btn" title="Tìm kiếm"><i class="fa fa-search"></i></button>
+						}
+					</div>
+					<div class="header-action-item">
+						<i class="fa fa-phone"></i>
+						<div class="header-action-text">
+							<span style="font-size:11px;opacity:.9">Hotline CSKH</span>
+							<b>0978.111.017</b>
+						</div>
+					</div>
+					@if (Session["usr"] == null)
+					{
+						<div class="header-account">
+							<span class="header-account-icon"><i class="fa fa-user"></i></span>
+							<div class="header-account-links">
+								<a href="@Url.Action("Register", "Login")">Đăng ký</a>
+								<a href="@Url.Action("Login", "Login")">Đăng nhập</a>
+							</div>
+						</div>
+					}
+					else
+					{
+						<a href="@Url.Action("Profile", "Shop")" class="header-account">
+							<span class="header-account-icon"><i class="fa fa-user"></i></span>
+							<div class="header-account-links">
+								<span>@(acc != null ? acc.Name : "Tài khoản")</span>
+							</div>
+						</a>
+					}
+					<a href="@Url.Action("Contact", "Shop")" class="header-action-item header-contact-link" title="Liên hệ">
+						<i class="fa fa-envelope" style="font-size:18px"></i>
+						<div class="header-action-text">
+							<span style="font-size:11px;opacity:.9">Hỗ trợ</span>
+							<b>Liên hệ</b>
+						</div>
+					</a>
+					<a href="@Url.Action("Cart", "Cart")" class="header-action-item header-cart-wrap" title="Đơn hàng chưa xử lý" id="headerCartLink">
+						<i class="fa fa-shopping-cart" style="font-size:22px"></i>
+						<span class="header-cart-badge" id="headerCartBadge">@headerCartCount</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="middle_menu_three">
+			<div class="container">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="index.html"><img src="img/logo-2.png" alt=""></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="my_toggle_menu">
+							<span></span>
+							<span></span>
+							<span></span>
+						</span>
+					</button>
+
+
+
+
+					@Html.Action("Menu", "Shop")
+
+
+
+				</nav>
+			</div>
+		</div>
+	</header>
+	<!--================End Main Header Area =================-->
+	@if (ViewBag.HideBanner != true)
+	{
+	<section class="main_slider_area">
+		<div class="container">
+			<div id="homeBannerOwl" class="owl-carousel owl-theme">
+				@Html.Action("Banner", "Shop")
+			</div>
+		</div>
+	</section>
+	}
+	<!--================Welcome Area =================-->
+	@RenderBody()
+
+	<!--================End Welcome Area =================-->
+	<!--================Service We offer Area =================-->
+	<!--================End Discover Menu Area =================-->
+	<!--================End Client Says Area =================-->
+	<!--================End Client Says Area =================-->
+	<!--================New Arivals Area =================-->
+	<!--================End Latest News Area =================-->
+	<!--================Newsletter Area =================-->
+	<!--================End Newsletter Area =================-->
+	<!--================Footer Area =================-->
+	<footer class="footer_area">
+		<div class="footer_widgets">
+			<div class="container">
+				<div class="row footer_wd_inner">
+					<div class="col-lg-3 col-6">
+						<aside class="f_widget f_about_widget">
+                            <p>laptop.khannv.vn</p>
+							<ul class="nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</aside>
+					</div>
+					<div class="col-lg-3 col-6">
+						<aside class="f_widget f_link_widget">
+							
+						</aside>
+					</div>
+					<div class="col-lg-3 col-6">
+						<aside class="f_widget f_link_widget">
+							
+						</aside>
+					</div>
+					<div class="col-lg-3 col-6">
+						<aside class="f_widget f_contact_widget">
+							<div class="f_title">
+								<h3>Liên hệ</h3>
+							</div>
+                            <h4>Phone: 0978.111.017</h4>
+                            <h5>Địa chỉ: 369 An Dương Vương, Phường Bình Phú, TP.Hồ Chí Minh</h5>
+                            <h5>khannv220292@tvu-onschool.edu.vn</h5>
+						</aside>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</footer>
+	<!--================End Footer Area =================-->
+	<!--================Search Box Area =================-->
+	@*<div class="search_area zoom-anim-dialog mfp-hide" id="test-search">
+			<div class="search_box_inner">
+				<h3>Search</h3>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>*@
+	@Html.Action("Search", "Shop")
+	<!--================End Search Box Area =================-->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="~/Scripts/popper.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<!-- Rev slider js -->
+	<script src="~/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
+	<script src="~/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
+	<script src="~/vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+	<script src="~/vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
+	<script src="~/vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+	<script src="~/vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+	<script src="~/vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+	<!-- Extra plugin js -->
+	<script src="~/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="~/vendors/magnifc-popup/jquery.magnific-popup.min.js"></script>
+	<script src="~/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+	<script src="~/vendors/isotope/isotope.pkgd.min.js"></script>
+	<script src="~/vendors/datetime-picker/js/moment.min.js"></script>
+	<script src="~/vendors/datetime-picker/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="~/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="~/vendors/jquery-ui/jquery-ui.min.js"></script>
+	<script src="~/vendors/lightbox/simpleLightbox.min.js"></script>
+
+	<script src="~/Scripts/theme.js?v=banner7"></script>
+	<script>
+		(function ($) {
+			var $b = $('#homeBannerOwl');
+			if (!$b.length) return;
+
+			function fitBannerHeight() {
+				var $img = $b.find('.owl-item.active img').first();
+				if (!$img.length) $img = $b.find('.owl-item img').first();
+				if (!$img.length || !$img[0].naturalWidth) return;
+				// Chiều cao theo tỷ lệ ảnh thật (tránh bị clip / khung trống)
+				var w = $b.width() || $img.width();
+				var h = Math.round(w * ($img[0].naturalHeight / $img[0].naturalWidth));
+				if (!h) return;
+				$b.find('.owl-stage-outer, .owl-stage, .owl-item.active').css({ height: h + 'px' });
+				$b.find('.owl-stage-outer').css('overflow', 'hidden');
+				$b.css({ height: h + 'px', overflow: 'hidden' });
+			}
+
+			var slideCount = $b.find('.item, .hb-slide').length;
+			if (!$b.hasClass('owl-loaded') && $.fn.owlCarousel) {
+				$b.owlCarousel({
+					items: 1,
+					loop: slideCount > 1,
+					autoplay: slideCount > 1,
+					autoplayTimeout: 5000,
+					autoplayHoverPause: true,
+					nav: slideCount > 1,
+					dots: slideCount > 1,
+					autoHeight: false,
+					smartSpeed: 500,
+					mouseDrag: slideCount > 1,
+					touchDrag: slideCount > 1,
+					navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+				});
+			}
+
+			// Chỉ fit chiều cao lúc init + resize — tránh vòng lặp reflow khi carousel đổi slide
+			$b.on('initialized.owl.carousel', function () {
+				fitBannerHeight();
+				setTimeout(fitBannerHeight, 100);
+			});
+			$b.find('img').one('load', fitBannerHeight);
+			setTimeout(fitBannerHeight, 100);
+			$(window).on('resize', fitBannerHeight);
+		})(jQuery);
+	</script>
+	<script>
+		(function () {
+			var countUrl = '@Url.Action("Count", "Cart")';
+			function setBadge(n) {
+				var el = document.getElementById('headerCartBadge');
+				if (!el) return;
+				n = parseInt(n, 10);
+				if (isNaN(n) || n < 0) n = 0;
+				el.textContent = n;
+			}
+			function refreshBadge() {
+				fetch(countUrl, { credentials: 'same-origin', cache: 'no-store' })
+					.then(function (r) { return r.json(); })
+					.then(function (d) { setBadge(d && d.count != null ? d.count : 0); })
+					.catch(function () { /* ignore */ });
+			}
+			document.addEventListener('DOMContentLoaded', refreshBadge);
+			window.addEventListener('pageshow', refreshBadge);
+
+			if (window.location.search.indexOf('search=') >= 0) {
+				var wrap = document.getElementById('danh-sach-wrap') || document.getElementById('danh-sach');
+				if (wrap) {
+					setTimeout(function () { wrap.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
+				}
+			}
+
+			// Thêm vào giỏ → chuyển sang trang đặt hàng / thanh toán
+			document.addEventListener('click', function (e) {
+				var t = e.target;
+				while (t && t !== document && !(t.tagName === 'A' && t.getAttribute('href'))) t = t.parentNode;
+				if (!t || !t.getAttribute) return;
+				if (t.getAttribute('data-oos') === '1') return;
+				var href = t.getAttribute('href') || '';
+				if (href.indexOf('/Cart/AddtoCart') < 0 && href.indexOf('Cart/AddtoCart') < 0) return;
+				e.preventDefault();
+				var sep = href.indexOf('?') >= 0 ? '&' : '?';
+				fetch(href + sep + 'ajax=1', {
+					credentials: 'same-origin',
+					cache: 'no-store',
+					headers: { 'X-Requested-With': 'XMLHttpRequest' }
+				})
+					.then(function (r) { return r.json(); })
+					.then(function (d) {
+						if (d && d.outOfStock) {
+							alert(d.message || 'Sản phẩm đã hết hàng');
+							return;
+						}
+						setBadge(d && d.count != null ? d.count : 0);
+						if (d && d.ok) {
+							window.location.href = (d.redirect) ? d.redirect : '@Url.Action("Order", "Cart")';
+						}
+					})
+					.catch(function () { window.location.href = href; });
+			});
+		})();
+	</script>
+</body>
+
+</html>

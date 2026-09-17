@@ -1,0 +1,7 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Minimal stub so web app compile works without full VS -->
+  <PropertyGroup>
+    <_WebApplicationTargetsStub>true</_WebApplicationTargetsStub>
+  </PropertyGroup>
+  <Target Name="OnAfter_Compile" />
+</Project>

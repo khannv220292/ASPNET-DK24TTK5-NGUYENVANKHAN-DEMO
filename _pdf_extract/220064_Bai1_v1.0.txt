@@ -1,0 +1,79 @@
+--- PAGE 1 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+1GIỚI THIỆU ASP.NET
+Bộ môn Công nghệ thông tin
+Khoa Kỹ thuật và Công nghệ
+Trường Đại học Trà Vinh
+
+--- PAGE 2 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+2Nội dung 
+Những ưu và khuyết điểm của ASP
+Các tính năng của ASP.NET
+Giới thiệu về .NET Framwork
+
+--- PAGE 3 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+3Ưu điểm của ASP
+Xây dựng và phát triển các ứng dụng web 
+động 
+Lập trình đơn giản phía máy chủ (Server -side)
+Sử dụng các đối tương COM một cách hiệu 
+quả.
+Tự động biên dịch
+
+--- PAGE 4 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+4Các khuyết điểm của ASP
+Hỗ trợ 2 loại ngôn ngữ chính: VBScript và 
+JavaScript
+Khả năng debug yếu
+Dễ lẫn lộn giữa HTML code và ASP code
+Khả năng sử dụng lại code hạn chế
+Không quản lý được trạng thái của trang web
+
+--- PAGE 5 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+5Các tính năng của ASP.NET
+Hỗ trợ đa ngôn ngữ: C#, VB.NET, J#...
+Trang ASP được biên dịch trước, làm tốc độ xử lý 
+tăng vọt.
+Hỗ trợ các dịch vụ cụ thể cho web: xác nhận và lưu 
+trữ dữ liệu
+Khả năng kế thừa code cao
+Tách biệt code và giao diện
+Hỗ trợ bộ thư viện phong phú và đa dạng
+Hỗ trợ quản lý trạng thái của web control
+Hỗ trợ debug mạnh
+
+--- PAGE 6 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+6Giới thiệu .NET Framwork
+.NET Framework là sản phẩm của Microsoft, giúp 
+cho việc phát triển các ứng dụng dễ dàng hơn
+.NET Framework là khung sườn cho việc xây dựng 
+và phát triển các ứng dụng web
+.NET Framework bao gồm: NET Framework Class 
+Library và Common Language Runtime (CLR).
+NET Framework Class Library chứa hàng nghìn lớp 
+bên trong, cung cấp các dịch vụ để xây dựng các 
+ứng dụng
+Common Language Runtime có nhiệm vụ thực thi 
+mã ứng dụng
+
+--- PAGE 7 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+7Vai trò của .NET Framework
+.NET code (C#, VB.NET, 
+ngôn ngũ khác).NET Framework Class 
+Library 
+Biên dịch
+DLL hay EXE 
+Ngôn ngữ đặc tả MSIL, 
+(Microsoft intermediate 
+Language)Mã máy 
+(machine code).NET common language 
+runtime (CLR) 
+Biên dịch
+Thực thi
+Kết quả

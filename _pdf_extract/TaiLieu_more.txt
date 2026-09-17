@@ -1,0 +1,24970 @@
+--- PAGE 41 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+41
+ 
+IV.
+ 
+  
+RegularExpression Validator
+ 
+   
+B
+ả
+ng sau đây mô t
+ả
+ 
+m
+ộ
+t s
+ố
+ 
+ký t
+ự
+ 
+đ
+ạ
+i di
+ệ
+n đƣ
+ợ
+c dùng trong m
+ẫ
+u nh
+ậ
+p li
+ệ
+u
+ 
+có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng trong thi
+ế
+t k
+ế
+ 
+ràng bu
+ộ
+c cho đ
+ị
+a ch
+ỉ
+ 
+email ho
+ặ
+c m
+ậ
+t kh
+ẩ
+u đ
+ăng nh
+ậ
+p. 
+ 
+Ký t
+ự
+ 
+Mô t
+ả
+ 
+[^ ]
+ 
+Matches 1 ký t
+ự
+ 
+không n
+ằ
+m trong dãy cho trƣ
+ớ
+c. Ví d
+ụ
+ 
+[^A
+-
+B] matches b
+ấ
+t 
+k
+ỳ
+ 
+ký t
+ự
+ 
+nào ngo
+ạ
+i tr
+ừ
+ 
+A và B. 
+ 
+.
+ 
+B
+ấ
+t k
+ỳ
+ 
+ký t
+ự
+ 
+nào ngo
+ạ
+i tr
+ừ
+ 
+newline. Ví d
+ụ
+, .here matches where và there.  
+ 
+\
+s
+ 
+B
+ấ
+t k
+ỳ
+ 
+ký t
+ự
+ 
+kho
+ả
+ng tr
+ắ
+ng nào (nhƣ tab ho
+ặ
+c space). 
+ 
+\
+S
+ 
+B
+ấ
+t k
+ỳ
+ 
+ký t
+ự
+ 
+không ph
+ả
+i kho
+ả
+ng tr
+ắ
+ng nào  
+ 
+\
+d
+ 
+B
+ấ
+t k
+ỳ
+ 
+ký t
+ự
+ 
+s
+ố
+ 
+nào. 
+ 
+\
+D
+ 
+B
+ấ
+t k
+ỳ
+ 
+ký t
+ự
+ 
+nào không là s
+ố
+  
+ 
+\
+w
+ 
+B
+ấ
+t k
+ỳ
+ 
+“word” (ký  t
+ự
+, s
+ố
+, ho
+ặ
+c d
+ấ
+u g
+ạ
+ch dƣ
+ớ
+i) 
+ 
+\
+W
+ 
+B
+ấ
+t k
+ỳ
+ 
+ký t
+ự
+ 
+nào không là “word” (ký t
+ự
+, s
+ố
+, ho
+ặ
+c g
+ạ
+ch dƣ
+ớ
+i).
+ 
+*
+ 
+0 ho
+ặ
+c nhi
+ề
+u hơ
+n 1 ký t
+ự
+ 
+đ
+ứ
+ng trƣ
+ớ
+c Ví d
+ụ
+ 
+7*8 => 7778 ho
+ặ
+c 8.
+ 
++
+ 
+1 ho
+ặ
+c nhi
+ề
+u hơn 1 ký t
+ự
+ 
+đ
+ứ
+ng trƣ
+ớ
+c. Ví d
+ụ
+ 
+7+8 => 7778, not 8.
+ 
+( )
+ 
+Nhóm ký t
+ự
+ 
+đƣ
+ợ
+c xem nhƣ 1 thành ph
+ầ
+n. Ví d
+ụ
+ 
+(78)+ => 78 và 787878.
+ 
+{m,n}
+ 
+Ký t
+ự
+ 
+đ
+ứ
+ng trƣ
+ớ
+c có th
+ể
+ 
+xu
+ấ
+t hi
+ệ
+n t
+ừ
+ 
+m đ
+ế
+n n l
+ầ
+n. Ví d
+ụ
+, A{1,3} 
+=> A, AA, 
+or AAA. 
+ 
+|
+ 
+Ví d
+ụ
+: 8|6 => 8 ho
+ặ
+c 6. 
+ 
+[ ]
+ 
+Matches 1 ký t
+ự
+ 
+trong m
+ộ
+t dãy ký t
+ự
+ 
+phù h
+ợ
+p. Ví d
+ụ
+ 
+[A
+-
+C] matches A, B, 
+ho
+ặ
+c C.
+ 
+ 
+   
+Ví d
+ụ
+ 
+m
+ộ
+t s
+ố
+ 
+m
+ẫ
+u ki
+ể
+m tra nh
+ậ
+p li
+ệ
+u thƣ
+ờ
+ng
+ 
+s
+ử
+ 
+d
+ụ
+ng
+ 
+N
+ộ
+i dung ki
+ể
+m tra
+ 
+M
+ẫ
+u ki
+ể
+m tra
+ 
+Mô t
+ả
+ 
+Đ
+ị
+a ch
+ỉ
+ 
+email
+ 
+\
+S+@
+\
+S+
+\
+.
+\
+S+
+ 
+Đ
+ị
+nh
+ 
+nghĩa m
+ộ
+t đ
+ị
+a ch
+ỉ
+ 
+email 
+c
+ầ
+n có ký t
+ự
+ 
+@ và ký t
+ự
+ 
+d
+ấ
+u 
+ch
+ấ
+m (.)
+ 
+M
+ậ
+t kh
+ẩ
+u
+ 
+\
+w+
+ 
+M
+ậ
+t kh
+ẩ
+u b
+ắ
+t bu
+ộ
+c ph
+ả
+i là m
+ộ
+t 
+chu
+ỗ
+i các t
+ừ
+ 
+(ký t
+ự
+, kho
+ả
+ng 
+cách, ho
+ặ
+c d
+ấ
+u g
+ạ
+ch dƣ
+ớ
+i)
+ 
+M
+ậ
+t kh
+ẩ
+u v
+ớ
+i chi
+ề
+u dài xác 
+đ
+ị
+nh
+ 
+\
+w{4, 10}
+ 
+M
+ậ
+t kh
+ẩ
+u ph
+ả
+i có ít nh
+ấ
+t t
+ừ
+ 
+4 
+đ
+ế
+n 10 ký t
+ự
+ 
+M
+ậ
+t kh
+ẩ
+u 
+ph
+ứ
+c t
+ạ
+p hơn
+ 
+[a
+-
+zA
+-
+Z]
+\
+w*
+\
+d+
+\
+w*
+ 
+M
+ậ
+t kh
+ẩ
+u ph
+ả
+i b
+ắ
+t đ
+ầ
+u b
+ằ
+ng 1 
+ký t
+ự
+, theo sau là 0 ho
+ặ
+c nhi
+ề
+u 
+ký t
+ự
+. M
+ộ
+t ho
+ặ
+c nhi
+ề
+u ch
+ữ
+ 
+s
+ố
+, 
+sau đó là 0 ho
+ặ
+c nhi
+ề
+u ký t
+ự
+ 
+Ki
+ể
+m tra m
+ậ
+t kh
+ẩ
+u
+ 
+\
+S{4,10}
+ 
+M
+ậ
+t kh
+ẩ
+u ph
+ả
+i có 4 đ
+ế
+n 10 ký 
+t
+ự
+ 
+nhƣng có th
+ể
+ 
+có các ký t
+ự
+ 
+đ
+ặ
+t bi
+ệ
+t nhƣ (*. &,
+…)
+ 
+ 
+
+--- PAGE 42 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+42
+ 
+V.
+ 
+CustomValidator Control
+ 
+CustomValidator cho phép ta ki
+ể
+m tra d
+ữ
+ 
+li
+ệ
+u c
+ả
+ 
+hai phía client side và server side. Ta có 
+th
+ể
+ 
+g
+ắ
+n k
+ế
+t nh
+ữ
+ng v
+ớ
+i đi
+ề
+u khi
+ể
+n đ
+ể
+ 
+mà validation đƣ
+ợ
+c th
+ự
+c thi m
+ộ
+t cách t
+ự
+ 
+đ
+ộ
+ng. N
+ế
+u 
+validation fails, thu
+ộ
+c tính Page.IsValid đƣ
+ợ
+c đ
+ặ
+t
+ 
+là false tƣơng t
+ự
+ 
+nhƣ các đi
+ề
+u khi
+ể
+n ki
+ể
+m tra 
+nh
+ậ
+p li
+ệ
+u khác. 
+ 
+C
+ả
+ 
+hai ki
+ể
+m tra nh
+ậ
+p li
+ệ
+u 
+ở
+ 
+client và server đƣ
+ợ
+c th
+ự
+c hi
+ệ
+n tƣơng t
+ự
+ 
+nhau. M
+ộ
+t phƣơng 
+th
+ứ
+c v
+ớ
+i 2 tham s
+ố
+ 
+<Tên hàm>(<Tên control>,<Đ
+ố
+i tư
+ợ
+ng ki
+ể
+m tra>).
+ 
+Đ
+ố
+i tƣ
+ợ
+ng ki
+ể
+m tra 
+cung c
+ấ
+p thu
+ộ
+c tính V
+alue ch
+ứ
+a giá tr
+ị
+ 
+đƣ
+ợ
+c g
+ắ
+n k
+ế
+t v
+ớ
+i đi
+ề
+u khi
+ể
+n nh
+ậ
+p li
+ệ
+u. Ví d
+ụ
+, đ
+ể
+ 
+ki
+ể
+m 
+tra s
+ố
+ 
+nh
+ậ
+p vào textbox có th
+ể
+ 
+chia h
+ế
+t cho 5 hay không
+ 
+<script type="text/javascript">
+ 
+  
+function EmpIDClientValidate(ctl, args)
+ 
+  
+{
+ 
+  
+ 
+  
+args.IsValid=(args.Value%5 == 0);
+ 
+  
+}
+ 
+</scrip
+t>  
+ 
+ 
+<asp:TextBox runat="server" ID="EmpID" />
+ 
+<asp:CustomValidator runat="server" ControlToValidate="EmpID"
+ 
+  
+ClientValidationFunction="EmpIDClientValidate"
+ 
+  
+ErrorMessage="ID must be a multiple of 5" Display="dynamic">*
+ 
+</asp:CustomValidator>
+ 
+ 
+Khi thôn
+g tin c
+ủ
+a form đƣ
+ợ
+c chuy
+ể
+n v
+ề
+ 
+server, ASP.net s
+ẽ
+ 
+t
+ự
+ 
+đ
+ộ
+ng g
+ọ
+i s
+ự
+ 
+ki
+ệ
+n 
+CustomValidator.ServerValidate. Ta có th
+ể
+ 
+th
+ự
+c hi
+ệ
+n các ki
+ể
+m tra tƣơng t
+ự
+u b
+ằ
+ng mã l
+ệ
+nh 
+C#. Đo
+ạ
+n mã l
+ệ
+nh sau đây dùng đ
+ể
+ 
+ki
+ể
+m tra nh
+ậ
+p li
+ệ
+u 
+ở
+ 
+trình ch
+ủ
+.
+ 
+protected void EmpIDServerValidate
+(object sender, ServerValidateEventArgs args)
+ 
+{
+ 
+    
+try
+ 
+    
+{        args.IsValid = (int.Parse(args.Value)%5 == 0);    }
+ 
+    
+catch
+ 
+    
+{        args.IsValid = false;
+        
+// Khi có m
+ộ
+t l
+ỗ
+i x
+ả
+y ra
+    
+}
+ 
+}
+ 
+ 
+Câu h
+ỏ
+i/bài t
+ậ
+p c
+ủ
+ng c
+ố
+:
+ 
+1.
+ 
+Hãy nêu tên các
+ 
+đ
+i
+ề
+u khi
+ể
+n ki
+ể
+m tra nh
+ậ
+p li
+ệ
+u trong ASP.net
+ 
+2.
+ 
+Cho bi
+ế
+t các thu
+ộ
+c tính c
+ủ
+a l
+ớ
+p 
+cơ s
+ở
+ 
+Validator
+.
+ 
+ 
+3.
+ 
+Li
+ệ
+t kê các ký t
+ự
+ 
+đ
+ặ
+c bi
+ệ
+t đƣ
+ợ
+c dùng đ
+ể
+ 
+t
+ạ
+o m
+ẫ
+u ki
+ể
+m tra nh
+ậ
+p li
+ệ
+u
+.  
+ 
+4.
+ 
+Cho bi
+ế
+t s
+ự
+ 
+khác nhau gi
+ữ
+a lo
+ạ
+i đi
+ề
+u khi
+ể
+n nh
+ậ
+p li
+ệ
+u CustomValidator và các lo
+ạ
+i đi
+ề
+u 
+khi
+ể
+n nh
+ậ
+p li
+ệ
+u khác.
+ 
+5.
+ 
+Th
+ự
+c hành bài t
+ậ
+p Lab 3.3 
+ở
+ 
+trang 50 b
+ằ
+ng cách vi
+ế
+t code
+ 
+6.
+ 
+Th
+ự
+c hành bài t
+ậ
+p Lab 3.3 
+ở
+ 
+trang 50 b
+ằ
+ng công c
+ụ
+ 
+Wizard.
+ 
+ 
+ 
+ 
+
+--- PAGE 43 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+43
+ 
+Bài 4:
+ 
+Rich Controls
+ 
+ 
+M
+ụ
+c tiêu h
+ọ
+c t
+ậ
+p:
+ 
+-
+ 
+T
+ạ
+o file 
+ch
+ứ
+a n
+ộ
+i dung 
+qu
+ả
+ng cáo
+ 
+xml
+ 
+-
+ 
+Liên k
+ế
+t 
+t
+ậ
+p tin 
+qu
+ả
+ng cáo v
+ớ
+i đi
+ề
+u khi
+ể
+n AdRotator
+ 
+-
+ 
+T
+ạ
+o đƣ
+ợ
+c m
+ộ
+t quy
+ể
+n l
+ị
+ch v
+ớ
+i đi
+ề
+u khi
+ể
+n Calendar.
+ 
+-
+ 
+Cài đ
+ặ
+t s
+ự
+ 
+ki
+ệ
+n 
+và đ
+ị
+nh d
+ạ
+ng quy
+ể
+n l
+ị
+ch 
+Calendar.
+ 
+ 
+I.
+ 
+Rich controls là gì? 
+ 
+Rich controls là các webcontrols có th
+ể
+ 
+t
+ạ
+o các thành ph
+ầ
+n giao di
+ệ
+n
+ 
+ngƣ
+ờ
+i dùng
+ 
+khá ph
+ứ
+c 
+t
+ạ
+p. M
+ặ
+c dù không có m
+ộ
+t đ
+ị
+nh nghĩa c
+ụ
+ 
+th
+ể
+ 
+nào
+ 
+đ
+ố
+i v
+ớ
+i
+ 
+thu
+ậ
+t ng
+ữ
+ 
+rich controls
+, chúng ta có 
+th
+ể
+ 
+hi
+ể
+u rich controls là các web controls cung c
+ấ
+p m
+ộ
+t mô hình đ
+ố
+i tƣ
+ợ
+ng khác bi
+ệ
+t v
+ớ
+i các 
+trình bày HTML. M
+ộ
+t rich control có th
+ể
+ 
+đƣ
+ợ
+c khai báo dƣ
+ớ
+i d
+ạ
+ng các th
+ẻ
+, và sau đó s
+ẽ
+ 
+tr
+ả
+ 
+v
+ề
+ 
+m
+ộ
+t lo
+ạ
+t các th
+ẻ
+ 
+HTML và 
+cũng có th
+ể
+ 
+có các mã l
+ệ
+nh JavaSript.  
+ 
+ 
+ASP.NET
+ 
+bao g
+ồ
+m r
+ấ
+t nhi
+ề
+u các rich controls khác nhau đƣ
+ợ
+c trình bày 
+ở
+ 
+các ph
+ầ
+n khác 
+nhau trong tài li
+ệ
+u này. C
+ụ
+ 
+th
+ể
+ 
+là các đi
+ề
+u khi
+ể
+n d
+ự
+a trên d
+ữ
+ 
+li
+ệ
+u, các đi
+ề
+u khi
+ể
+n chuy
+ể
+n 
+hƣ
+ớ
+ng d
+ữ
+ 
+li
+ệ
+u. 
+M
+ộ
+t s
+ố
+ 
+rich controls tiêu
+ 
+bi
+ể
+u đƣ
+ợ
+c trình bày theo sau. 
+ 
+-
+ 
+AdRotator:
+ 
+Đi
+ề
+u khi
+ể
+n này là m
+ộ
+t b
+ả
+ng qu
+ả
+ng cáo đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+m
+ộ
+t trong t
+ậ
+p các 
+ả
+nh 
+đƣ
+ợ
+c đ
+ặ
+t đ
+ị
+nh k
+ỳ
+ 
+trong file XML
+ 
+-
+ 
+Calendar:
+ 
+Control này cho phép ta t
+ạ
+o m
+ộ
+t l
+ị
+ch bi
+ể
+u có th
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+tháng và ngày. Ta 
+cũng có th
+ể
+ 
+ch
+ọ
+n ngày nà
+o đó.
+ 
+-
+ 
+MultiView, View, WiZard:
+ 
+Ta có th
+ể
+ 
+nghĩ các controls này nhƣ là các 
+b
+ả
+ng
+ 
+cho phép 
+ta chuy
+ể
+n đ
+ổ
+i ccs nhóm controls trong m
+ộ
+t trang. Control Wizard có th
+ể
+ 
+bao g
+ồ
+m ch
+ứ
+c năng 
+chuy
+ể
+n
+ 
+hƣ
+ớ
+ng d
+ữ
+ 
+li
+ệ
+u. 
+ 
+ 
+-
+ 
+Xml:
+ 
+controls này đ
+ọ
+c t
+ậ
+p tin XML và 
+XSLT
+, sau đó
+ 
+hi
+ể
+n 
+th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u dƣ
+ớ
+i d
+ạ
+ng 
+HTML 
+ở
+ 
+trình duy
+ệ
+t. 
+ 
+Trong n
+ộ
+i dung bài h
+ọ
+c này, chúng ta ch
+ỉ
+ 
+đi vào 2 n
+ộ
+i dung chính là AdRotator và 
+Calendar. 
+Các đi
+ề
+u khi
+ể
+n chuy
+ể
+n hƣ
+ớ
+ng d
+ữ
+ 
+li
+ệ
+u nhƣ MultiView, View, Wizard s
+ẽ
+ 
+đƣ
+ợ
+c trình 
+bày trong m
+ộ
+t chƣơng khác. Tƣơng t
+ự
+ 
+v
+ớ
+i XML 
+s
+ẽ
+ 
+đƣ
+ợ
+c trình bày trong ph
+ầ
+n ADO.net 
+ 
+II.
+ 
+Đi
+ề
+u khi
+ể
+n t
+ạ
+o t
+ậ
+p 
+ả
+nh qu
+ả
+ng cáo 
+AdRotator
+ 
+AdRotator ch
+ọ
+n ng
+ẫ
+u nhiên m
+ộ
+t hình 
+ả
+nh nào đó đ
+ể
+ 
+làm tiêu đ
+ề
+ 
+cho qu
+ả
+ng cáo trong danh 
+sách các hình 
+ả
+nh ch
+ỉ
+ 
+ra trong t
+ậ
+p tin XML. Trƣ
+ớ
+c khi t
+ạ
+o đi
+ề
+u khi
+ể
+n này, ta c
+ầ
+n t
+ạ
+o 
+t
+ậ
+p tin 
+XML. 
+ 
+Ví d
+ụ
+:
+ 
+-
+ 
+T
+ạ
+o t
+ậ
+p tin 
+Ads.xml
+ 
+v
+ớ
+i n
+ộ
+i dung 
+nhƣ sau:
+ 
+<Advertisements>
+ 
+  
+<Ad>
+ 
+    
+<ImageUrl>
+BannerTravel1
+.
+jpg
+</ImageUrl>
+ 
+    
+<NavigateUrl> 
+http://www.
+dulichvietnam.vn
+ 
+</NavigateUrl>
+ 
+    
+<AlternateText> 
+Web site du l
+ị
+ch Vi
+ệ
+t Nam
+ 
+</AlternateText>
+ 
+  
+  
+<Impressions> 20 </Impressions>
+ 
+    
+<Keyword> books </Keyword>
+ 
+
+--- PAGE 44 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+44
+ 
+  
+</Ad>
+ 
+  
+<Ad>
+ 
+    
+<ImageUrl> 
+BannerTravel2
+.jpg </ImageUrl>
+ 
+    
+<NavigateUrl> 
+http://www.
+dulichvietnam.vn
+ 
+</NavigateUrl>
+ 
+    
+<AlternateText> 
+Web site du l
+ị
+ch Vi
+ệ
+t Nam
+ 
+</AlternateText>
+ 
+    
+<Im
+pressions> 20 </Impressions>
+ 
+    
+<Keyword> Java </Keyword>
+ 
+  
+</Ad>
+ 
+  
+</Advertisements>
+ 
+    
+B
+ả
+ng sau đây m
+ô t
+ả
+ 
+các 
+th
+ẻ
+ 
+c
+ủ
+a t
+ậ
+p tin Advertisement
+ 
+Thành ph
+ầ
+n
+ 
+Mô t
+ả
+ 
+ImageUrl
+ 
+Ả
+nh đƣ
+ợ
+c hi
+ể
+n th
+ị
+. Có th
+ể
+ 
+là m
+ộ
+t liên k
+ế
+t tƣơng đ
+ố
+i (
+m
+ộ
+t t
+ậ
+p tin 
+trong thưc m
+ụ
+c hi
+ệ
+n 
+t
+ạ
+i
+) ho
+ặ
+c m
+ộ
+t đ
+ị
+a ch
+ỉ
+ 
+URL.
+ 
+NavigateUrl
+ 
+Liên k
+ế
+t đƣ
+ợ
+c theo sau n
+ế
+u ngƣ
+ờ
+i dùng click vào banner
+ 
+AlternateText
+ 
+Đo
+ạ
+n text s
+ẽ
+ 
+đƣ
+ợ
+c hi
+ệ
+n th
+ị
+ 
+n
+ế
+u hình 
+ả
+nh không đƣ
+ợ
+c hi
+ể
+n th
+ị
+. 
+Đo
+ạ
+n text này cũng đƣ
+ợ
+c dùng nhƣ tooltip trong m
+ộ
+t vài browser
+ 
+Impressions
+ 
+M
+ộ
+t s
+ố
+ 
+ch
+o bi
+ế
+t qu
+ả
+ng cáo đ
+ặ
+t bao nhiêu l
+ầ
+n. Ví d
+ụ
+: m
+ộ
+t banner 
+v
+ớ
+i giá tr
+ị
+ 
+10 s
+ẽ
+ 
+đƣ
+ợ
+c xu
+ấ
+t hi
+ệ
+n 2 l
+ầ
+n so v
+ớ
+i banner có giá tr
+ị
+ 
+5
+ 
+Keyword
+ 
+M
+ộ
+t t
+ừ
+ 
+khóa xác đ
+ị
+nh m
+ộ
+t nhóm các qu
+ả
+ng cáo. Có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng 
+đ
+ể
+ 
+l
+ọ
+c d
+ữ
+ 
+li
+ệ
+u.
+ 
+ 
+-
+ 
+Liên k
+ế
+t đi
+ề
+u khi
+ể
+n AdRotator v
+ớ
+i t
+ậ
+p tin Ads.xml
+ 
+nhƣ sau:
+ 
+<asp:AdRotator runat="server" AdvertisementFile="Ads.xml" Target="_blank" />
+ 
+III. 
+Đi
+ề
+u khi
+ể
+n t
+ạ
+o l
+ị
+ch
+ 
+Calendar
+ 
+     
+Đi
+ề
+u khi
+ể
+n Calendar t
+ạ
+o m
+ộ
+t quy
+ể
+n l
+ị
+ch khá đ
+ẹ
+p v
+ớ
+i nhi
+ề
+u tính năng thêm vào. M
+ộ
+t s
+ố
+ 
+tính 
+năng n
+ổ
+i b
+ậ
+t c
+ủ
+a đi
+ề
+u khi
+ể
+n này nhƣ  sau:
+ 
+ 
+-
+ 
+ 
+Nó có th
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+các ngày trong tháng. 
+ 
+-
+ 
+Ngƣ
+ờ
+i dùng có th
+ể
+ 
+thay đ
+ổ
+i tháng xem, ch
+ọ
+n ngày ho
+ặ
+c m
+ộ
+t s
+ố
+ 
+ngày nào đó. 
+ 
+-
+ 
+Ngƣ
+ờ
+i dùng có th
+ể
+ 
+đ
+ị
+nh d
+ạ
+ng màu n
+ề
+n, font ch
+ữ
+, tiêu đè, đ
+ị
+nh d
+ạ
+ng ngày. 
+ 
+-
+ 
+L
+ậ
+p trình viên có th
+ể
+ 
+cài đ
+ặ
+t s
+ự
+ 
+ki
+ệ
+n SelectionChanged.
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng 
+s
+ự
+ 
+ki
+ệ
+n DayRender đ
+ể
+ 
+thay đ
+ổ
+i đ
+ị
+nh d
+ạ
+ng c
+ủ
+a ô trong quy
+ể
+n l
+ị
+ch. 
+ 
+-
+ 
+Có th
+ể
+ 
+làm n
+ổ
+i b
+ậ
+t các ngày quan tr
+ọ
+ng trong quy
+ể
+n l
+ị
+ch.
+ 
+T
+ạ
+o m
+ớ
+i m
+ộ
+t Calendar
+ 
+<asp:Calendar runat="server" ID="Calendar1“ 
+ 
+                          
+ 
+ 
+ForeColor="red" BackColor="lightyellow" 
+/>
+ 
+-
+ 
+Màu n
+ề
+n và màu ch
+ữ
+ 
+thay đ
+ổ
+i sang Green và Yellow khi ngày là ngày cu
+ố
+i tu
+ầ
+n
+ 
+Cài đ
+ặ
+t s
+ự
+ 
+ki
+ệ
+n DayRender
+ 
+protected void Calendar1_DayRender(object sender,
+ 
+                                                                          
+DayRenderEventArgs e)
+ 
+{
+ 
+   
+ 
+if (e.Day.IsWeekend)
+ 
+
+--- PAGE 45 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+45
+ 
+    
+{
+ 
+            
+e.Cell.BackColor = System.Drawing.Color.Green;
+ 
+            
+e.Cell.ForeColor = System.Drawing.Color.Yellow;
+ 
+            
+e.Day.IsSelectable = false;
+ 
+    
+}
+ 
+}
+ 
+ 
+   
+M
+ộ
+t s
+ố
+ 
+thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng 
+c
+ủ
+a Calendar 
+ 
+Thu
+ộ
+c tính
+ 
+Ý ng
+hĩa
+ 
+DayHeaderStyle
+ 
+Đ
+ị
+nh d
+ạ
+ng khu v
+ự
+c Calendar hi
+ể
+n th
+ị
+ 
+ngày trong tu
+ầ
+n 
+ 
+DayStyle
+ 
+Đ
+ị
+nh d
+ạ
+ng m
+ặ
+c đ
+ị
+nh ngày trong tháng hi
+ệ
+n hành
+ 
+NextPrevStyle
+ 
+Đ
+ị
+nh d
+ạ
+ng navigation controls trong ph
+ầ
+n tiêu đ
+ề
+ 
+đ
+ể
+ 
+di chuy
+ể
+n 
+t
+ừ
+ 
+tháng này sang tháng khác. 
+ 
+OtherMonthDayStyle
+ 
+Ki
+ể
+u ngày không đƣ
+ợ
+c hi
+ể
+n th
+ị
+ 
+trong tháng hi
+ệ
+n t
+ạ
+i. Các ngày 
+này đƣ
+ợ
+c dùng đ
+ể
+ 
+fill calendar grid.
+ 
+SelectedDayStyle
+ 
+Đ
+ị
+nh d
+ạ
+ng ngày đƣ
+ợ
+c ch
+ọ
+n trong calendar.
+ 
+SelectorStyle
+ 
+Đ
+ị
+nh d
+ạ
+ng controls cho tu
+ầ
+n ho
+ặ
+c tháng đƣ
+ợ
+c ch
+ọ
+n.
+ 
+TitleStyle
+ 
+Đ
+ị
+nh d
+ạ
+ng khu v
+ự
+c tiê
+u đ
+ề
+.
+ 
+TodayDayStyle
+ 
+Đ
+ị
+nh d
+ạ
+ng ngày đƣ
+ợ
+c gán là ngày hôm nay. 
+ 
+WeekendDayStyle
+ 
+Đ
+ị
+nh d
+ạ
+ng ngày cu
+ố
+i tu
+ầ
+n 
+ 
+ 
+Câu h
+ỏ
+i/Bài t
+ậ
+p c
+ủ
+ng c
+ố
+:
+ 
+1.
+ 
+T
+ạ
+o đƣ
+ợ
+c m
+ộ
+t quy
+ể
+n l
+ị
+ch v
+ớ
+i đi
+ề
+u khi
+ể
+n Calendar
+ 
+nhƣ hình bên
+.
+ 
+2.
+ 
+Yêu c
+ầ
+u: 
+ 
+–
+ 
+Khi m
+ở
+ 
+trang web hi
+ể
+n th
+ị
+ 
+ngày gi
+ờ
+ 
+hi
+ệ
+n t
+ạ
+i
+ 
+–
+ 
+T
+ạ
+o gh
+i nh
+ớ
+ 
+cho các ngày 1/1, 1/5, 1/6 và 
+20/11
+ 
+–
+ 
+Khi ngày hi
+ệ
+n t
+ạ
+i gi
+ố
+ng nhƣ ngày đã ghi nh
+ớ
+ 
+thì có thông báo nh
+ắ
+c nh
+ở
+. 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 46 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+46
+ 
+Bài t
+ậ
+p
+ 
+Chƣơng 3
+ 
+Lab 3.1: S
+ử
+ 
+d
+ụ
+ng ASP.net Web Control cơ b
+ả
+n
+ 
+ 
+M
+ụ
+c tiêu:
+ 
+-
+ 
+Sinh viên có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng web controls trong ASP.net
+ 
+-
+ 
+Sinh viên có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng các thu
+ộ
+c tính c
+ủ
+a các đ
+ố
+i tƣ
+ợ
+ng trong Web controls
+ 
+-
+ 
+Cài đ
+ặ
+t đƣ
+ợ
+c các s
+ự
+ 
+ki
+ệ
+n đơn gi
+ả
+n trong ASP.net
+ 
+Ki
+ế
+n th
+ứ
+c c
+ầ
+n thi
+ế
+t
+:
+ 
+-
+ 
+Sinh viên đã h
+ọ
+c WebControls.
+ 
+-
+ 
+Sinh viên có ki
+ế
+n th
+ứ
+c v
+ề
+ 
+mô hình qu
+ả
+n lý s
+ự
+ 
+ki
+ệ
+n trongASP.net
+ 
+N
+ộ
+i dung:
+ 
+1.
+ 
+Sinh viên thi
+ế
+t k
+ế
+t tr
+ang web có n
+ộ
+i dung nhƣ 
+hình 1
+:
+ 
+   
+L
+ầ
+n đ
+ầ
+u tiên khi trang web đƣ
+ợ
+c g
+ọ
+i s
+ẽ
+ 
+hi
+ể
+n th
+ị
+ 
+các thông tin c
+ầ
+n thi
+ế
+t cho ngƣ
+ờ
+i dùng 
+ch
+ọ
+n l
+ự
+a các thông tin c
+ầ
+n thi
+ế
+t. 
+ 
+2.
+ 
+Khi ngƣ
+ờ
+i dùng xác đ
+ị
+nh các thông tin, trang web s
+ẽ
+ 
+hi
+ể
+n th
+ị
+ 
+nhƣ 
+hình 2
+ 
+bên dƣ
+ớ
+i:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.
+ 
+Ngƣ
+ờ
+i dùng thay đ
+ổ
+i ch
+ọ
+n l
+ự
+a thì trang web s
+ẽ
+ 
+hi
+ể
+n th
+ị
+ 
+nhƣ hình 3 phía dƣ
+ớ
+i
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Hình 1
+ 
+Hìn
+h 2
+ 
+
+--- PAGE 47 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+47
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Hƣ
+ớ
+ng d
+ẫ
+n:
+ 
+Bƣ
+ớ
+c 1: 
+T
+ạ
+o trang 
+GreetingCards.aspx
+ 
+có các thành ph
+ầ
+n nhƣ sau:
+ 
+Tên
+ 
+Ki
+ể
+u
+ 
+Thu
+ộ
+c tính
+ 
+Di
+ễ
+n gi
+ả
+i
+ 
+lstMaunen
+ 
+dropdownlist
+ 
+runat
+="server"
+ 
+Danh sách màu 
+n
+ề
+n
+ 
+lstTenfont
+ 
+dropdownlist
+ 
+runat
+="server"
+ 
+Danh sách tên font
+ 
+txtFontSize
+ 
+textbox
+ 
+ 
+Kích thƣ
+ớ
+c font
+ 
+lstBorder
+ 
+radiobuttonlist
+ 
+ 
+Ch
+ọ
+n màu n
+ề
+n
+ 
+chkPicture
+ 
+checkbox
+ 
+ 
+ 
+txtGreeting
+ 
+textbox
+ 
+TextMode
+="MultiLine"
+ 
+runat
+="server"
+ 
+Dòng ch
+ữ
+ 
+hi
+ể
+n th
+ị
+ 
+cmdUpdate
+ 
+butto
+n
+ 
+Text
+="Update"
+ 
+onclick
+="cmdUpdate_Click"
+ 
+Nút l
+ệ
+nh Update
+ 
+lblGreeting
+ 
+Label
+ 
+ 
+ 
+imgDefault
+ 
+Image
+ 
+Visible
+="False"
+ 
+ 
+pnlCard
+ 
+panel
+ 
+Height
+="507px"
+ 
+Width
+="339px"
+ 
+Khung hình
+ 
+ 
+Bư
+ớ
+c 2:
+ 
+Ph
+ầ
+n x
+ử
+ 
+lý CodeBehind c
+ủ
+a 
+GreetingCards.aspx
+ 
+     
+-
+ 
+Code x
+ử
+ 
+lý trong hàm Page
+Load
+ 
+        
+protected
+ 
+void
+ 
+Page_Load(
+object
+ 
+sender, System.
+EventArgs
+ 
+e)
+ 
+ 
+ 
+{
+ 
+ 
+ 
+ 
+if
+ 
+(
+this
+.IsPostBack == 
+false
+)
+ 
+ 
+ 
+ 
+{
+ 
+ 
+ 
+ 
+ 
+// Thêm các m
+ụ
+c ch
+ọ
+n.
+ 
+ 
+ 
+ 
+ 
+lstMaunen
+.Items.Add(
+"White"
+);
+ 
+ 
+ 
+ 
+ 
+lstMaunen
+.Items.Add(
+"Red"
+);
+ 
+ 
+ 
+ 
+ 
+lstMaunen
+.Items.Add(
+"Green"
+);
+ 
+ 
+ 
+ 
+ 
+lstMaunen
+.I
+tems.Add(
+"Blue"
+);
+ 
+Hình 3
+ 
+
+--- PAGE 48 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+48
+ 
+ 
+ 
+ 
+ 
+lstMaunen
+.Items.Add(
+"Yellow"
+);
+ 
+ 
+ 
+ 
+ 
+ 
+// Thêm m
+ụ
+c ch
+ọ
+n tên font
+ 
+ 
+ 
+ 
+ 
+lstTenfont
+.Items.Add(
+"Times New Roman"
+);
+ 
+ 
+ 
+ 
+ 
+lstTenfont
+.Items.Add(
+"Arial"
+);
+ 
+ 
+ 
+ 
+ 
+lstTenfont
+.Items.Add(
+"Verdana"
+);
+ 
+ 
+ 
+ 
+ 
+lstTenfont
+.Items.Add(
+"Tahoma"
+);
+ 
+                
+// 
+Thêm m
+ụ
+c ch
+ọ
+n ki
+ể
+u đư
+ờ
+ng vi
+ề
+n
+ 
+                 
+ListItem
+ 
+item = 
+new
+ 
+ListItem
+();
+ 
+                
+// M
+ụ
+c ch
+ọ
+n có tên ki
+ể
+u đư
+ờ
+ng là None.
+ 
+                
+item.Text = 
+BorderStyle
+.None.ToString();
+ 
+                
+item.Value = ((
+int
+)
+BorderStyle
+.None).ToString();
+ 
+                
+// Thêm m
+ụ
+c ch
+ọ
+n
+ 
+                
+lstBorder.Items.Add(item);
+ 
+                
+item = 
+new
+ 
+ListItem
+();
+ 
+                
+item.Text = 
+BorderStyle
+.Double.ToString();
+ 
+                
+item.Value = ((
+int
+)
+BorderStyle
+.Double).ToString();
+ 
+               
+ 
+lstBorder.Items.Add(item);
+ 
+ 
+                
+item = 
+new
+ 
+ListItem
+();
+ 
+                
+item.Text = 
+BorderStyle
+.Solid.ToString();
+ 
+                
+item.Value = ((
+int
+)
+BorderStyle
+.Solid).ToString();
+ 
+                
+lstBorder.Items.Add(item); 
+ 
+ 
+   
+ 
+    
+// M
+ặ
+c đ
+ị
+nh
+ 
+không có đư
+ờ
+ng vi
+ề
+n cho khung hình.
+ 
+ 
+ 
+    
+lstBorder.SelectedIndex = 0;
+ 
+        
+ 
+     
+//Đ
+ặ
+t hình n
+ề
+n.
+ 
+ 
+ 
+ 
+ 
+imgDefault.ImageUrl = 
+"defaultpic.png"
+;
+ 
+ 
+ 
+ 
+}
+ 
+ 
+ 
+}
+ 
+ 
+-
+ 
+Code x
+ử
+ 
+lý cho nút l
+ệ
+nh Command
+ 
+ 
+protected
+ 
+void
+ 
+cmdUpdate_Click(
+object
+ 
+sender, System.
+EventArgs
+ 
+e)
+ 
+ 
+{
+ 
+ 
+ 
+ 
+// C
+ậ
+p nh
+ậ
+t màu n
+ề
+n.
+ 
+ 
+pnlCard.BackColor = 
+Color
+.FromName(lstMaunen.SelectedItem.Text);
+ 
+ 
+ 
+ 
+ 
+// C
+ậ
+p nh
+ậ
+t font ch
+ữ
+ 
+ 
+lblGreeting.Font.Name = lstFontName.SelectedItem.Text;
+ 
+ 
+ 
+ 
+try
+ 
+ 
+ 
+{
+ 
+ 
+ 
+ 
+if
+ 
+(
+Int32
+.Parse(txtFontSize.Text) > 0)
+ 
+
+--- PAGE 49 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+49
+ 
+ 
+ 
+ 
+{
+ 
+                     
+lblG
+reeting.Font.Size =   
+ 
+                           
+FontUnit
+.Point(
+Int32
+.Parse(txtFontSize.Text));
+ 
+ 
+ 
+ 
+}
+ 
+ 
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+// C
+ậ
+p nh
+ậ
+t ki
+ể
+u đư
+ờ
+ng vi
+ề
+n
+ 
+pnlCard.BorderStyle =        
+ 
+              
+(
+BorderStyle
+)
+Int32
+.Parse(lstBorder.SelectedItem.Value);
+ 
+ 
+ 
+ 
+// C
+ậ
+p nh
+ậ
+t h
+ình.
+ 
+ 
+ 
+ 
+if
+ 
+(chkPicture.Checked == 
+true
+)
+ 
+ 
+ 
+ 
+{
+ 
+ 
+ 
+ 
+ 
+imgDefault.Visible = 
+true
+;
+ 
+ 
+ 
+ 
+}
+ 
+ 
+ 
+ 
+else
+ 
+ 
+ 
+ 
+{
+ 
+ 
+ 
+ 
+ 
+imgDefault.Visible = 
+false
+;
+ 
+ 
+ 
+ 
+}
+ 
+ 
+ 
+ 
+ 
+//N
+ộ
+i dung câu chào
+ 
+ 
+ 
+ 
+lblGreeting.Text = txtGreeting.Text;
+ 
+ 
+ 
+}
+ 
+ 
+----
+H
+ế
+t
+---
+ 
+ 
+ 
+
+--- PAGE 50 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+50
+ 
+Lab 3.2: S
+ử
+ 
+d
+ụ
+ng các Web
+ 
+Control cơ b
+ả
+n
+ 
+ 
+1.
+ 
+M
+ụ
+c tiêu 
+ 
+-
+  
+S
+ử
+ 
+d
+ụ
+ng các thành ph
+ầ
+n web server control cơ b
+ả
+n 
+ 
+-
+  
+S
+ử
+ 
+d
+ụ
+ng l
+ớ
+p StreamReader và StreamWriter đ
+ể
+ 
+đ
+ọ
+c ghi file d
+ạ
+ng text 
+ 
+-
+  
+Các thao tác x
+ử
+ 
+lý trên chu
+ỗ
+i, chia chu
+ỗ
+i, thay th
+ế
+ 
+chu
+ỗ
+i. 
+ 
+2. 
+Yêu c
+ầ
+u 
+ 
+-
+  
+Đã làm quen v
+ớ
+i các server control cơ b
+ả
+n, 
+ 
+ 
+-
+  
+Đã h
+ọ
+c qua các l
+ớ
+p x
+ử
+ 
+lý nh
+ậ
+t xu
+ấ
+t file c
+ủ
+a C#.
+ 
+3. N
+ộ
+i dung
+ 
+ 
+-
+ 
+Các trang web thƣ
+ờ
+ng có ph
+ầ
+n GuestBook, cho phép user có th
+ể
+ 
+lƣu l
+ạ
+i các comment cho 
+ch
+ủ
+  
+nhân  c
+ủ
+a  trang  web.  Trong  bài  này  chúng  ta  s
+ẽ
+  
+t
+ạ
+o  m
+ộ
+t  form  minh  h
+ọ
+a  d
+ạ
+ng  
+GuestBook, 
+cho user nh
+ậ
+p vào các thông tin: 
+ 
+
+ 
+Tiêu đ
+ề
+ 
+ 
+
+ 
+H
+ọ
+ 
+tên 
+ 
+
+ 
+Đ
+ị
+a ch
+ỉ
+ 
+email 
+ 
+
+ 
+N
+ộ
+i dung comment 
+ 
+-
+  
+Các thông tin này s
+ẽ
+ 
+đƣ
+ợ
+c lƣu l
+ạ
+i trên server (thông qua file text) 
+ 
+-
+  
+Nh
+ữ
+ng entry c
+ủ
+a user trƣ
+ớ
+c đó post lên cũng đƣ
+ợ
+c hi
+ể
+n th
+ị
+ 
+trong trang này. 
+ 
+-
+  
+Hình 1 minh h
+ọ
+a fo
+rm 
+GuestBook
+ 
+4. 
+Hƣ
+ớ
+ng d
+ẫ
+n:
+ 
+a. 
+Thi
+ế
+t k
+ế
+ 
+giao di
+ệ
+n:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 51 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+51
+ 
+b. 
+ 
+Chi ti
+ế
+t c
+ủ
+a các control nhƣ sau:
+ 
+Tên control
+ 
+Ki
+ể
+u
+ 
+Thu
+ộ
+c tính
+ 
+Di
+ễ
+n gi
+ả
+i
+ 
+txtTieuDe
+ 
+TextBox
+ 
+TextMode = SingleLine  
+ 
+Nh
+ậ
+p tiêu đ
+ề
+ 
+comment
+ 
+txtHoTen  
+ 
+TextBox
+ 
+TextMode = SingleLine  
+ 
+Nh
+ậ
+p h
+ọ
+ 
+tên 
+ 
+ 
+txtEmail  
+ 
+TextBox
+ 
+TextMode = SingleLine  
+ 
+Đ
+ị
+a ch
+ỉ
+ 
+email 
+ 
+ 
+txtNoiDung  
+ 
+TextBox
+ 
+TextMode = MultiLine 
+ 
+Rows = 6 
+ 
+Nh
+ậ
+p n
+ộ
+i dung comment 
+ 
+ 
+Btn_GoiND  
+ 
+Button
+ 
+ 
+Th
+ự
+c  thi hành đ
+ộ
+ng post comment  
+m
+ớ
+i lên server. Trình x
+ử
+ 
+lý s
+ự
+ 
+ki
+ệ
+n 
+này s
+ẽ
+ 
+thêm m
+ộ
+t 
+entry m
+ớ
+i vào file.
+ 
+EntryComment
+ 
+Span
+ 
+Runat = server  
+ 
+Ch
+ứ
+a  toàn  b
+ộ
+  
+các  entry comment 
+đƣ
+ợ
+c l
+ấ
+y t
+ừ
+ 
+trong file trên server
+ 
+ 
+c.
+ 
+Ph
+ầ
+n x
+ử
+ 
+lý trong code behind 
+ 
+   
+B
+ao g
+ồ
+m có 2 ph
+ầ
+n chính
+: G
+ử
+i n
+ộ
+i dung comment và hi
+ể
+n th
+ị
+ 
+danh sách các comment 
+hi
+ệ
+n có trong t
+ậ
+p tin 
+ở
+ 
+server.
+ 
+ 
+    
+Hàm x
+ử
+ 
+lý s
+ự
+ 
+ki
+ệ
+n cho nút G
+ử
+i n
+ộ
+i dung:
+ 
+    
+protected
+ 
+void
+ 
+Btn_GuiND_Click(
+Object
+ 
+sender, 
+EventArgs
+ 
+e)
+ 
+    
+{
+ 
+        
+//T
+ạ
+o file theo đư
+ờ
+ng d
+ẫ
+n c
+ủ
+a website
+ 
+        
+string
+ 
+sfile = 
+"D://BaiTH_Web2//Lab2//data.txt"
+;
+ 
+        
+using
+ 
+(
+StreamWr
+iter
+ 
+writer = 
+new
+ 
+StreamWriter
+(sfile, 
+true
+))
+ 
+        
+{
+ 
+            
+writer.WriteLine(txtTieude.Text);
+ 
+            
+writer.WriteLine(txtHoTen.Text);
+ 
+            
+writer.WriteLine(txtEmail.Text);
+ 
+            
+writer.WriteLine(txtNoidung.Text);
+ 
+            
+writer
+.WriteLine(
+"#END"
+);
+ 
+            
+writer.Close();
+//Đóng file sau khi ghi       
+ 
+        
+}
+ 
+        
+EntryComment.InnerHtml = 
+"Ban da gui thanh cong!"
+; 
+ 
+ 
+}
+ 
+ 
+ 
+Hàm hi
+ể
+n th
+ị
+ 
+n
+ộ
+i dung hi
+ệ
+n có trong t
+ậ
+p tin 
+ở
+ 
+server 
+ 
+      
+protected
+ 
+void
+ 
+ReadComment()
+ 
+    
+{
+ 
+        
+string
+ 
+stempt = 
+" "
+;
+ 
+        
+string
+ 
+sfile = 
+"D:/
+/BaiTH_Web2//Lab2//data.txt"
+;
+ 
+        
+using
+ 
+(
+StreamReader
+ 
+reader = 
+new
+ 
+StreamReader
+(sfile))
+ 
+        
+{
+ 
+
+--- PAGE 52 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+52
+ 
+            
+string
+ 
+snoidung = reader.ReadToEnd(); 
+//đ
+ọ
+c n
+ộ
+i dung
+ 
+            
+string
+[] delimeter = { 
+"#END"
+ 
+};
+ 
+            
+string
+[] sArr = snoidung.Split(d
+elimeter,  
+ 
+                            
+StringSplitOptions
+.RemoveEmptyEntries);
+ 
+            
+//L
+ọ
+c ra t
+ừ
+ng Entry và đưa vào m
+ả
+ng chu
+ỗ
+i
+ 
+            
+foreach
+ 
+(
+string
+ 
+s 
+in
+ 
+sArr)
+ 
+            
+{
+ 
+                
+stempt = stempt + s + 
+"</br>"
+;               
+ 
+ 
+      
+      
+}
+ 
+        
+}
+ 
+        
+EntryComment.InnerHtml = 
+"Noi dung "
+ 
++ stempt;
+ 
+    
+}
+ 
+Trong ph
+ầ
+n x
+ử
+ 
+lý đ
+ọ
+c file  ta làm theo các bƣ
+ớ
+c sau 
+ 
+
+ 
+Đ
+ọ
+c toàn b
+ộ
+ 
+n
+ộ
+i dung file comment 
+ 
+
+ 
+Chia các entry vào t
+ừ
+ng chu
+ỗ
+i 
+ 
+
+ 
+Cu
+ố
+i cùng đ
+ị
+nh d
+ạ
+ng n
+ộ
+i dung comment vào trong tag <td> và
+ 
+đƣa vào thu
+ộ
+c tính 
+ 
+
+ 
+InnerHTML c
+ủ
+a span có tên EntryComment.
+ 
+ 
+d.
+ 
+Ph
+ầ
+n m
+ở
+ 
+r
+ộ
+ng: 
+ 
+    
+Sinh viên b
+ổ
+ 
+sung thêm các thành ph
+ầ
+n sau: 
+ 
+-
+ 
+Ngày  tháng  năm  vi
+ế
+t  comment  và  hi
+ể
+n  th
+ị
+  
+thông  tin  này  lên  cùng  v
+ớ
+i  entry 
+comment.
+ 
+-
+ 
+Th
+ử
+ 
+không s
+ử
+ 
+d
+ụ
+ng tag span EntryCom
+ment mà dùng Web control Table đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+các comment trên. Tìm hi
+ể
+u các l
+ớ
+p 
+Table
+, 
+TableRow
+ 
+và 
+TableCell
+ 
+trong ph
+ầ
+n t
+ự
+ 
+xây d
+ự
+ng 
+các Web control b
+ằ
+ng cách s
+ử
+ 
+d
+ụ
+ng các l
+ớ
+p trong ASP.net.
+ 
+ 
+---
+H
+ế
+t
+---
+ 
+
+--- PAGE 53 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+53
+ 
+Lab 3.3: S
+ử
+ 
+d
+ụ
+ng Validation Controls
+ 
+ 
+1. 
+M
+ụ
+c tiêu 
+ 
+-
+  
+S
+ử
+ 
+d
+ụ
+ng các 
+web control
+ 
+trong trang ASP.NET  nhƣ  TextBox, Button, DropDownList 
+ 
+-
+  
+S
+ử
+ 
+d
+ụ
+ng input 
+validation controls
+ 
+trong trang ASP.NET 
+ 
+  
+RequiredFieldValidator 
+ 
+ 
+  
+CompareValidator 
+ 
+  
+RegularExpressionValidator 
+ 
+ 
+ 
+ValidationSummary 
+ 
+-
+  
+Hi
+ể
+n th
+ị
+ 
+các thông 
+báo l
+ỗ
+i khi 
+ngƣ
+ờ
+i dùng 
+nh
+ậ
+p 
+d
+ữ
+ 
+li
+ệ
+u
+ 
+không h
+ợ
+p l
+ệ
+ 
+2. 
+Yêu c
+ầ
+u 
+ 
+-
+  
+Đã làm quen v
+ớ
+i các server control cơ b
+ả
+n  
+ 
+-
+  
+Bi
+ế
+t x
+ử
+ 
+lý các s
+ự
+ 
+ki
+ệ
+n c
+ủ
+a ASP.NET web control.
+ 
+3. N
+ộ
+i dung 
+ 
+-
+  
+Xây d
+ự
+ng  trang web đăng ký phòng cho m
+ộ
+t h
+ộ
+i  th
+ả
+o khoa h
+ọ
+c. Các nhà khoa h
+ọ
+c ph
+ả
+i 
+đăng ký online trƣ
+ớ
+c,  t
+ạ
+o cho mình 1 account đ
+ể
+ 
+sau khi đăng ký xong  thì, h
+ọ
+ 
+có  th
+ể
+ 
+đăng 
+nh
+ậ
+p vào trang web c
+ủ
+a h
+ộ
+i ngh
+ị
+ 
+đ
+ể
+ 
+đăng ký phòng, và xem các thông tin khác, cũng nhƣ các 
+d
+ị
+ch v
+ụ
+ 
+mà trong su
+ố
+t quá trình lƣu trú mà khách đã dùng. Chúng ta ch
+ỉ
+ 
+xây d
+ự
+ng trang 
+Register_room.aspx
+, yêu c
+ầ
+u user ph
+ả
+i nh
+ậ
+p các thông tin sau: 
+H
+ọ
+ 
+tên, Đơn v
+ị
+ 
+công tác; đ
+ị
+a 
+ch
+ỉ
+ 
+email (làm username đăng nh
+ậ
+p), m
+ậ
+t kh
+ẩ
+u đ
+ể
+ 
+đăng nh
+ậ
+p, ngày check in và s
+ố
+ 
+ngày 
+ở
+, 
+ch
+ọ
+n lo
+ạ
+i phòng. 
+ 
+-
+  
+Trang web này ph
+ả
+i có đ
+ầ
+y đ
+ủ
+ 
+ch
+ứ
+c năng ki
+ể
+m tra d
+ữ
+ 
+li
+ệ
+u khi user nh
+ậ
+p vào. Sau khi t
+ấ
+t 
+c
+ả
+ 
+d
+ữ
+ 
+li
+ệ
+u h
+ợ
+p l
+ệ
+ 
+thì thông báo vi
+ệ
+c đăng ký thành công! 
+ 
+4. 
+Hƣ
+ớ
+ng d
+ẫ
+n:
+ 
+a.
+ 
+Thi
+ế
+t k
+ế
+ 
+giao di
+ệ
+n:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+b.
+ 
+Chi ti
+ế
+t c
+ủ
+a các control nhƣ sau:
+ 
+
+
+--- PAGE 54 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+54
+ 
+Tên control
+ 
+Ki
+ể
+u
+ 
+Thu
+ộ
+c tính
+ 
+Di
+ễ
+n gi
+ả
+i
+ 
+txtHoTen
+ 
+TextBox
+ 
+ 
+ 
+txtCoQuan
+ 
+TextBox
+ 
+ 
+ 
+txtEmail
+ 
+TextBox
+ 
+ 
+ 
+txtMatKhau
+ 
+TextBox
+ 
+TextMode = Password
+ 
+ 
+txtNLMatKhau
+ 
+TextBox
+ 
+TextMode = Password
+ 
+ 
+txtCheckin
+ 
+TextBox
+ 
+ 
+ 
+txtSoNgay
+ 
+TextBox
+ 
+ 
+ 
+cbxLoaiPhong
+ 
+DropDownList
+ 
+  
+Items  
+ 
+{“Phòng đơn”, “Phòng 
+ 
+đôi”,”Phòng VIP đơn”, 
+ 
+“Phòng VIP đôi”}
+ 
+btnDangKy
+ 
+Button
+ 
+ 
+ 
+lblThongBao
+ 
+Label
+ 
+ 
+ 
+rfvHoTen
+ 
+RequiredFieldVali
+dator
+ 
+ControlToValidate 
+ 
+ErrorMessage 
+ 
+ 
+txtHoTen 
+ 
+“Nh
+ậ
+p h
+ọ
+ 
+tên” 
+ 
+ 
+rfvCoQuan
+ 
+RequiredFieldVali
+dator
+ 
+ControlToValidate
+ 
+ErrorMessage 
+ 
+txtCoQuan 
+ 
+“Nh
+ậ
+p cơ quan” 
+ 
+revEmail
+ 
+RegularExpression
+ 
+Validator
+ 
+ControlToValidate
+ 
+ErrorMessage 
+ 
+ValidationExpression
+ 
+txtEmail 
+ 
+“Nh
+ậ
+p đ
+ị
+a ch
+ỉ
+ 
+email” 
+ 
+Internet email address 
+ 
+ 
+rfvMatKhau
+ 
+RequiredFieldVali
+dator
+ 
+Co
+ntrolToValidate 
+ErrorMessage 
+ 
+txtMatKhau 
+ 
+“Nh
+ậ
+p m
+ậ
+t kh
+ẩ
+u”
+ 
+rfvNLMatKhau
+ 
+RequiredFieldVali
+dator
+ 
+Cont
+rolToValidate 
+ 
+ErrorMessage 
+ 
+ 
+txtNLMatKhau
+ 
+“Nh
+ậ
+p m
+ậ
+t kh
+ẩ
+u l
+ầ
+n 2” 
+ 
+ 
+cmvMatKhau
+ 
+CompareValidator
+ 
+ControlToValidate
+ 
+ErrorMessage 
+ 
+ControlToCompare 
+ 
+txtNLMatKhau 
+ 
+“M
+ậ
+t kh
+ẩ
+u không kh
+ớ
+p”
+ 
+txtMatkhau
+ 
+ 
+cmvCheckin
+ 
+CompareValidator
+ 
+ControlToValidate 
+ 
+ErrorMessage 
+ 
+Type 
+ 
+Operator 
+ 
+txtCheckin 
+ 
+“Nh
+ậ
+p ngày checkin” 
+ 
+Date 
+ 
+DataTypeCheck 
+ 
+cmvSoNgay
+ 
+CompareValidator
+ 
+ControlToValidate 
+ErrorMessage 
+ 
+Type 
+ 
+Operator 
+ 
+txtSoNgay 
+ 
+“Nh
+ậ
+p con s
+ố
+ 
+ngày” 
+ 
+Integer 
+ 
+DataTypeCheck 
+ 
+
+--- PAGE 55 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+55
+ 
+Tên control
+ 
+Ki
+ể
+u
+ 
+Thu
+ộ
+c tính
+ 
+Di
+ễ
+n gi
+ả
+i
+ 
+ 
+ 
+vsTomTatLoi
+ 
+ValidationSummar
+y
+ 
+ 
+ 
+ 
+c.
+ 
+Ph
+ầ
+n x
+ử
+ 
+lý trong c
+ode behind 
+ 
+     
+Ph
+ầ
+n x
+ử
+ 
+lý s
+ự
+ 
+ki
+ệ
+n c
+ủ
+a nút l
+ệ
+nh btnDangky
+ 
+-
+ 
+Khi ngƣ
+ờ
+i dùng nh
+ậ
+p đ
+ầ
+y đ
+ủ
+ 
+thông tin và th
+ỏ
+a các đi
+ề
+u ki
+ệ
+n trong các thành ph
+ầ
+n c
+ủ
+a 
+web form. Sau đó, ngƣ
+ờ
+i dùng kích ho
+ạ
+t s
+ự
+ 
+ki
+ệ
+n b
+ằ
+ng cách click vào nút l
+ệ
+nh 
+“đăng ký”
+ 
+thì
+ 
+nhãn lbThongbao đƣ
+ợ
+c gá
+n v
+ớ
+i n
+ộ
+i dung là: 
+“B
+ạ
+n đã đăng ký thành công!!”
+.
+ 
+-
+ 
+Hi
+ể
+n th
+ị
+ 
+thông tin chi ti
+ế
+t
+ 
+c
+ủ
+a vi
+ệ
+c đăng ký
+ 
+sau khi 
+ngƣ
+ờ
+i d
+ụ
+ng 
+submit
+ 
+thông tin
+ 
+thành công, các thông tin  này  hi
+ể
+n  th
+ị
+  
+trên  lblThongBao.  (
+B
+ổ
+  
+sung  thêm  ph
+ầ
+n  x
+ử
+  
+lý  
+c
+ủ
+a  s
+ự
+  
+ki
+ệ
+n  click btnDangKy
+)
+.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 56 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+56
+ 
+Chƣơng 4: ĐI
+Ề
+U KHI
+Ể
+N CHUY
+Ể
+N HƢ
+Ớ
+NG D
+Ữ
+ 
+LI
+Ệ
+U
+ 
+ 
+M
+ụ
+c tiêu h
+ọ
+c t
+ậ
+p:
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng đƣ
+ợ
+c Multiview, wizards đ
+ể
+ 
+t
+ạ
+o trang web
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng đƣ
+ợ
+c TreeView đ
+ể
+ 
+t
+ạ
+o trang web
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng Menu View đ
+ể
+ 
+t
+ạ
+o trang web
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng Sitemap đ
+ể
+ 
+t
+ạ
+o b
+ả
+n đ
+ồ
+ 
+cho website
+ 
+I.
+ 
+Multiview và Wizard Co
+ntrols
+ 
+1.1.
+ 
+ 
+MultiView Control
+ 
+H
+ầ
+u h
+ế
+t các website c
+ầ
+n tách các công vi
+ệ
+c thành nhi
+ề
+u trang khác nhau. Ví d
+ụ
+, n
+ế
+u ta c
+ầ
+n 
+thêm m
+ộ
+t m
+ẫ
+u tin vào shopping cart, ta c
+ầ
+n ph
+ả
+i chuy
+ể
+n t
+ừ
+ 
+trang này sang trang khác. 
+Multiview là m
+ộ
+t công c
+ụ
+ 
+r
+ấ
+t hi
+ệ
+u qu
+ả
+ 
+đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n côn
+g vi
+ệ
+c đó. 
+ 
+Trong tình hu
+ố
+ng khác, ta c
+ầ
+n ph
+ả
+i nhúng mã vào m
+ộ
+t vài trang nh
+ỏ
+ 
+hơn bên trong m
+ộ
+t 
+trang chính. Ví d
+ụ
+, ta c
+ầ
+n t
+ạ
+o nhi
+ề
+u views cho cùng m
+ộ
+t lo
+ạ
+i d
+ữ
+ 
+li
+ệ
+u và cho phép ngƣ
+ờ
+i dùng 
+chuy
+ể
+n t
+ừ
+ 
+view này sang view khác mà không c
+ầ
+n ph
+ả
+i r
+ờ
+i trang web. 
+ 
+  
+ 
+Đ
+ể
+ 
+t
+ạ
+o m
+ớ
+i m
+ộ
+t 
+Multiview 
+v
+ớ
+i 3 view view1, view2 và view3 nhƣ sau:
+ 
+<asp:MultiView ID="MultiView1" runat="server">
+ 
+  
+<asp:View ID="View1" runat="server">...</asp:View>
+ 
+  
+<asp:View ID="View2" runat="server">...</asp:View>
+ 
+  
+<asp:View ID="View3" runat="ser
+ver">...</asp:View>
+ 
+</asp:MultiView>
+ 
+ 
+Bên trong th
+ẻ
+ 
+<asp:View>, ta thêm th
+ẻ
+ 
+HTML và web controls đ
+ố
+i v
+ớ
+i các view tƣơng 
+ứ
+ng.
+ 
+<asp:MultiView
+ 
+ID="MultiView1" runat="server" ActiveViewIndex="0">
+ 
+  
+<asp:View ID="View1" runat="server">
+ 
+    
+<b> Showing View #1 <
+br />
+ 
+    
+<asp:Image ID="Image1" runat="server“  ImageUrl="~/cookies.jpg" /></b>
+ 
+  
+</asp:View>
+ 
+  
+<asp:View ID="View2" runat="server“ >
+ 
+    
+<b>Showing View #2</b><br />
+ 
+    
+<br />   Text content.
+ 
+  
+</asp:View>
+ 
+  
+<asp:View ID="View3" runat="server">
+ 
+    
+<b>S
+howing View #3</b><br />  <br />
+ 
+    
+<asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+ 
+  
+</asp:View>
+ 
+</asp:MultiView>
+ 
+ 
+ 
+
+--- PAGE 57 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+57
+ 
+ 
+Hình
+ 
+1
+8
+: 
+ 
+Màn hình thi
+ế
+t k
+ế
+ 
+v
+ớ
+i  các View
+ 
+ 
+protected void Page_Load(object sender, EventArgs e)
+ 
+{
+ 
+    
+if (!Page.IsPostBack)
+ 
+    
+{
+ 
+            
+DropDownList1.DataSource = MultiView1.Views;   
+ 
+            
+DropDownList1.DataTextField = "ID";
+ 
+            
+DropDownList1.Da
+taBind();
+ 
+     
+}
+ 
+}
+ 
+// Đo
+ạ
+n code sau đây s
+ẽ
+ 
+đ
+ặ
+t view hi
+ệ
+n t
+ạ
+i tùy thu
+ộ
+c vào ch
+ỉ
+ 
+m
+ụ
+c trong list
+ 
+protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+ 
+{
+ 
+          
+MultiView1.ActiveViewIndex = DropDownList1.SelectedIndex;
+ 
+}
+ 
+
+
+--- PAGE 58 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+58
+ 
+Thu
+ộ
+c tính M
+ultiView.ActiveIndex xác đ
+ị
+nh tên view đƣ
+ợ
+c hi
+ể
+n th
+ị
+. M
+ặ
+c đ
+ị
+nh Activeindex 
+có giá tr
+ị
+ 
+là 
+-
+1 có nghĩa là không có view nào th
+ể
+ 
+hi
+ệ
+n c
+ả
+. 
+ 
+1.2.
+ 
+Wizard Control
+ 
+Các đi
+ề
+u khi
+ể
+n Wizard controls cũng t
+ạ
+o ra các MultiView controls. Nó cho phép hi
+ể
+n th
+ị
+ 
+m
+ộ
+t vài View
+s cùng m
+ộ
+t lúc, nhƣng nó có th
+ể
+ 
+thêm vào các navigation controls khác nhƣ nút 
+l
+ệ
+nh, sidebar, links, styles ho
+ặ
+c templates
+ 
+Thông thƣ
+ờ
+ng, wizards th
+ể
+ 
+hi
+ệ
+n m
+ộ
+t công vi
+ệ
+c riêng r
+ẽ
+ 
+theo trình t
+ự
+ 
+nào đó, ngƣ
+ờ
+i dùng 
+chuy
+ể
+n tu
+ầ
+n t
+ự
+ 
+thông qua t
+ừ
+ng công vi
+ệ
+c. Bên c
+ạ
+nh đó nó cũng cho phép ngƣ
+ờ
+i dùng di 
+chuy
+ể
+n m
+ộ
+t cách ng
+ẫ
+u nhiên gi
+ữ
+a các công vi
+ệ
+c ho
+ặ
+c có th
+ể
+ 
+b
+ỏ
+ 
+m
+ộ
+t s
+ố
+ 
+vi
+ệ
+c không c
+ầ
+n thi
+ế
+t.
+ 
+Ví d
+ụ
+ 
+sa
+u
+ 
+đây là các bƣ
+ớ
+c th
+ự
+c hi
+ệ
+n đăng ký thông tin c
+ủ
+a khách hàng vào h
+ệ
+ 
+th
+ố
+ng.  Vi
+ệ
+c
+ 
+đăng ký đƣ
+ợ
+c chia thành 4 công vi
+ệ
+c nh
+ỏ
+ 
+h
+ơn. M
+ỗ
+i vi
+ệ
+c đƣ
+ợ
+c th
+ự
+c hi
+ệ
+n 
+ở
+ 
+m
+ộ
+t view riêng r
+ẽ
+. 
+ 
+.
+ 
+ 
+ 
+ 
+
+
+--- PAGE 59 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+59
+ 
+ 
+Hình
+ 
+19
+: 
+ 
+Màn hình K
+ế
+t qu
+ả
+ 
+thi
+ế
+t k
+ế
+ 
+đi
+ề
+u khi
+ể
+n Wizard
+ 
+ 
+<asp:Wizard
+ 
+ID="Wizard1" runat="server"  Width="467px"
+ 
+ 
+BackColor="#EFF3FB" BorderColor="#B5C7DE"  BorderWidth="1px">
+ 
+  
+<WizardSteps>
+ 
+    
+<as
+p:WizardStep
+ 
+ID="WizardStep1" runat="server" Title="Personal">
+ 
+      
+<h3> Thông tin cá nhân </h3>
+ 
+      
+Ngôn ng
+ữ
+ 
+l
+ậ
+p trình yêu thích:
+ 
+      
+<asp:DropDownList ID="lstLanguage" runat="server“ >
+ 
+           
+<asp:ListItem> C# </asp:ListItem>  
+ 
+          
+<asp:Li
+stItem> VB </asp:ListItem>
+ 
+          
+<asp:ListItem> J# </asp:ListItem>
+ 
+          
+<asp:ListItem> Java </asp:ListItem>
+ 
+          
+<asp:ListItem> C++ </asp:ListItem>
+ 
+          
+<asp:ListItem> C </asp:ListItem>
+ 
+      
+</asp:DropDownList>
+ 
+      
+<br />
+ 
+    
+</asp:Wi
+zardStep>
+ 
+          
+<asp:WizardStep
+ 
+ID="WizardStep2" runat="server" Title="Company">
+ 
+      
+ 
+ 
+<h3> Company Profile </h3>
+ 
+  
+ 
+ 
+    
+S
+ố
+ 
+nhân viên: <asp:TextBox ID="txtEmpCount" runat="server"/>
+ 
+    
+ 
+ 
+  
+S
+ố
+ 
+đ
+ị
+a đi
+ể
+m: <asp:TextBox ID="txtLocCount" runat="server"/>
+ 
+    
+</asp:WizardStep>
+ 
+  
+<
+asp:WizardStep
+ 
+ID="WizardStep3" runat="server" Title="Software“ >
+ 
+   
+ 
+   
+<h3> Thông tin ph
+ầ
+n m
+ề
+m <
+/h3> Licenses Required:
+ 
+       
+ 
+ 
+<asp:CheckBoxList ID="lstTools" runat="server“ >
+ 
+        
+ 
+      
+<asp:ListItem> Visual Studio 2008 </asp:ListItem>
+ 
+           
+ 
+   
+<asp:ListItem> Office 2007 </asp:ListItem>
+ 
+         
+ 
+    
+<asp:ListItem> Windows Server 2008 </
+asp:ListItem>
+ 
+           
+ 
+  
+<asp:ListItem> SQL Server 2008 </asp:ListItem>  
+ 
+         
+</asp:CheckBoxList>
+ 
+    
+</asp:WizardStep>
+ 
+
+
+--- PAGE 60 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+60
+ 
+    
+<asp:WizardStep
+ 
+ID="Complete" runat="server" Title="Complete“   
+ 
+                                                           
+                      
+StepType="Complete“ >
+ 
+         
+<br />  
+ 
+                   
+C
+ả
+m ơn b
+ạ
+n đã đi
+ề
+n đ
+ầ
+y đ
+ủ
+ 
+thông tin.<br />
+ 
+                   
+S
+ả
+n ph
+ẩ
+m s
+ẽ
+ 
+đƣ
+ợ
+c giao nhanh chóng.<br />
+ 
+    
+</asp:WizardStep>
+ 
+  
+</WizardSteps>
+ 
+</Wizard>
+ 
+II.
+ 
+Site Map
+ 
+N
+ế
+u website c
+ủ
+a ta có nhi
+ề
+u trang web, ta c
+ầ
+n có m
+ộ
+t cách nào đó đ
+ể
+ 
+s
+ắ
+p x
+ế
+p 
+các trang đ
+ể
+ 
+ngƣ
+ờ
+i dùng có th
+ể
+ 
+di chuy
+ể
+n t
+ừ
+ 
+trang này sang trang khác m
+ộ
+t cách d
+ễ
+ 
+dàng. 
+ 
+ 
+Hình
+ 
+20
+: 
+ 
+Lư
+ợ
+c đ
+ồ
+ 
+liên k
+ế
+t trong SiteMap
+ 
+ 
+ 
+2.1.
+ 
+T
+ạ
+o m
+ộ
+t file Web.sitemap file
+ 
+
+ 
+Đ
+ể
+ 
+thêm sitemap ta th
+ự
+c hi
+ệ
+n 
+Website 
+ 
+Add New Item
+ 
+(
+ho
+ặ
+c Project 
+ 
+Add New 
+Item trong web 
+project
+), ch
+ọ
+n Site Map 
+ 
+cli
+ck Add.
+ 
+
+ 
+Xác đ
+ị
+nh c
+ấ
+u trúc c
+ủ
+a website s
+ử
+ 
+d
+ụ
+ng thành ph
+ầ
+n <siteMap> và <siteMapNode>.
+ 
+Liên k
+ế
+t SiteMap v
+ớ
+i đi
+ề
+u khi
+ể
+n TreeView ho
+ặ
+c MenuView.
+ 
+ 
+ 
+2.2.
+ 
+Ví d
+ụ
+:
+ 
+T
+ạ
+o t
+ậ
+p tin Sitemap v
+ớ
+i các thành ph
+ầ
+n nhƣ sau
+ 
+<siteMap xmlns=
+http://schemas.microsoft.com/AspNet/SiteMap
+-
+File
+-
+1.0
+ 
+>
+ 
+ 
+<siteMapNode title="Home" description="Home" url="~/default.aspx“ >
+ 
+    
+<siteMapNode title="Products" description="Our products“  url="~/Products.
+aspx">
+ 
+    
+<siteMapNode title="Hardware" description="Hardware choices“   url="~/Har
+-
+dware.aspx" />
+ 
+    
+<siteMapNode title="Software" description="Software choices“  url="~/Software.aspx" />
+ 
+
+
+--- PAGE 61 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+61
+ 
+ 
+</siteMapNode>
+ 
+ 
+<siteMapNode title="Services" description="Servi
+ces we offer“  url="~/Services.aspx">
+ 
+        
+<siteMapNode title="Training" description="Training classes“  url="~/Training.aspx" />
+ 
+        
+<siteMapNode title="Consulting" description="Consulting services“   
+ 
+                                              
+               
+url="~/Consulting.aspx" />
+ 
+        
+<siteMapNode title="Support" description="Support plans“  url="~/Support.aspx" />
+ 
+ 
+</siteMapNode>
+ 
+</siteMapNode>
+ 
+</siteMap>
+ 
+III.
+ 
+ 
+Đi
+ề
+u khi
+ể
+n TreeView
+ 
+3.1.
+T
+ạ
+o m
+ộ
+t TreeView đơn gi
+ả
+n
+ 
+ 
+Tree View là m
+ộ
+t đi
+ề
+u khi
+ể
+n đi
+ề
+u hƣ
+ớ
+ng r
+ấ
+t đƣ
+ợ
+c ƣa chu
+ộ
+ng so v
+ớ
+i các đi
+ề
+u khi
+ể
+n đi
+ề
+u 
+hƣ
+ớ
+ng khác. Tree view có th
+ể
+ 
+phát sinh mã HTML đ
+ể
+ 
+tr
+ả
+ 
+v
+ề
+ 
+phía trình khách. Tree View cũng 
+cung c
+ấ
+p nhi
+ề
+u m
+ẫ
+u đ
+ị
+nh d
+ạ
+ng cho p
+hép l
+ậ
+p trình viên ch
+ọ
+n lo
+ạ
+i phù h
+ợ
+p v
+ớ
+i 
+ứ
+ng d
+ụ
+ng c
+ủ
+a 
+mình.
+ 
+<asp:TreeView ID="TreeView1" runat="server“ >
+ 
+  
+<Nodes>
+ 
+       
+<asp:TreeNode Text="Products“ >
+ 
+               
+<asp:TreeNode Text="Hardware“ /> 
+ 
+               
+</asp:TreeNode>
+ 
+          
+<asp:TreeNo
+de Text="Services“ />
+ 
+  
+</Nodes>
+ 
+</asp:TreeView>
+ 
+     
+Ta có th
+ể
+ 
+l
+ậ
+p trình đ
+ể
+ 
+thêm m
+ộ
+t node vào treeview khi trang web đƣ
+ợ
+c load:
+ 
+    
+TreeNode newNode = new TreeNode("Software");
+ 
+// Thêm vào nút con đ
+ầ
+u tiên Add as a child of the first root node
+ 
+// (the Pro
+ducts node in the previous example).
+ 
+TreeView1.Nodes[0].ChildNodes.Add(newNode);
+ 
+Thu
+ộ
+c tính
+ 
+Mô t
+ả
+ 
+Text
+ 
+ 
+ToolTip
+ 
+ 
+Value
+ 
+ 
+NavigateUrl
+ 
+ 
+ 
+Target
+ 
+ 
+ 
+ 
+ImageUrl
+ 
+Chu
+ỗ
+i văn b
+ả
+n hi
+ể
+n th
+ị
+ 
+ 
+Chu
+ỗ
+i văn b
+ả
+n khi ta click chu
+ộ
+t vào m
+ụ
+c ch
+ọ
+n
+ 
+ 
+Lƣu tr
+ữ
+ 
+giá tr
+ị
+ 
+không đƣ
+ợ
+c hi
+ể
+n
+ 
+th
+ị
+ 
+v
+ớ
+i d
+ữ
+ 
+li
+ệ
+u thêm vào node
+ 
+ 
+Đ
+ị
+a ch
+ỉ
+ 
+trang web s
+ẽ
+ 
+chuy
+ể
+n đ
+ế
+n khi ngƣ
+ờ
+i dùng click chu
+ộ
+t vào 
+m
+ụ
+c ch
+ọ
+n
+ 
+ 
+N
+ế
+u thu
+ộ
+c tính NavigateUrl đƣ
+ợ
+c đ
+ặ
+t, nó s
+ẽ
+ 
+m
+ở
+ 
+trang web 
+ở
+ 
+c
+ử
+a s
+ố
+ 
+đƣ
+ợ
+c ch
+ỉ
+ 
+đ
+ị
+nh. N
+ế
+u target không đƣ
+ợ
+c đ
+ặ
+t, trang web m
+ớ
+i đƣ
+ợ
+c m
+ở
+ 
+trong c
+ử
+a s
+ổ
+ 
+hi
+ệ
+n th
+ờ
+i
+ 
+ 
+Hình 
+ả
+nh đƣ
+ợ
+c hi
+ể
+n th
+ị
+ 
+k
+ế
+ 
+nút c
+ủ
+a cây
+ 
+
+--- PAGE 62 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+62
+ 
+Các thu
+ộ
+c tính c
+ủ
+a m
+ỗ
+i nút trên cây
+ 
+ 
+Hình
+ 
+21
+: 
+ 
+Màn hình thi
+ế
+t k
+ế
+ 
+TreeView
+ 
+ở
+ 
+ch
+ế
+ 
+đ
+ộ
+ 
+Design
+ 
+ 
+Các bƣ
+ớ
+c th
+ự
+c hi
+ệ
+n
+ 
+t
+ạ
+o m
+ộ
+t TreeView
+ 
+b
+ằ
+ng công c
+ụ
+ 
+Wizard.
+ 
+-
+ 
+Ch
+ọ
+n TreeView t
+ừ
+ 
+nhóm Navigation c
+ủ
+a h
+ộ
+p tho
+ạ
+i Toolbox.
+ 
+-
+ 
+V
+ẽ
+ 
+m
+ộ
+t v
+ùng trong khu v
+ự
+c so
+ạ
+n th
+ả
+o
+
+ 
+ch
+ọ
+n Edit Nodes đ
+ể
+ 
+m
+ở
+ 
+h
+ộ
+p c
+ử
+a s
+ổ
+ 
+so
+ạ
+n th
+ả
+o 
+TreeView
+ 
+-
+ 
+Trong lúc t
+ạ
+o các m
+ụ
+c cho Treeview, ta c
+ầ
+n ph
+ả
+i xác đ
+ị
+nh giá tr
+ị
+ 
+cho m
+ộ
+t s
+ố
+ 
+thu
+ộ
+c tính 
+theo b
+ả
+ng đã cho 
+ở
+ 
+trên.
+ 
+     
+Đo
+ạ
+n mã HTML t
+ự
+ 
+phát sinh nhƣ sau:
+ 
+<
+asp
+:
+TreeView
+ 
+ID
+="TreeV
+iew1"
+ 
+runat
+="server"
+ 
+ShowLines
+="True">
+ 
+       
+<
+Nodes
+>
+ 
+         
+<
+asp
+:
+TreeNode
+ 
+Text
+="Ph
+ầ
+n m
+ề
+m"
+ 
+Value
+="Ph
+ầ
+n m
+ề
+m">
+ 
+            
+<
+asp
+:
+TreeNode
+ 
+NavigateUrl
+="Ungdung.aspx"
+ 
+Text
+="
+Ứ
+ng d
+ụ
+ng"
+ 
+Value
+="
+ud
+">
+ 
+            
+</
+asp
+:
+TreeNode
+>
+ 
+            
+<
+asp
+:
+TreeNode
+ 
+NavigateUr
+l
+="Hethong.aspx"
+ 
+Text
+="H
+ệ
+ 
+th
+ố
+ng"
+ 
+Value
+="
+ht
+">
+ 
+            
+</
+asp
+:
+TreeNode
+>
+ 
+        
+</
+asp
+:
+TreeNode
+>
+ 
+        
+<
+asp
+:
+TreeNode
+ 
+Text
+="Ph
+ầ
+n c
+ứ
+ng"
+ 
+Value
+="Ph
+ầ
+n c
+ứ
+ng">
+ 
+            
+<
+asp
+:
+TreeNode
+ 
+NavigateUrl
+="Bonho.aspx"
+ 
+Text
+="B
+ộ
+ 
+nh
+ớ
+"
+ 
+Value
+="
+bn
+">
+ 
+            
+</
+asp
+:
+TreeNo
+de
+>
+ 
+            
+<
+asp
+:
+TreeNode
+ 
+NavigateUrl
+="CPU.aspx"
+  
+Text
+="CPU"
+ 
+Value
+="
+4
+">
+ 
+ 
+           
+</
+asp
+:
+TreeNode
+>
+ 
+         
+</
+asp
+:
+TreeNode
+>
+ 
+  
+   
+</
+Nodes
+>
+ 
+</
+asp
+:
+TreeView
+>
+ 
+ 
+    
+Màn hình k
+ế
+t qu
+ả
+ 
+c
+ủ
+a thi
+ế
+t k
+ế
+ 
+đƣ
+ợ
+c t
+ạ
+o 
+ở
+ 
+trên
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 63 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+63
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Hình
+ 
+22
+: 
+ 
+Màn hình K
+ế
+t qu
+ả
+ 
+Form v
+ớ
+i TreeView
+ 
+3.2
+. 
+ 
+Đ
+ị
+nh d
+ạ
+ng Tree View
+ 
+a. 
+ 
+Đ
+ị
+nh d
+ạ
+ng các nút c
+ủ
+a TreeView
+ 
+Thu
+ộ
+c tính
+ 
+Mô t
+ả
+ 
+ImageUrl
+ 
+ 
+NodeSpacing
+ 
+ 
+Vertical Padding
+ 
+ 
+Horizontal Padding
+ 
+ 
+ 
+ChildNodesPadding
+ 
+Đ
+ị
+a ch
+ỉ
+ 
+c
+ủ
+a hình 
+ả
+nh đƣ
+ợ
+c hi
+ể
+n th
+ị
+ 
+g
+ầ
+n m
+ỗ
+i nút
+ 
+ 
+Kho
+ả
+ng cách gi
+ữ
+a nút hi
+ệ
+n th
+ờ
+i và các nút lân c
+ậ
+n
+ 
+ 
+Kho
+ả
+ng cách gi
+ữ
+a nút trên và nút dƣ
+ớ
+i
+ 
+ 
+Kho
+ả
+ng cách gi
+ữ
+a bên ph
+ả
+i và bên trái c
+ủ
+a nút và đƣ
+ờ
+ng 
+biên xung quanh text
+ 
+ 
+Kho
+ả
+ng cách gi
+ữ
+a nút cu
+ố
+i cùng và nút cha 
+ 
+Các thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng cho TreeView
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 64 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+64
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Hình
+ 
+23
+: 
+ 
+Các thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng 
+các nút trong 
+TreeView
+ 
+ 
+b.
+ 
+Các thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng cho TreeView
+ 
+Thu
+ộ
+c tính
+ 
+Mô t
+ả
+ 
+NodeStyle
+ 
+ 
+RootNodeStyle
+ 
+ 
+ParentNodeStyle
+ 
+ 
+ 
+LeafNodeStyle
+ 
+ 
+ 
+SelectedNodeStyle
+ 
+ 
+HoverNodeStyle
+ 
+Áp d
+ụ
+ng đ
+ị
+nh d
+ạ
+ng đ
+ố
+i v
+ớ
+i t
+ấ
+t c
+ả
+ 
+các nút
+ 
+ 
+Áp 
+d
+ụ
+ng đ
+ị
+nh d
+ạ
+ng cho các nút 
+ở
+ 
+m
+ứ
+c đ
+ầ
+u tiên root
+ 
+ 
+Áp d
+ụ
+ng đ
+ị
+nh d
+ạ
+ng cho t
+ấ
+t c
+ả
+ 
+các nút có ch
+ứ
+a nút khác, 
+ngo
+ạ
+i tr
+ừ
+ 
+nút g
+ố
+c
+ 
+ 
+Áp d
+ụ
+ng đ
+ị
+nh d
+ạ
+ng cho t
+ấ
+t c
+ả
+ 
+các nút không ch
+ứ
+a nút con và 
+không ch
+ứ
+a nút g
+ố
+c
+ 
+ 
+Áp d
+ụ
+ng đ
+ị
+nh d
+ạ
+ng cho các nút đƣ
+ợ
+c ch
+ọ
+n hi
+ệ
+n th
+ờ
+i 
+ 
+ 
+Áp 
+d
+ụ
+ng đ
+ị
+nh d
+ạ
+ng khi ngƣ
+ờ
+i dùng đƣa tr
+ỏ
+ 
+chu
+ộ
+t đ
+ế
+n nút 
+ch
+ọ
+n
+ 
+Các thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng cho TreeView
+ 
+
+
+--- PAGE 65 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+65
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+‘
+ 
+ 
+ 
+Hình
+ 
+24
+: 
+ 
+Các thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng TreeView
+ 
+ 
+c.
+ 
+Ví d
+ụ
+: Đ
+ị
+nh d
+ạ
+ng TreeView 
+ở
+ 
+trên v
+ớ
+i đ
+ị
+nh d
+ạ
+ng HoverNodeStyle v
+ớ
+i màu ch
+ữ
+ 
+là màu 
+đ
+ỏ
+ 
+và mà n
+ề
+n l
+à màu vàng khi ngƣ
+ờ
+i dùng th
+ự
+c hi
+ệ
+n đƣa tr
+ỏ
+ 
+chu
+ộ
+t vào m
+ụ
+c ch
+ọ
+n trên 
+cây TreeView. 
+ 
+ 
+ 
+Hình
+ 
+25
+: 
+ 
+Các thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng TreeView (2)
+ 
+ 
+ 
+ 
+Đo
+ạ
+n mã phát sinh nhƣ sau:
+ 
+
+
+--- PAGE 66 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+66
+ 
+<
+asp
+:
+TreeView
+ 
+ID
+="TreeView1"
+ 
+runat
+="server"
+ 
+ShowLines
+="True">
+ 
+            
+<
+HoverNodeStyle
+ 
+Ba
+ckColor
+="Yellow"
+ 
+ForeColor
+="
+Red
+"
+ 
+/>
+ 
+            
+<
+SelectedNodeStyle
+ 
+BackColor
+="
+Green
+"
+ 
+/>
+ 
+            
+<
+Nodes
+>
+ 
+                
+<
+asp
+:
+TreeNode
+ 
+Text
+="Ph
+ầ
+n m
+ề
+m"
+ 
+Value
+="pm">
+ 
+                    
+<
+asp
+:
+TreeNode
+ 
+NavigateUrl
+="Ungdung.aspx"
+ 
+Text
+="
+Ứ
+ng d
+ụ
+ng"
+ 
+Value
+="ud">
+ 
+ 
+                   
+</
+asp
+:
+TreeNode
+>
+ 
+                    
+<
+asp
+:
+TreeNode
+ 
+NavigateUrl
+="Hethong.aspx"
+ 
+Text
+="H
+ệ
+ 
+th
+ố
+ng"
+ 
+Value
+="ht">
+ 
+                    
+</
+asp
+:
+TreeNode
+>
+ 
+                
+</
+asp
+:
+TreeNode
+>
+ 
+                
+<
+asp
+:
+TreeNode
+ 
+Text
+="Ph
+ầ
+n c
+ứ
+ng"
+ 
+Value
+="pc">
+ 
+     
+               
+<
+asp
+:
+TreeNode
+ 
+NavigateUrl
+="Bonho.aspx"
+ 
+Text
+="B
+ộ
+ 
+nh
+ớ
+"
+ 
+Value
+="bn">
+ 
+                    
+</
+asp
+:
+TreeNode
+>
+ 
+                    
+<
+asp
+:
+TreeNode
+ 
+NavigateUrl
+="CPU.aspx"
+ 
+SelectAction
+="Expand"
+ 
+ 
+                        
+Text
+="CPU"
+ 
+Value
+="cpu"></
+asp
+:
+TreeNod
+e
+>
+ 
+                
+</
+asp
+:
+TreeNode
+>
+ 
+            
+</
+Nodes
+>
+ 
+</
+asp
+:
+TreeView
+>
+ 
+3.3.
+ 
+  
+Liên k
+ế
+t TreeView v
+ớ
+i SiteMap
+ 
+ 
+-
+ 
+T
+ạ
+o t
+ậ
+p tin SiteMap v
+ớ
+i n
+ộ
+i dung nhƣ sau:
+ 
+<?
+xml
+ 
+version
+=
+"
+1.0
+"
+ 
+encoding
+=
+"
+utf
+-
+8
+"
+ 
+?>
+ 
+<
+siteMap
+ 
+xmlns
+=
+"
+http://schemas.microsoft.com/AspNet/SiteMap
+-
+File
+-
+1.0
+"
+ 
+>
+ 
+  
+<
+siteMapNode
+ 
+title
+=
+"
+Trang ch
+ủ
+"
+>
+ 
+        
+<
+siteMapNode
+ 
+url
+=
+""
+ 
+title
+=
+"
+Ph
+ầ
+n m
+ề
+m
+"
+  
+description
+=
+""
+>
+ 
+            
+<
+siteMapNode
+ 
+url
+=
+"
+Ungdung.aspx
+"
+ 
+title
+=
+"
+Ứ
+ng d
+ụ
+ng
+"
+  
+description
+=
+""
+ 
+/>
+ 
+            
+<
+siteMapNode
+ 
+url
+=
+"
+Hethong.aspx
+"
+ 
+title
+=
+"
+H
+ệ
+ 
+th
+ố
+ng
+"
+  
+description
+=
+""
+ 
+/>
+ 
+         
+</
+siteMapNode
+>
+ 
+        
+ 
+          
+<
+siteMapNode
+ 
+url
+=
+""
+ 
+title
+=
+"
+Ph
+ầ
+n c
+ứ
+ng
+"
+  
+description
+=
+""
+>        
+ 
+              
+<
+siteMapNode
+ 
+url
+=
+"
+Bonho.aspx
+"
+ 
+title
+=
+"
+B
+ộ
+ 
+nh
+ớ
+"
+  
+description
+=
+""
+ 
+/>
+ 
+              
+<
+siteMapNode
+ 
+url
+=
+"
+CPU.aspx
+"
+ 
+title
+=
+"
+CPU
+"
+  
+description
+=
+""
+ 
+/>
+ 
+        
+</
+siteMapNode
+>
+ 
+  
+</
+siteMapNode
+>
+ 
+  
+ 
+</
+siteMap
+>
+ 
+ 
+-
+ 
+Liên k
+ế
+t SiteMap v
+ớ
+i Treeview 
+ 
+<
+asp
+:
+TreeView
+ 
+ID
+="TreeView1"
+ 
+runat
+="server"
+ 
+DataSourceID
+="sourceSiteMap"
+ 
+ 
+            
+ShowLines
+="True">
+    
+</
+asp
+:
+TreeView
+>
+ 
+ 
+<
+asp
+:
+SiteMapDataSource
+ 
+ID
+="sourceSiteMap"
+ 
+runat
+="server"
+ 
+/>
+ 
+ 
+Sinh viên có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng 
+công c
+ụ
+ 
+Wizard c
+ủ
+a Visual Studio đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n khai báo ngu
+ồ
+n 
+d
+ữ
+ 
+li
+ệ
+u site map v
+ớ
+i tên là sourceSiteMap và công đi
+ề
+u khi
+ể
+n TreeView v
+ớ
+i tên là TreeView1. 
+Sau đó s
+ử
+ 
+d
+ụ
+ng tính năng Autoformat đ
+ể
+ 
+có đƣ
+ợ
+c hình 
+ả
+nh Tre
+eView nhƣ hình theo sau. Đây 
+là công vi
+ệ
+c khá đơn gi
+ả
+n.
+ 
+-
+ 
+Màn hình k
+ế
+t qu
+ả
+ 
+nhƣ sau:
+ 
+
+--- PAGE 67 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+67
+ 
+ 
+Hình
+ 
+26
+: 
+ 
+Form k
+ế
+t qu
+ả
+ 
+TreeView (3)
+ 
+ 
+I
+V. 
+Đi
+ề
+u khi
+ể
+n MenuView
+ 
+    
+4.1.  
+T
+ạ
+o m
+ộ
+t Menu đơn gi
+ả
+n
+ 
+Đi
+ề
+u khi
+ể
+n Menu là m
+ộ
+t cách th
+ứ
+c trình bày khác đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u d
+ạ
+ng c
+ấ
+u tr
+úc. Gi
+ố
+ng 
+nhƣ TreeView, ta có th
+ể
+ 
+liên k
+ế
+t Menu v
+ớ
+i ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u ho
+ặ
+c có th
+ể
+ 
+t
+ạ
+o tr
+ứ
+c ti
+ế
+p t
+ừ
+ng M
+ụ
+c 
+ch
+ọ
+n (MenuItem). 
+ 
+L
+ớ
+p MenuItem trong đi
+ề
+u khi
+ể
+n MenuView không giàu tính năng nhƣ TreeView. Ví d
+ụ
+ 
+MenuItem không h
+ỗ
+ 
+tr
+ợ
+ 
+ch
+ứ
+c năng Checkbox đ
+ể
+ 
+l
+ậ
+p trình. Tu
+y nhiên MenuView v
+ẫ
+n có m
+ộ
+t 
+s
+ố
+ 
+thu
+ộ
+c tính ph
+ổ
+ 
+bi
+ế
+n nhƣ: hình 
+ả
+nh, đ
+ị
+nh d
+ạ
+ng khi ch
+ọ
+n m
+ụ
+c ch
+ọ
+n và xác đ
+ị
+nh liên k
+ế
+t cho 
+m
+ụ
+c ch
+ọ
+n. 
+ 
+Thu
+ộ
+c tính
+ 
+Mô t
+ả
+ 
+Text
+ 
+ 
+ToolTip
+ 
+ 
+Value
+ 
+ 
+ 
+NavigateUrl
+ 
+ 
+ 
+Target
+ 
+ 
+ 
+ 
+Selectable
+ 
+Đo
+ạ
+n Text hi
+ể
+n th
+ị
+ 
+trong m
+ụ
+c ch
+ọ
+n MenuItem
+ 
+ 
+Đo
+ạ
+n t
+ext hi
+ể
+n th
+ị
+ 
+khi ngƣ
+ờ
+i dùng đƣa chu
+ộ
+t vào m
+ụ
+c ch
+ọ
+n
+ 
+ 
+Là giá tr
+ị
+ 
+không hi
+ể
+n th
+ị
+ 
+bên ngoài, Value ch
+ứ
+a thông tin v
+ề
+ 
+m
+ụ
+c 
+ch
+ọ
+n 
+(thích h
+ợ
+p cho l
+ậ
+p trình)
+ 
+ 
+N
+ế
+u m
+ụ
+c ch
+ọ
+n đƣ
+ợ
+c ch
+ọ
+n, trang web s
+ẽ
+ 
+đƣ
+ợ
+c chuy
+ể
+n đ
+ế
+n m
+ộ
+t trang 
+web khác đƣ
+ợ
+c ch
+ỉ
+ 
+đ
+ị
+nh
+ 
+ 
+N
+ế
+u ta gán giá tr
+ị
+ 
+c
+ho NavigateUrl, ta c
+ầ
+n xác đ
+ị
+nh trang web 
+chuy
+ể
+n đ
+ế
+n s
+ẽ
+ 
+hi
+ể
+n th
+ị
+ 
+ở
+ 
+đâu trong target. Có th
+ể
+ 
+là frame nào đó, 
+có th
+ể
+ 
+là 
+ở
+ 
+m
+ộ
+t c
+ử
+a s
+ổ
+ 
+trình duy
+ệ
+t m
+ớ
+i
+ 
+ 
+N
+ế
+u là false, m
+ụ
+c ch
+ọ
+n s
+ẽ
+ 
+không đƣ
+ợ
+c ch
+ọ
+n
+ 
+
+
+--- PAGE 68 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+68
+ 
+M
+ộ
+t s
+ố
+ 
+thu
+ộ
+c tính 
+c
+ủ
+a m
+ụ
+c ch
+ọ
+n MenuItem
+ 
+4.2. Đ
+ị
+nh d
+ạ
+ng MenuView
+ 
+Gi
+ố
+ng nhƣ 
+TreeView, MenuView h
+ỗ
+ 
+tr
+ợ
+ 
+đ
+ị
+nh d
+ạ
+ng m
+ụ
+c ch
+ọ
+n 
+ở
+ 
+nhi
+ề
+u m
+ứ
+c khác nhau. 
+Đi
+ề
+u khi
+ể
+n MenuView cho phép ta ch
+ọ
+n l
+ự
+a gi
+ữ
+a hai lo
+ạ
+i m
+ụ
+c ch
+ọ
+n static
+ 
+và dynamic. M
+ụ
+c 
+ch
+ọ
+n Static cho phép ngƣ
+ờ
+i dùng đ
+ị
+nh d
+ạ
+ng 
+ 
+Lo
+ạ
+i Static
+ 
+Lo
+ạ
+i Dynamic
+ 
+Mô t
+ả
+ 
+StaticMenuStyle
+ 
+ 
+ 
+ 
+ 
+StaticMenuItemStyle
+ 
+ 
+ 
+StaticSelectedStyle
+ 
+ 
+ 
+ 
+StaticHoverStyle
+ 
+DynamicMenuStyle
+ 
+ 
+ 
+ 
+ 
+DynamicMenuItemStyle
+ 
+ 
+ 
+DynamicSelectedStyle
+ 
+ 
+ 
+ 
+Dynamic HoverStyle
+ 
+N
+ế
+u StaticMenuStyle đƣ
+ợ
+c gán
+. 
+Menu s
+ẽ
+ 
+đƣ
+ợ
+c hi
+ể
+n th
+ị
+ 
+trên trang. 
+Ngƣ
+ợ
+c l
+ạ
+i Menuu s
+ẽ
+ 
+hi
+ể
+n th
+ị
+ 
+dƣ
+ớ
+i 
+d
+ạ
+ng 
+Popup
+ 
+ 
+ 
+Gán thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng cho m
+ỗ
+i 
+m
+ụ
+c ch
+ọ
+n MenuItem trong menu
+ 
+ 
+Gán thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng cho các 
+m
+ụ
+c đƣ
+ợ
+c ch
+ọ
+n (sau khi ngƣ
+ờ
+i 
+dùng click vào m
+ụ
+c ch
+ọ
+n nào đó)
+ 
+ 
+Gán thu
+ộ
+c tính đ
+ị
+nh d
+ạ
+ng cho các 
+m
+ụ
+c ch
+ọ
+n khi ngƣ
+ờ
+i dùng đƣa mũi 
+tên chu
+ộ
+t vào m
+ụ
+c ch
+ọ
+n 
+ 
+4.3. Ví d
+ụ
+ 
+Menu
+ 
++ Ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+menu là 
+sourceSiteMap gi
+ố
+ng nhƣ ph
+ầ
+n Treeview
+ 
++ M
+ộ
+t s
+ố
+ 
+thu
+ộ
+c tính đƣ
+ợ
+c ch
+ọ
+n nhƣ sau:
+ 
+Orientation
+=Horizontal
+ 
+ 
+StaticDisplayLevels
+=2
+ 
+ 
+StaticSubMenuIndent
+=10px
+ 
++  Ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u hi
+ể
+n th
+ị
+ 
+cho menu d
+ọ
+c là t
+ậ
+p tin Sit
+eMap 
+nhƣ ví d
+ụ
+ 
+trên
+ 
++ M
+ộ
+t s
+ố
+ 
+thu
+ộ
+c tính đƣ
+ợ
+c ch
+ọ
+n là:
+ 
+    
+StaticDisplayLevels
+=2
+ 
+    
+StaticSubMenuIndent
+=5px
+ 
+    
+Orientation = Vertical
+ 
+ 
+ 
+ 
+    
+Hình
+ 
+27
+: 
+ 
+Form k
+ế
+t qu
+ả
+ 
+Menu 
+ 
+
+
+--- PAGE 69 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+69
+ 
+C
+âu h
+ỏ
+i/Bài t
+ậ
+p c
+ủ
+ng c
+ố
+ 
+1.
+ 
+Nêu các thu
+ộ
+c tính c
+ủ
+a TreeNode
+ 
+2.
+ 
+Nêu các thu
+ộ
+c tính thông d
+ụ
+ng
+ 
+đ
+ể
+ 
+đ
+ị
+nh d
+ạ
+ng TreeView
+ 
+3.
+ 
+S
+ử
+ 
+d
+ụ
+ng đi
+ề
+u khi
+ể
+n Wizards đ
+ể
+ 
+t
+ạ
+o form nh
+ậ
+p li
+ệ
+u gi
+ố
+ng nhƣ trang 56,57
+ 
+4.
+ 
+T
+ạ
+o TreeView gi
+ố
+ng nhƣ trang 63 và trang 65
+ 
+5.
+ 
+T
+ạ
+o menu d
+ọ
+c và ngang gi
+ố
+ng nhƣ trang 66 b
+ằ
+ng cách vi
+ế
+t code và s
+ử
+ 
+d
+ụ
+ng công 
+c
+ụ
+ 
+wizard
+ 
+ 
+ 
+
+--- PAGE 70 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+70
+ 
+Chƣơng 
+5
+: ADO.NET
+ 
+Bài 1: 
+ 
+T
+Ổ
+N
+G QUAN V
+Ề
+ 
+ADO.NET
+ 
+ 
+M
+ụ
+c tiêu h
+ọ
+c t
+ậ
+p
+ 
+-
+ 
+Trình bày ki
+ế
+n trúc v
+ề
+ 
+ADO.net
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng đ
+ố
+i tƣ
+ợ
+ng Connection đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i 
+cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u
+ 
+(CSDL)
+ 
+-
+ 
+Ki
+ể
+m tra K
+ế
+t n
+ố
+i v
+ớ
+i CSDL
+ 
+-
+ 
+Trình bày thông tin đƣ
+ợ
+c truy xu
+ấ
+t trên trang web.
+ 
+ 
+I.
+ 
+Gi
+ớ
+i thi
+ệ
+u 
+ 
+H
+ầ
+u h
+ế
+t các 
+ứ
+ng d
+ụ
+ng bao g
+ồ
+m 
+ứ
+ng d
+ụ
+ng windows và 
+ứ
+ng d
+ụ
+ng web đ
+ề
+u là các 
+ứ
+ng d
+ụ
+ng 
+theo hƣ
+ớ
+ng d
+ữ
+ 
+li
+ệ
+u. Các công vi
+ệ
+c chính thƣ
+ờ
+ng là truy xu
+ấ
+t, hi
+ể
+n th
+ị
+ 
+và ch
+ỉ
+nh s
+ử
+a d
+ữ
+ 
+li
+ệ
+u. 
+Truy xu
+ấ
+t và x
+ử
+ 
+lý d
+ữ
+ 
+li
+ệ
+u thƣ
+ờ
+ng đƣ
+ợ
+c xem là công vi
+ệ
+c đơn gi
+ả
+n, tuy nhiên th
+ờ
+i gian sau 
+này các vi
+ệ
+c này có v
+ẻ
+ 
+khá
+ 
+ph
+ứ
+c t
+ạ
+p. C
+ụ
+ 
+th
+ể
+ 
+là, các l
+ậ
+p trình viên đã ph
+ả
+i chuy
+ể
+n t
+ừ
+ 
+truy xu
+ấ
+t 
+d
+ữ
+ 
+li
+ệ
+u đơn gi
+ả
+n trên các cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u c
+ụ
+c b
+ộ
+ 
+đ
+ế
+n các h
+ệ
+ 
+th
+ố
+ng phân tán trên các cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u 
+trung tâm nào đó. Tƣơng t
+ự
+ 
+nhƣ v
+ậ
+y, các công ngh
+ệ
+ 
+truy xu
+ấ
+t d
+ữ
+ 
+li
+ệ
+u cũng phát tri
+ể
+n r
+ấ
+t 
+nha
+nh. Ví d
+ụ
+ 
+Microsoft đã phát tri
+ể
+n các công ngh
+ệ
+ 
+truy xu
+ấ
+t d
+ữ
+ 
+nhƣ 
+ODBC, DAO, RDO, 
+RDS, 
+và 
+ADO.
+ 
+.NET Framework
+ 
+bao g
+ồ
+m công ngh
+ệ
+ 
+truy xu
+ấ
+t d
+ữ
+ 
+li
+ệ
+u riêng
+ 
+g
+ọ
+i là  
+ADO.NET. ADO.NET 
+bao g
+ồ
+m các l
+ớ
+p cho phép các 
+ứ
+ng d
+ụ
+ng .NET truy xu
+ấ
+t v
+ớ
+i các ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u (thôn
+g thƣ
+ờ
+ng 
+là d
+ữ
+ 
+cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u quan h
+ệ
+)
+, 
+th
+ự
+c thi các câu l
+ệ
+nh, và qu
+ả
+n lý d
+ữ
+ 
+li
+ệ
+u không k
+ế
+t n
+ố
+i. 
+ 
+Chƣơng này s
+ẽ
+ 
+mô t
+ả
+ 
+ki
+ế
+n trúc  
+ADO.NET 
+và nhà cung c
+ấ
+p d
+ữ
+ 
+li
+ệ
+u ADO.NET. B
+ạ
+n s
+ẽ
+ 
+h
+ọ
+c 
+các ch
+ứ
+c năng cơ b
+ả
+n v
+ề
+ 
+ASP.net nhƣ m
+ở
+ 
+k
+ế
+t n
+ố
+i, th
+ự
+c thi câu l
+ệ
+nh SQL, store
+d procedure, và 
+truy v
+ấ
+n k
+ế
+t qu
+ả
+ 
+c
+ủ
+a câu truy v
+ấ
+n.
+ 
+Truy xu
+ấ
+t d
+ữ
+ 
+li
+ệ
+u không s
+ử
+ 
+d
+ụ
+ng ADO.net
+ 
+Trong ASP.NET, có vài cách đ
+ể
+ 
+truy xu
+ấ
+t thông tin kh
+ỏ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u tr
+ự
+c ti
+ế
+p mà không 
+s
+ử
+ 
+d
+ụ
+ng các l
+ớ
+p ADO.Net. Tùy thu
+ộ
+c vào yêu c
+ầ
+u công vi
+ệ
+c c
+ủ
+a b
+ạ
+n, mà có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng m
+ộ
+t 
+trong các cách sau đây: 
+ 
+-
+ 
+ 
+Đi
+ề
+u khi
+ể
+n SqlDataSource:
+ 
+Đi
+ề
+u khi
+ể
+n SqlDataSource cho phép b
+ạ
+n đ
+ị
+nh nghĩa các 
+câu truy v
+ấ
+n rõ ràng. B
+ạ
+n có th
+ể
+ 
+k
+ế
+t n
+ố
+i SqlDataSource v
+ớ
+i các đi
+ề
+u khi
+ể
+n rich controls nhƣ 
+GridView và cung c
+ấ
+p các trang web c
+ủ
+a b
+ạ
+n kh
+ả
+ 
+n
+ăng đ
+ể
+ 
+ch
+ỉ
+nh s
+ử
+a, c
+ấ
+p nh
+ậ
+t d
+ữ
+ 
+li
+ệ
+u mà 
+không vi
+ế
+t các câu l
+ệ
+nh ADO.NET. Tuy nhiên, SqlDataSource có m
+ộ
+t vài đi
+ể
+m h
+ạ
+n ch
+ế
+ 
+b
+ở
+i vì 
+nó đ
+ặ
+t vi
+ệ
+c x
+ử
+ 
+lý d
+ữ
+ 
+li
+ệ
+u vào trong ph
+ầ
+n th
+ẻ
+ 
+c
+ủ
+a trang web. Các nhà phát tri
+ể
+n web thích s
+ử
+ 
+ObjectDataSource, tƣơng t
+ự
+ 
+nhƣ chuc
+ứ
+c
+ 
+năng k
+ế
+t n
+ố
+i d
+ữ
+ 
+li
+ệ
+u trong data binding nhƣng 
+SqlDataSource s
+ử
+ 
+d
+ụ
+ng các gói d
+ữ
+ 
+li
+ệ
+u. Khi b
+ạ
+n s
+ử
+ 
+d
+ụ
+ng ObjectDataSource, b
+ạ
+n có th
+ể
+ 
+t
+ạ
+o 
+các thành ph
+ầ
+n d
+ữ
+ 
+li
+ệ
+u và vi
+ế
+t các mã l
+ệ
+nh ADO.net phía sau. 
+ 
+-
+ 
+LINQ to SQL:
+ 
+V
+ớ
+i LINQ to SQL, b
+ạ
+n c
+ầ
+n vi
+ế
+t các câu truy v
+ấ
+n
+ 
+s
+ử
+ 
+d
+ụ
+ng mã l
+ệ
+nh C# 
+code (or the LinqDataSource control) và cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u đƣ
+ợ
+c phát sinh t
+ự
+ 
+đ
+ộ
+ng. LINQ to SQL 
+h
+ỗ
+ 
+tr
+ợ
+ 
+c
+ậ
+p nh
+ậ
+t, phát sinh các câu l
+ệ
+nh SQL. Gi
+ố
+ng nhƣ các đi
+ề
+u khi
+ể
+n SQLDataSource, 
+LINQ to SQL không cho phép l
+ậ
+p trình viên th
+ự
+c thi các câu l
+ệ
+nh trên cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u mà không 
+kh
+ớ
+p v
+ớ
+i câu truy v
+ấ
+n tr
+ự
+c ti
+ế
+p và l
+ệ
+nh c
+ậ
+p nh
+ậ
+t
+ 
+(các l
+ệ
+nh t
+ạ
+o các b
+ả
+ng). Tuy nhiên, không 
+gi
+ố
+ng nhƣ đi
+ề
+u khi
+ể
+n SqlDataSource, LINQ to SQL ch
+ỉ
+ 
+làm vi
+ệ
+c đƣ
+ợ
+c SQL Server và hoàn 
+toàn đ
+ộ
+c l
+ậ
+p v
+ớ
+i ADO.
+ 
+
+--- PAGE 71 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+71
+ 
+-
+ 
+Profiles:
+ 
+Đ
+ặ
+c đi
+ể
+m c
+ủ
+a profi
+les cho phép b
+ạ
+n lƣu tr
+ữ
+ 
+kh
+ố
+i d
+ữ
+ 
+li
+ệ
+u trong cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u 
+mà không s
+ử
+ 
+d
+ụ
+ng mã l
+ệ
+nh ADO.NET. Tuy nhiên đ
+ặ
+c tính kh
+ố
+i này thì c
+ự
+c kì gi
+ớ
+i h
+ạ
+n. ví d
+ụ
+, 
+nó không cho phép b
+ạ
+n đi
+ề
+u khi
+ể
+n trên c
+ấ
+u trúc v
+ậ
+t lý c
+ủ
+a b
+ả
+ng d
+ữ
+ 
+li
+ệ
+u. K
+ế
+t qu
+ả
+ 
+là, các nhà 
+phát tri
+ể
+n 
+ứ
+ng d
+ụ
+ng thƣ
+ờ
+ng t
+ậ
+o các nhà cung c
+ấ
+p profile riêng v
+ớ
+i các l
+ệ
+nh ADO.net.
+ 
+II.
+ 
+Ki
+ế
+n trúc c
+ủ
+a ADO.NET
+ 
+ADO.net s
+ử
+ 
+d
+ụ
+ng ki
+ế
+n trúc đa t
+ầ
+ng đ
+ể
+ 
+gi
+ả
+i quy
+ế
+t các v
+ấ
+n đ
+ề
+ 
+v
+ề
+ 
+đ
+ố
+i tƣ
+ợ
+ng k
+ế
+t n
+ố
+i 
+(
+Connection
+), đ
+ố
+i tƣ
+ợ
+ng câu l
+ệ
+nh (
+Command
+) và đ
+ố
+i tƣ
+ợ
+ng t
+ậ
+p d
+ữ
+ 
+li
+ệ
+u (
+DataSet
+). 
+ 
+2.1.
+ 
+ADO.N
+ET Data Providers
+ 
+    
+Nhà cung c
+ấ
+p d
+ữ
+ 
+li
+ệ
+u là t
+ậ
+p h
+ợ
+p các lóp ADO.net cho phép th
+ự
+c hi
+ệ
+n truy xu
+ấ
+t đ
+ế
+n cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u nào đó, th
+ự
+c hi
+ệ
+n các câu l
+ệ
+nh SQL và truy v
+ấ
+n d
+ữ
+ 
+li
+ệ
+u. Nhà cung c
+ấ
+p d
+ữ
+ 
+li
+ệ
+u là m
+ộ
+t 
+c
+ầ
+u n
+ố
+i gi
+ữ
+a chƣơng trình 
+ứ
+ng d
+ụ
+ng và ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u. Cá
+c l
+ớ
+p t
+ạ
+o thành m
+ộ
+t Data Provider 
+bao g
+ồ
+m: 
+ 
+-
+ 
+Connection:
+  
+S
+ử
+ 
+d
+ụ
+ng đ
+ố
+i tƣ
+ợ
+ng này đ
+ể
+ 
+thi
+ế
+t l
+ậ
+p m
+ộ
+t k
+ế
+t n
+ố
+i v
+ớ
+i ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u
+ 
+(data 
+source).
+ 
+ 
+-
+ 
+Command:
+ 
+S
+ử
+ 
+d
+ụ
+ng đ
+ố
+i tƣ
+ợ
+ng này đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n câu l
+ệ
+nh SQL và th
+ủ
+ 
+t
+ụ
+c stored 
+procedures. 
+ 
+-
+ 
+DataReader:
+ 
+Truy xu
+ấ
+t d
+ữ
+ 
+li
+ệ
+u 
+tr
+ả
+ 
+v
+ề
+ 
+t
+ừ
+ 
+k
+ế
+t qu
+ả
+ 
+câu truy v
+ấ
+n. 
+ 
+-
+ 
+DataAdapter:
+ 
+Th
+ự
+c hi
+ệ
+n 2 nhi
+ệ
+m v
+ụ
+: 
+S
+ử
+ 
+d
+ụ
+ng 
+DataAdapter
+ 
+đ
+ể
+ 
+đ
+ổ
+ 
+d
+ữ
+ 
+li
+ệ
+u vào
+ 
+DataSet
+ 
+v
+ớ
+i thông tin đƣ
+ợ
+c rút ra t
+ừ
+ 
+Data source
+.
+ 
+Ta cũng có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng DataAdapter 
+đ
+ể
+ 
+thay đ
+ổ
+i 
+data Source 
+phù h
+ợ
+p v
+ớ
+i nh
+ữ
+ng ch
+ỉ
+nh s
+ử
+a đƣ
+ợ
+c th
+ự
+c hi
+ệ
+n trong DataSet.
+ 
+ 
+Hình
+ 
+28
+: 
+ 
+Ki
+ế
+n trúc ADO.net
+ 
+-
+ 
+SQL Server provider:
+ 
+Truy xu
+ấ
+t đ
+ế
+n CSDL SQL Server (version 7.0 ho
+ặ
+c sau)
+ 
+-
+ 
+OLE DB provider: 
+Truy xu
+ấ
+t đ
+ế
+n b
+ấ
+t c
+ứ
+ 
+ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u nào có OLE DB driver. 
+Bao g
+ồ
+m SQL Server databases trƣ
+ớ
+c version 7.0.
+ 
+-
+ 
+Oracle provid
+er:
+ 
+Cung c
+ấ
+p truy xu
+ấ
+t đ
+ế
+n cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u 
+Oracle database (version 
+8i ho
+ặ
+c các 
+ấ
+n b
+ả
+n sau này
+). 
+ 
+-
+ 
+ODBC provider:
+ 
+Cung c
+ấ
+p truy xu
+ấ
+t đ
+ế
+n b
+ấ
+t c
+ứ
+ 
+d
+ữ
+ 
+li
+ệ
+u ngu
+ồ
+n nào có ODBC
+ 
+driver. 
+ 
+ 
+2.2.
+Các l
+ớ
+p ADO.net c
+ơ
+ 
+b
+ả
+n
+ 
+  
+ADO.NET có 2 
+ki
+ể
+u
+ 
+đ
+ố
+i tƣ
+ợ
+ng
+ 
+chính
+: 
+đ
+ố
+i tƣ
+ợ
+ng d
+ự
+a trên 
+k
+ế
+t n
+ố
+i (
+connection
+-
+based
+) và 
+đ
+ố
+i tƣ
+ợ
+ng d
+ự
+a trên n
+ộ
+i dung (
+content
+-
+based
+)
+.
+ 
+
+
+--- PAGE 72 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+72
+ 
+-
+ 
+Các đ
+ố
+i tƣ
+ợ
+ng liên quan đ
+ế
+n k
+ế
+t n
+ố
+i:
+ 
+Các đ
+ố
+i tƣ
+ợ
+ng này bao g
+ồ
+m: 
+Connection, 
+Command, DataReader, và DataAdapter.
+ 
+Nh
+ữ
+ng đ
+ố
+i tƣ
+ợ
+ng này đƣ
+ợ
+c tìm trong namespace 
+System.Data.SqlClient
+ 
+đ
+ố
+i v
+ớ
+i SQL Server provider.
+ 
+-
+ 
+Các đ
+ố
+i tƣ
+ợ
+ng liên quan đ
+ế
+n n
+ộ
+i dung:
+ 
+Các đ
+ố
+i tƣ
+ợ
+ng này bao g
+ồ
+m: DataSet, 
+DataColumn, DataRow, DataRelation, và nhi
+ề
+u đ
+ố
+i tƣ
+ợ
+ng khác t
+ạ
+i namespace 
+System.Data
+. 
+ 
+Các l
+ớ
+p trong ADO.net đƣ
+ợ
+c nhóm l
+ạ
+i thành m
+ộ
+t vài namespaces. M
+ỗ
+i n
+hà cung c
+ấ
+p d
+ữ
+ 
+li
+ệ
+u có namespace riêng và các l
+ớ
+p t
+ổ
+ng quát nhƣ DataSet đƣ
+ợ
+c lƣu tr
+ữ
+ 
+trong namespaces 
+System.Data.
+ 
+Tên Namespace
+ 
+Mô t
+ả
+ 
+System.Data
+ 
+C
+h
+ứ
+a các l
+ớ
+p đ
+ể
+ 
+làm vi
+ệ
+c liên quan đ
+ế
+n 
+columns, 
+relations, tables, datasets, rows, views, and constraints. 
+ 
+System.Data
+.Common
+ 
+Đ
+ị
+nh nghĩa ch
+ứ
+c năng chính c
+ủ
+a ADO.NET. Data 
+providers th
+ừ
+a k
+ế
+ 
+t
+ừ
+ 
+nh
+ữ
+ng l
+ớ
+p này (nhƣ 
+DbConnection, DbCommand) đ
+ể
+ 
+t
+ạ
+o nh
+ữ
+ng version 
+khác nhau.
+ 
+System.Data.OleDb
+ 
+Ch
+ứ
+a các l
+ớ
+p đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i OLE DB provider, bao 
+g
+ồ
+m OleDbCommand, OleDbCon
+nection, 
+OleDbDataReader, và OleDbDataAdapter. Các l
+ớ
+p này 
+h
+ỗ
+ 
+tr
+ợ
+ 
+h
+ầ
+u h
+ế
+t 
+nhà cung c
+ấ
+p 
+OLE DB
+.
+ 
+ 
+System.Data.SqlClient
+ 
+Có các l
+ớ
+p đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i CSDL Microsoft SQL Server 
+nhƣ SqlDbCommand, SqlDbConnection, 
+SqlDataReader, 
+và
+SqlDBDataAdapter. 
+ 
+System.Data.O
+racleClient
+ 
+Ch
+ứ
+a các l
+ớ
+p đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i CSDL
+ 
+Oracle(version 8.1.7 
+or later), bao g
+ồ
+m OracleCommand, OracleConnection, 
+OracleDataReader 
+và
+ 
+OracleDataAdapter
+.
+ 
+ 
+System.Data.Odbc:
+ 
+Ch
+ứ
+a các l
+ớ
+p đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i h
+ầ
+u h
+ế
+t ODBC drivers. 
+Nh
+ữ
+ng l
+ớ
+p này bao g
+ồ
+m
+ 
+O
+dbcCom
+mand, 
+OdbcConnection, OdbcDataReader, và 
+OdbcDataAdapter. 
+ 
+System.Data.SqlTypes
+ 
+Ch
+ứ
+a các c
+ấ
+u trúc phù h
+ợ
+p v
+ớ
+i ki
+ể
+u d
+ữ
+ 
+li
+ệ
+u trong SQL 
+Server. Nh
+ữ
+ng l
+ớ
+p này thì không c
+ầ
+n thi
+ế
+t nhƣng nó 
+cung c
+ấ
+p m
+ộ
+t gi
+ả
+i pháp chu
+ẩ
+n đ
+ố
+i v
+ớ
+i 
+ki
+ể
+u d
+ữ
+ 
+li
+ệ
+u 
+.NET, 
+ 
+III.
+ 
+L
+ớ
+p Connectio
+n 
+ 
+3.1.
+ 
+Chu
+ỗ
+i k
+ế
+t n
+ố
+i
+ 
+Khi t
+ạ
+o m
+ộ
+t đ
+ố
+i tƣ
+ợ
+ng k
+ế
+t n
+ố
+i Connection, c
+ầ
+n ph
+ả
+i cung c
+ấ
+p m
+ộ
+t chu
+ỗ
+i k
+ế
+t n
+ố
+i 
+connectionstring.  M
+ộ
+t chu
+ỗ
+i k
+ế
+t n
+ố
+i 
+Connectionstring
+ 
+bao g
+ồ
+m các c
+ặ
+p name/value 
+(
+<
+tên/giá tr
+ị
+>
+)
+ 
+đƣ
+ợ
+c phân cách b
+ở
+i d
+ấ
+u “ ; ”. Th
+ứ
+ 
+t
+ự
+ 
+c
+ủ
+a các c
+ặ
+p thì không quan
+ 
+tr
+ọ
+ng và 
+không phân bi
+ệ
+t ch
+ữ
+ 
+hoa hay ch
+ữ
+ 
+thƣ
+ờ
+ng. Connectionstring ch
+ỉ
+ 
+đ
+ị
+nh các thông tin cơ b
+ả
+n c
+ầ
+n 
+thi
+ế
+t đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n k
+ế
+t n
+ố
+i v
+ớ
+i CSDL.
+ 
+M
+ặ
+c dù m
+ỗ
+i nhà cung c
+ấ
+p d
+ữ
+ 
+li
+ệ
+u yêu c
+ầ
+u các ConnectionString khác nhau. Tuy nhiên 
+sau đây là các thông tin b
+ắ
+t bu
+ộ
+c ph
+ả
+i có:
+ 
+-
+ 
+Data Source:
+ 
+Tên máy ch
+ủ
+ 
+ch
+ứ
+a cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u
+ 
+-
+ 
+Initial Catalog:
+ 
+Tên cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u
+ 
+-
+ 
+Integrated Security
+:
+ 
+Cách cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u nh
+ậ
+n d
+ạ
+ng
+ 
+ 
+
+--- PAGE 73 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+73
+ 
+a.
+ 
+K
+ế
+t n
+ố
+i d
+ữ
+ 
+li
+ệ
+u v
+ớ
+i CSDL MS SQL Server
+ 
+        
+Ví d
+ụ
+:
+ 
+M
+ộ
+t chu
+ỗ
+i k
+ế
+t n
+ố
+i có tên connectionString đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u 
+NorthWind trong MS SQL server 
+nhƣ sau:
+ 
+    
+string connectionString = "
+Data Source
+=localhos
+t; 
+Initial Catalog
+=Northwind; 
+Integrated Security
+=SSPI";
+ 
+    
+Tên máy ch
+ủ
+ 
+ch
+ứ
+a cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u: là Localhost; Tên cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u là Northwind; và nh
+ậ
+n 
+d
+ạ
+ng là tài 
+kh
+ỏ
+an ngƣ
+ờ
+i dùng windows đ
+ể
+ 
+login vào cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u.
+ 
+         
+N
+ế
+u integrated security không đƣ
+ợ
+c h
+ỗ
+ 
+tr
+ợ
+, k
+ế
+t n
+ố
+i ph
+ả
+i ch
+ỉ
+ 
+đ
+ị
+nh rõ c
+ả
+ 
+hai ngƣ
+ờ
+i dùng và 
+m
+ậ
+t kh
+ẩ
+u truy c
+ậ
+p. Đ
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u SQL m
+ớ
+i đƣ
+ợ
+c thi
+ế
+t l
+ậ
+p, tài kho
+ả
+n sa (
+system 
+administrator)
+ 
+thƣ
+ờ
+ng đƣ
+ợ
+c s
+ử
+ 
+d
+ụ
+ng. 
+ 
+ 
+b.
+ 
+K
+ế
+t n
+ố
+i d
+ữ
+ 
+li
+ệ
+u v
+ớ
+i CSDL Oracle
+ 
+     
+      
+  
+Ví d
+ụ
+: 
+ 
+          
+string connectionString = "Data Source=localhost; Initial Catalog=Northwind; 
+user id=sa; password=opensesame";
+ 
+Đ
+ể
+ 
+k
+ế
+t n
+ố
+i vào nhà cung c
+ấ
+p d
+ữ
+ 
+li
+ệ
+u OLE DB. Chu
+ỗ
+i k
+ế
+t n
+ố
+i cũng 
+tƣơng t
+ự
+, tuy nhiên c
+ầ
+n 
+ph
+ả
+i thêm vào chu
+ỗ
+i xác nh
+ậ
+n driver OLE DB. Ví d
+ụ
+ 
+sau cho th
+ấ
+y chu
+ỗ
+i k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u Oracle thông qua nhà cung c
+ấ
+p MSDAORA OLE. 
+ 
+string connectionString = "Data Source=localhost; Initial Catalog=Sales; user id=sa; 
+password
+=da#ta_li#nk_43;Provider=MSDAORA";
+ 
+ 
+c.
+ 
+K
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u Access:
+ 
+string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0; @"Data 
+Source=C:
+\
+DataSources
+\
+Northwind.mdb";
+ 
+ 
+d.
+ 
+Khai báo chu
+ỗ
+i k
+ế
+t n
+ố
+i trong t
+ậ
+p tin web.config
+ 
+Thay vì vi
+ế
+t chu
+ỗ
+i k
+ế
+t n
+ố
+i tron
+g code
+-
+behind r
+ấ
+t ph
+ứ
+c t
+ạ
+p và m
+ấ
+t nhi
+ề
+u th
+ờ
+i gian. Ta có th
+ể
+ 
+khai báo chu
+ỗ
+i k
+ế
+t n
+ố
+i trong t
+ậ
+p tin web.config nhƣ sau:
+ 
+<configuration>
+ 
+ 
+ 
+ 
+<connectionStrings>
+ 
+    
+ 
+ 
+ 
+<add 
+name
+="Northwind" 
+connectionString
+= " Data Source=localhost;
+ 
+ 
+Initial Catalog
+=Northwind;
+ 
+Integrated Security
+=SSPI"/>
+ 
+  
+</connectionStrings> 
+ 
+</configuration>
+ 
+Khi đó đ
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng chu
+ỗ
+i k
+ế
+t n
+ố
+i trên, ta s
+ẽ
+ 
+s
+ử
+ 
+d
+ụ
+ng t
+ậ
+p h
+ợ
+p         
+WebConfigurationManager.ConnectionStrings thông qua câu l
+ệ
+nh nhƣ sau:
+ 
+string connectionString =
+ 
+        
+WebConfigurati
+onManager.ConnectionStrings["Northwind"].ConnectionString; 
+ 
+3.2.
+ 
+ 
+Ki
+ể
+m tra k
+ế
+t n
+ố
+i:
+ 
+    
+Sau khi có chu
+ỗ
+i k
+ế
+t n
+ố
+i 
+và khai báo đ
+ố
+i tƣ
+ợ
+ng k
+ế
+t n
+ố
+i ta có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng phƣơng th
+ứ
+c 
+open() và close() đ
+ể
+ 
+ki
+ể
+m tra k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u:
+ 
+protected
+ 
+void
+ 
+Page_Load(
+obje
+ct
+ 
+sender, 
+EventArgs
+ 
+e)
+ 
+{
+ 
+
+--- PAGE 74 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+74
+ 
+        
+string
+ 
+connectionStr = 
+"Data Source=
+localhost
+; Initial Catalog=QLNV; Integrated 
+Security=SSPI"
+;
+ 
+        
+SqlConnection
+ 
+con  =
+new
+ 
+SqlConnection
+(connectionStr);            
+ 
+ 
+       
+//M
+ở
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i CSDL
+ 
+        
+try
+{
+ 
+         
+   
+con.Open();
+ 
+            
+lblTB.Text += 
+"<b>Server Version:</b> "
+ 
++ con.ServerVersion;
+ 
+            
+lblTB.Text += 
+"<br /><b>Tình tr
+ạ
+ng k
+ế
+t n
+ố
+i là:</b> "
+ 
++ con.State.ToString();
+ 
+            
+lblTB.Text += 
+"<br>K
+ế
+t n
+ố
+i thành công!"
+;
+ 
+ 
+        
+}
+ 
+      
+  
+// Hi
+ể
+n
+ 
+th
+ị
+ 
+thông báo l
+ỗ
+i n
+ế
+u có l
+ỗ
+i phát sinh
+ 
+        
+catch
+(
+SqlException
+ 
+ex){
+ 
+           
+lblTB.Text += 
+" K
+ế
+t n
+ố
+i th
+ấ
+t b
+ạ
+i! "
+ 
++ ex.ToString();       
+ 
+        
+}
+ 
+       
+// Th
+ự
+c hi
+ệ
+n đóng k
+ế
+t n
+ố
+i n
+ế
+u không còn làm vi
+ệ
+c v
+ớ
+i CSLD n
+ữ
+a
+ 
+        
+finally
+{
+ 
+            
+con.C
+lose();
+ 
+            
+lblTB.Text += 
+"<br /><b>Hi
+ệ
+n t
+ạ
+i k
+ế
+t n
+ố
+i:</b> "
+ 
++ con.State.ToString();
+ 
+ 
+        
+}  
+ 
+}
+ 
+K
+ế
+t qu
+ả
+ 
+sau khi k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u và đóng k
+ế
+t n
+ố
+i như sau:
+ 
+ 
+Hình
+ 
+29
+: 
+ 
+K
+ế
+t qu
+ả
+ 
+Form Ki
+ể
+m tra k
+ế
+t n
+ố
+i
+ 
+Câu h
+ỏ
+i/Bài t
+ậ
+p c
+ủ
+ng c
+ố
+ 
+1.
+ 
+Trình bày ki
+ế
+n t
+rúc v
+ề
+ 
+ADO.net
+ 
+2.
+ 
+Hãy nêu các thu
+ộ
+c tính c
+ầ
+n thi
+ế
+t đ
+ể
+ 
+t
+ạ
+o chu
+ỗ
+i k
+ế
+t n
+ố
+i
+ 
+3.
+ 
+Nêu tên thƣ vi
+ệ
+n có ch
+ứ
+a l
+ớ
+p Connection
+ 
+4.
+ 
+Nêu tên các phƣơng th
+ứ
+c thông d
+ụ
+ng c
+ủ
+a l
+ớ
+p Connection.
+ 
+5.
+ 
+T
+ạ
+o form k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u gi
+ố
+ng nhƣ trang 71 và 72
+ 
+ 
+ 
+
+
+--- PAGE 75 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+75
+ 
+Bài 2: 
+Đ
+ố
+i tƣ
+ợ
+ng
+ 
+Command và Da
+taReader
+ 
+ 
+M
+ụ
+c tiêu h
+ọ
+c t
+ậ
+p
+ 
+-
+ 
+Trình bày
+ 
+ứ
+ng d
+ụ
+ng
+ 
+đ
+ố
+i tƣ
+ợ
+ng Command và DataReader
+ 
+-
+ 
+T
+ạ
+o đƣ
+ợ
+c đ
+ố
+i tƣ
+ợ
+ng Command
+ 
+-
+ 
+Trình bày các thu
+ộ
+c tính c
+ủ
+a đ
+ố
+i tƣ
+ợ
+ng Command.
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng các phƣơng th
+ứ
+c c
+ủ
+a câu l
+ệ
+nh Command trong th
+ự
+c thi câu truy v
+ấ
+n SQL
+ 
+ 
+I.
+ 
+Đ
+ố
+i tƣ
+ợ
+ng
+ 
+Command
+ 
+  
+L
+ớ
+p C
+ommand cho phép ta th
+ự
+c hi
+ệ
+n b
+ấ
+t c
+ứ
+ 
+ki
+ể
+u câu l
+ệ
+nh SQL nào. M
+ặ
+c dù 
+ta
+ 
+có th
+ể
+ 
+dùng m
+ộ
+t l
+ớ
+p Command đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n các khai báo d
+ữ
+ 
+li
+ệ
+u (
+như t
+ạ
+o và ch
+ỉ
+nh s
+ử
+a cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u, b
+ả
+ng  ho
+ặ
+c ch
+ỉ
+ 
+m
+ụ
+c
+). 
+Thông thƣ
+ờ
+ng l
+ậ
+p trình viên thƣ
+ờ
+ng th
+ự
+c hi
+ệ
+n các thao tác v
+ớ
+i cơ 
+s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u nhƣ: truy xu
+ấ
+t và c
+ậ
+p nh
+ậ
+t các m
+ẫ
+u tin trong m
+ộ
+t table.
+ 
+       
+L
+ớ
+p Command cài đ
+ặ
+t giao ti
+ế
+p IDBCommand. Giao ti
+ế
+p này đ
+ị
+nh nghĩa m
+ộ
+t vài 
+thu
+ộ
+c tính chính và phƣơng th
+ứ
+c đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n câu l
+ệ
+nh sau khi m
+ở
+ 
+k
+ế
+t n
+ố
+i. 
+ 
+1.1.
+ 
+Các ki
+ể
+u câu l
+ệ
+nh Command
+ 
+       
+Trƣ
+ớ
+c khi s
+ử
+ 
+d
+ụ
+ng command, ta c
+ầ
+n ch
+ọ
+n ki
+ể
+u câu l
+ệ
+nh, gán giá tr
+ị
+ 
+cho chu
+ỗ
+i câu l
+ệ
+nh 
+và g
+ắ
+n câu l
+ệ
+nh vào m
+ộ
+t chu
+ỗ
+i k
+ế
+t n
+ố
+i nào đó. Đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n đi
+ề
+u này ta c
+ầ
+n xác đ
+ị
+nh thu
+ộ
+c 
+tính CommandType, CommandText và Connection. Ho
+ặ
+c ta có th
+ể
+ 
+truy
+ề
+n các tham s
+ố
+ 
+tr
+ên 
+thông qua hàm kh
+ở
+i t
+ạ
+o c
+ủ
+a đ
+ố
+i tƣ
+ợ
+ng Command.
+ 
+Giá tr
+ị
+ 
+Mô t
+ả
+ 
+CommandType.Text  
+ 
+Câu l
+ệ
+nh s
+ẽ
+ 
+th
+ự
+c thi câu l
+ệ
+nh SQL tr
+ự
+c ti
+ế
+p. Câu 
+l
+ệ
+nh SQL đƣ
+ợ
+c cung c
+ấ
+p trong thu
+ộ
+c tính 
+CommadText. Đây là giá tr
+ị
+ 
+m
+ặ
+c đ
+ị
+nh
+ 
+ 
+CommandType.StoredProcedure 
+ 
+Câu l
+ệ
+nh s
+ẽ
+ 
+th
+ự
+c 
+thi m
+ộ
+t th
+ủ
+ 
+t
+ụ
+c
+ 
+stored procedure 
+trong ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u. Thu
+ộ
+c tính CommandText 
+cung c
+ấ
+p tên c
+ủ
+a th
+ủ
+ 
+t
+ụ
+c.
+ 
+ 
+CommandType.TableDirect
+ 
+Câu l
+ệ
+nh s
+ẽ
+ 
+truy v
+ấ
+n toàn b
+ộ
+ 
+m
+ẫ
+u tin trong
+ 
+. 
+CommandText là tên c
+ủ
+a table mà câu l
+ệ
+nh s
+ẽ
+ 
+truy 
+xu
+ấ
+t các m
+ẫ
+u tin.
+ 
+ 
+V
+í d
+ụ
+: 
+Đ
+ể
+ 
+t
+ạ
+o
+ 
+m
+ộ
+t đ
+ố
+i tƣ
+ợ
+ng Command đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n m
+ộ
+t câu truy v
+ấ
+n “SELECT * FROM 
+Employees”  
+ 
+Cách 1:
+ 
+S
+ử
+ 
+d
+ụ
+ng hàm kh
+ở
+i t
+ạ
+o không tham s
+ố
+ 
+SqlCommand cmd = new SqlCommand();
+ 
+cmd.Connection = con;
+ 
+cmd.CommandType = CommandType.Text;
+ 
+cmd.CommandText = "SELECT * FROM Employ
+ees";
+ 
+Cách 2:
+ 
+Truy
+ề
+n tham s
+ố
+ 
+trong hàm kh
+ở
+i t
+ạ
+o đ
+ố
+i tư
+ợ
+ng SqlCommand
+ 
+SqlCommand cmd = new SqlCommand(
+ 
+
+--- PAGE 76 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+76
+ 
+                                               
+"SELECT * FROM Employees", con);
+ 
+Cách 3:
+ 
+Đ
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng Store procedure
+ 
+SqlCommand cmd = new SqlCommand("GetEmp
+loyees", con);
+ 
+cmd.CommandType = CommandType.StoredProcedure;
+ 
+1.2.
+Các phƣơng th
+ứ
+c c
+ủ
+a đ
+ố
+i tƣ
+ợ
+ng Command
+ 
+Tên phƣơng th
+ứ
+c
+ 
+Mô t
+ả
+ 
+ExecuteNonQuery()
+ 
+ 
+-
+ 
+Th
+ự
+c thi câu l
+ệ
+nh non
+-
+SELECT, nhƣ là  
+insert, delete, 
+or update
+ 
+m
+ẫ
+u tin. Giá tr
+ị
+ 
+tr
+ả
+ 
+v
+ề
+ 
+cho bi
+ế
+t s
+ố
+ 
+dòng b
+ị
+ 
+ả
+nh 
+hƣ
+ở
+ng b
+ở
+i câu l
+ệ
+nh.
+ 
+-
+ 
+Th
+ự
+c thi câu l
+ệ
+nh 
+create, alter, or delete
+ 
+các đ
+ố
+i tƣ
+ợ
+ng 
+cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u (
+như tables, indexes, constraints, …
+). 
+ 
+ExecuteScalar()
+ 
+ 
+-
+ 
+Th
+ự
+c hi
+ệ
+n câu truy v
+ấ
+n SELECT và tr
+ả
+ 
+v
+ề
+ 
+giá tr
+ị
+ 
+c
+ủ
+a 
+field đ
+ầ
+u tiên c
+ủ
+a dòng đ
+ầ
+u tiên trong t
+ậ
+p d
+ữ
+ 
+li
+ệ
+u đƣ
+ợ
+c 
+t
+r
+ả
+ 
+v
+ề
+ 
+b
+ở
+i câu l
+ệ
+nh. 
+ 
+-
+ 
+Thƣ
+ờ
+ng đƣ
+ợ
+c dùng đ
+ể
+ 
+th
+ự
+c thi các câu l
+ệ
+nh t
+ổ
+ng h
+ợ
+p 
+SELECT 
+có s
+ử
+ 
+d
+ụ
+ng các hàm nhƣ 
+COUNT() 
+ho
+ặ
+c 
+SUM(). 
+ 
+ExecuteReader()
+ 
+-
+ 
+Th
+ự
+c hi
+ệ
+n câu truy v
+ấ
+n SELECT và tr
+ả
+ 
+v
+ề
+ 
+đ
+ố
+i tƣ
+ợ
+ng 
+DataReader 
+ 
+II.
+ 
+ 
+Đ
+ố
+i tƣ
+ợ
+ng 
+DataReader
+ 
+L
+ớ
+p DataReader cho phép b
+ạ
+n
+ 
+đ
+ọ
+c d
+ữ
+ 
+li
+ệ
+u tr
+ả
+ 
+v
+ề
+ 
+b
+ở
+i câu l
+ệ
+nh SELECT dƣ
+ớ
+i d
+ạ
+ng ch
+ỉ
+ 
+đ
+ọ
+c 
+(read
+-
+only). S
+ử
+ 
+d
+ụ
+ng DataReader là cách đơn gi
+ả
+n nh
+ấ
+t đ
+ể
+ 
+l
+ấ
+y d
+ữ
+ 
+li
+ệ
+u t
+ừ
+ 
+cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u. Tuy 
+nhiên nó h
+ạ
+n ch
+ế
+ 
+trong vi
+ệ
+c lƣu tr
+ữ
+ 
+và x
+ử
+ 
+lý d
+ữ
+ 
+li
+ệ
+u ki
+ể
+u không k
+ế
+t n
+ố
+i nhƣ DataSet. M
+ộ
+t s
+ố
+ 
+phƣơng th
+ứ
+c c
+ủ
+a
+ 
+đ
+ố
+i tƣ
+ợ
+ng DataReader đƣ
+ợ
+c mô t
+ả
+ 
+nhƣ b
+ả
+ng theo sau:
+ 
+Phƣơng th
+ứ
+c
+ 
+Mô t
+ả
+ 
+GetValue()
+ 
+ 
+ 
+-
+ 
+Tr
+ả
+ 
+v
+ề
+ 
+giá tr
+ị
+ 
+đƣ
+ợ
+c lƣu tr
+ữ
+ 
+trong trƣ
+ờ
+ng d
+ữ
+ 
+li
+ệ
+u v
+ớ
+i ch
+ỉ
+ 
+m
+ụ
+c đƣ
+ợ
+c 
+ch
+ỉ
+ 
+đ
+ị
+nh, trong ph
+ạ
+m vi dòng đƣ
+ợ
+c ch
+ọ
+n.
+ 
+-
+ 
+N
+ế
+u truy xu
+ấ
+t đ
+ế
+n trƣ
+ờ
+ng đƣ
+ợ
+c ch
+ỉ
+ 
+đ
+ị
+nh b
+ở
+i index ho
+ặ
+c index 
+không 
+phù h
+ợ
+p, m
+ộ
+t ngo
+ạ
+i l
+ệ
+ 
+IndexOutOfRangeException
+ 
+s
+ẽ
+ 
+đƣ
+ợ
+c tr
+ả
+ 
+v
+ề
+.  
+ 
+ 
+GetValues() 
+ 
+ 
+-
+ 
+Lƣu tr
+ữ
+ 
+các giá tr
+ị
+ 
+c
+ủ
+a dòng hi
+ệ
+n th
+ờ
+i vào m
+ộ
+t m
+ả
+ng. 
+ 
+-
+ 
+S
+ố
+ 
+lƣ
+ợ
+ng trƣ
+ờ
+ng đƣ
+ợ
+c lƣu ph
+ụ
+ 
+thu
+ộ
+c vào kích c
+ỡ
+ 
+c
+ủ
+a m
+ả
+ng mà 
+b
+ạ
+n truy
+ề
+n vào phƣơng th
+ứ
+c này. 
+ 
+-
+ 
+Ta có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng thu
+ộ
+c tính 
+DataReader.FieldCount
+ 
+đ
+ể
+ 
+xác đ
+ị
+nh 
+s
+ố
+ 
+lƣ
+ợ
+ng trƣ
+ờ
+ng trong m
+ộ
+t dòng. 
+ 
+ 
+Read()
+  
+ 
+ 
+-
+ 
+Chuy
+ể
+n con tr
+ỏ
+ 
+đ
+ế
+n dòng k
+ế
+ 
+ti
+ế
+p trong lu
+ồ
+ng d
+ữ
+ 
+li
+ệ
+u. 
+ 
+-
+ 
+Phƣơng th
+ứ
+c này đƣ
+ợ
+c g
+ọ
+i trƣ
+ớ
+c khi đ
+ọ
+c dòng d
+ữ
+ 
+li
+ệ
+u đ
+ầ
+u tiên. 
+ 
+-
+ 
+Tr
+ả
+ 
+v
+ề
+ 
+true n
+ế
+u có m
+ộ
+t dòng n
+ữ
+a đ
+ể
+ 
+đ
+ọ
+c, ho
+ặ
+c false n
+ế
+u nó đ
+ọ
+c 
+dòng cu
+ố
+i cùng. 
+ 
+GetInt32(),
+ 
+GetChar(),
+ 
+GetDateTime(),
+ 
+GetXxx(): 
+ 
+ 
+-
+ 
+GetInt32(),
+ 
+GetChar(), GetDateTime(), GetXxx(): 
+Nh
+ữ
+ng 
+phƣơng th
+ứ
+c này tr
+ả
+ 
+v
+ề
+ 
+giá tr
+ị
+ 
+c
+ủ
+a trƣ
+ờ
+ng v
+ở
+i ch
+ỉ
+ 
+m
+ụ
+c đƣ
+ợ
+c ch
+ỉ
+ 
+đ
+ị
+nh 
+ở
+ 
+dòng hi
+ệ
+n t
+ạ
+i. 
+ 
+-
+ 
+Lƣu ý n
+ế
+u b
+ạ
+n c
+ố
+ 
+g
+ắ
+ng gán giá tr
+ị
+ 
+tr
+ả
+ 
+v
+ề
+ 
+đ
+ế
+n b
+i
+ế
+n sai ki
+ể
+u, m
+ộ
+t 
+ngo
+ạ
+i l
+ệ
+ 
+InvalidCastException
+ 
+s
+ẽ
+ 
+đƣ
+ợ
+c tr
+ả
+ 
+v
+ề
+. 
+ 
+-
+ 
+Các giá tr
+ị
+ 
+này không h
+ỗ
+ 
+tr
+ợ
+ 
+ki
+ể
+u 
+NULL
+, n
+ế
+u trƣ
+ờ
+ng d
+ữ
+ 
+li
+ệ
+u có 
+ch
+ứ
+a giá tr
+ị
+ 
+NULL
+, ta c
+ầ
+n ph
+ả
+i ki
+ể
+m tra trƣ
+ớ
+c khi g
+ọ
+i các phƣơng 
+th
+ứ
+c này. 
+ 
+
+--- PAGE 77 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+77
+ 
+NextResult()
+ 
+-
+ 
+N
+ế
+u câu l
+ệ
+nh đƣ
+ợ
+c sinh ra b
+ở
+i DataReade
+r đƣ
+ợ
+c tr
+ả
+ 
+v
+ề
+ 
+có nhi
+ề
+u 
+hơn m
+ộ
+t rowset, phƣơng th
+ứ
+c này chuy
+ể
+n con tr
+ỏ
+ 
+đ
+ế
+n rowset k
+ế
+ 
+ti
+ế
+p. 
+ 
+Close()
+  
+ 
+-
+ 
+Đóng reader. 
+ 
+III.  
+Mô t
+ả
+ 
+c
+ơ
+ 
+s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u 
+ 
+    
+Cho c
+ơ
+ 
+s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u nhân viên 
+g
+ồ
+m 2 tables Nhanvien và Phongban 
+v
+ớ
+i c
+ấ
+u trúc nhƣ 
+sau:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+D
+ữ
+ 
+li
+ệ
+u 
+c
+ủ
+a Table Nhân viên
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+D
+ữ
+ 
+li
+ệ
+u c
+ủ
+a Table Phongban
+ 
+ 
+ 
+ 
+ 
+IV. 
+M
+ộ
+t s
+ố
+ 
+ví d
+ụ
+ 
+v
+ề
+ 
+L
+ớ
+p Command và Data Reader
+ 
+      
+4.1. 
+Áp d
+ụ
+ng Phƣơng th
+ứ
+c Excute
+NonQuery()
+ 
+ 
+Đo
+ạ
+n mã l
+ệ
+nh sau đây đƣ
+ợ
+c dùng đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u có tên là QLNV. Sau 
+khi k
+ế
+t n
+ố
+i v
+ớ
+i
+ 
+CSDL, chƣơng trình s
+ẽ
+ 
+đ
+ọ
+c d
+ữ
+ 
+li
+ệ
+u trong table Nhanvien b
+ằ
+ng cách s
+ử
+ 
+d
+ụ
+ng 
+phƣơng th
+ứ
+c ExecuteNonQuery(). Bƣ
+ớ
+c k
+ế
+ 
+ti
+ế
+p là g
+ọ
+i th
+ự
+c thi phƣơng th
+ứ
+c hienthi đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+k
+ế
+t qu
+ả
+ 
+tr
+ả
+ 
+v
+ề
+ 
+trong đ
+ố
+i tƣ
+ợ
+ng SqlDataReader.
+ 
+Table Nhanvien
+ 
+Table Phongban
+ 
+
+
+--- PAGE 78 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+78
+ 
+  
+protected
+ 
+void
+ 
+Page_Load(
+object
+ 
+sender, 
+Ev
+entArgs
+ 
+e)
+ 
+    
+{
+ 
+        
+string
+ 
+connectionStr = 
+"Data Source=
+localhost
+; Initial Catalog=QLNV; Integrated 
+Security=SSPI"
+;
+ 
+        
+SqlConnection
+ 
+con = 
+new
+ 
+SqlConnection
+(connectionStr);
+ 
+        
+SqlCommand
+ 
+cmd = 
+new
+ 
+SqlCommand
+(
+"Select * from nhanvien"
+);       
+  
+ 
+        
+cmd.CommandType = 
+CommandType
+.Text;
+ 
+        
+cmd.Connection = con;                
+ 
+        
+try
+ 
+        
+{
+ 
+            
+con.Open();
+//M
+ở
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i CSDL
+ 
+            
+SqlDataReader
+ 
+reader = cmd.ExecuteReader();          
+ 
+            
+lblTB.Text = 
+"K
+ế
+t 
+n
+ố
+i thành công! <br>"
+;
+ 
+            
+lblTB.Text += 
+"<b>DANH SÁCH NHÂN VIÊN CÓ T
+Ạ
+I CÔNG TY LÀ 
+</B></BR>"
+;
+ 
+            
+Hienthi(reader);
+ 
+           
+ 
+        
+}
+ 
+        
+catch
+ 
+(
+SqlException
+ 
+ex)
+ 
+        
+{
+ 
+            
+lblTB.Text = 
+" K
+ế
+t n
+ố
+i th
+ấ
+t b
+ạ
+i! "
+ 
++ ex.ToString
+();
+ 
+        
+}
+ 
+        
+finally
+ 
+        
+{
+ 
+         
+   
+   
+con.Close();
+ 
+        
+}
+ 
+    
+}
+ 
+    
+//
+Hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u k
+ế
+t qu
+ả
+ 
+dư
+ớ
+i d
+ạ
+ng Danh sách
+ 
+    
+protected
+ 
+void
+ 
+Hienthi(
+SqlDataReader
+ 
+reader)
+ 
+    
+{
+ 
+        
+StringBuilder
+ 
+htmlStr = 
+new
+ 
+StringBuilder
+(
+""
+);
+ 
+           
+ 
+ 
+        
+while
+ 
+(reader.Read())
+ 
+        
+{
+ 
+              
+htmlStr.Append(
+"<li>"
+);
+ 
+              
+htmlStr.Append(
+"<b>"
++reader[
+"tennhanvien"
+] + 
+"</b>"
+);
+ 
+              
+htmlStr.Append(
+" có đ
+ị
+a ch
+ỉ
+ 
+t
+ạ
+i  <b>"
+ 
++ reader[
+"Diachi"
+]+
+"</b><br>"
+);
+ 
+        
+}
+ 
+        
+ltrket
+qua.Text = htmlStr.ToString();
+ 
+    
+ 
+}
+ 
+  
+             
+K
+ế
+t qu
+ả
+ 
+c
+ủ
+a đo
+ạ
+n mã l
+ệ
+nh trên 
+ 
+
+--- PAGE 79 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+79
+ 
+ 
+Hình
+ 
+30
+: 
+ 
+Form
+ 
+K
+ế
+t qu
+ả
+ 
+Truy v
+ấ
+n d
+ữ
+ 
+li
+ệ
+u v
+ớ
+i câu l
+ệ
+nh SELECT
+ 
+4.2.  
+Phƣơng th
+ứ
+c ExecuteScalar( )
+ 
+Đo
+ạ
+n mã l
+ệ
+nh sau dùng đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u
+ 
+có tên là QLNV. Sau khi 
+k
+ế
+t 
+n
+ố
+i v
+ớ
+i ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u, chƣơng trình s
+ử
+ 
+d
+ụ
+ng phƣơng th
+ứ
+c 
+ExecuteScalar()
+ 
+đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n câu 
+l
+ệ
+nh SQL 
+S
+ELECT 
+count(*) from Nhanvien
+; đ
+ế
+m s
+ố
+ 
+lƣ
+ợ
+ng nhân viên hi
+ệ
+n có trong b
+ả
+ng d
+ữ
+ 
+li
+ệ
+u Nhanvien. Sau đó hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u k
+ế
+t qu
+ả
+ 
+trên trang web.
+ 
+protected
+ 
+void
+ 
+Page_Load(
+object
+ 
+sender, 
+EventArgs
+ 
+e)
+ 
+    
+{
+ 
+          
+string
+ 
+connectionStr = 
+"Data Source=
+localhost
+; Initial Catalog=QLNV; 
+Integrated Security=SSPI"
+;
+ 
+         
+SqlConnection
+ 
+con2 = 
+new
+ 
+SqlConnection
+(connectionStr);  
+ 
+         
+SqlCommand
+ 
+ 
+cmd2 = 
+new
+ 
+SqlComma
+nd
+(
+"S
+ELECT 
+count(*) from Nhanvien"
+, 
+con2);
+ 
+ 
+        
+try
+ 
+        
+{
+ 
+     
+   
+      
+con2.Open();
+ 
+            
+  
+lblTB.Text = 
+"K
+ế
+t n
+ố
+i thành công!"
+;
+ 
+          
+  
+  
+int
+ 
+sonv = (
+int
+)cmd2.ExecuteScalar();
+ 
+           
+  
+ 
+Response.Write(
+"T
+ổ
+ng s
+ố
+ 
+nhân viên là: "
+ 
++ sonv.
+ToString());
+ 
+        
+}
+ 
+        
+catch
+ 
+(
+SqlException
+ 
+ex)
+ 
+        
+{
+ 
+            
+lblTB.Text = 
+" K
+ế
+t n
+ố
+i th
+ấ
+t b
+ạ
+i! 
+"
+ 
++ ex.ToString();
+ 
+        
+}
+ 
+        
+finally
+ 
+        
+{
+ 
+            
+con2.Close();
+ 
+        
+}
+ 
+    
+}
+ 
+K
+ế
+t qu
+ả
+ 
+c
+ủ
+a đo
+ạ
+n mã l
+ệ
+nh trên như sau:
+ 
+ 
+ 
+
+
+--- PAGE 80 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+80
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Hình
+ 
+31
+: 
+ 
+Form
+ 
+K
+ế
+t qu
+ả
+ 
+th
+ự
+c hi
+ệ
+n phương th
+ứ
+c ExcecuteScalar 
+ 
+4.2. 
+Phƣơng th
+ứ
+c ExecuteNonQuery( )
+ 
+Đo
+ạ
+n mã l
+ệ
+nh sau dùng đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u
+ 
+có tên là QLNV. Sau khi k
+ế
+t n
+ố
+i v
+ớ
+i 
+ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u, chƣơng trình s
+ử
+ 
+d
+ụ
+ng phƣơng th
+ứ
+c 
+Execute
+NonQuery
+()
+ 
+đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n câu l
+ệ
+nh 
+SQL: 
+DELETE FROM
+ 
+Nhanvien WHERE MaNhanvien = <<
+Mã nhân viên
+>>;
+ 
+đ
+ể
+ 
+xóa nhân 
+viên có mã là 
+<<Mã nhân viên>>
+ 
+trong b
+ả
+ng d
+ữ
+ 
+li
+ệ
+u Nhanvien. 
+ 
+Đo
+ạ
+n mã l
+ệ
+nh đ
+ể
+ 
+thi
+ế
+t k
+ế
+ 
+Form xóa nhân viên, sinh viên t
+ự
+ 
+tìm hi
+ể
+u.
+ 
+protected
+ 
+void
+ 
+btnClick_Click(
+ob
+ject
+ 
+sender, 
+EventArgs
+ 
+e)
+ 
+    
+{
+ 
+        
+string
+ 
+connectionStr = 
+"Data Source=
+localhost
+; Initial Catalog=QLNV; 
+ 
+i
+ntegrated Security=SSPI"
+;
+ 
+        
+SqlConnection
+ 
+con = 
+new
+ 
+SqlConnection
+(connectionStr);
+ 
+        
+string
+ 
+sql = 
+"DELETE FROM Nhanvien WHERE MaNhanvi
+en ="
+ 
+ 
+                          
++ txtManv.Text;
+ 
+        
+SqlCommand
+ 
+cmd = 
+new
+ 
+SqlCommand
+(sql, con);    
+ 
+        
+cmd.CommandType = 
+CommandType
+.Text;
+ 
+        
+try
+ 
+        
+{
+ 
+            
+con.Open();
+ 
+            
+cmd.ExecuteNonQuery();
+ 
+            
+lblTB.Text += 
+"
+Đã xóa thành công nhân viên có mã là <b>"
+ 
++ 
+ 
+ 
+ 
+ 
+       
+txtManv.Text.ToString();
+ 
+         
+}
+ 
+        
+catch
+ 
+(
+SqlException
+ 
+ex)
+ 
+        
+{
+ 
+            
+lblTB.Text += 
+"Không có nhân viên v
+ớ
+i mã là: "
+ 
++ 
+xtManv.Text.ToString();
+ 
+            
+lblTB.Text += sql.ToString
+();
+ 
+        
+}   
+ 
+              
+}
+ 
+           
+K
+ế
+t qu
+ả
+ 
+c
+ủ
+a xóa nhân viên có mã là 11 như sau: 
+ 
+Hình
+ 
+31
+: 
+ 
+Form
+ 
+K
+ế
+t qu
+ả
+ 
+th
+ự
+c hi
+ệ
+n phương th
+ứ
+c ExcecuteScalar 
+ 
+ 
+
+
+--- PAGE 81 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+81
+ 
+Hình
+ 
+32
+: 
+ 
+Form
+ 
+K
+ế
+t qu
+ả
+ 
+th
+ự
+c hi
+ệ
+n phương th
+ứ
+c ExcecuteNonQuery() 
+ 
+4.3. 
+Làm vi
+ệ
+c v
+ớ
+i th
+ủ
+ 
+t
+ụ
+c
+  
+Stored P
+rocedure
+ 
+Các câu l
+ệ
+nh v
+ớ
+i tham s
+ố
+ 
+là bƣ
+ớ
+c ng
+ắ
+n nh
+ấ
+t đ
+ể
+ 
+t
+ạ
+o stored procedures. Th
+ủ
+ 
+t
+ụ
+c 
+stored 
+procedure là t
+ậ
+p h
+ợ
+p m
+ộ
+t ho
+ặ
+c nhi
+ề
+u câu l
+ệ
+nh SQL đƣ
+ợ
+c lƣu tr
+ữ
+ 
+ở
+ 
+cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u. Stored 
+procedures tƣơng t
+ự
+ 
+nhƣ các hàm đƣ
+ợ
+c đóng gói, có th
+ể
+ 
+nh
+ậ
+n d
+ữ
+ 
+li
+ệ
+u và tr
+ả
+ 
+k
+ế
+t qu
+ả
+ 
+thông qua 
+cá tham s
+ố
+. Trong xây d
+ự
+ng các 
+ứ
+ng d
+ụ
+ng web. S
+ử
+ 
+d
+ụ
+ng các th
+ủ
+ 
+t
+ụ
+c có nhi
+ề
+u đi
+ể
+m thu
+ậ
+n l
+ợ
+i 
+nhƣ: 
+ 
+D
+ễ
+ 
+b
+ả
+o trì h
+ệ
+ 
+th
+ố
+ng: Ví v
+ụ
+, b
+ạ
+n có th
+ể
+ 
+t
+ố
+i ƣu hóa các câu l
+ệ
+nh trong th
+ủ
+ 
+t
+ụ
+c mà không c
+ầ
+n 
+biên d
+ị
+ch 
+ứ
+ng d
+ụ
+ng liên quan. B
+ạ
+n cũng có th
+ể
+ 
+chu
+ẩ
+n hóa
+ 
+d
+ữ
+ 
+li
+ệ
+u truy xu
+ấ
+t t
+ạ
+i ch
+ỗ
+. Các th
+ủ
+ 
+t
+ụ
+chcũng giúp ta xây dun
+ự
+g 
+ứ
+ng d
+ụ
+ng an toàn hơn. Ví d
+ụ
+, ta có th
+ể
+ 
+cho phép ngƣ
+ờ
+i dùng s
+ử
+ 
+d
+ụ
+ng tài kho
+ả
+n windowws đ
+ể
+ 
+th
+ự
+c thi các l
+ệ
+nh trong ASP.NET nhƣng h
+ạ
+n ch
+ế
+ 
+truy xu
+ấ
+t đ
+ế
+n 
+m
+ộ
+t s
+ố
+ 
+tables quan tr
+ọ
+ng. Th
+ủ
+ 
+t
+ụ
+c cũng làm t
+ăng hi
+ệ
+u qu
+ả
+ 
+th
+ự
+c hi
+ệ
+n chƣơng trình. Ta có th
+ể
+ 
+th
+ự
+c hi
+ệ
+n m
+ộ
+t lo
+ạ
+t các thao tác v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u trong ph
+ạ
+m vi m
+ộ
+t k
+ế
+t n
+ố
+i. Đ
+ặ
+c bi
+ệ
+t, th
+ủ
+ 
+t
+ụ
+c 
+r
+ấ
+t có ít trong vi
+ệ
+c truy xu
+ấ
+t d
+ữ
+ 
+li
+ệ
+u 
+ở
+.
+ 
+Các bƣ
+ớ
+c chính đ
+ể
+ 
+g
+ọ
+i th
+ự
+c thi m
+ộ
+t th
+ủ
+ 
+t
+ụ
+c: 
+ 
+B
+ƣ
+ớ
+c
+1: T
+ạ
+o đ
+ố
+i tƣ
+ợ
+ng 
+SqlCom
+mand và gán thu
+ộ
+c tính CommandText là 
+InsertEmployee.
+ 
+-
+ 
+SqlCommand cmd = new SqlCommand("InsertEmployee", con);
+ 
+-
+ 
+InsertEmployee là tên th
+ủ
+ 
+t
+ụ
+c 
+ở
+ 
+HQTCSDL
+ 
+B2: Gán giá tr
+ị
+ 
+cho thu
+ộ
+c tính CommandType 
+ 
+cmd.CommandType = CommandType.StoredProcedure
+ 
+ 
+B3: Gán giá tr
+ị
+ 
+cho các tham s
+ố
+ 
+ 
+-
+ 
+cmd.Parameters.Add(new SqlParameter(
+ 
+
+ 
+"@TitleOfCourtesy", SqlDbType.NVarChar, 25));
+ 
+-
+ 
+ 
+cmd.Parameters["@TitleOfCourtesy"].Value = title;
+ 
+ 
+Ví d
+ụ
+:
+ 
+Đo
+ạ
+n mã l
+ệ
+nh sau đây th
+ự
+c hi
+ệ
+n g
+ọ
+i th
+ủ
+ 
+t
+ụ
+c xem thông tin mã nhân viên do ngƣ
+ờ
+i 
+dùng nh
+ậ
+p vào t
+ừ
+ 
+bàn phím.
+ 
+a.
+ 
+T
+ạ
+o th
+ủ
+ 
+t
+ụ
+c getNhanvien.
+ 
+CREATE
+ 
+PROCEDURE
+ 
+getNhanvien
+ 
+ 
+@MaNV 
+int
+,
+  
+ 
+AS
+  
+BEGIN
+ 
+    
+SELECT * FROM Nhanvien WHERE Manhanvien =@MaNV
+ 
+
+
+--- PAGE 82 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+82
+ 
+E
+ND
+ 
+b.
+ 
+Đo
+ạ
+n mã l
+ệ
+nh g
+ọ
+i th
+ủ
+ 
+t
+ụ
+c getNhanvien và hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u k
+ế
+t qu
+ả
+ 
+dƣ
+ớ
+i d
+ạ
+ng danh sách. 
+ 
+protected
+ 
+void
+ 
+btnClick_Cl
+ick(
+object
+ 
+sender, 
+EventArgs
+ 
+e)
+ 
+    
+{
+ 
+                
+string
+ 
+conStr = 
+"Data Source=
+localhost
+; Initial Catalog=QLNV; Integrated 
+Security=SSPI"
+;
+ 
+                
+SqlConnection
+ 
+con = 
+new
+ 
+SqlConnection
+(conStr);
+ 
+                
+//T
+ạ
+o đ
+ố
+i tư
+ợ
+ng cmd g
+ọ
+i th
+ự
+c thi t
+h
+ủ
+ 
+t
+ụ
+c getNhanvien
+ 
+                
+SqlCommand
+ 
+cmd = 
+new
+ 
+SqlCommand
+(
+"getNhanvien"
+, con);
+ 
+ 
+                
+cmd.CommandType = 
+CommandType
+.StoredProcedure;
+ 
+                
+//Khai báo tham s
+ố
+ 
+tên là @MaNV ki
+ể
+u Int
+ 
+                
+cmd.Parameters.Add(
+new
+ 
+SqlParam
+eter
+(
+"@MaNV"
+, 
+SqlDbType
+.Int));
+ 
+                
+//Gán giá tr
+ị
+ 
+cho tham s
+ố
+ 
+@MaNV
+ 
+                
+cmd.Parameters[
+"@MaNV"
+].Value = 
+txtManv.Text.toString()
+;
+ 
+ 
+                
+try
+ 
+                
+{
+ 
+                    
+con.Open();
+ 
+                    
+SqlDataReader
+ 
+reader = cmd.ExecuteReader();
+ 
+                    
+Hienthi(reader);
+ 
+                
+}
+ 
+                
+catch
+ 
+(
+SqlException
+ 
+ex)
+ 
+                
+{
+ 
+                    
+lblTB.Text = 
+" Ket noi that bai!"
+ 
++ ex.ToString();
+ 
+                
+}
+ 
+                
+finally
+ 
+                
+{
+ 
+                    
+con.Close();
+ 
+                
+}
+ 
+    
+}
+ 
+    
+protected
+ 
+void
+ 
+Hienthi(
+SqlDataReader
+ 
+reader)
+ 
+    
+{
+ 
+ 
+        
+StringBuilder
+ 
+str = 
+new
+ 
+StringBuilder
+(
+""
+);
+ 
+        
+str.Append(
+"<b>THÔNG TIN NHÂN VIÊN</b>"
+);
+ 
+        
+while
+ 
+(reader.R
+ead())
+ 
+        
+{
+ 
+            
+str.Append(
+"<li>Mã Nhân viên: "
+ 
++ reader[
+"Manhanvien"
+]);
+ 
+            
+str.Append(
+"<li>Tên nhân viên: "
+ 
++ reader[
+"Tennhanvien"
+]);
+ 
+            
+str.Append(
+"<li>Ngày sinh: "
+ 
++ reader[
+"Ngaysinh"
+]);
+ 
+            
+str.Append(
+"<li>Đ
+ị
+a ch
+ỉ
+: "
+ 
++ reader[
+"Diachi"
+]);
+ 
+            
+str.Append(
+"<li>Đi
+ệ
+n tho
+ạ
+i: "
+ 
++ reader[
+"Dienthoai"
+]);
+ 
+            
+str.Append(
+"<li>Mã phòng: "
+ 
++ reader[
+"Maphong"
+]);
+ 
+ 
+        
+}
+ 
+        
+lblTB.Text = str.ToString();
+ 
+    
+}
+ 
+ 
+
+--- PAGE 83 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+83
+ 
+ 
+ 
+Hình
+ 
+33
+: 
+ 
+Form
+ 
+K
+ế
+t qu
+ả
+ 
+ví d
+ụ
+ 
+trang 82
+ 
+Câu h
+ỏ
+i
+/Bài t
+ậ
+p c
+ủ
+ng c
+ố
+ 
+1.
+ 
+Trình bày 
+ứ
+ng d
+ụ
+ng đ
+ố
+i tƣ
+ợ
+ng Command và DataReader
+.
+ 
+2.
+ 
+Hãy nêu m
+ộ
+t s
+ố
+ 
+thu
+ộ
+c tính và phƣơng th
+ứ
+c thƣ
+ờ
+ng s
+ử
+ 
+d
+ụ
+ng c
+ủ
+a
+ 
+đ
+ố
+i tƣ
+ợ
+ng Command
+. 
+ 
+3.
+ 
+Hãy nêu m
+ộ
+t s
+ố
+ 
+thu
+ộ
+c tính và phƣơng th
+ứ
+c thƣ
+ờ
+ng s
+ử
+ 
+d
+ụ
+ng c
+ủ
+a đ
+ố
+i tƣ
+ợ
+ng Reader. 
+ 
+4.
+ 
+T
+ạ
+o l
+ạ
+i các form 
+ở
+ 
+trang 
+77,
+ 
+79, 81
+ 
+b
+ằ
+ng cách vi
+ế
+t code 
+ 
+5.
+ 
+ 
+Th
+ự
+c hành bài Qu
+ả
+n lý bài hát trang s
+ố
+ 
+102
+ 
+ 
+ 
+ 
+
+
+--- PAGE 84 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+84
+ 
+Bài 3
+:
+ 
+L
+ớ
+p 
+DataSet
+ 
+và Data Adapter
+ 
+ 
+M
+ụ
+c tiêu h
+ọ
+c t
+ậ
+p
+ 
+-
+ 
+Trình bày ki
+ế
+n trúc 
+c
+ủ
+a l
+ớ
+p DataSet
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng l
+ớ
+p Data Adapter đ
+ể
+ 
+đ
+ổ
+ 
+d
+ữ
+ 
+li
+ệ
+u vào DataSet
+ 
+ 
+I.
+ 
+L
+ớ
+p 
+DataSet
+ 
+là gì?
+ 
+Trung tâm c
+ủ
+a truy x
+u
+ấ
+t d
+ữ
+ 
+li
+ệ
+u ki
+ể
+u không k
+ế
+t n
+ố
+i.
+ 
+ 
+M
+ỗ
+i DataSet ch
+ứ
+a 2 thành ph
+ầ
+n quan 
+tr
+ọ
+ng: M
+ộ
+t t
+ậ
+p Tables (
+đư
+ợ
+c th
+ể
+ 
+hi
+ệ
+n thông qua thu
+ộ
+c tính Tables
+)
+ 
+và m
+ộ
+t t
+ậ
+p Relations dùng 
+đ
+ể
+ 
+liên k
+ế
+t các tables l
+ạ
+i v
+ớ
+i nhau. 
+ 
+ 
+Hình
+ 
+34
+: 
+ 
+Các l
+ớ
+p c
+ủ
+a t
+ậ
+p d
+ữ
+ 
+l
+ệ
+u DataSet
+ 
+     
+M
+ộ
+t s
+ố
+ 
+l
+ợ
+i
+ 
+ích khi s
+ử
+ 
+d
+ụ
+ng DataSet so v
+ớ
+i DataReader.
+ 
+Khi 
+ứ
+ng d
+ụ
+ng đƣ
+ợ
+c k
+ế
+t n
+ố
+i v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u, nó s
+ẽ
+ 
+th
+ự
+c hi
+ệ
+n t
+ạ
+o m
+ộ
+t b
+ả
+n sao c
+ủ
+a d
+ữ
+ 
+li
+ệ
+u 
+vào DataSet. Vì v
+ậ
+y, n
+ế
+u ta thay đ
+ổ
+i thông tin trong DataSet, thông tin 
+ở
+ 
+dƣ
+ớ
+i CSDL không 
+h
+ề
+ 
+b
+ị
+ 
+ả
+nh hƣ
+ở
+ng. M
+ộ
+t s
+ố
+ 
+trƣ
+ờ
+ng h
+ợ
+p sau đây ta nên s
+ử
+ 
+d
+ụ
+ng DataSet.
+ 
+-
+ 
+Khi ta c
+ầ
+n truy xu
+ấ
+t d
+ữ
+ 
+li
+ệ
+u m
+ộ
+t cách ng
+ẫ
+u nhiên trong t
+ậ
+p d
+ữ
+ 
+li
+ệ
+u. DataSet có th
+ể
+ 
+giúp 
+ta truy xu
+ấ
+t các m
+ẫ
+u tin sau ho
+ặ
+c trƣ
+ớ
+c m
+ẫ
+u tin nào đó. Đi
+ề
+u này thì ta không th
+ể
+ 
+th
+ự
+c hi
+ệ
+n 
+đƣ
+ợ
+c v
+ớ
+i DataReader. 
+ 
+-
+ 
+Khi ta c
+ầ
+n truy xu
+ấ
+t
+ 
+d
+ữ
+ 
+li
+ệ
+u t
+ừ
+ 
+nhi
+ề
+u tables khác nhau
+ 
+-
+ 
+Có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng t
+ố
+t khi mu
+ố
+n th
+ự
+c hi
+ệ
+n ch
+ứ
+c năng DataBinding
+ 
+-
+ 
+Khi ta c
+ầ
+n thao tác d
+ữ
+ 
+li
+ệ
+u v
+ớ
+i XML. 
+ 
+II.
+ 
+ 
+L
+ớ
+p Data Adapter
+ 
+-
+ 
+L
+ớ
+p 
+DataAdapter
+ 
+nhƣ là c
+ầ
+u n
+ố
+i gi
+ữ
+a 
+DataTable
+ 
+trong 
+DataSet 
+và 
+ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u
+. Nó 
+ch
+ứ
+a các câu l
+ệ
+nh có s
+ẵ
+n
+ 
+đ
+ể
+ 
+truy xu
+ấ
+t và c
+ậ
+p nh
+ậ
+t ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u.
+ 
+-
+ 
+Đ
+ể
+ 
+DataAdapter có th
+ể
+ 
+th
+ự
+c hi
+ệ
+n các ch
+ứ
+c năng nhƣ edit, delete, và insert m
+ẫ
+u tin, 
+c
+ầ
+n xác đ
+ị
+nh đ
+ố
+i 
+tƣ
+ợ
+ng 
+Command
+ 
+c
+ụ
+ 
+th
+ể
+ 
+g
+ồ
+m các 
+thu
+ộ
+c tính UpdateCommand, 
+DeleteCommand, 
+I
+nsertCommand c
+ủ
+a DataAdapter.
+ 
+
+
+--- PAGE 85 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+85
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng DataA
+dapter đ
+ể
+ 
+fill m
+ộ
+t DataSet, b
+ạ
+n c
+ầ
+n ph
+ả
+i 
+gán giá tr
+ị
+ 
+cho
+ 
+thu
+ộ
+c tính 
+SelectCommand. 
+ 
+Các phƣơng th
+ứ
+c c
+ủ
+a l
+ớ
+p DataAdapter
+ 
+Phƣơng th
+ứ
+c
+ 
+Mô t
+ả
+ 
+Fill()
+ 
+Thêm m
+ộ
+t DataTable vào m
+ộ
+t DataSet b
+ằ
+ng cách th
+ự
+c thi câu truy 
+v
+ấ
+n trong câu l
+ệ
+nh SelectCommand. N
+ế
+u câu truy 
+v
+ấ
+n tr
+ả
+ 
+v
+ề
+ 
+k
+ế
+t qu
+ả
+ 
+là nhi
+ề
+u t
+ậ
+p d
+ữ
+ 
+li
+ệ
+u, phƣơng th
+ứ
+c này s
+ẽ
+ 
+thêm nhi
+ề
+u đ
+ố
+i tƣ
+ợ
+ng 
+DataTable cùng m
+ộ
+t lúc. 
+ 
+ 
+FillSchema
+()
+ 
+Thêm m
+ộ
+t DataTable vào DataSet b
+ằ
+ng cách th
+ự
+c thi câu truy v
+ấ
+n 
+trong câu l
+ệ
+nh SelectCommand và truy xu
+ấ
+t lƣ
+ợ
+c đ
+ồ
+ 
+thông tin. 
+Phƣơng th
+ứ
+c
+ 
+này không th
+ể
+ 
+thêm b
+ấ
+t k
+ỳ
+ 
+d
+ữ
+ 
+li
+ệ
+u nào vào DataTable. 
+Thay vào đó, nó ch
+ỉ
+ 
+th
+ự
+c hi
+ệ
+n c
+ấ
+u hình l
+ạ
+i DataTable v
+ớ
+i thông tin 
+chi ti
+ế
+t nhƣ tên c
+ộ
+t, ki
+ể
+u d
+ữ
+ 
+li
+ệ
+u, khóa chính, và các ràng bu
+ộ
+c d
+ữ
+ 
+li
+ệ
+u
+ 
+ 
+Update
+()
+ 
+K
+i
+ể
+m tra t
+ấ
+t c
+ả
+ 
+các thay đ
+ổ
+i trong DataTable và th
+ự
+c hi
+ệ
+n t
+ấ
+t c
+ả
+ 
+các 
+thay đ
+ố
+i đ
+ế
+n ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u b
+ằ
+ng cách th
+ự
+c thi các câu l
+ệ
+nh phù h
+ợ
+p 
+trong InsertCommand, UpdateCommand, và DeleteCommand.
+ 
+ 
+ 
+Hình
+ 
+35
+: 
+ 
+Mô hình L
+ớ
+p DataAdapter tương tác v
+ớ
+i ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u 
+ 
+III.
+ 
+Ví d
+ụ
+:
+ 
+       
+S
+ử
+ 
+d
+ụ
+ng DataAdapter đ
+ể
+ 
+làm c
+ầ
+u n
+ố
+i v
+ớ
+i ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u QLNV. Sau khi th
+ự
+c hi
+ệ
+n câu 
+l
+ệ
+nh truy v
+ấ
+n 
+select * from nhanvien
+ 
+và 
+Select * from phongban
+, t
+ậ
+p DataSet s
+ẽ
+ 
+có 2 
+DataTable là NV và PB tƣơng 
+ứ
+ng. Cu
+ố
+i cùng, hi
+ể
+n th
+ị
+ 
+k
+ế
+t qu
+ả
+ 
+dƣ
+ớ
+i d
+ạ
+ng Literal nhƣ k
+ế
+t qu
+ả
+ 
+ở
+ 
+hình sau:
+ 
+protected
+ 
+void
+ 
+Page_Load
+(
+object
+ 
+sender, 
+EventArgs
+ 
+e)
+ 
+    
+{
+ 
+        
+string
+ 
+connStr= 
+"Data Source=
+localhost
+; Initial Catalog=QLNV; 
+ 
+Integrated Security=SSPI"
+;
+ 
+        
+SqlConnection
+ 
+conn = 
+new
+ 
+SqlConnection
+(connStr);
+ 
+        
+string
+ 
+sql = 
+"select * from nhanvien"
+;      
+ 
+        
+SqlDa
+taAdapter
+ 
+da = 
+new
+ 
+SqlDataAdapter
+(sql, conn);      
+ 
+        
+DataSet
+ 
+ds = 
+new
+ 
+DataSet
+();
+ 
+        
+da.Fill(ds,
+"NV"
+); 
+ 
+
+
+--- PAGE 86 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+86
+ 
+        
+ 
+        
+ltr_nhanvien.Text = hienthi(ds.Tables[
+"NV"
+]).ToString();
+ 
+        
+da.SelectCommand.CommandText = 
+"Select * from phongban"
+;
+ 
+  
+      
+da.Fill(ds, 
+"PB"
+);
+ 
+        
+ 
+        
+ltr_Phongban.Text = hienthi(ds.Tables[
+"PB"
+]).ToString();
+ 
+  
+ 
+    
+}
+ 
+    
+//Hien thi duoi dang danh sach
+ 
+   
+StringBuilder
+ 
+hienthi(
+DataTable
+ 
+dt) {
+ 
+        
+    
+StringBuilder
+ 
+str = 
+new
+ 
+StringBuilder
+();       
+ 
+    
+    
+    
+foreach
+ 
+(
+DataRow
+ 
+dr 
+in
+ 
+dt.Rows)            
+ 
+        
+       
+    
+str.Append(
+"<li>    "
+ 
++ dr[0] + 
+" "
+ 
++ dr[1]);
+ 
+        
+    
+return
+ 
+str;         
+ 
+  
+ 
+}
+ 
+             
+K
+ế
+t qu
+ả
+ 
+c
+ủ
+a đo
+ạ
+n mã l
+ệ
+nh trên như sau:
+ 
+ 
+Hình
+ 
+36
+: 
+ 
+Form K
+ế
+t qu
+ả
+ 
+ví d
+ụ
+ 
+trang 85
+ 
+Câu h
+ỏ
+i/Bài t
+ậ
+p c
+ủ
+ng c
+ố
+ 
+1.
+ 
+Trình bày ki
+ế
+n trúc 
+c
+ủ
+a l
+ớ
+p DataSet
+ 
+2.
+ 
+Nêu m
+ộ
+t s
+ố
+ 
+thu
+ộ
+c tính và phƣơng th
+ứ
+c c
+ủ
+a l
+ớ
+p.
+ 
+3.
+ 
+ 
+Th
+ự
+c hành bài t
+ậ
+p Qu
+ả
+n lý Album trong trang 102
+ 
+
+
+--- PAGE 87 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+87
+ 
+Bài 
+4
+:  Data Binding
+ 
+ 
+M
+ụ
+c tiêu h
+ọ
+c t
+ậ
+p:
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng DataBinding đ
+ể
+ 
+liên k
+ế
+t d
+ữ
+ 
+li
+ệ
+u t
+ậ
+p h
+ợ
+p v
+ớ
+i web controls
+ 
+-
+ 
+Liên k
+ế
+t ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u trong DataReader v
+ớ
+i web controls
+ 
+ 
+I.
+ 
+ 
+Gi
+ớ
+i thi
+ệ
+u 
+ 
+H
+ầ
+u h
+ế
+t các 
+ứ
+ng d
+ụ
+ng web ph
+ả
+i làm vi
+ệ
+c v
+ớ
+i cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u trong cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u quan h
+ệ
+ 
+ho
+ặ
+c các t
+ậ
+p tin XML. Vi
+ệ
+c truy xu
+ấ
+t d
+ữ
+ 
+li
+ệ
+u ch
+ỉ
+ 
+là m
+ộ
+t ph
+ầ
+n vi
+ệ
+c trong vi
+ệ
+c xây d
+ự
+ng 
+ứ
+ng 
+d
+ụ
+ng web. M
+ộ
+t 
+ứ
+ng d
+ụ
+ng
+ 
+web hi
+ệ
+n đ
+ạ
+i c
+ầ
+n ph
+ả
+i th
+ể
+ 
+hi
+ệ
+n tính ti
+ệ
+n ích, linh ho
+ạ
+t và h
+ấ
+p d
+ẫ
+n đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u trên trang web. ASP.net bao g
+ồ
+m các mô hình có đ
+ầ
+y đ
+ủ
+ 
+ch
+ứ
+c năng c
+ủ
+a Data
+-
+binding. Data Binding cho phép l
+ậ
+p trình viên th
+ự
+c hi
+ệ
+n k
+ế
+t n
+ố
+i đ
+ố
+i tƣ
+ợ
+ng d
+ữ
+ 
+li
+ệ
+u đƣ
+ợ
+c truy 
+xu
+ấ
+t v
+ớ
+i m
+ộ
+t ho
+ặ
+c vài web control, sau đó s
+ẽ
+ 
+t
+ự
+ 
+đ
+ộ
+ng hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u. Đi
+ề
+u này có nghĩa là 
+các l
+ậ
+p trình viên không c
+ầ
+n ph
+ả
+i vi
+ế
+t các đo
+ạ
+n code ph
+ứ
+c t
+ạ
+p đ
+ể
+ 
+duy
+ệ
+t qua các dòng d
+ữ
+ 
+li
+ệ
+u, 
+đ
+ọ
+c d
+ữ
+ 
+li
+ệ
+u t
+ừ
+ 
+nhi
+ề
+u c
+ộ
+t khác nhau và thao tác v
+ớ
+i t
+ừ
+ng controls riêng bi
+ệ
+t. 
+ 
+Đ
+ể
+ 
+m
+ọ
+i vi
+ệ
+c đƣ
+ợ
+c d
+ễ
+ 
+dàng hơn, ta có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng các đi
+ề
+u khi
+ể
+n ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u. M
+ộ
+t đi
+ề
+u 
+khi
+ể
+n ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u cho phép b
+ạ
+n đ
+ị
+nh nghĩa liên k
+ế
+t rõ ràng gi
+ữ
+a trang web c
+ủ
+a b
+ạ
+n và 
+ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u. Đi
+ề
+u khi
+ể
+n ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u là m
+ộ
+t công c
+ụ
+ 
+t
+ố
+t đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n k
+ế
+t bu
+ộ
+c d
+ữ
+ 
+li
+ệ
+u. Sau 
+khi c
+ấ
+u hình ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u xong, ta có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng nó trong lúc thi
+ế
+t k
+ế
+. Th
+ậ
+t v
+ậ
+y, b
+ằ
+ng cách 
+s
+ử
+ 
+d
+ụ
+ng đi
+ề
+u khi
+ể
+n ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u, b
+ạ
+n có th
+ể
+ 
+t
+ạ
+o ra các trang web ph
+ứ
+c t
+ạ
+p cho phép b
+ạ
+n truy 
+v
+ấ
+n và c
+ậ
+p nh
+ậ
+t d
+ữ
+ 
+li
+ệ
+u mà không c
+ầ
+n vi
+ế
+t t
+ừ
+ng dòng l
+ệ
+nh. 
+ 
+II.
+ 
+Cơ b
+ả
+n v
+ề
+ 
+Data Binding
+ 
+Data binding là ch
+ứ
+c năng cho phép b
+ạ
+n th
+ự
+c hi
+ệ
+n k
+ế
+t n
+ố
+i d
+ữ
+ 
+li
+ệ
+u gi
+ữ
+a ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u v
+ớ
+i 
+web control và có th
+ể
+ 
+t
+ự
+ 
+đ
+ộ
+ng hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u c
+ủ
+a b
+ạ
+n. Đ
+ặ
+c đi
+ể
+m chính c
+ủ
+a Data Biding là 
+tính rõ ràng, không mang tính l
+ậ
+p trình. Đi
+ề
+u này
+ 
+có nghĩa là Data binding đƣ
+ợ
+c đ
+ị
+nh nghĩa 
+bên ngoài code c
+ủ
+a b
+ạ
+n cùng v
+ớ
+i các đi
+ề
+u khi
+ể
+n trong trang .aspx.
+ 
+2.1. 
+Single Value Binding
+ 
+Trong Asp.net, h
+ầ
+u h
+ế
+t các đi
+ề
+u khi
+ể
+n web (bao g
+ồ
+m 
+TextBox, LinkButton, Image,
+…) 
+đ
+ề
+u 
+h
+ỗ
+ 
+tr
+ợ
+ 
+single
+-
+value binding. V
+ớ
+i Sing
+le
+-
+value binding, ta có th
+ể
+ 
+k
+ế
+t bu
+ộ
+c m
+ộ
+t thu
+ộ
+c tính c
+ủ
+a 
+đi
+ề
+u khi
+ể
+n v
+ớ
+i ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u, nhƣng đi
+ề
+u khi
+ể
+n có th
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+ch
+ỉ
+ 
+m
+ộ
+t giá tr
+ị
+ 
+đơn. Thu
+ộ
+c tính 
+mà b
+ạ
+n có th
+ể
+ 
+k
+ế
+t bu
+ộ
+c không c
+ầ
+n hi
+ể
+n th
+ị
+ 
+tr
+ự
+c ti
+ế
+p trên trang. Ví d
+ụ
+, b
+ạ
+n có th
+ể
+ 
+liên k
+ế
+t thu
+ộ
+c 
+tính Tex
+t trong th
+ẻ
+ 
+Hyperlink. Ta có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng thu
+ộ
+c tính Text, ho
+ặ
+c có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng thu
+ộ
+c 
+tính NavigateUrl đ
+ể
+ 
+xác đ
+ị
+nh liên k
+ế
+t c
+ủ
+a trang web. 
+ 
+Cú pháp:
+  
+<%# 
+  
+Bi
+ể
+u th
+ứ
+c k
+ế
+t bu
+ộ
+c  
+%>
+ 
+        
+Ví d
+ụ
+:
+   
+<%# EmployeeName %>
+ 
+đ
+ể
+ 
+liên k
+ế
+t v
+ớ
+i trƣ
+ờ
+ng thông tin EmployeeN
+ame
+ 
+ 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 
+  
+<body>
+ 
+<form method="post" runat="server">
+ 
+      
+<asp:Image
+ 
+ID="image1" runat="server" ImageUrl='<%# FilePath %>' />
+ 
+      
+<br />
+ 
+      
+<asp:Label
+ 
+ID="label1" runat="server" Text='<%# FilePath %>' />
+ 
+    
+  
+<br />
+ 
+
+--- PAGE 88 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+88
+ 
+      
+<asp:TextBox
+ 
+ID="textBox1" runat="server" Text='<%# GetFilePath() %>' />
+ 
+      
+<br />
+ 
+      
+<asp:HyperLink
+ 
+ID="hyperLink1" runat="server"
+ 
+        
+NavigateUrl='<%# LogoPath.Value %>' Font
+-
+Bold="True" Text="Show logo" />
+ 
+      
+<br />
+ 
+      
+<in
+put type="hidden" ID="LogoPath" runat="server" value="apress.gif">
+ 
+      
+<b> <%# FilePath %> </b><br />
+ 
+      
+<img src="<%# GetFilePath() %>“ >
+ 
+ 
+protected string GetFilePath()
+ 
+{
+ 
+        
+return "apress.gif";
+ 
+}
+ 
+protected string FilePath 
+ 
+{
+ 
+        
+get { retu
+rn "apress.gif"; }
+ 
+}
+ 
+protected void Page_Load(object sender, System.EventArgs e)
+ 
+{
+ 
+         
+this.DataBind();
+ 
+} 
+ 
+ 
+2.2.
+ 
+Liên k
+ế
+t d
+ữ
+ 
+li
+ệ
+u có l
+ặ
+p (
+Repeated Value Binding
+)
+ 
+     
+Nhi
+ề
+u web controls có h
+ỗ
+ 
+tr
+ợ
+ 
+Repeated value binding có nghĩa là chúng s
+ẽ
+ 
+tr
+ả
+ 
+v
+ề
+ 
+m
+ộ
+t 
+t
+ậ
+p 
+các m
+ụ
+c ch
+ọ
+n. Các Repeated Value control thƣ
+ờ
+ng t
+ạ
+o danh sách ho
+ặ
+c các lƣ
+ớ
+i (Listbox 
+ho
+ặ
+c Gridview). N
+ế
+u m
+ộ
+t đi
+ề
+u khi
+ể
+n có h
+ỗ
+ 
+tr
+ợ
+ 
+d
+ạ
+ng này ph
+ả
+i có thu
+ộ
+c tính DataSource đ
+ể
+ 
+ch
+ấ
+p nh
+ậ
+n đ
+ố
+i tƣ
+ợ
+ng d
+ữ
+ 
+li
+ệ
+u. Khi gán thu
+ộ
+c tính DataSource, ta đã th
+ự
+c hi
+ệ
+n m
+ộ
+t liên
+ 
+k
+ế
+t t
+ừ
+ 
+server control đ
+ế
+n đ
+ố
+i tƣ
+ợ
+ng d
+ữ
+ 
+li
+ệ
+u c
+ầ
+n hi
+ể
+n th
+ị
+. Tuy nhiên nó không t
+ự
+ 
+đ
+ộ
+ng th
+ự
+c hi
+ệ
+n, mà 
+ta ph
+ả
+i g
+ọ
+i phƣơng th
+ứ
+c DataBind(). Phƣơng th
+ứ
+c này s
+ẽ
+ 
+duy
+ệ
+t qua toàn b
+ộ
+ 
+ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u, 
+truy xu
+ấ
+t d
+ữ
+ 
+li
+ệ
+u và tr
+ả
+ 
+v
+ề
+ 
+d
+ữ
+ 
+li
+ệ
+u dƣ
+ớ
+i d
+ạ
+ng trang web. 
+ 
+     
+Repea
+ted
+-
+value binding cho phép b
+ạ
+n k
+ế
+t n
+ố
+i toàn b
+ộ
+ 
+danh sách thông tin đ
+ế
+n m
+ộ
+t 
+control. Danh sách thông tin đƣ
+ợ
+c trình bày b
+ở
+i đ
+ố
+i tƣ
+ợ
+ng d
+ữ
+ 
+li
+ệ
+u có th
+ể
+ 
+đóng gói trong m
+ộ
+t 
+t
+ậ
+p đ
+ố
+i tƣ
+ợ
+ng có th
+ể
+ 
+là t
+ậ
+p h
+ợ
+p các custom objects (vd: trong m
+ộ
+t ArrayList ho
+ặ
+c hashtabl
+e) 
+ho
+ặ
+c m
+ộ
+t t
+ậ
+p các m
+ẫ
+u tin (vd, DataReader ho
+ặ
+c DataSet). ASP.NET bao g
+ồ
+m m
+ộ
+t vài list 
+controls có h
+ỗ
+ 
+tr
+ợ
+ 
+repeated
+-
+value binding:
+ 
+         
+Cho phép k
+ế
+t bu
+ộ
+c toàn b
+ộ
+ 
+danh sách thông tin đ
+ế
+n m
+ộ
+t trong các controls
+ 
+-
+ 
+T
+ấ
+t c
+ả
+ 
+các control tr
+ả
+ 
+v
+ề
+ 
+có s
+ử
+ 
+d
+ụ
+ng th
+ẻ
+ 
+<s
+elect> bao g
+ồ
+m HtmlSelect, ListBox, và 
+DropDownList 
+ 
+-
+ 
+CheckBoxList, RadioButtonList tr
+ả
+ 
+v
+ề
+ 
+các m
+ụ
+c ch
+ọ
+n con 
+ở
+ 
+check box ho
+ặ
+c radio 
+button tách r
+ờ
+i.
+ 
+-
+ 
+BulletedList control, t
+ạ
+o danh sách các bullet ho
+ặ
+c number. T
+ấ
+t c
+ả
+ 
+các control này 
+hi
+ể
+n th
+ị
+ 
+trƣ
+ờ
+ng giá tr
+ị
+ 
+ri
+êng
+ 
+c
+ủ
+a thu
+ộ
+c tính t
+ừ
+ 
+m
+ỗ
+i m
+ụ
+c ch
+ọ
+n d
+ữ
+ 
+li
+ệ
+u. 
+ 
+
+--- PAGE 89 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+89
+ 
+-
+ 
+Khi th
+ự
+c hi
+ệ
+n liên k
+ế
+t
+ 
+d
+ữ
+ 
+li
+ệ
+u v
+ớ
+i các controls này, ta s
+ẽ
+ 
+s
+ử
+ 
+d
+ụ
+ng các thu
+ộ
+c tính đƣ
+ợ
+c 
+li
+ệ
+t kê theo sau.
+ 
+Thu
+ộ
+c tính
+ 
+Mô t
+ả
+ 
+DataSource
+ 
+Đ
+ố
+i tƣ
+ợ
+ng d
+ữ
+ 
+li
+ệ
+u ch
+ứ
+a t
+ậ
+p các m
+ụ
+c ch
+ọ
+n d
+ữ
+ 
+li
+ệ
+u c
+ầ
+n hi
+ể
+n 
+th
+ị
+. Đ
+ố
+i tƣ
+ợ
+ng d
+ữ
+ 
+li
+ệ
+u này ph
+ả
+i cài đ
+ặ
+t m
+ộ
+t trong nh
+ữ
+ng 
+giao ti
+ế
+p mà ASP.NET data binding h
+ỗ
+ 
+tr
+ợ
+, thƣ
+ờ
+ng là 
+ICollection.
+ 
+DataSourceID
+ 
+L
+iên k
+ế
+t list control v
+ớ
+i data source control b
+ằ
+ng cách đ
+ặ
+t 
+giá tr
+ị
+ 
+cho thu
+ộ
+c tính này. Data source control s
+ẽ
+ 
+tao ra đ
+ố
+i 
+tƣ
+ợ
+ng d
+ữ
+ 
+li
+ệ
+u yêu c
+ầ
+u t
+ự
+ 
+đ
+ộ
+ng. Ta có th
+ể
+ 
+dùng thu
+ộ
+c tính 
+DataSource 
+ho
+ặ
+c 
+DataSourceID
+, nhƣng không ph
+ả
+i c
+ả
+ 
+hai.
+ 
+DataTextField
+ 
+M
+ộ
+t list control có th
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+duy nh
+ấ
+t m
+ộ
+t giá tr
+ị
+ 
+t
+ừ
+ 
+danh 
+sách m
+ụ
+c ch
+ọ
+n. DataTextField ch
+ỉ
+ 
+đ
+ị
+nh field ho
+ặ
+c property 
+c
+ủ
+a m
+ụ
+c ch
+ọ
+n d
+ữ
+ 
+li
+ệ
+u ch
+ứ
+a gi
+á tr
+ị
+ 
+hi
+ể
+n th
+ị
+ 
+trong trang 
+ 
+DataTextFormatString: 
+ 
+ 
+Đ
+ị
+nh d
+ạ
+ng d
+ữ
+ 
+li
+ệ
+u c
+ầ
+n hi
+ể
+n th
+ị
+ 
+trong 
+DataTextValue:
+ 
+ 
+ 
+Ví d
+ụ
+: ta có th
+ể
+ 
+ch
+ỉ
+ 
+đ
+ị
+nh m
+ộ
+t s
+ố
+ 
+ph
+ả
+i đƣ
+ợ
+c đ
+ị
+nh d
+ạ
+ng dƣ
+ớ
+i 
+d
+ạ
+ng ki
+ể
+u ti
+ề
+n t
+ệ
+ 
+currency. 
+ 
+DataValueField 
+ 
+ 
+Giá tr
+ị
+ 
+t
+ừ
+ 
+m
+ụ
+c ch
+ọ
+n d
+ữ
+ 
+li
+ệ
+u không hi
+ể
+n th
+ị
+ 
+t
+rong trang. 
+ 
+ 
+Đƣ
+ợ
+c lƣu tr
+ữ
+ 
+trong thu
+ộ
+c tính 
+value
+ 
+c
+ủ
+a th
+ẻ
+ 
+HTML
+ 
+ 
+Thƣ
+ờ
+ng dùng đ
+ể
+ 
+lƣu tr
+ữ
+ 
+các trƣ
+ờ
+ng 
+ID 
+ho
+ặ
+c 
+khóa chính 
+ 
+ 
+Có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng nó đ
+ể
+ 
+truy xu
+ấ
+t nhi
+ề
+u d
+ữ
+ 
+li
+ệ
+u khi ngƣ
+ờ
+i 
+dùng ch
+ọ
+n m
+ộ
+t m
+ụ
+c ch
+ọ
+n c
+ụ
+ 
+th
+ể
+ 
+nào đó. 
+ 
+ 
+Ví d
+ụ
+: 
+ 
+        
+T
+ạ
+o m
+ộ
+t s
+ố
+ 
+các list contr
+ols bao g
+ồ
+m: listbox, dropdownlist, checkboxlist và 
+radiobuttonlist 
+ở
+ 
+trang ListBinding.aspx. 
+Ở
+ 
+code behinde ListBiding.aspx.cs, th
+ự
+c hi
+ệ
+n t
+ạ
+o 
+ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u đ
+ể
+ 
+liên k
+ế
+t v
+ớ
+i các list controls đƣ
+ợ
+c nêu 
+ở
+ 
+trên.
+ 
+       
+Đo
+ạ
+n script 
+ở
+ 
+trang ListBinding.aspx nhƣ 
+sau:
+ 
+ 
+  
+<
+form
+ 
+id
+="form1"
+ 
+runat
+="server">
+ 
+       
+<
+br
+ 
+/><
+b
+>
+S
+ử
+ 
+d
+ụ
+ng listbox đ
+ể
+ 
+hi
+ể
+n th
+ị
+</
+b
+>
+ 
+        
+<
+asp
+:
+ListBox
+ 
+id
+="MyListBox"
+ 
+runat
+="server"
+ 
+Width
+="169px"
+ 
+></
+asp
+:
+ListBox
+>
+ 
+        
+ 
+         
+<
+br
+ 
+/><
+b
+>
+S
+ử
+ 
+d
+ụ
+ng HTML control DropdownList đ
+ể
+ 
+hi
+ể
+n th
+ị
+</
+b
+>
+ 
+         
+<
+br
+ 
+><
+select
+ 
+id
+="MyHTMLSelect"
+  
+size
+="1"
+  
+runat
+="server"/>
+ 
+         
+ 
+ 
+ 
+ 
+<
+br
+ 
+/><
+b
+>
+S
+ử
+ 
+d
+ụ
+ng Web control DropdownList đ
+ể
+ 
+hi
+ể
+n th
+ị
+</
+b
+>
+ 
+ 
+ 
+ 
+ 
+<
+br
+><
+asp
+:
+DropDownList
+ 
+id
+="MyDropDownListBox"
+ 
+runat
+="server"
+ 
+ 
+ 
+ 
+ 
+Width
+="200"
+ 
+></
+asp
+:
+DropDownList
+>
+ 
+ 
+    
+ 
+ 
+     
+<
+br
+ 
+/><
+b
+>
+S
+ử
+ 
+d
+ụ
+ng CheckBoxListđ
+ể
+ 
+hi
+ể
+n th
+ị
+</
+b
+>
+ 
+ 
+ 
+ 
+<
+asp
+:
+CheckBoxList
+ 
+id
+="MyCheckBoxList"
+  
+runat
+="server"
+ 
+ 
+ 
+ 
+RepeatColumns
+=3
+ 
+RepeatDirection
+=Horizontal
+ 
+></
+asp
+:
+CheckBoxList
+>
+ 
+ 
+ 
+ 
+ 
+ 
+<
+br
+ 
+/><
+b
+>
+S
+ử
+ 
+d
+ụ
+ng  RadioButtonList đ
+ể
+ 
+hi
+ể
+n th
+ị
+</
+b
+>
+ 
+ 
+ 
+<
+asp
+:
+RadioButtonList
+ 
+id
+="MyRadioButtonList"
+ 
+runat
+="server"
+ 
+ 
+RepeatColumns
+=3
+ 
+RepeatDirection
+=Horizontal></
+asp
+:
+RadioButtonList
+>
+        
+ 
+    
+</
+form
+>
+ 
+ 
+        
+Đo
+ạ
+n mã l
+ệ
+nh 
+ở
+ 
+trang ListBinding.aspx.cs
+ 
+protected
+ 
+void
+ 
+Page_Load(
+object
+ 
+sender, 
+EventArgs
+ 
+e)
+ 
+
+--- PAGE 90 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+90
+ 
+{
+ 
+        
+// T
+ạ
+o và fill danh sách
+ 
+        
+List
+<
+st
+ring
+> fruit = 
+new
+ 
+List
+<
+string
+>();
+ 
+        
+fruit.Add(
+"Kiwi"
+);
+ 
+        
+fruit.Add(
+"Đào"
+);
+ 
+        
+fruit.Add(
+"Mãn c
+ầ
+u"
+);
+ 
+        
+fruit.Add(
+"Dâu tây"
+);
+ 
+        
+fruit.Add(
+"Đào tiên"
+);
+ 
+        
+fruit.Add(
+"Chu
+ố
+i"
+);
+ 
+        
+fruit.Add(
+"M
+ậ
+n"
+);
+ 
+        
+fruit.Add(
+"Lê"
+);
+ 
+ 
+        
+// Đ
+ị
+nh nghĩa m
+ộ
+t k
+ế
+t n
+ố
+i v
+ớ
+i list controls
+.
+ 
+        
+MyListBox.DataSource = fruit;
+ 
+        
+MyDropDownListBox.DataSource = fruit;
+ 
+        
+MyHTMLSelect.DataSource = fruit;
+ 
+        
+MyCheckBoxList.DataSource = fruit;
+ 
+        
+MyRadioButtonList.DataSou
+rce = fruit;
+ 
+ 
+        
+// 
+Th
+ự
+c hi
+ệ
+n liên k
+ế
+t
+ 
+        
+this
+.DataBind();
+ 
+ 
+}
+ 
+        
+ 
+K
+ế
+t qu
+ả
+ 
+c
+ủ
+a đo
+ạ
+n chương trình trên đư
+ợ
+c minh h
+ọ
+a như hình.
+ 
+ 
+ 
+Hình
+ 
+37
+: 
+ 
+Form K
+ế
+t qu
+ả
+ 
+ví d
+ụ
+ 
+trang 89
+ 
+      
+2.3. Liên k
+ế
+t d
+ữ
+ 
+li
+ệ
+u v
+ớ
+i 
+DataReader 
+ 
+-
+ 
+Li
+ệ
+t kê tên c
+ủ
+a các nhân viê
+n trong table 
+Nhanvien 
+đƣa vào listbox nhƣ hình bên 
+ 
+-
+ 
+Cho phép ngƣ
+ờ
+i dùng click ch
+ọ
+n m
+ộ
+t vài nhân viên. Sau đó click vào nút l
+ệ
+nh 
+“Ch
+ọ
+n 
+nhân viên”
+ 
+s
+ẽ
+ 
+hi
+ệ
+n th
+ị
+ 
+tên c
+ủ
+a các nhân viên đƣ
+ợ
+c ch
+ọ
+n 
+ở
+ 
+phía dƣ
+ớ
+i.
+ 
+-
+ 
+Khai báo trong t
+ậ
+p tin Binding to DataReader.aspx
+ 
+nhƣ sau. Ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u cho listbox 
+lb_dsNhanvien đƣ
+ợ
+c vi
+ế
+t trong code_behind.
+ 
+<
+form
+ 
+id
+="form1"
+ 
+runat
+="server">
+ 
+
+
+--- PAGE 130 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+130
+ 
+ 
+ 
+ 
+ 
+ 
+2.3.
+ 
+Table Muon
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.
+ 
+S
+ử
+ 
+d
+ụ
+ng các l
+ớ
+p trong ADO.net
+ 
+ở
+ 
+chƣơng 5 
+ 
+a.
+ 
+T
+ạ
+o trang web có tên:
+ 
+Thongtinsach
+.aspx
+ 
+cho phép ng
+ư
+ờ
+i dùng 
+xem các thông 
+tin v
+ề
+ 
+sách đang đ
+ư
+ợ
+c đ
+ộ
+c gi
+ả
+ 
+m
+ư
+ợ
+n
+:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 131 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+131
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Yêu c
+ầ
+u chi ti
+ế
+t
+ 
+ 
++ 
+Dropdownli
+st 
+Ch
+ọ
+n 
+t
+ự
+a sách
+ 
+có ID là 
+ddl
+Tuasach
+ 
+và
+ 
+các m
+ụ
+c ch
+ọ
+n 
+c
+ủ
+a 
+dropdownlist này 
+đƣ
+ợ
+c load t
+ừ
+ 
+table 
+DMSach
+ 
+ 
+trong 
+CSDL ngay khi trang web đƣ
+ợ
+c 
+g
+ọ
+i l
+ầ
+n đ
+ầ
+u tiên
+.  
+ 
+ 
++ Cài đ
+ặ
+t s
+ự
+ 
+ki
+ệ
+n cho dropdownlist 
+ddl
+Tuasach
+ 
+sao cho khi ngƣ
+ờ
+i dùng ch
+ọ
+n m
+ộ
+t 
+t
+ự
+a sách nào đó thì c
+hƣơng trình th
+ự
+c hi
+ệ
+n tìm ki
+ế
+m trong table DMSach thông tin chi 
+ti
+ế
+t 
+(Tuasach, namxb, nhaxb)
+ 
+c
+ủ
+a quy
+ể
+n sách đƣ
+ợ
+c ch
+ọ
+n và hi
+ể
+n th
+ị
+ 
+các thông tin này 
+trong DetailsView có tên là dvSach. Đ
+ồ
+ng th
+ờ
+i, chƣơng trình cũng th
+ự
+c hi
+ệ
+n tìm ki
+ế
+m 
+trong CSDL thông tin v
+ề
+ 
+tình tr
+ạ
+ng mƣ
+ợ
+n sách c
+ủ
+a quy
+ể
+n sách đƣ
+ợ
+c ch
+ọ
+n (
+Masach, 
+Madg, Ngaymuon, Ngaytra, Tienphat, Ghichu
+) và các thông tin này đƣ
+ợ
+c hi
+ể
+n th
+ị
+ 
+trong GridView có tên là gvMuon nhƣ trên hình 
+ả
+nh minh h
+ọ
+a trên
+.
+ 
+    
+Ví d
+ụ
+ 
+trên hình minh h
+ọ
+a k
+ế
+t qu
+ả
+ 
+tìm ki
+ế
+m khi ngư
+ờ
+i dù
+ng ch
+ọ
+n t
+ự
+a sách có tên là 
+365 truy
+ệ
+n k
+ể
+ 
+h
+ằ
+ng đêm
+  
+ 
+4.
+ 
+S
+ử
+ 
+d
+ụ
+ng các l
+ớ
+p trong ADO.net
+ 
+
+ 
+T
+ạ
+o trang web có tên:
+ 
+Thongdocgia.aspx
+ 
+cho phép ngƣ
+ờ
+i dùng xem các thông 
+tin v
+ề
+ 
+vi
+ệ
+c mƣ
+ợ
+n sách c
+ủ
+a đ
+ộ
+c gi
+ả
+: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Yêu c
+ầ
+u chi ti
+ế
+t: 
+ 
+
+
+--- PAGE 132 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+132
+ 
+
+ 
+Trong đó Dropdownlist 
+Xem thông tin 
+mƣ
+ợ
+n sách c
+ủ
+a đ
+ộ
+c gi
+ả
+ 
+có ID là 
+ddlDocgia
+ 
+và các m
+ụ
+c ch
+ọ
+n c
+ủ
+a dropdownlist này đƣ
+ợ
+c load t
+ừ
+ 
+table 
+Docgia
+  
+trong 
+CSDL ngay khi trang web đƣ
+ợ
+c g
+ọ
+i l
+ầ
+n đ
+ầ
+u tiên.  
+ 
+
+ 
+Cài đ
+ặ
+t th
+ủ
+ 
+t
+ụ
+c có tên là 
+sp_Docgiamuonsach 
+có tham s
+ố
+ 
+là Madocgia đ
+ể
+ 
+th
+ự
+c 
+hi
+ệ
+n tìm ki
+ế
+m các thô
+ng tin v
+ề
+ 
+vi
+ệ
+c mƣ
+ợ
+n sách g
+ồ
+m 
+(MaDG,MaSach, Ngaymuon, 
+Ngaytra, Tienphat, Ghichu)
+ 
+c
+ủ
+a đ
+ộ
+c gi
+ả
+ 
+tƣơng 
+ứ
+ng.  
+ 
+
+ 
+Cài đ
+ặ
+t s
+ự
+ 
+ki
+ệ
+n cho dropdownlist 
+ddlDocgia
+ 
+sao cho khi ngƣ
+ờ
+i dùng ch
+ọ
+n tên 
+c
+ủ
+a m
+ộ
+t đ
+ộ
+c gi
+ả
+ 
+nào đó thì chƣơng trình th
+ự
+c hi
+ệ
+n tìm ki
+ế
+m trong table 
+Muon
+ 
+thông 
+tin chi ti
+ế
+t 
+(MaDG,MaSach, Ngaymuon, Ngaytra, Tienphat, Ghichu)
+ 
+v
+ề
+ 
+vi
+ệ
+c mƣ
+ợ
+n 
+sách c
+ủ
+a đ
+ộ
+c gi
+ả
+ 
+đƣ
+ợ
+c ch
+ọ
+n và hi
+ể
+n th
+ị
+ 
+các thông tin trên trong GridView có tên là 
+gvMuon nhƣ trên hình 
+ả
+nh minh h
+ọ
+a 
+ 
+
+ 
+Ví d
+ụ
+ 
+trên hình minh h
+ọ
+a k
+ế
+t qu
+ả
+ 
+tìm ki
+ế
+m khi ngư
+ờ
+i dùn
+g ch
+ọ
+n đ
+ộ
+c gi
+ả
+ 
+có 
+tên là Hu
+ỳ
+nh Th
+ị
+ 
+Trúc Linh.
+  
+ 
+5.
+ 
+S
+ử
+ 
+d
+ụ
+ng SQL DataSource 
+ 
+   
+-
+ 
+T
+ạ
+o tr
+ang web có tên là 
+Thongtinmuonsach.aspx
+ 
+đ
+ể
+ 
+xem thông tin đ
+ộ
+c gi
+ả
+ 
+mƣ
+ợ
+n sách
+. Trong đó các thành ph
+ầ
+n đƣ
+ợ
+c mô t
+ả
+ 
+chi ti
+ế
+t nhƣ sau:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+-
+ 
+Yêu c
+ầ
+u chi ti
+ế
+t:
+ 
++ T
+ạ
+o m
+ộ
+t 
+SqlD
+ataSource
+ 
+có tên là 
+source
+Docgia 
+đ
+ể
+ 
+li
+ệ
+t kê thông tin 
+mã đ
+ộ
+c 
+gi
+ả
+ 
+và tên đ
+ộ
+c gi
+ả
+ 
+hi
+ệ
+n có trong cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u.
+ 
++ T
+ạ
+o m
+ộ
+t 
+Dropdownlist
+ 
+có tên là 
+ddlDocgia
+ 
+đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u t
+ừ
+ 
+ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u 
+source
+Docgia
+ 
+ở
+ 
+câu a trên.
+ 
++ T
+ạ
+o m
+ộ
+t 
+SqlDataSource
+ 
+có tên là 
+source
+Muon; 
+source
+Muon
+ 
+là m
+ộ
+t ngu
+ồ
+n 
+d
+ữ
+ 
+li
+ệ
+u có s
+ử
+ 
+d
+ụ
+ng tham s
+ố
+ 
+đƣ
+ợ
+c ch
+ọ
+n t
+ừ
+ 
+ddlDocgia
+ 
+ở
+ 
+câu b
+; đ
+ể
+ 
+li
+ệ
+t kê các thông tin 
+mƣ
+ợ
+n sách c
+ủ
+a đ
+ộ
+c gi
+ả
+ 
+do ngƣ
+ờ
+i dùng ch
+ọ
+n 
+ở
+ 
+ddl
+Docgia
+. Ví d
+ụ
+: Khi ngƣ
+ờ
+i dùng 
+ch
+ọ
+n đ
+ộ
+c gi
+ả
+ 
+có tên là Hu
+ỳ
+nh Th
+ị
+ 
+Trúc Linh thì d
+ữ
+ 
+li
+ệ
+u k
+ế
+t qu
+ả
+ 
+c
+ủ
+a
+ 
+sourceMuon là 
+danh sách các m
+ẫ
+u tin mƣ
+ợ
+n sách c
+ủ
+a đ
+ộ
+c gi
+ả
+ 
+trên.
+ 
++ T
+ạ
+o m
+ộ
+t 
+Gridview
+ 
+có tên là 
+gv
+Muon
+ 
+đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+d
+ữ
+ 
+li
+ệ
+u t
+ừ
+ 
+ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u 
+source
+Muon
+ 
+ở
+ 
+câu c trên. Thêm và ki
+ể
+m tra các c
+ộ
+t m
+ớ
+i d
+ạ
+ng 
+Button
+Field 
+đ
+ể
+ 
+cho 
+phép ngƣ
+ờ
+i dùng th
+ự
+c hi
+ệ
+n 
+xóa
+, c
+ậ
+p nh
+ậ
+t
+ 
+thông tin mƣ
+ợ
+n sách 
+nhƣ màn hình thi
+ế
+t k
+ế
+ 
+ở
+ 
+trên.
+ 
+
+
+--- PAGE 133 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+133
+ 
+6.
+ 
+T
+ạ
+o FormView
+ 
+T
+ạ
+o m
+ộ
+t Form view dùng đ
+ể
+ 
+th
+ự
+c hi
+ệ
+n ch
+ứ
+c năng xem thông tin đ
+ộ
+c gi
+ả
+,
+ 
+ch
+ỉ
+nh 
+s
+ử
+a thông tin đ
+ộ
+c gi
+ả
+ 
+và thêm đ
+ộ
+c gi
+ả
+ 
+m
+ớ
+i vào danh sách đ
+ộ
+c gi
+ả
+. Các yêu c
+ầ
+u chi ti
+ế
+t 
+nhƣ sau:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Dropdow
+nlist Ch
+ọ
+n tên đ
+ộ
+c gi
+ả
+ 
+hi
+ể
+n th
+ị
+ 
+danh sách các đ
+ộ
+c gi
+ả
+ 
+hi
+ệ
+n có trong table 
+DMDocgia. Cài đ
+ặ
+t ch
+ứ
+c năng AutoPostBack = true.
+ 
+
+ 
+Khu v
+ự
+c formView s
+ẽ
+ 
+hi
+ể
+n th
+ị
+ 
+t
+ấ
+t c
+ả
+ 
+thông tin liên quan c
+ủ
+a đ
+ộ
+c gi
+ả
+ 
+đƣ
+ợ
+c ch
+ọ
+n 
+ở
+ 
+Dropdownlist Ch
+ọ
+n tên đ
+ộ
+c gi
+ả
+ 
+ở
+ 
+trên.
+ 
+
+ 
+Khi ngƣ
+ờ
+i dùng 
+ch
+ọ
+n Edit đ
+ể
+ 
+ch
+ỉ
+nh s
+ử
+a thông tin. Màn hình s
+ẽ
+ 
+chuy
+ể
+n sang ch
+ế
+ 
+đ
+ộ
+ 
+ch
+ỉ
+nh s
+ử
+a nhƣ sau
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Màn hình
+ 
+khi ngƣ
+ờ
+i dùng ch
+ọ
+n m
+ụ
+c ch
+ọ
+n New nhƣ sau
+ 
+
+
+--- PAGE 134 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+134
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 135 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+135
+ 
+Chƣơng 
+7
+: 
+ 
+QU
+Ả
+N LÝ TR
+Ạ
+NG THÁI
+ 
+ 
+M
+ụ
+c tiêu h
+ọ
+c t
+ậ
+p:
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng đƣ
+ợ
+c m
+ộ
+t s
+ố
+ 
+bi
+ế
+n tr
+ạ
+ng thái 
+ở
+ 
+client.
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng đƣ
+ợ
+c m
+ộ
+t s
+ố
+ 
+bi
+ế
+n trang thái 
+ở
+ 
+server. 
+ 
+ 
+I.
+ 
+Các bi
+ế
+n ViewState, Cookies và Sessions
+ 
+ 
+Hình 
+47
+:  
+Các bi
+ế
+n qu
+ả
+n lý tr
+ạ
+ng thái trong ASP.net
+ 
+ 
+M
+ộ
+t s
+ố
+ 
+công c
+ụ
+ 
+đ
+ể
+ 
+h
+ỗ
+ 
+tr
+ợ
+ 
+qu
+ả
+n lý tr
+ạ
+ng thái tiêu bi
+ể
+u nhƣ sau:
+ 
+-
+ 
+View State
+ 
+-
+ 
+Cookies
+ 
+-
+ 
+Sessions
+ 
+-
+ 
+Applications
+ 
+1.1.
+ 
+ 
+View State
+ 
+View state đƣ
+ợ
+c s
+ử
+ 
+d
+ụ
+ng trong các web controls c
+ủ
+a ASP.net.
+ 
+View state cho phép các 
+web controls gi
+ữ
+ 
+l
+ạ
+i các thu
+ộ
+c tính c
+ủ
+a nó gi
+ữ
+a các postback.Viewstate đƣ
+ợ
+c xem nhƣ trƣ
+ờ
+ng 
+ẩ
+n cho trang web đƣ
+ợ
+c tr
+ả
+ 
+v
+ề
+ 
+sau cùng 
+ 
+ 
+Hình 
+48
+:  
+Yêu c
+ầ
+u m
+ộ
+t trang t
+rong ASP.net
+ 
+a.
+ 
+T
+ạ
+o m
+ớ
+i m
+ộ
+t viewstate
+ 
+-
+ 
+ViewState[“Counter”]=1
+ 
+
+
+--- PAGE 136 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+136
+ 
+-
+ 
+Ý nghĩa: T
+ạ
+o m
+ớ
+i m
+ộ
+t viewstate có tên là Counter
+ 
+b.
+ 
+Đ
+ọ
+c m
+ộ
+t viewstate 
+ 
+ 
+-
+ 
+Int count=ViewState[“Counter”]
+ 
+c.
+ 
+Khi nào nên s
+ử
+ 
+d
+ụ
+ng viewstate 
+ 
+-
+ 
+Bi
+ế
+n d
+ữ
+ 
+li
+ệ
+u có kích thƣ
+ớ
+c nh
+ỏ
+ 
+ 
+-
+ 
+N
+ộ
+i dung d
+ữ
+ 
+li
+ệ
+u thay đ
+ổ
+i 
+ 
+-
+ 
+Không nê
+n s
+ử
+ 
+d
+ụ
+ng d
+ữ
+ 
+li
+ệ
+u có tính b
+ả
+o m
+ậ
+t trong viewstate 
+ 
+1.2.
+ 
+ 
+Cookies
+ 
+     
+Cookies là các file nh
+ỏ
+ 
+đƣ
+ợ
+c lƣu 
+ở
+ 
+đĩa c
+ứ
+ng c
+ủ
+a máy khách ho
+ặ
+c b
+ộ
+ 
+nh
+ớ
+ 
+c
+ủ
+a trình 
+duy
+ệ
+t.
+ 
+Đƣ
+ợ
+c s
+ử
+ 
+d
+ụ
+ng đ
+ể
+ 
+lƣu tr
+ữ
+ 
+thông tin mà sau này có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng l
+ạ
+i.
+ 
+    
+Thu
+ậ
+n l
+ợ
+i:
+ 
+-
+ 
+Ngƣ
+ờ
+i dùng không nh
+ậ
+n bi
+ế
+t thông tin đƣ
+ợ
+c lƣu tr
+ữ
+.
+ 
+-
+ 
+Có th
+ể
+ 
+đƣ
+ợ
+c dùng b
+ở
+i b
+ấ
+t k
+ỳ
+ 
+trang web nào c
+ủ
+a 
+ứ
+ng d
+ụ
+ng và đƣ
+ợ
+c truy xu
+ấ
+t 
+gi
+ữ
+a các l
+ầ
+n vi
+ế
+ng trang web khác nhau.
+ 
+     
+B
+ấ
+t l
+ợ
+i:
+ 
+-
+ 
+Gi
+ớ
+i h
+ạ
+n b
+ở
+i chu
+ỗ
+i thông tin g
+ử
+i vào cookies
+ 
+-
+ 
+D
+ễ
+ 
+dàng truy xu
+ấ
+t và đ
+ọ
+c n
+ế
+u ngƣ
+ờ
+i dùng th
+ấ
+y và m
+ở
+ 
+file t
+ƣơng 
+ứ
+ng 
+ 
+-
+ 
+Ngƣ
+ờ
+i dùng có th
+ể
+ 
+vô hi
+ệ
+u hóa cookies 
+ở
+ 
+trình duy
+ệ
+t.
+ 
+          
+Có hai lo
+ạ
+i cookies: 
+ 
+-
+ 
+Session
+ 
+cookies:  Session
+ 
+cookie
+ 
+ch
+ỉ
+ 
+t
+ồ
+n t
+ạ
+i trong b
+ộ
+ 
+nh
+ớ
+.
+ 
+ 
+ 
+-
+ 
+Persistent
+ 
+cookies:
+ 
+ 
+Persistent
+ 
+cookie
+ 
+có th
+ể
+ 
+t
+ồ
+n t
+ạ
+i hàng tháng ho
+ặ
+c hàng năm. 
+Nó đƣ
+ợ
+c lƣu tr
+ữ
+ 
+vĩnh
+ 
+vi
+ễ
+n trong máy tính c
+ủ
+a ngƣ
+ờ
+i dùng 
+ 
+using System.Net;
+ 
+// T
+ạ
+o đ
+ố
+i tư
+ợ
+ng Cookies
+ 
+HttpCookie cookie = new HttpCookie("Preferences");
+ 
+// Gán giá tr
+ị
+ 
+cho cookie.
+ 
+cookie["LanguagePref"] = "English";
+ 
+// T
+ạ
+o thêm cookies khác 
+ 
+cookie["Country"] = "US";
+ 
+// Đưa coo
+kies xu
+ố
+ng trình duy
+ệ
+t 
+ 
+Response.Cookies.Add(cookie);
+ 
+ 
+<
+form
+ 
+id="form1"
+ 
+runat="server">
+ 
+    
+<asp:Label 
+   
+id="lblCookieValue“ 
+      
+Text="Cookie
+ 
+Value:"
+ 
+        
+AssociatedControlID="txtCookieValue“ 
+       
+Runat="server"
+ 
+/>
+ 
+     
+    
+<asp:TextBox
+    
+id="txtC
+ookieValue” 
+       
+Runat="server"
+ 
+/>
+ 
+    
+<asp:Button
+       
+id="btnAdd“ 
+       
+Text="Add
+ 
+Value"
+ 
+      
+                    
+  
+OnClick="btnAdd_Click”
+       
+Runat="server"
+ 
+/>
+ 
+</
+form
+>
+ 
+
+--- PAGE 137 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+137
+ 
+protected
+ 
+void
+ 
+btnAdd_Click(object
+ 
+sender,
+ 
+EventArgs
+ 
+e)
+ 
+    
+{
+ 
+        
+Response
+.Cookies["message"].Value
+ 
+=
+ 
+txtCookieValue.Text;
+ 
+    
+}
+ 
+ 
+T
+ạ
+o m
+ộ
+t Persistence Cookies
+ 
+void
+ 
+Page_Load()
+ 
+    
+{
+ 
+        
+int
+ 
+counter
+ 
+=
+ 
+0;
+ 
+        
+if
+ 
+(Request.Cookies["counter"]
+ 
+!=
+ 
+null
+)
+ 
+            
+counter
+ 
+=
+ 
+Int32.Parse(Request.Cookies["counter"].Value); 
+ 
+      
+  
+counter++;
+ 
+        
+Response.Cookies["counter"].Value
+ 
+=
+ 
+counter.ToString();
+ 
+        
+Response.Cookies["counter"].Expires
+ 
+=
+ 
+DateTime.Now.AddYears(2);
+ 
+ 
+ 
+//Cookies tên counter s
+ẽ
+ 
+t
+ồ
+n t
+ạ
+i 
+ở
+ 
+máy khách 2 năm
+ 
+        
+lblCounter.Text
+ 
+=
+ 
+counter.ToString();
+ 
+    
+}
+ 
+<
+f
+orm
+ 
+id="form1"
+ 
+runat="server">
+ 
+    
+<div> 
+   
+You
+ 
+have
+ 
+visited
+ 
+this
+ 
+page
+ 
+ 
+    
+<asp:Label 
+     
+id="lblCounter“  
+      
+Runat="server"
+ 
+/> 
+    
+times!
+ 
+    
+</div>
+ 
+ 
+</
+form
+>
+ 
+ 
+1.3.
+ 
+ 
+Sessions:
+ 
+-
+ 
+Session là m
+ộ
+t th
+ự
+c th
+ể
+ 
+c
+ủ
+a l
+ớ
+p System.Web.SessionState.HttpSessionState.
+ 
+-
+ 
+Bi
+ế
+n s
+ession đƣ
+ợ
+c lƣu tr
+ữ
+ 
+ở
+ 
+máy ch
+ủ
+ 
+server. Nó có th
+ể
+ 
+có b
+ấ
+t k
+ỳ
+ 
+ki
+ể
+u d
+ữ
+ 
+li
+ệ
+u nào đ
+ể
+ 
+lƣu gi
+ữ
+ 
+tr
+ạ
+ng thái đƣ
+ợ
+c 
+yêu c
+ầ
+u gi
+ữ
+a các trang web 
+ở
+ 
+server.
+ 
+-
+ 
+Ứ
+ng d
+ụ
+ng c
+ầ
+n yêu c
+ầ
+u b
+ả
+o m
+ậ
+t mà không th
+ể
+ 
+lƣu tr
+ữ
+ 
+thông tin v
+ề
+ 
+client trong các view 
+state ho
+ặ
+c trong cookies. 
+ 
+-
+ 
+Đ
+ố
+i 
+tƣ
+ợ
+ng Session cung c
+ấ
+p truy xu
+ấ
+t ki
+ể
+u t
+ừ
+ 
+đi
+ể
+n đ
+ể
+ 
+set các c
+ặ
+p name/value th
+ể
+ 
+hi
+ệ
+n 
+d
+ữ
+ 
+li
+ệ
+u c
+ủ
+a ngƣ
+ờ
+i dùng trong session trên 
+ 
+-
+ 
+Tr
+ạ
+ng thái c
+ủ
+a session đƣ
+ợ
+c dùng đ
+ể
+ 
+duy trì các thông tin nhƣ user’s name, user’s ID, 
+a shopping cart, ho
+ặ
+c nh
+ữ
+ng thành ph
+ầ
+n khác b
+ị
+ 
+b
+ỏ
+ 
+khi ngƣ
+ờ
+i dùng không còn truy xu
+ấ
+t 
+website n
+ữ
+a 
+ 
+-
+ 
+Ghi Session
+ 
+Cú pháp:
+ 
+  
+Session[“Tên session”] =“ Giá tr
+ị
+ 
+session”
+ 
+Ví d
+ụ
+:
+ 
+ 
+Session["message"]
+ 
+=
+ 
+"Hello
+ 
+World!";:
+ 
+T
+ạ
+o m
+ộ
+t session tên là message và có giá tr
+ị
+ 
+là Hello World!
+ 
+-
+ 
+Đ
+ọ
+c d
+ữ
+ 
+li
+ệ
+u t
+ừ
+ 
+session
+ 
+lblMessa
+ge.Text
+ 
+=
+ 
+Session["message"].ToString();
+ 
+Đ
+ọ
+c bi
+ế
+n session message và hi
+ể
+n th
+ị
+ 
+vào nhãn lblMessage 
+ 
+
+--- PAGE 138 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+138
+ 
+II.
+ 
+Application State
+ 
+-
+ 
+Lƣu tr
+ữ
+ 
+đ
+ố
+i tƣ
+ợ
+ng toàn c
+ụ
+c và có th
+ể
+ 
+đƣ
+ợ
+c truy xu
+ấ
+t b
+ở
+i b
+ấ
+t k
+ỳ
+ 
+client nào.
+ 
+Tr
+ạ
+ng thái 
+Application d
+ự
+a trên l
+ớ
+p HttpApplicationState 
+ 
+-
+ 
+H
+ỗ
+ 
+tr
+ợ
+ 
+các lo
+ạ
+i đ
+ố
+i tƣ
+ợ
+ng tƣ
+ợ
+ng t
+ự
+ 
+nhƣ v
+ớ
+i Session State
+, 
+nó cũng có d
+ữ
+ 
+li
+ệ
+u 
+name/value.
+ 
+-
+ 
+Bi
+ế
+t tr
+ạ
+ng thái Application có th
+ể
+ 
+ch
+ấ
+p nh
+ậ
+n nhi
+ề
+u ki
+ể
+u d
+ữ
+ 
+li
+ệ
+u khác nhau. 
+Ứ
+ng d
+ụ
+ng 
+ph
+ổ
+ 
+bi
+ế
+n là đ
+ể
+ 
+t
+ạ
+o b
+ộ
+ 
+đ
+ế
+m toàn c
+ụ
+c đ
+ể
+ 
+theo dõi s
+ố
+ 
+l
+ầ
+n th
+ự
+c hi
+ệ
+n các yêu c
+ầ
+u b
+ở
+i t
+ấ
+t c
+ả
+ 
+c
+ác 
+clients.
+ 
+-
+ 
+Ví d
+ụ
+, ta có th
+ể
+ 
+t
+ạ
+o m
+ộ
+t s
+ự
+ 
+ki
+ệ
+n global.asaxx đ
+ể
+ 
+theo dõi báo nhiêu sessions đƣ
+ợ
+c t
+ạ
+o 
+ho
+ặ
+c bao nhiêu requests đƣ
+ợ
+c nh
+ậ
+n vào 
+ứ
+ng d
+ụ
+ng. Ho
+ặ
+c b
+ạ
+n có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng các similar logic 
+trong trang Page.Load đ
+ể
+ 
+theo dõi s
+ố
+ 
+l
+ầ
+n trang đƣ
+ợ
+c yêu c
+ầ
+u b
+ở
+i các 
+clients khác nhau.
+ 
+protected void Page_Load(Object sender, EventArgs e)
+ 
+{
+ 
+    
+int count = 0;
+ 
+    
+if (Application["HitCounterForOrderPage"] != null)
+ 
+        
+count = (int)Application["HitCounterForOrderPage"];
+ 
+    
+count++;
+ 
+    
+Application["HitCounterForOrder
+Page"] = count;
+ 
+    
+lblCounter.Text = count.ToString();
+ 
+}
+ 
+N
+ế
+u có 2 client truy xu
+ấ
+t bi
+ế
+n counter đ
+ồ
+ng th
+ờ
+i, ta c
+ầ
+n ph
+ả
+i dùng phƣơng th
+ứ
+c 
+Lock() và UnClock đ
+ể
+ 
+qu
+ả
+n lý. Đi
+ề
+u này cho phép ch
+ỉ
+ 
+m
+ộ
+t cliden truy xu
+ấ
+t vào t
+ậ
+p 
+Application vào m
+ộ
+t th
+ờ
+i đi
+ể
+m nhƣ sau:
+ 
+ 
+protected void Page_Load(Object sender, EventArgs e)
+ 
+{
+ 
+    
+// Acquire exclusive access.
+ 
+    
+Application.Lock();
+ 
+    
+int count = 0;
+ 
+    
+if (Application["HitCounterForOrderPage"] != null)
+ 
+        
+count = (int)Application["HitCounterForOrderPage"];
+ 
+    
+coun
+t++;
+ 
+    
+Application["HitCounterForOrderPage"] = count;
+ 
+    
+// Release exclusive access.
+ 
+    
+Application.UnLock();
+ 
+    
+lblCounter.Text = count.ToString();
+ 
+}
+ 
+III.
+ 
+T
+ậ
+p tin 
+ứ
+ng d
+ụ
+ng global.asax
+ 
+T
+ậ
+p tin global.asax cho phép ta vi
+ế
+t các thao tác s
+ự
+ 
+ki
+ệ
+n mà tác đ
+ộ
+ng 
+s
+ự
+ 
+ki
+ệ
+n global. Ngƣ
+ờ
+i 
+dùng không c
+ầ
+n truy xu
+ấ
+t t
+ậ
+p tin global.asax tr
+ự
+c ti
+ế
+p. Thay vào đó, t
+ậ
+p tin global.asax th
+ự
+c 
+thi đo
+ạ
+n mã t
+ự
+u đ
+ộ
+ng đ
+ể
+ 
+đáp 
+ứ
+ng các s
+ự
+ 
+ki
+ệ
+n 
+ứ
+ng d
+ụ
+ng nào đó. T
+ậ
+p tin asax cung c
+ấ
+p m
+ộ
+t 
+d
+ị
+ch v
+ụ
+ 
+tƣơng t
+ự
+ 
+nhƣ t
+ậ
+p tin global.asa trong các 
+ứ
+ng
+ 
+d
+ụ
+ng ASP c
+ổ
+ 
+đi
+ể
+n.
+ 
+
+--- PAGE 139 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+139
+ 
+Ta có th
+ể
+ 
+l
+ậ
+p trình t
+ậ
+p tin global.asaxx tƣơgn t
+ự
+ 
+nhƣ web form. Có mot
+ọ
+ 
+s
+ự
+ 
+khác bi
+ệ
+t là t
+ậ
+p 
+tin global.asax không ch
+ứ
+a t
+ẻ
+h HTML ho
+ặ
+c th
+ẻ
+ 
+ASP.net. Thay vào đó, nó ch
+ứ
+a các phƣơng 
+th
+ứ
+c v
+ớ
+i tên c
+ụ
+ 
+th
+ể
+, rõ ràng. Ví d
+ụ
+, t
+ậ
+p tin global.asax tá
+c đ
+ộ
+ng đ
+ế
+n s
+ự
+ 
+ki
+ệ
+n 
+HttpApplication.EndRequest x
+ả
+y ra trƣ
+ớ
+c khi trang đƣ
+ợ
+c g
+ử
+i đ
+ế
+n ngƣ
+ờ
+i dùng nhƣ sau:
+ 
+ 
+<%@ Application Language="C#" %>
+ 
+<script language="C#" runat="server">
+ 
+    
+protected void Application_OnEndRequest()
+ 
+    
+{
+ 
+        
+Response.Write("<hr />
+This page was served at " +
+ 
+          
+DateTime.Now.ToString());
+ 
+    
+}
+ 
+</script>
+ 
+ 
+ 
+M
+ộ
+t s
+ố
+ 
+s
+ự
+ 
+ki
+ệ
+n không kích ho
+ạ
+t v
+ớ
+i m
+ỗ
+i yêu c
+ầ
+u:
+ 
+-
+ 
+Application_start():
+ 
+Phƣơng th
+ứ
+c này đƣ
+ợ
+c g
+ọ
+i khi 
+ứ
+ng d
+ụ
+ng đ
+ầ
+u tiên đƣ
+ợ
+c kh
+ở
+i t
+ạ
+o và 
+ứ
+ng d
+ụ
+ng đƣ
+ợ
+c t
+ạ
+o. S
+ự
+ 
+ki
+ệ
+n này thì r
+ấ
+t h
+ữ
+u ích đ
+ể
+ 
+cung c
+ấ
+p mã l
+ệ
+nh ngƣ
+ờ
+i dùng. Ví d
+ụ
+, ngay 
+t
+ạ
+i th
+ờ
+i đi
+ể
+m ta load và cache d
+ữ
+ 
+li
+ệ
+u không thay đ
+ổ
+i trong su
+ố
+t th
+ờ
+i gian s
+ố
+ng c
+ủ
+a 
+ứ
+ng d
+ụ
+ng 
+nhƣ là navigation trees. 
+ 
+-
+ 
+Session_Start():
+ 
+phƣơng th
+ứ
+c đƣ
+ợ
+c g
+ọ
+i m
+ỗ
+i khi có m
+ộ
+t phiên giao d
+ị
+ch m
+ớ
+i b
+ắ
+t đ
+ầ
+u. 
+Thƣ
+ờ
+n
+g đƣ
+ợ
+c dùng đ
+ể
+ 
+kh
+ở
+i t
+ạ
+o thông tin ngƣ
+ờ
+i dùng. 
+ 
+-
+ 
+Application_Error():
+ 
+Phƣơng th
+ứ
+c này đƣ
+ợ
+c g
+ọ
+i m
+ỗ
+i khi có m
+ộ
+t ngo
+ạ
+i l
+ệ
+ 
+x
+ả
+y ra trong 
+ứ
+ng 
+d
+ụ
+ng. 
+ 
+-
+ 
+Session_End():
+ 
+Phƣơng th
+ứ
+c này đƣ
+ợ
+c g
+ọ
+i m
+ỗ
+i khi phiên giao d
+ị
+ch k
+ế
+t thúc. M
+ộ
+t phiên 
+giao d
+ị
+ch k
+ế
+t thúc khi mã l
+ệ
+nh 
+ngƣ
+ờ
+i dùng  
+ 
+-
+ 
+Application_End():
+ 
+Phƣơng th
+ứ
+c này đƣ
+ợ
+c g
+ọ
+i b
+ấ
+t c
+ứ
+ 
+khi nào phiên giao d
+ị
+ch d
+ừ
+ng. M
+ộ
+t 
+phiênlàm vi
+ệ
+c d
+ừ
+ng khi
+,
+ 
+-
+ 
+ 
+Application_Disposed():
+ 
+Phƣơng th
+ứ
+c này đƣ
+ợ
+c g
+ọ
+i vài l
+ầ
+n sau khi 
+ứ
+ng d
+ụ
+ng đƣ
+ợ
+c đóng. 
+ 
+IV.
+ 
+T
+ậ
+p tin 
+Web.config 
+ 
+4.1. 
+C
+ấ
+u trúc t
+ậ
+p tin w
+eb.config.
+ 
+-
+ 
+Web.config là m
+ộ
+t t
+ậ
+p tin văn b
+ả
+n đƣ
+ợ
+c s
+ử
+ 
+d
+ụ
+ng đ
+ể
+ 
+lƣu tr
+ữ
+ 
+thông tin c
+ấ
+u hình c
+ủ
+a m
+ộ
+t 
+ứ
+ng d
+ụ
+ng, đƣ
+ợ
+c t
+ự
+ 
+đ
+ộ
+ng t
+ạ
+o ra khi chúng ta t
+ạ
+o m
+ớ
+i 
+ứ
+ng d
+ụ
+ng web. T
+ậ
+p tin web.config đƣ
+ợ
+c 
+vi
+ế
+t theo đ
+ị
+nh d
+ạ
+ng XML. 
+ 
+-
+ 
+Web.config đƣ
+ợ
+c t
+ạ
+o k
+ế
+ 
+th
+ừ
+a các giá tr
+ị
+ 
+t
+ừ
+ 
+t
+ậ
+p tin Windows
+\
+Microsoft. 
+NET
+\
+Framework
+\
+[Framework Version]
+\
+CONFIG
+\
+machine.config 
+ 
+4.2. 
+T
+ậ
+p tin c
+ấ
+u hình 
+ứ
+ng d
+ụ
+ng Web.config: 
+ 
+<configuration> 
+ 
+  
+<appSettings> 
+ 
+      
+<add key="Ole_Con" value="Provider=SQLOLEDB;      Data Source=dlthien;      
+Initial Catalo
+g=QlBanSach;      User ID=Qlbs_app;      Password=Qlbs_app"/> 
+ 
+ 
+</appSettings>   
+ 
+
+--- PAGE 140 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+140
+ 
+ 
+<system.web> 
+ 
+   
+ 
+  
+<compilation defaultLanguage="vb" debug="true"/> 
+ 
+         
+<customErrors mode="RemoteOnly" /> 
+ 
+         
+<authentication mode="Windows" />  
+ 
+         
+<aut
+horization> 
+ 
+                     
+<allow users="*" /> <!
+--
+ 
+Allow all users 
+--
+> 
+ 
+        
+</authorization>
+ 
+</system.web> 
+ 
+</configuration>
+ 
+ 
+4.3. 
+Các c
+ấ
+u hình m
+ặ
+c đ
+ị
+nh 
+ 
+    
+<compilation
+ 
+defaultLanguage="vb" debug="true"/> 
+ 
+   
+defaultLanguage: qui đ
+ị
+nh ngôn ng
+ữ
+ 
+m
+ặ
+c đ
+ị
+nh c
+ủ
+a 
+ứ
+ng d
+ụ
+ng. 
+ 
+   
+debug: B
+ậ
+t/t
+ắ
+t ch
+ế
+ 
+đ
+ộ
+ 
+debug c
+ủ
+a 
+ứ
+ng d
+ụ
+ng 
+ 
+    
+<customErrors mode="RemoteOnly"/> 
+ 
+      
+Đây là m
+ộ
+t c
+ấ
+u hình khá c
+ầ
+n thi
+ế
+t cho 
+ứ
+ng d
+ụ
+ng Web. Hi
+ệ
+u ch
+ỉ
+nh c
+ấ
+u hình này cho phép 
+chúng ta qu
+ả
+n lý vi
+ệ
+c x
+ử
+ 
+lý l
+ỗ
+i khi có l
+ỗ
+i phát sinh tr
+ong 
+ứ
+ng d
+ụ
+ng. 
+ 
+Thu
+ộ
+c tính mode có các giá tr
+ị
+: RemoteOnly, On và Off. 
+ 
+-
+  
+RemoteOnly: Cho phép ngƣ
+ờ
+i dùng th
+ấ
+y thông báo l
+ỗ
+i c
+ủ
+a h
+ệ
+ 
+th
+ố
+ng ho
+ặ
+c trang thông 
+báo l
+ỗ
+i đƣ
+ợ
+c ch
+ỉ
+ 
+đ
+ị
+nh qua defaultRedirect (n
+ế
+u có). Thông báo l
+ỗ
+i g
+ồ
+m: Mã l
+ỗ
+i và mô t
+ả
+ 
+l
+ỗ
+i 
+tƣơng 
+ứ
+ng
+ 
+     
+<customErrors mode="RemoteOnly"   defaultRedirect="Error/Err.aspx"/>
+ 
+      
+On: Tùy theo giá tr
+ị
+ 
+c
+ủ
+a defaultRedirect mà có các trƣ
+ờ
+ng h
+ợ
+p tƣơng 
+ứ
+ng: 
+ 
+-
+  
+Có qui đ
+ị
+nh trang thông báo l
+ỗ
+i qua defaultRedirect: Hi
+ể
+n th
+ị
+ 
+trang thông báo l
+ỗ
+i.
+ 
+ 
+Hình 
+49
+:  
+Form
+ 
+k
+ế
+t qu
+ả
+ 
+trang 140
+ 
+ 
+Không có thu
+ộ
+c tính defaultRedirect: Hi
+ể
+n th
+ị
+ 
+trang báo l
+ỗ
+i nh
+ư
+ng không có hi
+ể
+n th
+ị
+ 
+mã 
+l
+ỗ
+i và mô t
+ả
+ 
+l
+ỗ
+i.
+ 
+
+
+--- PAGE 141 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+141
+ 
+4.4.
+ 
+SessionState
+ 
+      
+<sessionState     mode="InProc"    stateConnectionString="tcpip=127.0.0.1:42424" 
+ 
+               
+sqlConnect
+ionString="data source=127.0.0.1;   Trusted_Connection=yes" 
+ 
+                
+cookieless="false"     timeout="20" />
+ 
+-
+ 
+mode:
+ 
+Thu
+ộ
+c tính này có 3 giá tr
+ị
+:  InProc,  sqlserver (lƣu trong database), và  
+stateserver (lƣu trong b
+ộ
+ 
+nh
+ớ
+) 
+ 
+-
+ 
+ 
+stateConnectionString:
+ 
+C
+ấ
+u
+ 
+hình đ
+ị
+a ch
+ỉ
+ 
+và c
+ổ
+ng (port) c
+ủ
+a máy đ
+ể
+ 
+lƣu tr
+ữ
+ 
+thông tin 
+c
+ủ
+a Session trong vùng nh
+ớ
+ 
+(n
+ế
+u ch
+ứ
+c năng này đƣ
+ợ
+c ch
+ọ
+n). 
+ 
+-
+ 
+ 
+sqlConnectionString:
+ 
+C
+ấ
+u hình k
+ế
+t n
+ố
+i đ
+ế
+n SQL Server đƣ
+ợ
+c dùng đ
+ể
+ 
+lƣu thông tin 
+Session (n
+ế
+u ch
+ứ
+c năng này đƣ
+ợ
+c ch
+ọ
+n). 
+ 
+-
+ 
+ 
+cookieless:
+ 
+N
+ế
+u g
+iá tr
+ị
+ 
+c
+ủ
+a thu
+ộ
+c tính này = True, thông tin cookie s
+ẽ
+ 
+đƣ
+ợ
+c lƣu tr
+ữ
+ 
+trong URL, ngƣ
+ợ
+c l
+ạ
+i, n
+ế
+u = False, thông tin cookies s
+ẽ
+ 
+đƣ
+ợ
+c lƣu tr
+ữ
+ 
+t
+ạ
+i client (n
+ế
+u client có 
+h
+ỗ
+ 
+tr
+ợ
+) 
+ 
+-
+ 
+ 
+timeout:
+ 
+Kho
+ả
+ng th
+ờ
+i gian (tính b
+ằ
+ng phút) mà đ
+ố
+i tƣ
+ợ
+ng Session đƣ
+ợ
+c duy trì. Sau 
+kh
+o
+ả
+ng th
+ờ
+i gian này, đ
+ố
+i tƣ
+ợ
+ng Session s
+ẽ
+ 
+b
+ị
+ 
+hu
+ỷ
+. Giá tr
+ị
+ 
+m
+ặ
+c đ
+ị
+nh c
+ủ
+a thu
+ộ
+c tính này là 20.
+ 
+4.5. 
+ 
+Làm vi
+ệ
+c v
+ớ
+i t
+ậ
+p tin web.config 
+ 
+        
+T
+ậ
+p tin web.config có h
+ỗ
+ 
+tr
+ợ
+ 
+tag <appSettings> v
+ớ
+i 2 thu
+ộ
+c tính là key và value cho phép 
+chúng ta thêm vào các bi
+ế
+n d
+ùng đ
+ể
+ 
+c
+ấ
+u hình 
+ứ
+ng d
+ụ
+ng. 
+ 
+         
+Lƣu ý: Các tên tag trong t
+ậ
+p tin c
+ấ
+u hình web.config có phân bi
+ệ
+t ch
+ữ
+ 
+hoa, ch
+ữ
+ 
+thƣ
+ờ
+ng.
+ 
+<appSettings> 
+ 
+ 
+<add key="Tên bi
+ế
+n" value="Giá tr
+ị
+" /> 
+ 
+</appSettings>
+ 
+Ví d
+ụ
+: 
+ 
+         
+T
+ạ
+o bi
+ế
+n c
+ấ
+u hình Ole_Con dùng
+ 
+đ
+ể
+ 
+lƣu tr
+ữ
+ 
+th
+ông tin c
+ủ
+a chu
+ỗ
+i k
+ế
+t n
+ố
+i
+ 
+đ
+ế
+n cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u SQL Server:
+ 
+<configuration> 
+ 
+ 
+<appSettings> 
+ 
+  
+<add key="Ole_Con" value="Provider=SQLOLEDB;     Data Source=dlthien; 
+ 
+                     
+Initial Catalog=QlBanSach;      User ID=Qlbs_app;      
+Password=Qlbs_app
+"/> 
+ 
+ 
+</appSettings> 
+ 
+</configuration>
+ 
+ 
+L
+ấ
+y giá tr
+ị
+ 
+đã thi
+ế
+t l
+ậ
+p trong t
+ậ
+p tin web.config
+ 
+gChuoi_ket_noi = ConfigurationSettings.AppSettings("Ole_Con")
+ 
+ 
+
+--- PAGE 142 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+142
+ 
+Bài 2: USER CONTROL
+ 
+& MASTER PAGE
+ 
+M
+ụ
+c tiêu h
+ọ
+c t
+ậ
+p:
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng User control đ
+ể
+ 
+t
+ạ
+o giao di
+ệ
+n cho trang w
+eb
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng Master page đ
+ể
+ 
+t
+ạ
+o giao di
+ệ
+n cho website 
+ 
+ 
+I.
+ 
+User controls
+ 
+-
+ 
+User controls:
+ 
+M
+ộ
+t user control là m
+ộ
+t ph
+ầ
+n nh
+ỏ
+ 
+trên trang web có th
+ể
+ 
+thêm vào các th
+ẻ
+ 
+HTML và các web server controls.
+ 
+User controls là cách t
+ố
+t nh
+ấ
+t đ
+ể
+ 
+t
+ạ
+o các ph
+ầ
+n nh
+ỏ
+ 
+đƣ
+ợ
+c s
+ử
+ 
+d
+ụ
+ng nhi
+ề
+u l
+ầ
+n trong các trang web.
+ 
+-
+ 
+Có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng l
+ạ
+i 
+user control
+ 
+ở
+ 
+nhi
+ề
+u trang trong cùng m
+ộ
+t 
+ứ
+ng d
+ụ
+ng web.
+ 
+-
+ 
+Có th
+ể
+ 
+thêm các properties, events và methods.
+ 
+-
+ 
+T
+ậ
+p tin User controls có ph
+ầ
+n m
+ở
+ 
+r
+ộ
+ng ascx
+.
+ 
+ 
+ 
+  
+ 
+Các t
+ậ
+p tin 
+User control (.ascx) 
+tƣơng t
+ự
+ 
+nhƣ t
+ậ
+p tin c
+ủ
+a
+ 
+Web F
+orm trong 
+ASP.NET. 
+Gi
+ố
+ng 
+nhƣ 
+web form
+s
+, user controls 
+đƣ
+ợ
+c bao g
+ồ
+m các ph
+ầ
+n giao di
+ệ
+n nh
+ỏ
+ 
+v
+ớ
+i th
+ẻ
+ 
+đi
+ề
+u khi
+ể
+n (t
+ậ
+p tin 
+.ascx
+ 
+và có th
+ể
+ 
+s
+ử
+ 
+d
+ụ
+ng các đo
+ạ
+n mã n
+ộ
+i tuy
+ế
+n bên trong t
+ậ
+p tin cs 
+ở
+ 
+code behind.
+ 
+User controls 
+có th
+ể
+ 
+ch
+ứ
+a b
+ấ
+t k
+ỳ
+ 
+thành ph
+ầ
+n nào 
+mà m
+ộ
+t trang web bình thƣ
+ờ
+ng có th
+ể
+ 
+có 
+nhƣ th
+ẻ
+ 
+HTML, các đi
+ề
+u khi
+ể
+n webs, các s
+ự
+ 
+ki
+ệ
+n và 
+các đ
+ố
+i tƣ
+ợ
+ng ASP.net nhƣ 
+Application, 
+Session, Request, 
+và Response.
+ 
+M
+ộ
+t s
+ố
+ 
+đi
+ể
+m khác gi
+ữ
+a User Controls và các Web forms 
+ 
+• User controls 
+b
+ắ
+t đ
+ầ
+u v
+ớ
+i ti
+ề
+n ch
+ỉ
+ 
+th
+ị
+ 
+Control 
+thay vì ti
+ề
+n ch
+ỉ
+ 
+th
+ị
+ 
+Page.
+ 
+• User controls
+ 
+s
+ử
+ 
+d
+ụ
+ng ph
+ầ
+n m
+ở
+ 
+r
+ộ
+ng  
+.ascx 
+thay vì
+ 
+.aspx, 
+và t
+ậ
+p tin code behind đƣ
+ợ
+c 
+th
+ừ
+a k
+ế
+ 
+t
+ừ
+ 
+l
+ớ
+p 
+System.Web.UI.UserControl.
+ 
+Do l
+ớ
+p 
+UserControl
+ 
+và 
+Page 
+có th
+ể
+ 
+th
+ừ
+a k
+ế
+ 
+t
+ừ
+ 
+l
+ớ
+p 
+TemplateControl
+ 
+nên c
+ả
+ 
+hai l
+ớ
+p này có nhi
+ề
+u phƣơng th
+ứ
+c và s
+ự
+ 
+ki
+ệ
+n chung. 
+ 
+• User controls 
+không đƣ
+ợ
+c g
+ọ
+i tr
+ự
+c ti
+ế
+p t
+ừ
+ 
+trình duy
+ệ
+t c
+ủ
+a máy khách.
+ 
+Thay vào đó, user 
+controls đƣ
+ợ
+c nhúng tr
+ự
+c ti
+ế
+p vào bên trong m
+ộ
+t trang web khác. 
+ 
+ 
+T
+ạ
+o User control
+ 
+
+
+--- PAGE 143 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+143
+ 
+Website 
+ 
+Add New Item 
+ch
+ọ
+n Web User Control temp
+late.
+ 
+<%@ Control Language="C#" AutoEventWireup="true"
+ 
+    
+CodeFile="Header.ascx.cs" Inherits="Header" %>
+ 
+<table width="100%" border="0" style="background
+-
+color: Blue">
+ 
+    
+<tr>
+ 
+        
+<td style="...">
+ 
+                 
+<b> User Control Test Page </b></fon
+t>
+ 
+        
+</td>
+ 
+    
+</tr>
+ 
+    
+<tr>
+ 
+        
+<td align="right" style="...">   
+ 
+                
+<b>An Apress Creation © 2008</b>
+ 
+        
+</td>
+ 
+    
+</tr>
+ 
+</table>
+ 
+ 
+ 
+Đ
+ể
+ 
+ki
+ể
+m tra th
+ự
+c hi
+ệ
+n c
+ủ
+a user control, b
+ạ
+n c
+ầ
+n g
+ắ
+n user control vào trong m
+ộ
+t web form 
+b
+ằ
+ng c
+ách đ
+ặ
+t user control vào ti
+ề
+n ch
+ỉ
+ 
+th
+ị
+ 
+Register
+ 
+nhƣ sau:
+ 
+<%@ Register TagPrefix="apress" TagName="Header" Src="Header.ascx" %>
+ 
+ 
+<%@ Page Language="C#" AutoEventWireup="true"    
+ 
+                   
+CodeFile="HeaderTest.aspx.cs"
+ 
+                   
+Inherits="H
+eaderTest" %>
+ 
+<%@ Register TagPrefix="apress" TagName="Header" Src="Header.ascx" %>
+ 
+<html mlns="http://www.w3.org/1999/xhtml">
+ 
+    
+<head>
+ 
+        
+<title>HeaderHost</title>
+ 
+    
+</head>
+ 
+    
+<body>
+ 
+                
+<form id="Form1" method="post" runat="server"
+>
+ 
+                
+<apress:Header
+ 
+id="Header1" runat="server"></apress:Header>
+ 
+        
+</form>
+ 
+    
+</body>
+ 
+</html>
+ 
+II.
+ 
+Themes
+ 
+Gi
+ố
+ng CSS, themes cho phép b
+ạ
+n đ
+ị
+nh nghĩa m
+ộ
+t lo
+ạ
+t thu
+ộ
+c tính style đ
+ể
+ 
+áp d
+ụ
+ng vào 
+trong các controls 
+ở
+ 
+nhi
+ề
+u trang web. Tuy nhiên, khô
+ng gi
+ố
+ng nhƣ CSS themes không đƣ
+ợ
+c 
+cài đ
+ặ
+t b
+ở
+i browser:
+ 
+-
+ 
+ 
+Themes d
+ự
+a trên control, không d
+ự
+a trên th
+ẻ
+ 
+Themes đƣ
+ợ
+c áp d
+ụ
+ng trên server
+ 
+-
+ 
+ 
+Themes có th
+ể
+ 
+đƣ
+ợ
+c áp d
+ụ
+ng thông qua các file c
+ấ
+u hình  
+ 
+ 
+Themes không c
+ậ
+p nh
+ậ
+t gi
+ố
+ng nhƣ CSS
+ 
+
+--- PAGE 144 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+144
+ 
+ 
+Hình 
+50
+:  
+Mô hình Theme và
+ 
+Skin
+ 
+ 
+ 
+Áp d
+ụ
+ng m
+ộ
+t Theme đơn gi
+ả
+n 
+ 
+      
+Đ
+ể
+ 
+thêm m
+ộ
+t theme vào project, b
+ạ
+n ch
+ọ
+n Website 
+ 
+Add New Item (or Project 
+ 
+Add N
+ew Item), ch
+ọ
+n Skin File. Visual Studio s
+ẽ
+ 
+thông báo b
+ạ
+n bi
+ế
+t thƣ m
+ụ
+c đ
+ể
+ 
+đ
+ặ
+t file skin 
+là App_Themes. 
+ 
+<asp:ListBox
+ 
+runat="server" F
+oreColor="White" BackColor="Orange"/>
+ 
+<asp:TextBox
+ 
+runat="server" ForeColor="White" BackColor="Orange"/>
+ 
+<asp:Button
+ 
+runat="server" ForeColor="White" BackColor="Orange"/>
+ 
+ 
+ 
+Hình 
+51
+: 
+Form k
+ế
+t qu
+ả
+ 
+áp d
+ụ
+ng Theme
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 145 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+145
+ 
+b. 
+T
+ạ
+o nhi
+ề
+u skins trên cùng m
+ộ
+t control
+ 
+<
+asp:ListBox 
+runat="server" ForeColor="White" BackColor="Orange" />
+ 
+<asp:TextBox
+ 
+runat="server" ForeColor="White" BackColor="Orange" />
+ 
+<asp:Button
+ 
+runat="server" ForeColor="White" BackColor="Orange" />
+ 
+<asp:TextBox
+ 
+runat="server" ForeColor="White" BackColo
+r="DarkOrange"
+ 
+ 
+Font
+-
+Bold="True" 
+SkinID
+="Dramatic" />
+ 
+<asp:Button
+ 
+runat="server" ForeColor="White" BackColor="DarkOrange"
+ 
+ 
+Font
+-
+Bold="True" 
+SkinID
+="Dramatic" /> 
+ 
+<asp:Button ID="Button1" runat="server" ... SkinID="Dramatic" />
+ 
+III.
+ 
+Master Page
+ 
+-
+ 
+Ch
+ứ
+c năng đ
+ể
+ 
+đ
+ị
+nh
+ 
+nghĩa m
+ộ
+t ph
+ầ
+n c
+ủ
+a trang web tách r
+ờ
+i và s
+ử
+ 
+d
+ụ
+ng l
+ạ
+i nó trên nhi
+ề
+u 
+trang khác nhau.
+ 
+-
+ 
+ 
+Ch
+ứ
+c năng đ
+ể
+ 
+t
+ạ
+o
+ 
+locked
+-
+in layout mà đ
+ị
+nh nghĩa m
+ộ
+t khu v
+ự
+c có th
+ể
+ 
+so
+ạ
+n th
+ả
+o đƣ
+ợ
+c. 
+Các trang s
+ử
+ 
+d
+ụ
+ng template ki
+ể
+u này thƣ
+ờ
+ng ràng bu
+ộ
+c v
+ớ
+i vi
+ệ
+c thêm vào ho
+ặ
+c ch
+ỉ
+nh s
+ử
+a n
+ộ
+i 
+dung trong khu v
+ự
+c đƣ
+ợ
+c cho phép.
+ 
+-
+ 
+ 
+Ch
+ứ
+c năng đ
+ể
+ 
+cho phép m
+ộ
+t vài tùy bi
+ế
+n v
+ề
+ 
+các thành ph
+ầ
+n đƣ
+ợ
+c dùng trong m
+ỗ
+i 
+trang.
+ 
+-
+ 
+ 
+Ch
+ứ
+c năng đ
+ể
+ 
+k
+ế
+t n
+ố
+i m
+ộ
+t trang v
+ớ
+i trang template rõ ràng (
+Không có code
+) ho
+ặ
+c k
+ế
+t 
+n
+ố
+i đ
+ế
+n m
+ộ
+t trang đ
+ộ
+ng vào lúc th
+ự
+c thi.
+ 
+-
+ 
+ 
+Ch
+ứ
+c năn
+g đ
+ể
+ 
+thi
+ế
+t k
+ế
+ 
+m
+ộ
+t trang có s
+ử
+ 
+d
+ụ
+ng các template v
+ớ
+i công c
+ụ
+ 
+nhƣ Visual 
+Studio.
+ 
+<%@ Master Language="C#" AutoEventWireup="true" 
+CodeFile="SiteTemplate.master.cs“ Inherits="SiteTemplate" %>
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" >
+ 
+<head runat="server">  
+  
+<title> Untitled Page </title>   </head>
+ 
+<body>
+ 
+    
+<form
+ 
+id="form1" runat="server">
+ 
+    
+<div style="...">
+ 
+              
+<img align="left" src="headerleft.jpg" alt="" />
+ 
+              
+<img align="right" src="headerright.jpg" alt="" />
+ 
+              
+<br /
+> My Site <br />
+ 
+    
+</div>
+ 
+   
+<asp:ContentPlaceHolder
+ 
+id="ContentPlaceHolder1" runat="server">
+ 
+    
+</asp:ContentPlaceHolder>
+ 
+</form>
+ 
+</body>
+ 
+</html>
+ 
+Vì v
+ậ
+y đ
+ể
+ 
+t
+ạ
+o m
+ộ
+t trang n
+ộ
+i dung đ
+ầ
+y đ
+ủ
+ 
+có dùng trang master page là SiteTemplate, b
+ạ
+n 
+ch
+ỉ
+ 
+c
+ầ
+n thêm n
+ộ
+i du
+ng vào 
+ContentPlaceHolderID
+ 
+là ContentPlaceHolder1. Ví d
+ụ
+:
+ 
+ 
+
+--- PAGE 146 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+146
+ 
+<%@ Page Language="C#" 
+MasterPageFile="~/SiteTemplate.master
+"
+ 
+    
+AutoEventWireup="true" CodeFile="SimpleContentPage.aspx.cs"
+ 
+    
+Inherits="SimpleContentPage" Title="Content Page" %>
+ 
+<asp:Content
+ 
+ID="Content1“ 
+ 
+                     
+ContentPlaceHolderID="ContentPlaceHolder1“ 
+ 
+                     
+runat="Server“ >
+ 
+          
+<span style="...“> N
+ộ
+i dung văn b
+ả
+n</span>
+ 
+</asp:Content>
+ 
+ 
+Câu h
+ỏ
+i/Bài t
+ậ
+p c
+ủ
+ng c
+ố
+:
+ 
+1.
+ 
+Nêu s
+ự
+ 
+khác bi
+ệ
+t gi
+ữ
+a user control và các we
+b form bình thƣ
+ờ
+ng khác.
+ 
+2.
+ 
+Liên k
+ế
+t web form v
+ớ
+i user controls
+ 
+3.
+ 
+Làm bài t
+ậ
+p Th
+ự
+c hành Lab 7.1 và Lab 7.2 
+ở
+ 
+trang 145
+ 
+b
+ằ
+ng vi
+ế
+t code
+ 
+4.
+ 
+Làm bài t
+ậ
+p Th
+ự
+c hành Lab 7.1 và Lab 7.2 
+ở
+ 
+trang 145 b
+ằ
+ng công c
+ụ
+ 
+wizard.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 147 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+147
+ 
+Bài t
+ậ
+p chƣơng 7
+ 
+Lab 7.1. 
+ 
+T
+Ạ
+O LAYOUT TRANG TIN
+ 
+T
+Ứ
+C
+ 
+ 
+1. M
+ụ
+c tiêu 
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng Master page đ
+ể
+ 
+t
+ạ
+o ph
+ầ
+n layout c
+ủ
+a trang web tin t
+ứ
+c 
+ 
+-
+ 
+S
+ử
+ 
+d
+ụ
+ng control AdRotator, đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+thông tin qu
+ả
+ng cáo 
+ 
+-
+ 
+T
+ạ
+o các trang n
+ộ
+i dung (content page) s
+ử
+ 
+d
+ụ
+ng master page đã thi
+ế
+t k
+ế
+.
+ 
+ 
+2. Yêu c
+ầ
+u: 
+ 
+  
+Thi
+ế
+t k
+ế
+ 
+trang web tin t
+ứ
+c d
+u l
+ị
+ch đơn gi
+ả
+n có b
+ố
+ 
+c
+ụ
+c đƣ
+ợ
+c mô t
+ả
+ 
+nhƣ sau: 
+ 
+-
+ 
+Ph
+ầ
+n header: ch
+ứ
+a banner c
+ủ
+a trang web 
+ 
+-
+ 
+Ph
+ầ
+n left: ch
+ứ
+a menu ch
+ọ
+n các m
+ụ
+c tin 
+ 
+-
+ 
+Ph
+ầ
+n right: ch
+ứ
+a các ph
+ầ
+n qu
+ả
+ng cáo 
+ 
+-
+ 
+Ph
+ầ
+n footer: ch
+ứ
+a thông tin b
+ả
+n quy
+ề
+n, thông tin trang web…
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Các thành ph
+ầ
+n trê
+n giao di
+ệ
+n đƣ
+ợ
+c mô t
+ả
+ 
+(hình 2) trên 
+ 
+-
+ 
+Ph
+ầ
+n 1:
+ 
+chính là header, ch
+ứ
+a m
+ộ
+t banner, bên dƣ
+ớ
+i 2 hyperlink và thông tin 
+ngày tháng năm hi
+ệ
+n hành. 
+ 
+-
+ 
+Ph
+ầ
+n 2:
+ 
+ch
+ứ
+a các m
+ụ
+c n
+ộ
+i dung tin t
+ứ
+c 
+ 
+-
+ 
+Ph
+ầ
+n 3:
+ 
+ch
+ứ
+a n
+ộ
+i dung chính tin t
+ứ
+c s
+ẽ
+ 
+hi
+ể
+n th
+ị
+ 
+ở
+ 
+đây 
+ 
+-
+ 
+Ph
+ầ
+n 4:
+ 
+ch
+ứ
+a qu
+ả
+ng cá
+o 
+ 
+-
+ 
+Ph
+ầ
+n 5:
+ 
+footer, thông tin b
+ả
+n quy
+ề
+n, thông tin c
+ủ
+a trang web…  
+ 
+ 
+3. 
+Hƣ
+ớ
+ng d
+ẫ
+n: 
+ 
+-
+ 
+Bƣ
+ớ
+c 1:
+ 
+Sinh viên t
+ạ
+o 
+ứ
+ng d
+ụ
+ng web có tên WebsiteDulich. 
+ 
+-
+ 
+Bƣ
+ớ
+c 2:
+ 
+T
+ạ
+o master page cho 
+ứ
+ng d
+ụ
+ng trên 
+ 
+o
+ 
+Kích chu
+ộ
+t ph
+ả
+i vào project trong solution explorer, ch
+ọ
+n 
+A
+dd 
+-
+> New 
+Ite
+m 
+
+ 
+Ch
+ọ
+n Master Page.
+ 
+-
+ 
+Thi
+ế
+t k
+ế
+ 
+trang master theo m
+ẫ
+u
+ 
+
+
+--- PAGE 148 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+148
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+-
+  
+Đ
+ặ
+t m
+ộ
+t ContentPlaceHolder  có  ID  là MainContent 
+ở
+  
+ph
+ầ
+n  gi
+ữ
+a: ph
+ầ
+n này dùng cho 
+các trang content s
+ẽ
+ 
+hi
+ể
+n th
+ị
+ 
+n
+ộ
+i dung riêng c
+ủ
+a nó.
+ 
+ 
+-
+ 
+Thêm m
+ộ
+t Label vào bên ph
+ả
+i c
+ủ
+a header, đ
+ặ
+t tên là lblDate, label này s
+ẽ
+ 
+hi
+ể
+n  th
+ị
+  
+thông  
+tin ngày  tháng năm. Ph
+ầ
+n code đƣ
+ợ
+c vi
+ế
+t  trong hàm 
+Page
+_Load c
+ủ
+a trang 
+MasterPage
+ 
+public partial class 
+ 
+MasterPage
+: System.Web.UI.MasterPage 
+ 
+{ 
+ 
+ 
+     
+protected void Page_Load(object sender, EventArgs e) 
+ 
+     
+{ 
+ 
+            
+// hi
+ể
+n th
+ị
+ 
+ngày tháng năm trên top 
+ 
+            
+DateTime date = DateTime.Now; 
+ 
+            
+string strDate = string.Format("Ngày {0} tháng {1} năm  
+ 
+                                                             
+{2}",date.Day, date.Month,
+ 
+date.Year); 
+ 
+              
+lblDate.Text = strDate; 
+ 
+       
+}
+ 
+1
+ 
+2
+ 
+3
+ 
+4
+ 
+5
+ 
+
+--- PAGE 149 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+149
+ 
+  
+}
+ 
+ 
+-
+ 
+Bƣ
+ớ
+c 3:
+ 
+Thêm m
+ộ
+t AdRotator control vào c
+ộ
+t th
+ứ
+ 
+3 table con. AdRotator là control ch
+ứ
+a 
+các  m
+ẩ
+u hình qu
+ả
+ng cáo, m
+ỗ
+i khi trang refesh thì Adrotator t
+ự
+ 
+đ
+ộ
+ng chuy
+ể
+n sang hình qu
+ả
+ng 
+cáo khác. 
+Các m
+ẩ
+u qu
+ả
+ng cáo này đƣ
+ợ
+c khai báo trong m
+ộ
+t file XML, và thu
+ộ
+c tính 
+AdvertisementFile s
+ẽ
+ 
+link đ
+ế
+n file XML này.
+ 
+<Advertisements> 
+ 
+    
+<Ad> 
+ 
+        
+<ImageUrl>    
+   
+Đƣ
+ờ
+ng
+ 
+d
+ẫ
+n đ
+ế
+n t
+ậ
+p tin 
+ả
+nh 
+  
+                    
+</ImageUrl> 
+ 
+        
+<NavigateUrl>
+   
+Liên
+ 
+k
+ế
+ 
+đ
+ế
+n Website khi b
+ấ
+m chu
+ộ
+t vào  </NavigateUrl> 
+ 
+        
+<AlternateText> Dòng ch
+ữ
+ 
+hi
+ệ
+n ra khi rê chu
+ộ
+t vào  
+        
+</AlternateText> 
+ 
+        
+<Keyword>     
+   
+T
+ừ
+ 
+khoá dùng đ
+ể
+ 
+l
+ọ
+c 
+ả
+nh       
+                 
+</Keyword> 
+ 
+        
+<Impressions>    T
+ầ
+n su
+ấ
+t hi
+ể
+n th
+ị
+ 
+c
+ủ
+a 
+ả
+nh     
+                   
+</Impressions> 
+ 
+    
+</Ad> 
+ 
+</Advertisements>
+ 
+-
+ 
+Ta t
+ạ
+o 2 m
+ẩ
+u qu
+ả
+ng cáo và lƣu trong file QuangCao.XML
+ 
+<?
+xml
+ 
+version
+=
+"
+1.0
+"
+ 
+encoding
+=
+"
+utf
+-
+8
+"
+ 
+?>
+ 
+<
+Advertisements
+>
+ 
+ 
+<
+Ad
+>
+ 
+    
+<
+ImageUrl
+>
+images
+\
+MCC.jpg
+</
+ImageUrl
+>     
+ 
+    
+<
+Navi
+gateUrl
+>
+http://www.mcc.dulich.vn
+</
+NavigateUrl
+>    
+ 
+    
+<
+AlternateText
+>
+ 
+Du l
+ị
+ch Mù Cang Ch
+ả
+y    
+</
+AlternateText
+>    
+ 
+    
+<
+Keyword
+>
+ 
+Vùng núi Tây B
+ắ
+c 
+</
+Keyword
+>    
+ 
+    
+<
+Impressions
+>
+80 
+</
+Impressions
+>
+ 
+  
+</
+Ad
+>   
+ 
+  
+<
+Ad
+>
+ 
+    
+<
+ImageUrl
+>
+images
+\
+LDS.jpg
+</
+ImageUrl
+>
+ 
+ 
+   
+<
+NavigateUrl
+>
+http://www.quangnam.dulich.vn
+</
+NavigateUrl
+>
+ 
+    
+<
+AlternateText
+>
+ 
+Du l
+ị
+ch Qu
+ả
+ng Nam 
+</
+AlternateText
+>
+ 
+    
+<
+Keyword
+>
+ 
+Halong, Halong Bay, du lich 
+</
+Keyword
+>
+ 
+    
+<
+Impressions
+>
+80 
+</
+Impressions
+>
+ 
+  
+</
+Ad
+>
+ 
+</
+Advertisements
+>
+ 
+4.
+ 
+Bƣ
+ớ
+c 
+4
+:
+ 
+T
+ạ
+o trang Content c
+ó tên TrangChu.aspx có khai báo s
+ử
+ 
+d
+ụ
+ng master page 
+trên
+ 
+
+--- PAGE 150 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+150
+ 
+ 
+   
+Ch
+ọ
+n master page cho trang n
+ộ
+i dung
+ 
+   
+Ph
+ầ
+n code c
+ủ
+a trang TrangChu.aspx nhƣ sau: ph
+ầ
+n n
+ộ
+i dung chƣa có, trong lab 7 
+ 
+ti
+ế
+p theo ta s
+ẽ
+ 
+làm ph
+ầ
+n n
+ộ
+i dung đ
+ầ
+y đ
+ủ
+.
+ 
+ 
+<%@ Page Title="" Language="C#" M
+asterPageFile="~/
+MasterPage
+.Master"   
+ 
+           
+AutoEventWireup="true" CodeBehind="
+TrangChu
+.aspx.cs" Inherits="Lab6.tintuc" 
+ 
+%> 
+ 
+<asp:Content ID="Content1" 
+ 
+ContentPlaceHolderID="head" runat="server"> </asp:Content> 
+ 
+<asp:Content ID="Content2" ContentPla
+ceHolderID="MainContent" runat="server"> 
+ 
+  
+                  
+  
+<h2>PH
+Ầ
+N N
+Ộ
+I DUNG CHÍNH TIN T
+Ứ
+C 
+Ở
+ 
+ĐÂY</h2> 
+ 
+</asp:Content>
+ 
+ 
+ 
+
+
+--- PAGE 151 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+151
+ 
+Lab 7.2
+: T
+ạ
+o trang tóm t
+ắ
+t tin t
+ứ
+c
+ 
+1.
+ 
+M
+ụ
+c tiêu 
+ 
+
+ 
+S
+ử
+ 
+d
+ụ
+ng 
+Master page
+ 
+đ
+ể
+ 
+t
+ạ
+o ph
+ầ
+n layout c
+ủ
+a trang web tin t
+ứ
+c 
+ 
+
+ 
+S
+ử
+ 
+d
+ụ
+ng 
+SQLDataSource
+ 
+đ
+ể
+ 
+k
+ế
+t n
+ố
+i v
+ớ
+i b
+ả
+ng d
+ữ
+ 
+li
+ệ
+u tin t
+ứ
+c trong SQL Server 
+ 
+
+ 
+S
+ử
+ 
+d
+ụ
+ng 
+DataList
+ 
+đ
+ể
+ 
+hi
+ể
+n th
+ị
+ 
+tóm t
+ắ
+t các tin t
+ứ
+c.
+ 
+ 
+2. 
+N
+ộ
+i dung 
+ 
+-
+ 
+Ti
+ế
+p t
+ụ
+c phát tri
+ể
+n bài Lab 
+8.1
+ 
+trong bu
+ổ
+i trƣ
+ớ
+c, trong bài lab 
+8.2
+ 
+ch
+ỉ
+ 
+xây d
+ự
+ng Layout 
+c
+ủ
+a trang tin t
+ứ
+c, c
+ụ
+ 
+th
+ể
+ 
+là ph
+ầ
+n master page, còn
+ 
+các trang n
+ộ
+i dung t
+ừ
+ng chuyên m
+ụ
+c thì 
+chƣa có n
+ộ
+i dung.
+ 
+-
+ 
+Trong  bài  Lab 
+8.2.
+  
+này  chúng  ta  s
+ẽ
+  
+xây  d
+ự
+ng  trang 
+Tindulich.aspx
+.
+  
+T
+rang  này 
+ch
+ứ
+a toàn b
+ộ
+ 
+các tin t
+ứ
+c tóm t
+ắ
+t c
+ủ
+a chuyên m
+ụ
+c 
+Đ
+ị
+a đi
+ể
+m
+, trang này đƣ
+ợ
+c g
+ọ
+i t
+ừ
+ 
+menu trái, 
+m
+ụ
+c 
+Đ
+ị
+a đi
+ể
+m
+. 
+ 
+-
+  
+Giao di
+ệ
+n cu
+ố
+i cùng c
+ủ
+a trang 
+TinDulich.aspx
+ 
+th
+ể
+ 
+hi
+ệ
+n nhƣ sau.
+ 
+ 
+Hình 1: Giao di
+ệ
+n c
+ủ
+a 
+ứ
+ng d
+ụ
+ng 
+ở
+ 
+chuyên m
+ụ
+c 
+Dulich
+ 
+ 
+3. 
+Hƣ
+ớ
+ng d
+ẫ
+n 
+ 
+1.
+ 
+M
+ở
+ 
+l
+ạ
+i project c
+ủ
+a bài 
+Thuchanh8.1
+ 
+(đã làm xong ph
+ầ
+n master page c
+ủ
+a trang) 
+ 
+2. T
+ạ
+o
+ 
+m
+ớ
+i m
+ộ
+t cơ s
+ở
+ 
+d
+ữ
+ 
+li
+ệ
+u 
+đơn
+ 
+gi
+ả
+n ch
+ứ
+a ti
+n t
+ứ
+c có tên là 
+WebsiteDulich
+ 
+v
+ớ
+i 
+m
+ộ
+t
+ 
+table có tên 
+BanTin
+ 
+có c
+ấ
+u trúc nhƣ sau:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 152 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+152
+ 
+Tên trƣ
+ờ
+ng
+ 
+Ki
+ể
+u
+ 
+Di
+ễ
+n gi
+ả
+i
+ 
+MaBanTin
+ 
+int, t
+ự
+ 
+đ
+ộ
+ng tăng  
+ 
+Mã b
+ả
+n tin
+ 
+TieuDe
+ 
+nvarchar(255)  
+ 
+Tiêu đ
+ề
+ 
+c
+ủ
+a b
+ạ
+n tin 
+ 
+NDTomTat
+ 
+nvarchar(255)  
+ 
+N
+ộ
+i dung tóm t
+ắ
+t c
+ủ
+a b
+ả
+n tin
+ 
+No
+iDung
+ 
+ntext
+ 
+N
+ộ
+i dung chính c
+ủ
+a b
+ả
+n tin 
+ 
+NgayDang
+ 
+datetime  
+ 
+Ngày đăng tin
+ 
+HinhAnh
+ 
+ 
+nvarchar(50)  
+ 
+Ch
+ứ
+a tên file minh h
+ọ
+a trong b
+ả
+n tin
+ 
+TheLoai
+ 
+ 
+nchar(2) 
+ 
+ 
+ 
+-
+ 
+Hình sau đây là t
+ậ
+p m
+ộ
+t s
+ố
+ 
+m
+ẫ
+u tin minh h
+ọ
+a cho bài th
+ự
+c hành. Trong th
+ự
+c t
+ế
+, sinh viên 
+có th
+ể
+ 
+b
+ổ
+ 
+sung vào thêm m
+ộ
+t s
+ố
+ 
+m
+ẫ
+u tin khác phù h
+ợ
+p theo các yêu c
+ầ
+u khác nhau c
+ủ
+a 
+ứ
+ng 
+d
+ụ
+ng
+  
+ 
+    
+ 
+3.
+ 
+T
+ạ
+o t
+rang tóm t
+ắ
+t tin: Dulich
+.aspx khai báo s
+ử
+ 
+d
+ụ
+ng master page.
+ 
+ 
+4.  T
+ạ
+o DataSource cho trang web:
+ 
+ 
+<
+asp
+:
+SqlDataSource
+ 
+ID
+="
+sdsSourceBantin
+"
+ 
+runat
+="server"
+ 
+ 
+       
+   
+                          
+ConnectionString
+="
+<%
+$                 
+              
+ 
+                                     
+ConnectionStrings:TintucDulich
+cnstr
+ 
+%>
+"
+ 
+ 
+                     
+            
+SelectCommand
+="SELECT * FROM [Bantin]">
+ 
+ 
+ 
+</
+asp
+:
+SqlDataSource
+>
+.
+ 
+2.
+ 
+T
+ạ
+o m
+ộ
+t DataList có s
+ử
+ 
+d
+ụ
+ng k
+ế
+t n
+ố
+i v
+ớ
+i Ngu
+ồ
+n d
+ữ
+ 
+li
+ệ
+u nhƣ sau:
+ 
+ 
+<
+asp
+:
+DataList
+ 
+ID
+="DataList1"
+ 
+runat
+="server"
+ 
+DataSourceID
+="SqlDataSource2"
+ 
+ 
+   
+onselectedindexchanged
+="DataList1_SelectedIndexChanged"
+ 
+Width
+="564px">
+ 
+      
+<
+ItemTemplate
+>
+ 
+          
+<
+table
+ 
+alig
+n
+="left"
+ 
+style
+="
+width
+: 
+100%
+;
+">
+ 
+            
+<
+tr
+>
+ 
+               
+<
+td
+ 
+colspan
+="2"
+ 
+class
+="style6"
+ 
+>
+ 
+                   
+Ngày đăng: 
+<
+asp
+:
+Label
+ 
+ID
+="Label1"
+ 
+runat
+="server"
+  
+ 
+                   
+Text
+='
+<%
+# Eval("NgayDang") 
+%>
+'></
+asp
+:
+Label
+>
+ 
+
+
+--- PAGE 153 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+153
+ 
+                
+</
+td
+>
+ 
+     
+       
+</
+tr
+>
+ 
+            
+<
+tr
+>
+ 
+                
+<
+td
+>
+ 
+                      
+<
+asp
+:
+Image
+ 
+ID
+="Image1"
+ 
+Width
+="100px"
+ 
+Height
+="60px"
+ 
+ 
+                       
+runat
+="server"
+ 
+ImageUrl
+='
+<%
+# Eval("Hinhanh") 
+%>
+'
+ 
+/>
+ 
+                
+</
+td
+>
+ 
+                
+<
+td
+>
+ 
+             
+       
+<
+asp
+:
+HyperLink
+ 
+ID
+="HyperLink1"
+ 
+runat
+="server"
+   
+ 
+                        
+Text
+='
+<%
+# Eval("NDTomtat") 
+%>
+'></
+asp
+:
+HyperLink
+>
+ 
+                
+</
+td
+>
+ 
+            
+<
+/
+tr
+>
+ 
+            
+<
+tr
+>
+ 
+                
+<
+td
+ 
+colspan
+=2
+ 
+align
+=right>
+ 
+<
+asp
+:
+HyperLink
+ 
+ID
+="Xemtiep"
+ 
+runat
+="server"
+ 
+NavigateUrl
+="~/Trangchu.aspx">
+Xem ti
+ế
+p
+</
+asp
+:
+HyperLink
+></
+td
+>
+ 
+            
+</
+tr
+>
+ 
+         
+</
+table
+>
+                
+ 
+       
+</
+ItemTemplate
+>
+ 
+</
+asp
+:
+DataList
+>
+ 
+ 
+Màn hình thi
+ế
+t k
+ế
+ 
+có d
+ạ
+ng nhƣ sau:
+ 
+ 
+ 
+3.
+ 
+Ch
+ạ
+y th
+ử
+ 
+nghi
+ệ
+m trang web và xem k
+ế
+t qu
+ả
+.
+ 
+ 
+ 
+
+
+--- PAGE 154 ---
+Tài li
+ệ
+u gi
+ả
+ng d
+ạ
+y môn Chuyên đ
+ề
+ 
+ASP.net
+ 
+ 
+Trang 
+154
+ 
+TÀI LI
+Ệ
+U THAM KH
+Ả
+O
+ 
+ 
+
+ 
+TÀI LI
+Ệ
+U THAM KH
+Ả
+O Đ
+Ể
+ 
+BIÊN SO
+Ạ
+N N
+Ộ
+I DUNG MÔN H
+Ọ
+C:
+ 
+ 
+[1]. 
+Pro Asp Net 3.5 In C# 2008, Second Edition
+ 
+, Tác gi
+ả
+: Matthew MacDonald  
+và Mario Szpuszta, NXB: 2008
+ 
+[2.] 
+Beginning 
+Asp
+.
+Net 3.5 In C# 2008, Second Edition
+ 
+, Tác gi
+ả
+: Matthew 
+MacDonald  v
+à Mario Szpuszta, NXB: 2008
+ 
+[
+3
+]. 
+OReilly
+-
+Programming C#, 2Ed
+, Tác gi
+ả
+: Jesse Liberty ; NXB: 2002 
+ 
+[
+4
+]. 
+Silde bài gi
+ả
+ng
+ 
+L
+ậ
+p trình 
+Ứ
+ng d
+ụ
+ng Web v
+ớ
+i ASP.net;
+ 
+Trung tâm Tin h
+ọ
+c Đ
+ạ
+i 
+h
+ọ
+c Khoa h
+ọ
+c t
+ự
+ 
+nhiên; NXB: 200
+9
+ 
+[5]. 
+Bài t
+ậ
+p th
+ự
+c hành ASP.net;
+ 
+Trung tâm Tin 
+h
+ọ
+c Trƣ
+ờ
+ng Đ
+ạ
+i h
+ọ
+c Khoa h
+ọ
+c t
+ự
+ 
+nhiên; NXB: 2009
+ 
+
+ 
+TÀI LI
+Ệ
+U THAM KH
+Ả
+O Đ
+Ề
+ 
+NGH
+Ị
+ 
+CHO H
+Ọ
+C VIÊN:
+ 
+ 
+[1]. Learning ASP.net 
+ 
+  
+Đ
+ị
+a ch
+ỉ
+: 
+www.asp.net
+ 
+[2]. ASP.net Tutorial:     Đ
+ị
+a ch
+ỉ
+: 
+ww
+w.w3schools.com/
+ASPNET
+ 
+ 
+[3]. Java2S: 
+ 
+        
+Đ
+ị
+a ch
+ỉ
+: http://www.java2s.com/
+ 
+ 
+ 
+ 
+ 
+ 
+ 

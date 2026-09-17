@@ -1,0 +1,20 @@
+@using System
+@using System.Linq
+
+@functions {
+    public static string MainName(string picture)
+    {
+        if (string.IsNullOrWhiteSpace(picture)) return "";
+        var parts = picture.Split(new[] { '|', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+        return parts.Length == 0 ? "" : parts[0].Trim();
+    }
+
+    public static string[] All(string picture)
+    {
+        if (string.IsNullOrWhiteSpace(picture)) return new string[0];
+        return picture.Split(new[] { '|', ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => x.Trim())
+            .Where(x => x.Length > 0)
+            .ToArray();
+    }
+}

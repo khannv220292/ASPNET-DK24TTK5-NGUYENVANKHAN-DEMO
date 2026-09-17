@@ -1,0 +1,378 @@
+--- PAGE 1 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+1GIỚI THIỆU C Sharp
+Bộ môn Công nghệ thông tin
+Khoa Kỹ thuật và Công nghệ
+Trường Đại học Trà Vinh
+
+--- PAGE 2 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+2Nội dung 
+Biến và kiểu dữ liệu
+Các phép tính toán trong C# 
+Các hàm chuyển đổi kiểu dữ liệu
+Các lệnh điều kiện
+Các lệnh lặp 
+Hàm và phương thức (methods)
+Lớp và không gian tên (class and namespace)
+
+--- PAGE 3 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+3Kiểu dữ liệu
+C# VB .NET Type Diển giải
+byte Byte Byte Số nguyên không dấu từ 0 đến 255
+short Short Int16 Số nguyên có dấu từ -32768 đến 
+32767
+int Int Int32 Số nguyên có dấu từ -2,147,483,648 
+đến 2,147,483,647
+long Long Int64 Số nguyên có dấu từ -9.2E18 đến 
+9.2E18
+float Single Single Kiểu dấu chấm động giá trị từ 3.4E -38 
+đến 3.4E+38
+double Double Double Kiểu dấu chấm động giá trị từ 1.7E -308 
+đến 1.7E+308
+decimal Decimal Decimal Độ chính xác 28 con số và thập phân
+char Char Char Kiểu ký tự Unicode
+string String String Kiểu chuỗi các ký tự
+bool Boolean Boolean Có giả trị true hoặc false
+* Date Datetime Thể hiện ngày và thời gian 
+
+--- PAGE 4 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+4Khai báo biến
+Cú pháp: Kiểu Tên_biến
+Ví du:
+int x;
+string str1, str2;
+string str=“Chao ban!!!”;
+Tên_biến: 
+Có thể bao gồm các chữ cái
+Chữ số không được đứng đầu
+Tên biến trong C# phân biệt chữ hoa và chữ 
+thường
+
+--- PAGE 5 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+5Làm việc với chuỗi (string)
+string str1 = “chao”;
+string str2 = “ cac ban”;
+string str = str1+str2; //str = “chao cac ban”
+str += “ !!!”;  //str = “chao cac ban !!!”;
+
+--- PAGE 6 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+6Làm việc với mảng (array)
+int [] digit= new int [ 3];
+digit[ 0]=1;
+digit[ 1]=2;
+digit[ 2]=3;
+int [,] intArray= new int [3,3];
+digit[0,0]=1;
+digit[0,1]=2;
+digit[0,2]=3;
+double [] doubleArray = {1.0, 2.0, 3.0}
+
+--- PAGE 7 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+7Các phép tính toán trong C#
+Phép tính Diển giải Ví dụ
++ Cộng 1 + 2 = 3
+- Trừ 8 –2 = 6 
+* Nhân 2 * 7 = 14
+/ Chia 9.0 / 2 = 4.5
+% Chia lấy dư 8 % 3 = 2
+Ngoài ra còn có một số phép tính mở rộng 
+double  value;
+value = Math.Sqrt( 16) ; //hàm tính căn value = 4.0
+value = Math.Round( 31.258 , 2); // hàm làm tròn value = 31.26
+Value = Math.Abs( -5); //hàm tính giá trị tuyệt đối value= 5.0
+
+--- PAGE 8 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+8Các hàm chuyển đổi kiểu dữ liệu
+int a = 10;
+string str;
+str = (string) a; //str = “10”
+Str= Convert.ToString(a);
+Str= a.ToString();
+int b = Convert.ToInt32 (str); // b=10;
+int c = Int32.Parse (str); //c=10
+
+--- PAGE 9 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+9Các lệnh điều kiện (conditional statements)
+Lệnh if:
+if (điều_kiện)
+{
+// thực hiện công việc
+}
+else
+{
+// thực hiện công việc
+}
+
+--- PAGE 10 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+10Các lệnh điều kiện (conditional statements)
+protected void btnCheck_Click( object sender, EventArgs e)
+{
+inta = Convert.ToInt 32 (txtNumber.Text);
+if ( a> 10)
+{
+lblKetqua.Text="giá trị nhập vào lớn h ơn 10";
+}
+else
+{
+lblKetqua.Text="giá trị nhập vào hợp lệ";
+}
+}
+
+--- PAGE 11 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+11Các lệnh điều kiện (conditional statements)
+Lệnh switch:
+switch (giá_trị)
+{
+case 1:
+// thực hiện công việc 1
+break;
+case 2 :
+// thực hiện công việc 2
+break;
+default:
+// thực hiện công việc măc 
+định
+break;
+}
+
+--- PAGE 12 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+12Các lệnh điều kiện (conditional statements)
+protected void b tnTinh _Click(object sender, EventArgs e)
+{
+string dau = cboPhepTinh.SelectedValue;
+int So1, So2;
+So1 = Convert.ToInt32(txtSo1.Text);
+So2 = Convert.ToInt32(txtSo2.Text);
+double Ketqua =0;
+switch (dau)
+{
+case "+":
+Ketqua = So1 + So2;
+break;
+case "-":
+Ketqua = So1 -So2;
+break;
+}
+lblKetqua.Text = Ketqua.ToString();
+}
+txtSo1 txtSo2
+cboPhepTinhbtnTinh
+lblKetqua
+
+--- PAGE 13 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+13Các Lệnh lặp ( loop statements)
+for: for(giá_trị_bắt đầu; điều_kiện; tăng_giá_trị)
+{
+//thực hiện công việc
+}
+while: while (điều_kiện)
+{
+//thực hiện công việc
+}
+do… while:
+do
+{
+//thực hiện công việc
+}
+while (điều_kiện)
+
+--- PAGE 14 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+14Các Lệnh lặp ( loop statements)
+Ví dụ: Viết hàm tính tổng từ 1 đến 10.
+void Tong()
+{
+intKetqua=0;
+for( int i=0; i<=10; i++)
+{
+Ketqua+=i;
+}
+lblKetqua.Text=Ketqua.ToString();
+}void Tong()
+{
+intKetqua=0;
+inti=1;
+while(i<=10)
+{
+Ketqua+=i;
+i++;
+}
+lblKetqua.Text=Ketqua.ToString();
+}
+
+--- PAGE 15 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+15Các Lệnh lặp ( loop statements)
+foreach: duyệt tập hợp
+foreach (kiêu_dữ_liêu phần_tử intâp_hợp)
+{
+//thực hiện công việc
+}
+Ví dụ:
+int [] intArray = {1, 2, 3};
+int Ketqua = 0;
+foreach (inti inintArray)
+{
+Ketqua+=i;
+}
+
+--- PAGE 16 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+16Hàm và phương thức (methods)
+Hàm và phương thức là một khối lệnh, dùng 
+để giải quyết một công viêc cụ thể.
+void myMethod()
+{
+//các lệnh
+}
+int myMethod()
+{
+int a=10;
+return a;
+}private void myMethod()
+{
+//các lệnh
+}
+public int myMethod(int a, int b)
+{
+return a+b;
+}
+
+--- PAGE 17 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+17Lớp và không gian tên (class and namespace)
+Lớp là khuôn mẫu để định nghĩa các đối tương, 
+bao gồm 3 loại thành phần chính: thuộc tính, 
+phương thức và các sự kiện.
+Ví dụ: 
+class SanPham
+{
+private string ten;
+private double gia;
+private string hinhAnhUrl;
+}Thuộc tính của đối tượng
+
+--- PAGE 18 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+18Lớp và không gian tên (class and namespace)
+Từ khóa Phạm vi truy xuất
+public Có thể truy xuất ở bất kỳ lớp nào
+private Chỉ có thể truy xuất bởi các thành 
+viên bên trong lớp hiện tại
+protected Có thể truy xuất bởi các thành viên 
+bên trong lớp hiện tại, và các thành 
+viên của lớp kế thừa từ lớp hiện tại
+
+--- PAGE 19 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+19Lớp và không gian tên (class and namespace)
+Thuộc tính: là dữ liệu, các thông tin của đối tượng, cho 
+phép chúng ta truy xuất khi tương tác với chúng.
+Các đối tượng private ( đối tượng riêng), chúng ta không 
+thể tương tác trực tiếp khi đứng bên ngoài lớp. 
+Các đối tượng public, ta có thể truy xuất ở bất cứ đâu, dễ 
+tạo ra những lỗi cho hệ thống.
+Tạo ra các thuộc tính truy xuất: set và get. Chúng giống 
+như thuộc tính public.
+Ví dụ: 
+class SanPham
+{
+private string ten;
+public string Ten
+{
+get { return ten;}
+set { ten = value;}
+}
+}SanPham banSP = new SanPham();
+banSP.Ten =  “Iphone”;
+banSP.Gia = 14000;
+banSP.HinhAnhUrl = “ http://mysite//iphone.jpg ”;
+
+--- PAGE 20 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+20Phương thức của lớp: là một thủ tục được 
+xây dựng cho lớp để thực thi một việc gì đó 
+có ích.Lớp và không gian tên (class and namespace)
+Ví dụ: 
+class SanPham
+{ 
+//khai báo các thuộc tinh
+public string getHTML()
+{
+string htmlStr;
+htmlStr = “<h1>”+ ten + ”</h1><br/> ”;
+htmlStr += “<h3> Giá: ”+ gia.ToString()+ “</h3><br/> ”;
+htmlStr += “<img src= ‘” + hinhAnhUrl + “’/>”;
+return htmlStr;
+}
+}
+
+--- PAGE 21 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+21Lớp và không gian tên (class and namespace)
+Phương thức khởi tạo: là phương thức đặc biệt của lớp, 
+được gọi tự động khi tạo mới lớp.
+Ví dụ : 
+class SanPham
+{
+// khai báo các thuộc tính
+public SanPham()
+{
+ten=“khong ten”;
+gia=0.0;
+hinhAnhUrl = “http://mysite//1.jpg”;
+}public SanPham( string _ten, double
+_gia, string _url)
+{
+ten = _ten;
+gia = _gia;
+hinhAnhUrl = _url;
+}
+}
+SanPham a = new SanPham(); 
+SanPham a = new SanPham(“1”,
+20.0, “hinh1.jpg”); 
+
+--- PAGE 22 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+22Lớp và không gian tên (class and namespace)
+Kế thừa: là hình thức sử dụng lại code. Nó cho phép một 
+lớp yêu cầu và mở rộng các chức năng của lớp mà nó 
+truy xuất tới.
+Ví dụ: 
+class SanPhamDienThoai : SanPham
+{
+public SanPham DienThoai (string _ten, double _gia, string _url) : 
+base (_ten, _gia,  _url )
+{
+}
+}
+SanPham a; // a.
+
+--- PAGE 23 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+23Lớp và không gian tên (class and namespace)
+Không gian tên (namespace): là một gói các lớp 
+có đặc tính chung, dùng để miêu tả hay giải 
+quyết một vấn đề gì đó.
+Sử dụng các namespaces trong C# ta dùng từ khóa using
+
+
+--- PAGE 24 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+24Bài tập
+Xây dựng ứng dụng kiểm tra đăng nhập.
+Xây dựng ứng dụng tìm số nguyên lớn nhất 
+trong mảng.

@@ -1,0 +1,418 @@
+--- PAGE 1 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+1Sử dụng các controls của 
+ASP.NET
+Bộ môn Công nghệ thông tin
+Khoa Kỹ thuật và Công nghệ
+Trường Đại học Trà Vinh
+
+--- PAGE 2 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+2Nội dung 
+Giới thiệu vềServer controls
+Sự khác nhau của HTML controls và ASP.NET 
+Server controls
+Những web controls cơ bản của ASP.NET
+Một số controls khác
+
+--- PAGE 3 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+3Giới thiệu vềServer control 
+Server control là những mô hình mức cao 
+được ASP.NET  giới thiệu, chúng được tạo ra 
+và cấu hình như một đối tượng. 
+Server control chạy trên web server và tự 
+động xuất ra những mã HTML riêng.
+Server control gồm có:
+HTML Server control
+ASP.NET Server control
+Dùng để trình bày giao diện web.
+
+--- PAGE 4 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+4HTML Server Control 
+Tương tự như những đối tượng HTML chuẩn.
+Có khả năng tương thích với các tags HTML cũ
+Chạy phía Server, nên các HTML Server Control phải 
+được thêm vào thuộc tính runat =“server” 
+HTML Server Control phải được đặt trong tag 
+<form> và cũng thêm vào thuộc tính runat =“server
+Ví du:
+<form runat=“server”>
+Nhập tên:
+<input type=“text” ID=“Ten” runat=“server”/>
+</form>
+
+--- PAGE 5 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+5ASP.NET Server Control 
+Là những tag đặc biệt được dùng trong 
+ASP.NET
+Chúng chạy trên server, nên thuộc tính 
+runat= “server ” bắt buộc phải có
+Không tương thích với các tag của HTML
+Là mô hình đối tượng ở mức cao, với nhiều 
+thuộc tính hỗ trợ cho việc định dạng các 
+control này một cách cụ thể
+
+--- PAGE 6 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+6Sự khác nhau của HTML controls và ASP.NET 
+Server controls
+Tính năng 
+hỗ trợHTML Server 
+controlASP Server Control
+Server event Chi có thể kich hoạt các 
+sự kiện ở mức trang 
+(post -back) trên serverKích hoạt được các sự kiện 
+cụ thể trên máy server
+Quản lý 
+trạng tháiDữ liệu không thể lưu trữ 
+lại, phải tự lưu bằng 
+cách sử dụng scriptDữ liệu sau khi nhập vào 
+control sẽ được giữ lại sau 
+request
+Mức độ 
+tương thíchKhông thể tự động nhận 
+diện được trình quyệtCó khả năng nhận diện được 
+trình duyệt và tạo ra hiển thị 
+thích hợp
+Thuộc tính Các thuộc tính chuẩn 
+của HTML.NET framework cung cáo 
+một tập các thuộc tính cho 
+mỗi control, có thể các thuộc 
+tính này qua mã lệnh
+
+--- PAGE 7 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+7Khi nào thì sử dụng HTML Control
+Nâng cấp trang web từ ASP
+Không phải tất cả các control đều yêu cầu sự 
+kiện trên máy server hoặc quản lý trạng thái
+Ví dụ: 
+sự khác biệt của HTML control và Server control
+<asp:TextBox ID="TextBox 1" runat ="server"></ asp:TextBox ></div>
+<input type= “text” id=“textName ”>
+
+--- PAGE 8 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+8ASP.NET Page
+Gồm 4 sự kiện chính:
+Init:sự kiện Page_Init xảy ra đầu tiên khi trang web được 
+yêu cầu.
+Load : sự kiện Page_Load, đây là nơi đặt phần lớn các xử 
+lý. Được khởi động mỗi khi trang web được yêu cầu
+PreRender : sự kiện này xảy ra khi trang web chuẩn bị trả 
+về cho client.
+Unload : xảy ra sau tất cả những sự kiện khác
+Thuộc tính: 
+IsPostBack : đây là thuộc tính kiểu luân lý. Nếu là load lần 
+đầu tiên giá trị là false. Thường được sử dung trong sự 
+kiện Page_Load để kiểm tra trang thái của trang Web.
+
+--- PAGE 9 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+9Web control cơ bản của ASP.NET
+Control class Đối tương HTML tương ưng
+Label <span>
+Button <input type=“submit”> hay <input type=“button”>
+TextBox <input type=“text”>, <input type=“password”> , hay 
+<textarea>
+CheckBox <input type=“checkbox”>
+RadioButton <input type=“radio”>
+Hyperlink <a>
+LinkButton <a> chứa tag <img>
+ImageButton <input type=“image”>
+Image <img>
+ListBox <select size=“x”> với X là số dòng có thể thấy 
+trong 1 lần
+
+--- PAGE 10 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+10Web control cơ bản của ASP.NET
+Control class Đối tương HTML tương ứng
+DropDownList <select>
+CheckBoxList Một danh sách hay bảng với nhiều tags <input 
+type=“checkbox”> 
+RadioButtonList Một danh sách hay bảng với nhiều tags <input 
+type=“radio”> 
+BulleteList Danh sách có thứ tự số <ol> hay ký hiệu <ul>
+Panel <div>
+Table, TableRow, 
+và TableCell<table>, <tr>, và <td> hay <th>
+
+--- PAGE 11 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+11Thuộc tính chung
+Thuộc tính Kiểu Ý nghĩa
+ID Chuỗi Tên của control, tên control là duy nhất
+AccessKey String Ký tự di chuyển nhanh, phím nóng
+BackColor Color Màu nền của control
+BorderColor Color Màu đường viền của control
+BorderStyle BorderStyle Kiểu đường viền của control
+BorderWidth Unit Quy định độ rộng của đường viền
+Enabled Boolean Quy định control có hiển thị (true) hay không 
+hiển thị (false)
+Font FontInfo Font hiển thị cho control
+Height/Width Unit Chiều cao và chiều rộng của control
+ToolTip String Dòng chữ sẽ hiển thị khi rê chuột vào 
+control
+
+--- PAGE 12 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+12Những web controls cơ bản của ASP.NET
+Label:
+thường được được sử dụng hiển thị và trình bày nội dung trên trang 
+web.
+Nội dung hiển thị trong Label thông qua thuộc tính Text.
+<asp:Label ID="Label 1" runat ="server" Text="Label">Nhap ten</ asp:Label >
+Ví dụ: 
+lblA.Text= “Đây là chuỗi văn bản ”;
+lblB.Text= “<B>Chuỗi văn bản được in đậm</B> ”;
+Buttons ( Button , LinkButton , ImageButton ): mặc định đều là các nút 
+submit, Khi được nhấn vào sẽ PostBack về Server
+Text: Chuỗi văn bản hiển thị trên điều khiển
+<asp:Button ID="Button 1" runat ="server" Text="Button" />
+<asp:LinkButton ID="LinkButton 1" 
+runat ="server">LinkButton</ asp:LinkButton >
+<asp:ImageButton ID="ImageButton 1" runat ="server" />
+
+--- PAGE 13 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+13Những web controls cơ bản của ASP.NET
+HyperLink : được sử dụng để tạo ra các kiên kết 
+siêu văn bản
+ImageUrl: qui định hình hiển thị trên control
+Text: Chuổi văn bản sẽ được hiển thị trên control.
+NavigateUrl : Đường dẫn cần liên kết đến.
+Image : dùng hiển thị hình ảnh trên trang web
+ImageUrl: đường dẫn đến tập tin hình cần hiển thị
+AlternateText: chuỗi văn bản sẽ hiển thị khi hình không 
+tồn tại
+ImageAlign: qui định hiển thị của hình và nội dung văn 
+bản
+
+--- PAGE 14 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+14Những web controls cơ bản của ASP.NET
+Thuộc tính Diển giải
+Text Dữ liệu của TextBox
+TextMode Một dòng: SingleLine, nhiều dòng MultiLine, 
+hoặc Password
+Enabled Enable/Disable TextBox 
+Visible Show/Hide TextBox (Hiện hay ẩn)
+Rows Khi thuộc tính TextMode=MultiLine, thuộc tính 
+này sẽ qui định số dòng được hiển thị
+MaxLength Quy định số ký tự tối đa được nhập vào cho 
+TextBox
+AutoPostBack Khi được thiết lập là True, người dùng thay đổi 
+DL TextChanged của TextBox, sẽ kích hoạt sự 
+kiện post -back về serverTextbox: Là control được dùng để nhập và hiển thị DL
+<asp:TextBox ID="TextBox 1" runat ="server"></ asp:TextBox >
+
+--- PAGE 15 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+15Những web controls cơ bản của ASP.NET
+ListBox và DropDownList: là điều khiển hiển thị danh sách lựa 
+chọn mà người có thể chọn 1hoặc nhiều đối tượng (Item)
+Thuộc tính:
+AutoPostBack: qui định control có tự PostBack về Server khi chỉ số 
+mặc định bị thay đổi
+Items: đây là tập hợp chứa các mục chọn của điều khiển
+SelectionMode: Thuộc tính này xác định cách thức chọn trong 
+ListBox
+Single: chỉ được chọn một mục có trong danh sách (mặc định)
+Multiple: Cho phép chọn nhiều lựa chọn
+SelectectIndex: Cho biết chỉ số của mục được chọn
+SelectedItem: cho biết mục được lựa chọn
+SelectedValue: cho biết giá trị được chọn
+
+--- PAGE 16 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+16Những web controls cơ bản của ASP.NET
+Ví dụ Thiết kế trang chọn các khu du lịch:
+Với ListBox có tên là lstDuLich và 
+SelectionMode=Multiple, Rows= 4
+
+
+--- PAGE 17 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+17Những web controls cơ bản của ASP.NET
+Sự hiệ n nhấn nút chọn
+protected void btnChon_Click(object sender, 
+EventArgs e)
+{
+for (int i = 0; i < lstDuLich.Items.Count; i++)
+{
+if (lstDuLich.Items[i].Selected == true)
+lblDiaDiem.Text +=
+lstDuLich.Items[i].Text + "<br>";
+}
+}
+
+--- PAGE 18 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+18Những web controls cơ bản của ASP.NET
+Thêm các item vào danh sách của ListBox và 
+DropDowList, ta dùng phương thức Add
+Ví dụ:
+ListBox 1.Items.Add( “Nhân ”)
+DropDownList 1.Items.Add( “Nhân ”)
+Thêm một đối tượng vào danh sách:
+Ví dụ :
+Tạo DropDownList quốc tịch
+Thêm một số tên quốc gia vào.
+
+--- PAGE 19 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+19Một số controls khác
+Validation control
+Lấy và thiết lập giá trị
+RadioButton, RadioButtonList, CheckBox, CheckBoxList, 
+BulletedList
+Gom nhóm
+Panel
+Hiển thị hình ảnh và thông tin
+Background, Foreground, Image, AdRotator
+Thông tin ngày tháng
+Calendar
+MultiView control
+
+--- PAGE 20 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+20Một số controls khác
+Validation control: được dùng kiểm tra tính đúng đắn của DL nhập 
+vào của Client trước khi gửi về cho server
+Validation control class Diển giải
+RequiredFieldValidator Kiểm tra DL nhập vào khác rỗng
+RangeValidator Kiểm tra DL nhập vào trong control nằm 
+trong một khoảng giá trị 
+CompareValidator Kiểm tra DL nhập vào trong control có 
+giống với control khác
+RegularExpressionValidator Kiểm tra DL nhập vào thỏa một công thức 
+cụ thể
+CustomValidator Kiểm tra được thực hiện bởi hàm của 
+người sử dụng định nghĩa
+
+--- PAGE 21 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+21Một số controls khác
+Các bước sử dụng validation control
+Kéo validation control vào web form
+Thiết lập thuộc tính cho validation control:
+ControlToValidate: chọn control ta muốn 
+kiểm tra
+ErrorMessage: Thông báo lỗi
+Tuy việc kiểm tra thực hiện phía client , 
+nhưng nó chỉ thực hiện khi có sự kiện 
+post-back (nhấn một nút gì đó )
+
+
+--- PAGE 22 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+22Một số controls khác
+<asp:Label ID="Label 1" runat ="server" Text="Nhập vào sô (từ 1 đến 
+10)"></ asp:Label >
+<asp:TextBox ID="txtNhap" runat ="server"></ asp:TextBox >
+<asp:RangeValidator ID="RangeValidator 1" runat ="server" 
+ControlToValidate ="txtNhap"
+ErrorMessage ="Nhập giá trị không đúng" MaximumValue ="10" 
+MinimumValue ="1"></asp:RangeValidator >
+<br />
+<asp:Button ID="cmdKiemTra" runat ="server" Text="Kiểm tra" />
+
+--- PAGE 23 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+23Một số controls khác
+Kiểm tra DL ở phía Server với thuộc tính 
+Page.IsValid
+Dùng để kiểm tra xem các form đã thỏa các 
+Validation control hay chưa.
+Kết quả là True nếu tất cả đều được kiểm tra 
+thành công
+Kết quả là False,  với trường hợp ngược lại
+
+--- PAGE 24 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+24Một số controls khác
+CustomValidator
+Được dùng bằng cách tự viết mã.
+Kiểm tra trên Server: bằng cách đặt mã lệnh trong 
+hàm xử lý sự kiện ServerValidate
+Kiểm tra trên Client: bằng cách viết đoạn script 
+kiểm tra thuộc tính ClientValidationFunction của 
+CustomValidator
+
+--- PAGE 25 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+25Một số controls khác
+Kiểm tra trên Server
+
+
+--- PAGE 26 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+26Một số controls khác
+Kiểm tra phía Client
+
+
+--- PAGE 27 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+27Một số controls khác
+RadioButton, RadioButtonList, CheckBox, CheckBoxList, 
+BulletedList
+HTML tag
+<asp:CheckBox ID="CheckBox1" runat ="server" />
+<asp:RadioButton ID="RadioButton1" runat ="server" />
+Thuộc tính Selected cho biết DL đang được chọn hay 
+không
+Tất cả RadioButton phải có cùng GroupName
+BulletedList: giống như danh sách có thứ tự (<ul>), 
+hay không có thứ tự (<ol>)
+Dùng thuộc tính DisplayMode để chọn kiểu thể hiện của 
+BulletedList, có thể là Text, HyperLink hay LinkButton.
+
+--- PAGE 28 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+28Một số controls khác
+Gom nhóm:
+Kéo thả những controls khác vào panel để tạo 
+nhóm
+Hình ảnh và quảng cáo:
+Hình nền
+Sử dụng thuộc tính Background của web form
+Sử dụng thuộc tính BackImageUrl của Panel control
+Sử dụng image control để thể hiện hình ảnh
+Button bằng hình ảnh: sử dụng ImageButton 
+control
+Quảng cáo: sử dụng AdRotator control
+
+--- PAGE 29 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+29Một số controls khác
+Calendar
+Là một đối tượng đơn, đặt bất cứ đâu trên webpage
+Được dùng để thể hiện thông tin về ngày tháng
+<asp:Calendar ID="Calendar 1" runat ="server"></ asp:Calendar >
+Để lấy hoặc thiết lập giá trị ngày tháng trên 
+Calendar control, sử dụng hàm xử lý sự kiện 
+SelectionChanged và thuộc tính SelectedDate
+
+
+--- PAGE 30 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+30Một số controls khác
+MultiView Control
+Cho phép thể hiện nhiều khung nhin (view) cùng lúc
+<asp:MultiView ID="MultiView 1" runat ="server">
+<asp:View ID="View 1" runat ="server"> …</asp:View >
+<asp:View ID="View 2" runat ="server"> …</asp:View >
+</asp:MultiView >
+
+--- PAGE 31 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+31Bài tập
+Xây dựng trang web đăng ký thành viên đơn 
+giản của gmail.
+Xây dựng trang bình chọn một số danh lam 
+thắng cảnh.
+Xây dựng đánh giá nộ i dung của website.

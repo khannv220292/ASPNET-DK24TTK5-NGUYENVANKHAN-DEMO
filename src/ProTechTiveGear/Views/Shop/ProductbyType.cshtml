@@ -1,0 +1,28 @@
+﻿@using System.Linq
+@{
+	ViewBag.Title = ViewBag.TitleList ?? "Laptop";
+	ViewBag.HideBanner = true;
+	Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+@model IEnumerable<ProTechTiveGear.Models.Item>
+@Html.Partial("~/Views/Shared/_LaptopCardCss.cshtml")
+<section class="feat-wrap" style="background:#f5f6f8;padding:36px 0 48px;min-height:70vh">
+	<div class="container">
+		<div style="background:#fff;border-radius:8px;padding:18px 22px;margin-bottom:24px">
+			<h2 style="font-size:22px;font-weight:700;margin:0 0 6px">@(ViewBag.TitleList ?? "Laptop")</h2>
+			<p style="color:#666;margin:0">Laptop chinh hang VAT day du</p>
+		</div>
+		<div class="row">
+			@foreach (var item in Model)
+			{
+				<div class="col-lg-3 col-md-4 col-sm-6" style="margin-bottom:16px">
+					@Html.Partial("~/Views/Shared/_LaptopCard.cshtml", item)
+				</div>
+			}
+		</div>
+		@if (!Model.Any())
+		{
+			<p>Chua co san pham trong nhom nay.</p>
+		}
+	</div>
+</section>

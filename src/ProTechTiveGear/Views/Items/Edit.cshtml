@@ -1,0 +1,245 @@
+﻿@model ProTechTiveGear.Models.Item
+
+@{
+	ViewBag.Title = "Edit";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<head>
+	<script src="~/Scripts/tinymce/js/tinymce/tinymce.min.js"></script>
+
+	<script>tinymce.init({ selector: 'textarea' });</script>
+	<style>
+		.editor-field textarea {
+			width: 400;
+			height: 100px;
+		}
+	</style>
+
+
+
+</head>
+<h2>Chỉnh sửa</h2>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<h4>Sản phẩm</h4>
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.ID)
+
+		<div class="form-group">
+            <h5 class="control-label col-md-2">Tên</h5>
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		@Html.Partial("_PriceFields", Model)
+
+		<div class="form-group">
+            <h5 class="control-label col-md-2">Ngày Nhập</h5>
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.DateImport, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+				@Html.ValidationMessageFor(model => model.DateImport, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+            <h5 class="control-label col-md-2">Số lượng</h5>
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+				@Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+            <h5 class="control-label col-md-2">Loại Sản Phẩm</h5>
+			<div class="col-md-10">
+				@Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control", required = "required" })
+				@Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+            <h5 class="control-label col-md-2">Mặt Hàng</h5>
+			<div class="col-md-10">
+				@Html.DropDownList("BrandID", null, htmlAttributes: new { @class = "form-control", required = "required" })
+				@Html.ValidationMessageFor(model => model.BrandID, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		@Html.Partial("_PictureFields", Model)
+
+		<div class="form-group">
+            <h5 class="control-label col-md-2">Mô tả</h5>
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.ShortTitle, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.ShortTitle, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+            <h5 class="control-label col-md-2">Chi Tiết</h5>
+			<div class="col-md-10">
+				@*@Html.EditorFor(model => model.Describe, new { htmlAttributes = new { @class = "form-control" } })
+		@Html.ValidationMessageFor(model => model.Describe, "", new { @class = "text-danger" })*@
+				@Html.TextAreaFor(model => model.Describe, new { htmlAttributes = new { @class = "form-control" } })
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Lưu" class="btn btn-success" style="font-weight:700;padding:8px 28px;font-size:15px" />
+			</div>
+		</div>
+	</div>
+}
+
+<div>
+	@Html.ActionLink("Quay lại", "Index")
+</div>
+@section upload
+{
+	<script>
+		function digitsOnly(v) {
+			return String(v || '').replace(/[^\d]/g, '');
+		}
+		function formatVnd(numStr) {
+			var d = digitsOnly(numStr);
+			if (!d) return '';
+			// bỏ số 0 đứng đầu
+			d = String(parseInt(d, 10));
+			if (!isFinite(parseInt(d, 10)) || parseInt(d, 10) <= 0) return '';
+			return d.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ';
+		}
+		function parseVnd(v) {
+			var d = digitsOnly(v);
+			if (!d) return NaN;
+			return parseInt(d, 10);
+		}
+		function updateDiscountPercent() {
+			var buy = parseVnd($('#PurcharsePriceDisplay').val());
+			var sell = parseVnd($('#SellPriceDisplay').val());
+			var el = $('#DiscountPercent');
+			if (!isFinite(buy) || !isFinite(sell) || buy <= 0) {
+				el.val('—');
+				return;
+			}
+			if (buy > sell) {
+				var pct = Math.round((buy - sell) / buy * 100);
+				el.val('-' + pct + '%');
+			} else {
+				el.val('0%');
+			}
+		}
+		function bindMoney($display, $hidden) {
+			$display.on('input', function () {
+				var raw = digitsOnly(this.value);
+				var caretAtEnd = this.selectionStart === this.value.length;
+				var formatted = formatVnd(raw);
+				this.value = formatted;
+				$hidden.val(raw ? String(parseInt(raw, 10)) : '');
+				if (caretAtEnd) {
+					try { this.setSelectionRange(this.value.length, this.value.length); } catch (e) { }
+				}
+				updateDiscountPercent();
+			});
+			$display.on('blur', function () {
+				this.value = formatVnd(this.value);
+				var n = parseVnd(this.value);
+				$hidden.val(isFinite(n) ? String(n) : '');
+				updateDiscountPercent();
+			});
+		}
+		function getPictureList() {
+			return ($('#picture').val() || '').split(/[|,;]/).map(function (s) { return (s || '').trim(); }).filter(Boolean);
+		}
+		function setPictureList(list) {
+			$('#picture').val(list.join('|'));
+			renderPreviews();
+		}
+		function renderPreviews() {
+			var list = getPictureList();
+			var box = $('#picturePreview');
+			box.empty();
+			list.forEach(function (name, idx) {
+				var src = '/img/Item/' + encodeURIComponent(name).replace(/%2F/g, '/');
+				var main = idx === 0 ? '<span style="position:absolute;left:4px;bottom:4px;background:#0077dd;color:#fff;font-size:10px;padding:1px 5px;border-radius:3px">Chính</span>' : '';
+				var html = ''
+					+ '<div class="pic-item" data-name="' + $('<div/>').text(name).html() + '" style="position:relative;width:100px;height:100px;border:1px solid #ddd;background:#fff;border-radius:6px;overflow:hidden">'
+					+ '<img src="' + src + '" alt="" style="width:100%;height:100%;object-fit:contain" onerror="this.style.opacity=.3" />'
+					+ main
+					+ '<button type="button" class="btn-remove-pic" title="Xóa ảnh này" style="position:absolute;top:2px;right:2px;width:24px;height:24px;border:none;border-radius:50%;background:#e53935;color:#fff;font-weight:700;line-height:24px;padding:0;cursor:pointer">×</button>'
+					+ '</div>';
+				box.append(html);
+			});
+			if (list.length === 0) {
+				box.append('<div class="text-muted" style="padding:12px 0">Chưa có ảnh. Bấm “Thêm ảnh...” để chọn.</div>');
+			}
+		}
+		$(function () {
+			bindMoney($('#PurcharsePriceDisplay'), $('#PurcharsePrice'));
+			bindMoney($('#SellPriceDisplay'), $('#SellPrice'));
+			updateDiscountPercent();
+			$('form').on('submit', function () {
+				var buy = parseVnd($('#PurcharsePriceDisplay').val());
+				var sell = parseVnd($('#SellPriceDisplay').val());
+				$('#PurcharsePrice').val(isFinite(buy) ? String(buy) : '');
+				$('#SellPrice').val(isFinite(sell) ? String(sell) : '');
+				if (!isFinite(buy) || buy <= 0 || !isFinite(sell) || sell <= 0) {
+					alert('Vui lòng nhập Giá mua và Giá bán hợp lệ (vd: 15.000.000đ).');
+					return false;
+				}
+			});
+			renderPreviews();
+			$('#btnUpload').click(function () {
+				$('#fileUpload').val('');
+				$('#fileUpload').trigger('click');
+			});
+			$('#btnClearPics').click(function () {
+				if (!getPictureList().length) return;
+				if (confirm('Xóa tất cả ảnh của sản phẩm này?')) {
+					setPictureList([]);
+				}
+			});
+			$('#picturePreview').on('click', '.btn-remove-pic', function () {
+				var name = $(this).closest('.pic-item').attr('data-name');
+				var list = getPictureList().filter(function (n) { return n !== name; });
+				setPictureList(list);
+			});
+			$('#fileUpload').change(function () {
+				if (window.FormData === undefined) return;
+				var files = $('#fileUpload').get(0).files;
+				if (!files || !files.length) return;
+				var i = 0;
+				function next() {
+					if (i >= files.length) { renderPreviews(); return; }
+					var formData = new FormData();
+					formData.append('file', files[i]);
+					i++;
+					$.ajax({
+						type: 'POST',
+						url: '/Image/ProcessUpload',
+						contentType: false,
+						processData: false,
+						data: formData,
+						success: function (urlImage) {
+							if (urlImage) {
+								var list = getPictureList();
+								list.push(urlImage);
+								$('#picture').val(list.join('|'));
+							}
+							next();
+						},
+						error: function () { next(); }
+					});
+				}
+				next();
+			});
+		});
+	</script>
+}

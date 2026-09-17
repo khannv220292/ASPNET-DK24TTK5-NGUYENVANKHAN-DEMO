@@ -1,0 +1,2 @@
+# Báo cáo tiến độ
+Đã hoàn thiện xây dựng website bán laptop http://laptop.khannv.vn

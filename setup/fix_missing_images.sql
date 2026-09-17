@@ -1,0 +1,27 @@
+﻿USE [laptopstore];
+-- Optional: database.sql đã gồm Picture từ local. Chỉ chạy nếu cần chỉnh lại ảnh.
+UPDATE Item SET Picture = N'shopping.webp|ThinkPad T14 Gen 2.jpg' WHERE ID = 1;
+UPDATE Item SET Picture = N'laptop-shop-01.jpg' WHERE ID = 2 AND (Picture IS NULL OR Picture <> N'laptop-shop-01.jpg');
+UPDATE Item SET Picture = N'laptop-shop-02.jpg' WHERE ID = 5 AND (Picture IS NULL OR Picture <> N'laptop-shop-02.jpg');
+UPDATE Item SET Picture = N'laptop-shop-03.jpg' WHERE ID = 6 AND (Picture IS NULL OR Picture <> N'laptop-shop-03.jpg');
+UPDATE Item SET Picture = N'laptop-shop-04.jpg' WHERE ID = 7 AND (Picture IS NULL OR Picture <> N'laptop-shop-04.jpg');
+UPDATE Item SET Picture = N'laptop-shop-05.jpg' WHERE ID = 15 AND (Picture IS NULL OR Picture <> N'laptop-shop-05.jpg');
+UPDATE Item SET Picture = N'laptop-shop-06.jpg' WHERE ID = 22 AND (Picture IS NULL OR Picture <> N'laptop-shop-06.jpg');
+UPDATE Item SET Picture = N'laptop-shop-07.jpg' WHERE ID = 26 AND (Picture IS NULL OR Picture <> N'laptop-shop-07.jpg');
+UPDATE Item SET Picture = N'laptop-shop-08.jpg' WHERE ID = 28 AND (Picture IS NULL OR Picture <> N'laptop-shop-08.jpg');
+UPDATE Item SET Picture = N'laptop-shop-09.jpg' WHERE ID = 29 AND (Picture IS NULL OR Picture <> N'laptop-shop-09.jpg');
+UPDATE Item SET Picture = N'laptop-shop-10.jpg' WHERE ID = 30 AND (Picture IS NULL OR Picture <> N'laptop-shop-10.jpg');
+UPDATE Item SET Picture = N'laptop-shop-11.jpg' WHERE ID = 31 AND (Picture IS NULL OR Picture <> N'laptop-shop-11.jpg');
+UPDATE Item SET Picture = N'laptop-shop-12.jpg' WHERE ID = 32 AND (Picture IS NULL OR Picture <> N'laptop-shop-12.jpg');
+UPDATE Item SET Picture = N'shopping.webp' WHERE ID = 33 AND (Picture IS NULL OR Picture <> N'shopping.webp');
+UPDATE Item SET Picture = N'Latitude 7420.jpg' WHERE ID = 34 AND (Picture IS NULL OR Picture <> N'Latitude 7420.jpg');
+UPDATE Item SET Picture = N'XPS 15 7590.jpg' WHERE ID = 35 AND (Picture IS NULL OR Picture <> N'XPS 15 7590.jpg');
+UPDATE Item SET Picture = N'Victus 15 RTX4050.jpg' WHERE ID = 36 AND (Picture IS NULL OR Picture <> N'Victus 15 RTX4050.jpg');
+UPDATE Item SET Picture = N'Laptop HP 14 em0023AU - D0BG7PA.webp' WHERE ID = 37 AND (Picture IS NULL OR Picture <> N'Laptop HP 14 em0023AU - D0BG7PA.webp');
+UPDATE Item SET Picture = N'laptop-hp-victus-16-r0298tx-ae0n5pa.webp' WHERE ID = 38 AND (Picture IS NULL OR Picture <> N'laptop-hp-victus-16-r0298tx-ae0n5pa.webp');
+UPDATE Item SET Picture = N'laptop-shop-01.jpg' WHERE ID = 39 AND (Picture IS NULL OR Picture <> N'laptop-shop-01.jpg');
+UPDATE Item SET Picture = N'laptop-shop-02.jpg' WHERE ID = 40 AND (Picture IS NULL OR Picture <> N'laptop-shop-02.jpg');
+UPDATE Item SET Picture = N'laptop-shop-03.jpg' WHERE ID = 41 AND (Picture IS NULL OR Picture <> N'laptop-shop-03.jpg');
+UPDATE Banner SET Picture = N'ADS-BANNER-11.11-01-1-scaled.jpg' WHERE ID = 1;
+UPDATE Banner SET Picture = N'laptop-shop-01.png' WHERE ID = 2;
+UPDATE Banner SET Picture = N'shopping.webp' WHERE ID = 3;

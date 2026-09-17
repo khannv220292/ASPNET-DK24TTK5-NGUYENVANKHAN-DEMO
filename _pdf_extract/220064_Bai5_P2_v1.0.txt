@@ -1,0 +1,182 @@
+--- PAGE 1 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+1Sử dụng Data List
+Bộ môn Công nghệ thông tin
+Khoa Kỹ thuật và Công nghệ
+Trường Đại học Trà Vinh
+
+--- PAGE 2 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+2Nội dung
+GridView
+DataList
+
+--- PAGE 3 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+3GridView
+Sử dụng giống như thẻ Table của HTML
+Trình bày một bảng có nhiều cột (column)
+Mỗi một dòng DL trong lưới (grid) là một 
+record
+Mỗi trường trong record là một cột trong lưới
+Thuộc tính và phương thức:
+Data Source: chỉ nguồn DL sẽ kết nối, thường là 
+một DataSet hay DataTable
+DataBind(): giúp cập nhật lai DL
+
+--- PAGE 4 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+4Tạo cột tự đông
+
+
+--- PAGE 5 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+5Trình bày dữ liệ u
+Page_Load()
+{ 
+string sql=“Select * from tblCasi ”;
+SqlConnection cnn= new SqlConnection ();
+cnn.ConnectionString= “ Data Source =localhost;Initial 
+Catalog=QuanLyThanhVien; Integrated Security=SSPI ”;
+//khoi tao DataAdapter
+SqlDataAdapter da = new SqlDataAdapter ( sql, cnn);
+DataSet ds= new DataSet ();
+da.Fill(ds);
+//liên kết dữ liệ u
+GridView 1.DataSource=ds;
+GridView 1.DataBind();
+}
+
+--- PAGE 6 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+6Đinh nghĩa column
+GridView tự động tạo ra các cột tương ứng với 
+Data source được gán vào, khi thuộc tính
+Auto-Genegate -Column =true
+Một số thuộc tính cơ bản của Column:
+BoundField: Thể hiện DL của một trường trong Data 
+Source
+ButtonField: Thể hiện một nút trong GridView
+CheckBoxField: thể hiện một checkbox trong GridView
+CommnandField: cung cấp nút lựa chọn hay biên tập
+HyperLinkField: trình bày nội dung của nó như là một 
+đối tượng HyperLink
+
+--- PAGE 7 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+7Cấu hình column
+DataField: Xác định tên trường sẽ thể hiện trong 
+cột này
+DataFormatString: Định dạng trường trên 
+GridView
+FooterText, HeaderText và HeaderImageUrl: cài 
+đặt text ở khu vực đầu và cuối của cột. 
+HeaderImageUrl trình bày hình ảnh thay vì text ở 
+đầu cột.
+
+--- PAGE 8 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+8GridView Styles
+HeaderStyle: cấu hình thể hiện của dòng đầu
+RowStyle: cấu hình trình bày của mỗi dòng DL
+SelectedRowStyle: Cấu hình thể hiện của dòng 
+đang được trỏ tới.
+Thuộc tính khác của GridView:
+Cũng cho phép sắp xếp các giá trị thông qua thuộc 
+tính AllowSorting (true)
+Cho phép phân trang thông qua thuộc tính 
+AllowPaging (true)
+PageSize: cho phép số dòng thể hiện trên một trang
+
+--- PAGE 9 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+9GridView Styles
+
+
+--- PAGE 10 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+10Định dạng cột BoundField
+Bước 1: Chọn BoundField
+Bước 2: Nhấn nút AddBước 3: Thay đổi HeaderText 
+và DataField
+
+--- PAGE 11 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+11Bài tập liên quan
+Trình bày danh sách nhân viên với GridView
+Trình bày danh sách thành viên của website cho 
+phép xóa thành viên.
+
+--- PAGE 12 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+12Thể hiện dữ liệu với DataList
+Giống như GridView, DataList dùng để thể hiện DL trên web
+Chúng ta có thể tự thiết kế hình thức hiển thị DL
+
+
+--- PAGE 13 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+13Thể hiện dữ liệu với DataList
+Thuộc tính của DataList:
+RepeatDirection : qui định hướng hiển thị của DL
+Horizontal : hiển thị theo chiều ngang
+Vertical: Hiển thị theo chiều đứng
+Thiết kế hình thức hiển thị DataList 
+Chọn Edit Template từ thủ tục ngữ cảnh của DataList
+
+--- PAGE 14 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+14Các bước thiết kế DataList
+Nhấp chuộ t phải vào dataList control 
+chọn Edit Template -> chọn ItemTemplate
+Trong mục Item Template ta thiết kế giao diện
+Thể hiện dữ liệu với DataList
+
+--- PAGE 15 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+15Thể hiện dữ liệu với DataList
+Để việc thiết kế được dễ dàng, ta sử dụng table để định 
+vị trí hiển thị.
+Ví dụ thiế t kế hiển thị thông tin album bài hát với DataList
+Image
+LabelHyperLink
+
+--- PAGE 16 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+16Thể hiện dữ liệu với DataList
+Gán dữ liệ u cho DataList
+protected void Page_Load(object sender, EventArgs e)
+{
+//Đọc dữ liệ u vào Dataset
+SqlConnection cnn = new SqlConnection();
+cnn.ConnectionString = @"Data Source=GiaoVien; Initial 
+Catalog=nghenhac; Integrated Security=SSPI";
+string sql = "select * From tbl Album ";
+SqlDataAdapter da = new SqlDataAdapter(sql, cnn);
+DataSet ds = new DataSet();
+da.Fill(ds);
+//Liên kết dữ liệ u cho DataList
+DataList 2.DataSource = ds;
+DataList 2.DataBind();
+}
+
+--- PAGE 17 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+17Thể hiện dữ liệu với DataList
+Liên kết dữ liệ u với từng control trong 
+DataList
+Nhấp chuộ t phải vào control muốn liên kết chọn 
+EditDataBinding
+Chọn Text (khi muốn hiển thị nộ i dung)
+Trong mục Code Expression nhập vào Eval(“Nội 
+dung cần hiển thị”)
+Ví dụ : muốn hiển thị tiêu đề thì Eval( “TieuDe ”)
+Chú ý TieuDe là cộ t dữ liệ u được đọc từ 
+database
+
+--- PAGE 18 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+18Bài tập liên quan
+Thiết kế trang hiển thị mộ t sản phẩm
+Thiết kế trang hiển thị mộ t bản tin
+Thiết kế trang hiển thị mộ t bài hát

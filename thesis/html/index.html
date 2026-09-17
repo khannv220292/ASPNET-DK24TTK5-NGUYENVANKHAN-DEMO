@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Tài liệu HTML — Website bán laptop laptop.khannv.vn</title>
+	<style>
+		body { font-family: "Segoe UI", Tahoma, sans-serif; max-width: 860px; margin: 28px auto; padding: 0 18px 48px; color: #1f2937; line-height: 1.55; }
+		h1 { font-size: 1.55rem; }
+		h2 { font-size: 1.2rem; margin-top: 1.6em; border-bottom: 1px solid #e5e7eb; padding-bottom: .25em; }
+		table { border-collapse: collapse; width: 100%; font-size: 14px; }
+		th, td { border: 1px solid #d1d5db; padding: 8px 10px; text-align: left; vertical-align: top; }
+		th { background: #f9fafb; }
+		.box { background: #f3f4f6; padding: 12px 16px; border-radius: 8px; }
+		.say { background: #eff6ff; border-left: 4px solid #2563eb; padding: 8px 12px; margin: 8px 0; }
+		code { background: #f3f4f6; padding: 1px 5px; border-radius: 4px; }
+		a { color: #1d4ed8; }
+	</style>
+</head>
+<body>
+	<h1>Tài liệu dạng web (HTML) — Đồ án Chuyên đề ASP.NET</h1>
+	<div class="box">
+		<strong>Đề tài:</strong> Xây dựng website bán laptop<br />
+		<strong>Website:</strong> <a href="http://laptop.khannv.vn">laptop.khannv.vn</a><br />
+		<strong>Sinh viên:</strong> Nguyễn Văn Khan &nbsp;|&nbsp; <strong>Lớp:</strong> DK24TTK5<br />
+		<strong>Email:</strong> khannv220292@tvu-onschool.edu.vn<br />
+		<strong>Điện thoại:</strong> 0978.111.017<br />
+		<strong>GitHub:</strong> <a href="https://github.com/khannv220292/ASPNET-DK24TTK5-NGUYENVANKHAN-DEMO">ASPNET-DK24TTK5-NGUYENVANKHAN-DEMO</a>
+	</div>
+	<p>File này nằm trong <code>thesis/html</code> theo quy định nộp đồ án (tài liệu dạng web). Mở bằng trình duyệt (Chrome, Edge), không cần cài thêm.</p>
+
+	<h2>1. Website làm gì?</h2>
+	<p><strong>laptop.khannv.vn</strong> là cửa hàng bán laptop trực tuyến, viết bằng ASP.NET MVC 5, dữ liệu SQL Server catalog <code>laptopstore</code>.</p>
+	<ul>
+		<li><strong>Khách:</strong> xem sản phẩm, tìm kiếm, lọc hãng, giỏ hàng, đặt hàng, đăng ký/đăng nhập.</li>
+		<li><strong>Admin:</strong> quản lý sản phẩm, đơn hàng, xuất Excel, báo cáo doanh thu. Tài khoản demo: <code>Admin</code> / <code>admin</code>.</li>
+	</ul>
+
+	<h2>2. Chạy lại chương trình (tóm tắt)</h2>
+	<ol>
+		<li>Cài Visual Studio (workload ASP.NET), .NET 4.8, SQL Server.</li>
+		<li>Chạy script <code>setup/database.sql</code> để tạo database <strong>laptopstore</strong>.</li>
+		<li>Mở <code>src/ProTechTiveGear.sln</code> → F5.</li>
+		<li>Shop: <code>http://localhost:51494/Shop/Index</code> — Admin: <code>/Admin</code>.</li>
+	</ol>
+	<p>Chi tiết: file <code>README.md</code> ở gốc repository và <code>setup/HUONG_DAN_CAI_DAT.md</code> (nếu có).</p>
+
+	<h2>3. Hướng dẫn thuyết trình / demo tính năng</h2>
+	<p>Mở sẵn hai tab: trang khách và trang Admin đã đăng nhập.</p>
+	<h3>Khách hàng</h3>
+	<ol>
+		<li>Trang chủ: banner, hãng nổi bật, lưới laptop.</li>
+		<li>Ô tìm kiếm: gõ <code>ASUS</code> hoặc <code>HP</code>. Giải thích LINQ <code>Contains</code> ≈ SQL <code>LIKE '%…%'</code>.</li>
+		<li>Menu hãng → danh sách máy của hãng đó.</li>
+		<li>Chi tiết sản phẩm → thêm giỏ → đặt hàng.</li>
+		<li>Đăng nhập khách: <code>/Login/Login</code>.</li>
+	</ol>
+	<div class="say">Nói một câu: “Khách mua hàng trên web; đơn lưu bảng Order; admin xử lý sau.”</div>
+	<h3>Quản trị</h3>
+	<ol>
+		<li>Đơn hàng: <code>/Admin/AllListOrder</code> — lọc tab, tìm mã/khách.</li>
+		<li>Nút Xuất dữ liệu → file Excel.</li>
+		<li>Báo cáo doanh thu: menu Đơn hàng hoặc <code>/Admin</code> — lọc ngày, số liệu đã thu / chưa TT, theo sản phẩm.</li>
+	</ol>
+	<div class="say">Nói: “Đây là chức năng thống kê số liệu phục vụ quản lý cửa hàng.”</div>
+
+	<h2>4. Cấu trúc GitHub (mục 4.3)</h2>
+	<table>
+		<thead><tr><th>Thư mục</th><th>Nội dung</th></tr></thead>
+		<tbody>
+			<tr><td><code>README.md</code></td><td>Liên hệ + hướng dẫn chạy</td></tr>
+			<tr><td><code>setup/</code></td><td>Script CSDL, dữ liệu mẫu</td></tr>
+			<tr><td><code>src/</code></td><td>Mã nguồn Visual Studio</td></tr>
+			<tr><td><code>progress-report/</code></td><td>Báo cáo tiến độ</td></tr>
+			<tr><td><code>thesis/doc</code></td><td>Báo cáo Word, bìa</td></tr>
+			<tr><td><code>thesis/pdf</code></td><td>Báo cáo PDF, bìa</td></tr>
+			<tr><td><code>thesis/html</code></td><td>File HTML này</td></tr>
+			<tr><td><code>thesis/abs</code></td><td>Slide PPTX</td></tr>
+			<tr><td><code>thesis/refs</code></td><td>Tài liệu tham khảo</td></tr>
+		</tbody>
+	</table>
+
+	<h2>5. File báo cáo đi kèm</h2>
+	<ul>
+		<li>Word: <code>thesis/doc/BaoCao_laptop.khannv.vn.docx</code></li>
+		<li>PDF: <code>thesis/pdf/BaoCao_laptop.khannv.vn.pdf</code></li>
+		<li>Bìa: <code>Bia_laptop.khannv.vn_ASP.NET</code> (doc và pdf)</li>
+		<li>Slide: <code>thesis/abs/Slide_laptop.khannv.vn.pptx</code></li>
+	</ul>
+	<p><em>Đồ án học phần — Trường Đại học Trà Vinh.</em></p>
+</body>
+</html>

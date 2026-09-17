@@ -1,0 +1,112 @@
+@model ProTechTiveGear.Models.Item
+@using System.Text.RegularExpressions
+@{
+	var item = Model;
+	string hang = (item.ItemType != null && item.ItemType.Menu != null) ? item.ItemType.Menu.Name : "";
+	string dong = item.ItemType != null ? (item.ItemType.TypeName ?? "") : "";
+	string badge = hang;
+	if (!string.IsNullOrWhiteSpace(dong)
+		&& !string.Equals(dong.Trim(), hang.Trim(), StringComparison.OrdinalIgnoreCase)
+		&& !(hang.Length > 0 && dong.IndexOf(hang, StringComparison.OrdinalIgnoreCase) >= 0))
+	{
+		badge = (hang + ": " + dong).Trim().TrimStart(':').Trim();
+	}
+	if (string.IsNullOrWhiteSpace(badge)) { badge = "Laptop"; }
+	string pic = (item.Picture ?? "").Split('|')[0];
+	decimal oldPrice = item.PurcharsePrice.HasValue && item.PurcharsePrice.Value > item.SellPrice
+		? item.PurcharsePrice.Value
+		: item.SellPrice;
+	int off = oldPrice > item.SellPrice ? (int)Math.Round((double)((oldPrice - item.SellPrice) / oldPrice * 100m)) : 0;
+	string blob = ((item.Name ?? "") + " " + (item.ShortTitle ?? "") + " " + (item.Describe ?? "")).Replace('\n', ' ');
+	string[] slash = (item.ShortTitle ?? "").Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+	string spec1 = !string.IsNullOrWhiteSpace(dong) ? dong : hang;
+	if (spec1.Length == 0) { spec1 = "Laptop"; }
+	string ram = "8GB";
+	string ssd = "256GB";
+	string scr = "15.6\"";
+	if (slash.Length >= 4)
+	{
+		spec1 = slash[0].Trim();
+		ram = slash[1].Trim();
+		ssd = slash[2].Trim();
+		scr = slash[3].Trim();
+	}
+	else if (slash.Length == 3)
+	{
+		ram = slash[1].Trim();
+		ssd = slash[2].Trim();
+	}
+	else
+	{
+		var mRam = Regex.Match(blob, @"(\d{1,2})\s*GB", RegexOptions.IgnoreCase);
+		if (mRam.Success) { ram = mRam.Groups[1].Value + "GB"; }
+		var mSsd = Regex.Match(blob, @"(\d{3,4})\s*GB", RegexOptions.IgnoreCase);
+		if (mSsd.Success) { ssd = mSsd.Groups[1].Value + "GB"; }
+		var mTb = Regex.Match(blob, @"(\d)\s*TB", RegexOptions.IgnoreCase);
+		if (mTb.Success) { ssd = mTb.Groups[1].Value + "TB"; }
+		var mScr = Regex.Match(blob, @"(\d{2}(?:\.\d)?)\s*(?:""|inch|in\b)", RegexOptions.IgnoreCase);
+		if (mScr.Success) { scr = mScr.Groups[1].Value + "\""; }
+	}
+		if (!scr.ToUpperInvariant().Contains("FHD") && !scr.ToUpperInvariant().Contains("HD"))
+		{
+			scr = scr.Trim() + " FHD";
+		}
+	string sub = !string.IsNullOrWhiteSpace(item.ShortTitle) ? item.ShortTitle : badge;
+	string themGio = "Th\u00eam v\u00e0o gi\u1ecf";
+	string xemCt = "Xem chi ti\u1ebft";
+	string conHang = "C\u00f2n h\u00e0ng";
+	string hetHang = "H\u1ebft h\u00e0ng";
+	string baoHet = "S\u1ea3n ph\u1ea9m \u0111\u00e3 h\u1ebft h\u00e0ng";
+	bool inStock = item.Quantity.HasValue && item.Quantity.Value > 0;
+	// Hien nhan "Moi" neu ngay nhap trong 30 ngay gan nhat
+	bool isNew = item.DateImport.HasValue
+		&& item.DateImport.Value.Date >= DateTime.Today.AddDays(-30);
+}
+<div class="lp-card">
+	<div class="lp-top">
+		<span class="lp-badge" title="@badge">@badge</span>
+		<span class="lp-top-right">
+			@if (isNew)
+			{
+				<span class="lp-new">New</span>
+			}
+			@if (off > 0)
+			{
+				<span class="lp-off">-@off%</span>
+			}
+		</span>
+	</div>
+	<a href="@Url.Action("Detail", "Shop", new { id = item.ID })">
+		<div class="lp-img">
+			<img src="~/img/Item/@pic" alt="@item.Name" />
+		</div>
+	</a>
+	<p class="lp-name"><a href="@Url.Action("Detail", "Shop", new { id = item.ID })">@item.Name</a></p>
+	<div class="lp-sub" title="@sub">@sub</div>
+	<div class="lp-specs">
+		<div><i class="fa fa-laptop"></i><b title="@spec1">@spec1</b></div>
+		<div><i class="fa fa-memory"></i><b>@ram</b></div>
+		<div><i class="fa fa-hdd-o"></i><b>@ssd</b></div>
+		<div><i class="fa fa-desktop"></i><b>@scr</b></div>
+	</div>
+	<div>
+		<span class="lp-price">@string.Format("{0:#,##0}\u0111", item.SellPrice)</span>
+		@if (oldPrice > item.SellPrice)
+		{
+			<span class="lp-old">@string.Format("{0:#,##0}\u0111", oldPrice)</span>
+		}
+	</div>
+	<div class="lp-stock @(inStock ? "" : "out")"><span class="lp-dot"></span>@(inStock ? conHang : hetHang)</div>
+	<div class="lp-btns">
+		@if (inStock)
+		{
+			<a class="lp-cart" href="@Url.Action("AddtoCart", "Cart", new { id = item.ID, strURL = Request.Url.ToString() })"><i class="fa fa-shopping-cart"></i> @themGio</a>
+		}
+		else
+		{
+			<a class="lp-cart lp-cart-oos" href="javascript:void(0)" data-oos="1"
+			   onclick="alert('@baoHet'); return false;"><i class="fa fa-shopping-cart"></i> @themGio</a>
+		}
+		<a class="lp-more" href="@Url.Action("Detail", "Shop", new { id = item.ID })">@xemCt</a>
+	</div>
+</div>

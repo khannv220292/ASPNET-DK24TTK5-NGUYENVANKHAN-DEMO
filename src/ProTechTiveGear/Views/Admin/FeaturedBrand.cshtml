@@ -1,0 +1,25 @@
+@{
+	ViewBag.Title = "Hang noi bat";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>San pham noi bat trang chu</h2>
+<p>Chon hang hien o khoi noi bat. Che do xoay ngay: hom nay Dell, hom sau Asus,...</p>
+@if (TempData["Ok"] != null)
+{
+	<div class="alert alert-success">@TempData["Ok"]</div>
+}
+@using (Html.BeginForm("FeaturedBrand", "Admin", FormMethod.Post))
+{
+	@Html.AntiForgeryToken()
+	<div class="form-group">
+		<label><input type="radio" name="mode" value="auto" @(ViewBag.Auto == true ? "checked" : "") /> Xoay theo ngay (tu dong doi hang)</label>
+	</div>
+	<div class="form-group">
+		<label><input type="radio" name="mode" value="fix" @(ViewBag.Auto == true ? "" : "checked") /> Ghim 1 hang</label>
+	</div>
+	<div class="form-group" style="max-width:360px">
+		<label>Hang</label>
+		@Html.DropDownList("menuId", ViewBag.Menus as SelectList, "-- Chon hang --", new { @class = "form-control" })
+	</div>
+	<button type="submit" class="btn btn-success">Luu</button>
+}

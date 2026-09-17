@@ -1,0 +1,97 @@
+﻿
+@{
+	ViewBag.Title = "Liên hệ";
+	Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+	ViewBag.HideBanner = true;
+
+	// Thông tin shop — sửa tại đây nếu cần đổi
+	string diaChi = "369 An Dương Vương, Phường Bình Phú, TP. Hồ Chí Minh";
+	string dienThoai = "0978.111.017";
+	string email = "khannv220292@tvu-onschool.edu.vn";
+	string gioLamViec = "8:00 – 21:00 (Thứ 2 – Chủ nhật)";
+	string mapSrc = "https://maps.google.com/maps?q=" + Uri.EscapeDataString(diaChi) + "&hl=vi&z=16&output=embed";
+	string mapLink = "https://www.google.com/maps/search/?api=1&query=" + Uri.EscapeDataString(diaChi);
+}
+
+<style>
+	.ct-page { padding: 36px 0 48px; background: #f5f6f8; }
+	.ct-head { margin-bottom: 22px; }
+	.ct-head h2 { font-size: 28px; font-weight: 800; margin: 0 0 8px; color: #1a1a1a; }
+	.ct-head p { color: #667; margin: 0; }
+	.ct-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; }
+	.ct-info {
+		flex: 0 0 320px; max-width: 100%;
+		background: #fff; border-radius: 12px; padding: 22px 20px;
+		box-shadow: 0 2px 12px rgba(0,0,0,.06);
+	}
+	.ct-info h3 { font-size: 16px; font-weight: 800; margin: 0 0 16px; color: #0b5cab; }
+	.ct-row { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
+	.ct-ico {
+		width: 40px; height: 40px; border-radius: 50%; background: #eaf3ff; color: #0b5cab;
+		display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+	}
+	.ct-row b { display: block; font-size: 13px; color: #888; font-weight: 600; margin-bottom: 2px; }
+	.ct-row span, .ct-row a { font-size: 14px; color: #222; font-weight: 700; text-decoration: none; }
+	.ct-row a:hover { color: #0b5cab; }
+	.ct-map {
+		flex: 1 1 420px; min-width: 280px;
+		background: #fff; border-radius: 12px; overflow: hidden;
+		box-shadow: 0 2px 12px rgba(0,0,0,.06);
+	}
+	.ct-map iframe { width: 100%; height: 420px; border: 0; display: block; }
+	.ct-map-foot { padding: 12px 16px; border-top: 1px solid #eee; font-size: 13px; }
+	.ct-map-foot a { color: #0b5cab; font-weight: 700; text-decoration: none; }
+</style>
+
+<section class="ct-page">
+	<div class="container">
+		<div class="ct-head">
+			<h2>Liên hệ / Địa chỉ</h2>
+			<p>Đến cửa hàng laptop.khannv.vn để xem trực tiếp nhiều sản phẩm hơn!</p>
+		</div>
+
+		<div class="ct-grid">
+			<div class="ct-info">
+				<h3><i class="fa fa-map-marker"></i> Thông tin liên hệ</h3>
+				<div class="ct-row">
+					<div class="ct-ico"><i class="fa fa-map-marker"></i></div>
+					<div>
+						<b>Địa chỉ</b>
+						<span>@diaChi</span>
+					</div>
+				</div>
+				<div class="ct-row">
+					<div class="ct-ico"><i class="fa fa-phone"></i></div>
+					<div>
+						<b>Hotline</b>
+						<a href="tel:@dienThoai.Replace(".", "")">@dienThoai</a>
+					</div>
+				</div>
+				<div class="ct-row">
+					<div class="ct-ico"><i class="fa fa-envelope"></i></div>
+					<div>
+						<b>Email</b>
+						<a href="mailto:@email">@email</a>
+					</div>
+				</div>
+				<div class="ct-row" style="margin-bottom:0">
+					<div class="ct-ico"><i class="fa fa-clock-o"></i></div>
+					<div>
+						<b>Giờ làm việc</b>
+						<span>@gioLamViec</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="ct-map">
+				<iframe src="@mapSrc"
+						allowfullscreen="" loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+						title="Bản đồ cửa hàng"></iframe>
+				<div class="ct-map-foot">
+					<a href="@mapLink" target="_blank" rel="noopener">Mở trong Google Maps →</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

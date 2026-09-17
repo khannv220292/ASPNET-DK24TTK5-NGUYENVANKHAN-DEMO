@@ -1,0 +1,17 @@
+@model ProTechTiveGear.Models.Item
+<div class="form-group">
+	<h5 class="control-label col-md-2">Ảnh (nhiều ảnh)</h5>
+	<div class="col-md-10">
+		<input type="hidden" name="Picture" id="picture" value="@(Model != null ? (Model.Picture ?? "") : "")" />
+		<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px">
+			<input type="button" id="btnUpload" value="Thêm ảnh..." class="btn btn-success" />
+			<input type="button" id="btnClearPics" value="Xóa tất cả ảnh" class="btn btn-outline-danger" />
+			<input type="file" id="fileUpload" accept="image/*" name="fileUpload" multiple style="display:none" />
+		</div>
+		<p class="text-muted" style="margin:0 0 8px">
+			Chọn ảnh mới để thêm. Bấm <b>×</b> trên từng ảnh để xóa / thay bằng ảnh khác. Ảnh đầu tiên là ảnh chính.
+		</p>
+		@Html.ValidationMessageFor(m => m.Picture, "", new { @class = "text-danger" })
+		<div id="picturePreview" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px"></div>
+	</div>
+</div>

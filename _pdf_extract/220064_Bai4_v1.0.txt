@@ -1,0 +1,312 @@
+--- PAGE 1 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+1Quản lý trang thái và các 
+đối tượng của ASP.NET
+Bộ môn Công nghệ thông tin
+Khoa Kỹ thuật và Công nghệ
+Trường Đại học Trà Vinh
+
+--- PAGE 2 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+2Nội dung
+Response
+Request
+View State ( trạng thái khung nhìn)
+Truyền thông tin giữa các trang
+Cookies
+Session State ( trạng thái phiên làm việc)
+Application State (trạng thái ứng dụng)
+
+--- PAGE 3 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+3Response
+Là đối tượng được tạo ra tương ứng với mỗi yêu cầu 
+từ phía Client
+Respond là một kết quả được trả về cho Client, để 
+xử lý một sự kiện Request ( yêu cầu)
+Thuộc tính Diển giải
+Charset Xác lập bộ charset sẽ chuyền
+IsClientConnected Cho biết Client có đang kết nối với hệ thông 
+hay không
+Cookies Các thông tin về Cookies sẽ được truyền 
+đến phía Client
+… …
+
+--- PAGE 4 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+4Response
+Các phương 
+thứcDiển giải
+Write Ghi DL dạng text
+WriteFile Ghi DL từ file
+BinaryWrite Ghi DL nhị phân
+Close Đóng kết nối với Client
+End Kết thúc thi hành một trang
+Redirect Chuyển client sang một địa chỉ khác
+…
+
+--- PAGE 5 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+5Response
+Ví dụ : mở mộ t địa chỉ vớ i Response
+txtLink btnGo
+protected void btnGo_Click(object sender, EventArgs e)
+{
+Response.Redirect(txtLink.Text);
+}
+
+
+--- PAGE 6 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+6Đối tượng Request 
+Cung cấp các thông tin từ yêu cầu của phía 
+Client
+Được tạo ra tương ứng với các Response
+Sử dụng đối tượng này để nhận các thông 
+tin từ phía Client  như: header, query string, 
+hay Cookies
+
+--- PAGE 7 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+7Đối tượng Request
+Thuộc tính Diển giải
+Browser Cung cấp thông tin về trình duyệt 
+web của phía Client 
+Url Đia chỉ của trang gửi Request
+Cookies Cho biết các thông tin về Cookies 
+của Client
+QueryString Lấy tham số truyền từ phía Client 
+bằng phương thức GET
+Form Lấy tham số truyền từ phía Client 
+bằng phương thức POST
+
+--- PAGE 8 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+8Truyền thông tin giữa các trang
+Sử dụng Query String
+Bằng cách sử dụng chuỗi trong query trong Url
+Ví du:
+http://www.google.com.vn/search?q=ASP+.NET
+Một số hạn chế:
+Thông tin giới hạn trong chuỗi đơn
+Thông tin thể hiện cho tất cả mọi người, dễ bị lấy 
+cấp
+Một số user có thể thay đổi và cung cấp giá trị mới 
+mà chương trình không mong muốn
+Một số browser giới hạn chiều dài của URL (1KB -
+2KB). Do dó, không thể đặt quá nhiều thông tin lên 
+query string
+
+--- PAGE 9 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+9Truyền thông tin giữa các trang
+Tuy nhiên, thông tin trong query string vẫn còn 
+hữu dụng và sử dụng phổ biến trong các ứng 
+dụng CSDL
+Cách sử dụng:
+Response.Redirect( "Default2.aspx? Ho=Ngo ");
+Response.Redirect( "Default2.aspx? ho=Ngo&ten=Quoc ");
+Để nhận được giá trị của query string ta dùng 
+thuộc tính QueryString trong đối tượng Request
+String Ho= Request.QueryString[“ho”];
+
+--- PAGE 10 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+10Truyền thông tin giữa các trang
+protected void btn_Xem_Click(object sender, EventArgs e)
+{
+if (lstMonHoc.SelectedIndex == -1)
+{
+lblThongBao.Text = "Bạn phải chọn môn học";
+}
+else
+{
+string url = "XemThongTinMonHoc.aspx?";
+url+="tenMon="+lstMonHoc.SelectedItem.Text+"&";
+url+="ngonNgu="+chk_Chon.Checked.ToString();
+Response.Redirect(url);
+}
+}
+Trong Trang XemThongTinMonHoc.aspx
+protected void Page_Load(object sender, EventArgs e)
+{
+lblThongTin.Text = "Ten mon hoc chon la: " + Request.QueryString["tenMon"];
+lblThongTin.Text+="<br/> Ngon ngu lua chon la tieng anh:" 
++Request.QueryString["ngonNgu"];
+}
+
+
+--- PAGE 11 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+11Cookies
+Là một cách khác để truyền thông tin cho việc sử 
+dụng sau đó
+Được lưu trữ trong bộ nhớ của browser
+Dễ dàng sử dụng cho các trang web khác nhau, và 
+được lưu trữ tạm thời hay lâu dài trên browser bằng 
+cách thiết lập giá trị Expires của Cookies
+Bị giới hạn giống như Querystring, như sử dụng 
+chuỗi đơn giản.
+Ngoài ra sử dụng Cookies cũng gặp khó khăn cho 
+các ứng dụng web, khi user làm mất khả năng của 
+cookies, hay xóa file chứa chúng
+Tuy nhiên, Cookies vẫn được dùng rộng rãi hiện nay
+
+--- PAGE 12 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+12Cookies
+Để sử dụng Cookies ta cần khai báo không gian tên 
+System.Net ( using System.Net;)
+Cookies thể hiện trong ASP.NET với lớp HttpCookies
+Các thuộc tính của Cookies:
+Name: Tên của Cookies
+Domain: Miền chứa cookies
+Expires: Xác định thời gian có hiệu lực của 
+Cookies
+Value: giá trị của Cookies
+HasKeys: Cookies có tập giá trị con hay không
+Values: tập các giá trị của Cookies
+
+--- PAGE 13 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+13Cookies
+Ghi Cookies vào đối tượng Response
+Response.Cookies[ cookie ][(key)|.attribute ]=value;
+Cookies : tên biến
+Key: tham số tùy chọn, có thể đặt nhiều giá trị cho 
+1 cookies
+Attribute : thuộc tính (domain, path…)
+Lấy giá tri của Cookies
+value=Request.Cookies[cookies ][( key)|.attribute ];
+
+--- PAGE 14 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+14Cookies
+Ví dụ : lưu thông tin đăng nhập vào Cookie
+//Khai bao biến
+HttpCookie ckiNguoiDung = new HttpCookie( “NguoiDung ");
+ckiNguoiDung [“Ten”]=“admin ”; //thiet dat gia trị cho cookies
+ckiNguoiDung [“MatKhau ”]=“123”; //thiet dat them gia trị cho cookies
+Response.Cookies.Add(ckiNguoiDung); // thêm cookie vao đối tượng Response
+ckiNguoiDung.Expires=DateTime.Now.AddYears( 1); // Thờii gian sống của cookies 
+la 1 năm
+//Đọc giá trị của Cookie
+HttpCookie ckiNguoiDung =Request.Cookies [“NguoiDung ”];
+//Kiểm tra có cookie này tồn tại không. Nếu có lây tên
+If(ckiNguoiDung!=null)
+{
+string hoten= ckiNguoiDung[ “Ten”];
+}
+//Xóa cookies
+ckiNguoiDung.Expires=DateTime.Now.AddDays (-1); 
+
+
+--- PAGE 15 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+15Cookies
+protected void Page_Load(object sender, EventArgs e)
+{
+HttpCookie cookie = new HttpCookie( "NguoiDung");
+if (cookie == null)
+{
+lblWelcome.Text = "<b> Không biết ng ười dùng</b>";
+}
+else
+{
+if (cookie[ "HoTen"] == null)
+{
+lblWelcome.Text = "<b> Không biết người dùng</b>";
+}
+else
+{
+lblWelcome.Text = "<b> Người dùng đã tìm thấy</b><br/>";
+lblWelcome.Text += "Chào mừng, " + cookie["HoTen"];
+}
+}
+}
+
+
+--- PAGE 16 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+16Cookies
+protected void btnTaoCookies_Click(object sender, EventArgs e)
+{
+HttpCookie cookie = new HttpCookie( "NguoiDung");
+if (cookie == null)
+{
+cookie = new HttpCookie( "NguoiDung");
+}
+cookie["HoTen"] = txtHoTen.Text;
+cookie.Expires = DateTime.Now.AddYears(1);
+Response.Cookies.Add(cookie);
+lblWelcome.Text = "<b> Tạo g ười dùng mới</b><br/>";
+lblWelcome.Text += "Chào mừng, " + cookie["HoTen"];
+}
+
+--- PAGE 17 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+17Session state (trạng thái phiên làm việc)
+Cho phép lưu bất kỳ DL vào bộ nhớ của 
+Server
+Thông tin được bảo vệ trong một phiên làm 
+việc 
+Với mỗi phiên làm việc của client sẽ có một 
+tập thông tin riêng biệt, một session object 
+được tạo ra.
+
+--- PAGE 18 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+18Session state (trạng thái phiên làm việc)
+Session được tạo ra khi client bắt đầu phiên 
+làm việc của mình
+Session sẽ được hủy khi
+Khi Client thoát khỏi session một cách tường 
+minh
+Sau một khoảng thời gian (timeout), user không 
+có bất cử hành động làm việc nào
+Sự kiện :
+Session_Start
+Session_End
+
+--- PAGE 19 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+19Session state (trạng thái phiên làm việc)
+Thuộc tính của Session Diển giải
+Session.Timeout=minutes Đặt một thời gian (phút) phiên làm việc 
+Session.SessionID ID của phiên làm việc
+Session.Abondon() Hủy phiên làm việc và các biến DL
+Cung cấp một danh sách các trạng thái trong suốt 
+phiên làm việc (Session)
+Các trạng thái của Session cũng tổ chức như tập 
+hợp theo key -value
+VD: Session[ “daDangNhap ”]=0;
+
+--- PAGE 20 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+20Session state (trạng thái phiên làm việc)
+
+
+--- PAGE 21 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+21Session state (trạng thái phiên làm việc)
+1. Khởi tạo giá trị mặ c định cho biến Session [“IsLogin ”]=0
+(Chưa đăng nhập)
+void Session_Start(o Kbject sender, EventArgs e) 
+{
+// Code that runs when a new session is started
+Session[ "isLogin"]= 0;
+}
+
+--- PAGE 22 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+22Session state (trạng thái phiên làm việc)
+
+
+--- PAGE 23 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+23Session state (trạng thái phiên làm việc)
+
+
+--- PAGE 24 ---
+BM: Công ngh ệthông tin LẬP TRÌNH WEB V ỚI ASP .NET
+24Session state (trạng thái phiên làm việc)

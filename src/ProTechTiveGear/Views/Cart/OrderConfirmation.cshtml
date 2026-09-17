@@ -1,0 +1,15 @@
+﻿@{
+	ViewBag.Title = "Đặt hàng thành công";
+	Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+	ViewBag.HideBanner = true;
+}
+<div class="container" style="padding:48px 16px;text-align:center;min-height:40vh">
+	<div style="max-width:520px;margin:0 auto;background:#fff;border-radius:12px;padding:32px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+		<i class="fa fa-check-circle" style="font-size:56px;color:#2e7d32"></i>
+		<h1 style="color:#2e7d32;font-size:24px;font-weight:800;margin:16px 0 10px">Đã đặt hàng thành công!</h1>
+		<p style="color:#555;margin:0 0 8px">Đơn hàng đã được lưu vào hệ thống. Admin sẽ xử lý sớm.</p>
+		<p style="color:#888;font-size:13px;margin:0 0 22px">Giỏ hàng đã được làm trống (số trên icon giỏ = 0 là bình thường).</p>
+		<a href="@Url.Action("Index", "Shop")" class="btn" style="background:#0b5cab;color:#fff;font-weight:700;padding:10px 20px;border-radius:8px;text-decoration:none">Tiếp tục mua sắm</a>
+		<a href="@Url.Action("ListOrderClient", "Shop")" class="btn" style="margin-left:8px;background:#fff;color:#0b5cab;border:1px solid #0b5cab;font-weight:700;padding:10px 20px;border-radius:8px;text-decoration:none">Xem đơn của tôi</a>
+	</div>
+</div>
